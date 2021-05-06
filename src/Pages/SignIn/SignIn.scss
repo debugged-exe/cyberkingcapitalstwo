@@ -1,0 +1,28 @@
+.signin-container
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.signin-header
+{
+  font-size: 40px;
+  letter-spacing: 1px;
+}
+.form-container
+{
+  width: 30vw;
+  height: 80%;
+}
+@media only screen and (max-width: 768px){
+  .form-container
+  {
+    width: 50vw;
+    height: 80%;
+  }
+}
+
+
