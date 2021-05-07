@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import 'tachyons';
 import {
@@ -7,24 +7,28 @@ import {
     Redirect
 } from "react-router-dom";
 import SignIn from './Pages/SignIn/SignIn.js';
-import Header from './Components/Header/Header';
-class App extends Component{
-    constructor()
-    {
+import Sidebar from "./Components/Sidebar/Sidebar";
+
+class App extends Component {
+    constructor() {
         super();
         this.state = {
-
+            panel: false
         }
     }
 
-    render(){
+    togglePanel = () => {
+        this.setState({panel: !this.state.panel});
+    }
+
+    render() {
         return (
             <div className="App">
-                <Header/>
+                <Sidebar/>
                 <Switch>
-                    <Route exact path = "/"><h1>hello world</h1></Route>
-                    <Route path = '/signin'>
-                        <SignIn />
+                    <Route exact path="/"><h1>hello world</h1></Route>
+                    <Route path='/signin'>
+                        <SignIn/>
                     </Route>
                 </Switch>
             </div>
