@@ -6,13 +6,16 @@ import {SidebarData} from './SidebarData.js';
 import SubMenu from './SubMenu.js';
 import Logo from '../../Assets/Images/Logo_3D2.png';
 
-const Sidebar = () => {
+const Sidebar = ({designation}) => {
 
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => {
         setSidebar(!sidebar);
-    }
+    } 
+
+    const dataLinks = Object.entries(SidebarData);
+    const links = dataLinks.filter(item => item[0]===designation);
 
     return (
         <div className="sidebar-container white">
@@ -30,7 +33,7 @@ const Sidebar = () => {
                     </div>
                     <img src={Logo} alt="React Logo" style={{width: '75%', margin:'10px'}}/>
                     {
-                        SidebarData.senior.map((item,index) => {
+                        links[0][1].map((item,index) => {
                             return(
                                 <SubMenu key={index} item={item} />
                             );

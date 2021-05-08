@@ -3,14 +3,14 @@ import FormInput from '../../Components/FormInput/FormInput.js';
 import CustomButton from '../../Components/CustomButton/CustomButton.js';
 import './SignIn.scss';
 const initialState = {
-    name: '',
+    username: '',
     password: ''
 }
 
 class SignIn extends Component{
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
         this.state = initialState;
     }
 
@@ -19,11 +19,10 @@ class SignIn extends Component{
         this.setState({[name]: value});
     }
 
-    handleSubmit = (event) =>
+    handleSubmit = () =>
     {
-        event.prefentDefault();
-        console.log(this.state);
-        this.setState({name: '', email: '', message: ''});
+        this.props.setUser(this.state.username, this.state.password);
+        this.setState({username: '', password: ''});
     }
 
     render() {
@@ -33,10 +32,10 @@ class SignIn extends Component{
                 <div className="form-container">
                     <form>
                         <FormInput
-                            label="Name"
-                            name="name"
+                            label="UserName"
+                            name="username"
                             type="text"
-                            value={this.state.name}
+                            value={this.state.username}
                             handleChange={this.handleChange}
                             required
                         />
@@ -48,7 +47,7 @@ class SignIn extends Component{
                             handleChange={this.handleChange}
                             required
                         />
-                        <CustomButton type="submit">Sign In</CustomButton>
+                        <CustomButton onClick={() => this.handleSubmit()}>Sign In</CustomButton>
                     </form>
                 </div>
             </div>
