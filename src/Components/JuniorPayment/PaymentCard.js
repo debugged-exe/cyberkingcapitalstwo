@@ -1,14 +1,17 @@
 import React from 'react';
-import * as MdIcons from 'react-icons/md';
-const PaymentCard = () => {
+import * as RiIcons from 'react-icons/ri';
+import * as BiIcons from 'react-icons/bi';
+import './PaymentCard.scss';
+
+const PaymentCard = ({Heading, numeric,icon}) => {
     return(
-        <div className={'payment-card-container'}>
+        <div className={'payment-card-container shadow-4'}>
             <div className={'content-container'}>
-                <h2>Heading</h2>
-                <p>₹10000000</p>
+                <p className="card-header b">{Heading}</p>
+                <p className="price flex justify-center"><BiIcons.BiRupee size={'2rem'}/>{numeric}</p>
             </div>
             <div className={'payment-logo'}>
-                <MdIcons.MdAttachMoney size={'2rem'} />
+                {icon}
             </div>
         </div>
     );

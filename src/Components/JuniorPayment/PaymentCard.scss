@@ -1,0 +1,30 @@
+.payment-card-container
+{
+	margin: 5%;
+	display: grid;
+	grid-template-columns: 70% 30%;
+}
+.price
+{
+	font-size: 1.9rem;
+}
+.card-header
+{
+	font-size: 2rem;
+	margin-bottom: 1%;
+}
+.content-container
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.payment-logo
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}

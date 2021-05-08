@@ -35,7 +35,7 @@ const Sidebar = ({designation}) => {
                     {
                         links[0][1].map((item,index) => {
                             return(
-                                <SubMenu key={index} item={item} />
+                                <SubMenu key={index} item={item} designation={designation}/>
                             );
                         })
                     }

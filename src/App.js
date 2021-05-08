@@ -13,6 +13,7 @@ import {store} from './Assets/Database/Store.js';
 import AdminPanel from "./Pages/AdminPanel/AdminPanel";
 import SeniorPanel from "./Pages/SeniorPanel/SeniorPanel";
 import JuniorPanel from "./Pages/JuniorPanel/JuniorPanel";
+import JuniorPayment from "./Components/JuniorPayment/JuniorPayment";
 
 class App extends Component {
     constructor(props) {
@@ -46,7 +47,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path={"/admin"}><AdminPanel/></Route>
                     <Route exact path={"/senior"}><SeniorPanel/></Route>
-                    <Route exact path={"/junior"}><JuniorPanel/></Route>
+                    <Route path={"/junior"}><JuniorPanel/></Route>
                     <Route exact path="/"><h1>hello world</h1></Route>
                     <Route path='/signin'>
                         <SignIn setUser={this.setUser}/>

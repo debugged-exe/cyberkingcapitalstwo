@@ -1,15 +1,13 @@
 import React from 'react';
-import {Switch,Route} from "react-router-dom";
+import {Switch,Route,useRouteMatch} from "react-router-dom";
 import JuniorPayment from "../../Components/JuniorPayment/JuniorPayment";
+import JuniorLogs from "../../Components/JuniorLogs/JuniorLogs";
 const JuniorPanel = () => {
+    let match = useRouteMatch();
     return (
         <div>
-            Junior
-            <Switch>
-                <Route path={'/junior/payment'}>
-                    <JuniorPayment/>
-                </Route>
-            </Switch>
+            <JuniorPayment/>
+            <JuniorLogs />
         </div>
     );
 }

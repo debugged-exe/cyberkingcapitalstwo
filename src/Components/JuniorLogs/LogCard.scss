@@ -1,0 +1,16 @@
+.log-card-container
+{
+	margin: 5%;
+	display: grid;
+	grid-template-columns: 70% 30%;
+}
+.stat-header
+{
+	font-size: 2rem;
+	margin-bottom: 1%;
+	padding-left: 2%;
+}
+.stat-value
+{
+	font-size: 1.9rem;
+}
