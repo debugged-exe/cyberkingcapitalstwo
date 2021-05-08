@@ -6,7 +6,6 @@ const initialState = {
     username: '',
     password: ''
 }
-
 class SignIn extends Component{
     constructor(props)
     {

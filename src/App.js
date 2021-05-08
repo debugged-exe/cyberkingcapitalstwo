@@ -4,20 +4,24 @@ import 'tachyons';
 import {
     Switch,
     Route,
-    Redirect
+    Redirect,
+    withRouter
 } from "react-router-dom";
 import SignIn from './Pages/SignIn/SignIn.js';
 import Sidebar from "./Components/Sidebar/Sidebar";
 import {store} from './Assets/Database/Store.js';
+import AdminPanel from "./Pages/AdminPanel/AdminPanel";
+import SeniorPanel from "./Pages/SeniorPanel/SeniorPanel";
+import JuniorPanel from "./Pages/JuniorPanel/JuniorPanel";
 
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             user: {
                 username: '',
                 designation: 'client',
-                telecaller_id: ''
+                telecaller_id: '',
             }
         }
     }
@@ -30,7 +34,7 @@ class App extends Component {
             telecaller_id: data[0].telecaller_id
         }
         this.setState({user: user}, () => {
-            console.log('Signing In')
+            this.props.history.push(`/${this.state.user.designation}`);
         })
     }
 
@@ -40,6 +44,9 @@ class App extends Component {
             <div className="App">
                 <Sidebar designation={designation} />
                 <Switch>
+                    <Route exact path={"/admin"}><AdminPanel/></Route>
+                    <Route exact path={"/senior"}><SeniorPanel/></Route>
+                    <Route exact path={"/junior"}><JuniorPanel/></Route>
                     <Route exact path="/"><h1>hello world</h1></Route>
                     <Route path='/signin'>
                         <SignIn setUser={this.setUser}/>
@@ -50,4 +57,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default withRouter(App);
