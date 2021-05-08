@@ -1,8 +1,7 @@
-import React,{Component} from 'react';
+import React, {Component, useState} from 'react';
 import FormInput from '../../Components/FormInput/FormInput.js';
 import CustomButton from '../../Components/CustomButton/CustomButton.js';
 import './SignIn.scss';
-
 const initialState = {
     name: '',
     password: ''
@@ -27,8 +26,7 @@ class SignIn extends Component{
         this.setState({name: '', email: '', message: ''});
     }
 
-    render()
-    {
+    render() {
         return (
             <div className="signin-container">
                 <h1 className="signin-header">SIGN IN</h1>
@@ -56,7 +54,6 @@ class SignIn extends Component{
             </div>
         )
     }
-
 }
 
 export default SignIn;
