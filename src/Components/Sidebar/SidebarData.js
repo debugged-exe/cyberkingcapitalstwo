@@ -10,43 +10,6 @@ import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 import * as GrIcons from 'react-icons/gr';
 
-// export const SidebarData = [
-//     {
-//         title: 'Home',
-//         path: '/',
-//         icon: <AiIcons.AiFillHome />
-//     },
-//     {
-//         title: 'Signin',
-//         path: '/signin',
-//         icon: <FaIcons.FaListUl />,
-//         iconClosed: <RiIcons.RiArrowDownSFill />,
-//         iconOpened: <RiIcons.RiArrowUpSFill />,
-//         // subNav: [
-//         //     {
-//         //         title: 'Residential',
-//         //         path: '/residential/#res',
-//         //         icon: <BsIcons.BsFillPeopleFill/>
-//         //     },
-//         //     {
-//         //         title: 'Commercial',
-//         //         path: '/commercial/#commercial',
-//         //         icon: <RiIcons.RiRestaurant2Fill/>
-//         //     }
-//         // ]
-//     },
-//     {
-//         title: 'About Us',
-//         path: '/aboutus',
-//         icon: <FaIcons.FaInfo />
-//     },
-//     {
-//         title: 'Contact Us',
-//         path: '/aboutus/contactus',
-//         icon: <IoIcons.IoIosCall />
-//     },
-// ]
-
 export const SidebarData = {
     client: [
         {
@@ -157,7 +120,3 @@ export const SidebarData = {
         }
     ]
 }
-
-export const seniorLinks = [
-
-];
