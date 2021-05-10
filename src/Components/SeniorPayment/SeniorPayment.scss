@@ -1,0 +1,13 @@
+.card-array-container-senior
+{
+  display: grid;
+  grid-template-columns: 33% 34% 33%;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+@media only screen and (max-width: 428px){
+  .card-array-container-senior
+  {
+    grid-template-columns: 100%;
+  }
+}
