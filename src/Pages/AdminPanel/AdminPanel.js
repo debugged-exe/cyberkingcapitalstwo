@@ -1,9 +1,11 @@
 import React from 'react';
+import AdminPayment from '../../Components/AdminPayment/AdminPayment.js';
+import './AdminPanel.scss';
 
 const AdminPanel = () => {
     return (
         <div>
-            Admin
+            <AdminPayment />
         </div>
     );
 }

@@ -1,31 +1,43 @@
-.table-container{
+.admin-payment-container{
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+.admin-payment-details{
+	display: flex;
+	flex-direction: column;
+}
+.admin-payment-disection{
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+
+.admin-payment-table-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.table-box{
-  width: 70%;
+.admin-payment-table-box{
+  width: 90%;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   border: 1px solid black;
   background-color: #bbbbbb;
 }
-.table-head-container{
+.admin-payment-table-head-container{
   font-size: 2rem;
   background-color: white;
 }
-.table-header-container{
+.admin-payment-table-header-container{
   padding-top: 1.5%;
   padding-bottom: 1.8%;
 }
-.table-body-container{
+.admin-payment-table-body-container{
 
 }
-.table-row-container{
+.admin-payment-table-row-container{
 
 }
-.table-data-container{
+.admin-payment-table-data-container{
   font-size: 1.5rem;
   background-color: white;
   padding-top: 1.5%;
@@ -34,11 +46,11 @@
 
 @media only screen and (max-width: 769px)
 {
-  .table-box
+  .admin-payment-table-box
   {
-    width: 90%;
+    width: 95%;
   }
-  .table-data-container{
+  .admin-payment-table-data-container{
     font-size: 1.5rem;
     background-color: white;
     padding-top: 1.5%;
@@ -48,28 +60,34 @@
   }
 }
 
+@media only screen and (max-width: 650px){
+	.admin-payment-disection{
+		grid-template-columns: 100%;
+	}
+}
+
 @media only screen and (max-width: 500px){
-  .table-head-container{
+  .admin-payment-table-head-container{
     display: none;
   }
 
-  .table-body-container, .table-row-container, .table-data-container{
+  .admin-payment-table-body-container, .admin-payment-table-row-container, .admin-payment-table-data-container{
     display: block;
     width: 100%;
   }
 
-  .table-row-container{
+  .admin-payment-table-row-container{
     margin-bottom: 10px;
   }
 
-  .table-data-container{
+  .admin-payment-table-data-container{
     text-align: right;
     padding-left: 50%;
     margin-bottom: 1px;
     position: relative;
   }
 
-  .table-data-container::before{
+  .admin-payment-table-data-container::before{
     content: attr(data-label);
     position: absolute;
     left: 0;

@@ -34,11 +34,11 @@ const SeniorPaymentTable = () => {
             <tbody className={'table-body-container'}>
             {tableData.map((item, index) => {
                 return (
-                    <tr>
-                        <td className={'table-data-container'}>{index + 1}</td>
-                        <td className={'table-data-container'}>{item.telecaller_id}</td>
-                        <td className={'table-data-container'}>{item.telecaller_name}</td>
-                        <td className={'table-data-container'}>{item.points_earned}</td>
+                    <tr className="table-row-container">
+                        <td className={'table-data-container'} data-label={'Sr.No'}>{index + 1}</td>
+                        <td className={'table-data-container'} data-label={'Telecaller ID'}>{item.telecaller_id}</td>
+                        <td className={'table-data-container'} data-label={'Telecaller Name'}>{item.telecaller_name}</td>
+                        <td className={'table-data-container'} data-label={'Points Earned'}>{item.points_earned}</td>
                     </tr>
                 )
             })}

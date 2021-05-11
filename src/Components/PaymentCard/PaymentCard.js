@@ -8,7 +8,7 @@ const PaymentCard = ({Heading, numeric,icon}) => {
         <div className={'payment-card-container shadow-4'}>
             <div className={'content-container'}>
                 <p className="card-header b">{Heading}</p>
-                <p className="price flex justify-center"><BiIcons.BiRupee size={'2rem'}/>{numeric}</p>
+                <p className="price flex justify-center">{numeric}</p>
             </div>
             <div className={'payment-logo'}>
                 {icon}

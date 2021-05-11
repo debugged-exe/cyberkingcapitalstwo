@@ -31,10 +31,10 @@ const SeniorViewTeam = () => {
             <tbody className={'team-table-body-container'}>
             {tableData.map((item, index) => {
                 return (
-                    <tr>
-                        <td className={'team-table-data-container'}>{index + 1}</td>
-                        <td className={'team-table-data-container'}>{item.telecaller_id}</td>
-                        <td className={'team-table-data-container'}>{item.telecaller_name}</td>
+                    <tr className={'team-table-row-container'}>
+                        <td className={'team-table-data-container'} data-label={'Sr No.'}>{index + 1}</td>
+                        <td className={'team-table-data-container'} data-label={'Telecaller ID'}>{item.telecaller_id}</td>
+                        <td className={'team-table-data-container'} data-label={'Telecaller Name'}>{item.telecaller_name}</td>
                         <td className={'team-table-data-container'}><button>View Logs</button></td>
                     </tr>
                 )
