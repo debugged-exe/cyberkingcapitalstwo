@@ -37,9 +37,9 @@ class SearchByDropdown extends Component {
             "designation"
         ];
         return (
-            <div className={"admin-register-container mt4"}>
-                <p className={"admin-register-header b mb4"}>Search For Leads</p>
-                <form className={"admin-register-form mt4"} onSubmit={this.handleSubmit}>
+            <div className={"search-leads-container mt4"}>
+                <p className={"search-leads-header b mb4"}>Search For Leads</p>
+                <form className={"search-leads-form mt4"} onSubmit={this.handleSubmit}>
                     <div className={"flex justify-center items-center center mb4 w-100"}>
                         <label className={"b f3 ml1-ns mr3 "}>Search by : </label>
                         <select

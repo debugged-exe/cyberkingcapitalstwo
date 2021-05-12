@@ -1,16 +1,16 @@
-.admin-register-container{
+.search-leads-container{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Open Sans Condensed', sans-serif;
 }
-.admin-register-header{
+.sear-leads-header{
   font-size: 3rem;
   margin-bottom: 0px;
   text-align: center;
 }
-.admin-register-form{
+.search-leads-form{
   display: flex;
   flex-direction: column;
   width: 60%;
@@ -20,7 +20,7 @@
 }
 
 @media only screen and (max-width: 500px){
-  .admin-register-form{
+  .search-leads-form{
     width: 60%;
   }
 }
