@@ -3,6 +3,7 @@ import LogCard from './LogCard.js';
 import CustomButton from '../CustomButton/CustomButton.js';
 import FormInput from '../FormInput/FormInput.js';
 import './JuniorLogs.scss';
+import JuniorTable from "./JuniorTable/JuniorTable";
 
 const LogStatArray = [
     {
@@ -41,7 +42,7 @@ const JuniorLogs = () => {
 
 	return (
 		<div className="junior-logs">
-			<p style={{fontFamily: 'Open Sans Condensed', fontSize: '2rem', fontWeight: 'bold', textAlign: 'center'}}>Junior Payment Details</p>
+			<p style={{fontFamily: 'Open Sans Condensed', fontSize: '2rem', fontWeight: 'bold', textAlign: 'center'}}>View Logs</p>
 			<div className="stats">
            		{
            			LogStatArray.map((item,index) => {
@@ -62,6 +63,9 @@ const JuniorLogs = () => {
                     />
                     <CustomButton style={{marginLeft: '0'}}>Go</CustomButton>
                 </div>
+            </div>
+            <div className={'mt4 w-100 mb4'}>
+                <JuniorTable />
             </div>
 		</div>
 	)

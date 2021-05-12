@@ -1,5 +1,6 @@
 import React from 'react';
 import './SeniorViewTeam.scss';
+import SeniorLogTable from "./SeniorLogTable/SeniorLogTable";
 const header = ["Sr No.", "Telecaller ID", "Telecaller Name"];
 const tableData = [
     {
@@ -16,7 +17,8 @@ const tableData = [
     }
 ]
 const SeniorViewTeam = () => {
-    return (<div className={'team-table-container'}>
+    return (<div>
+        <div className={'team-table-container'}>
         <h1>My Team</h1>
         <table cellspacing="1" className={'team-table-box'} >
             <thead className={'team-table-head-container'}>
@@ -41,6 +43,11 @@ const SeniorViewTeam = () => {
             })}
             </tbody>
         </table>
+    </div>
+        <div className={'mt4 mb4'}>
+            <h1 className={'flex justify-center '}>View Logs Table</h1>
+            <SeniorLogTable />
+        </div>
     </div>);
 }
 

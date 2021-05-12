@@ -1,0 +1,26 @@
+.admin-register-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+.admin-register-header{
+  font-size: 3rem;
+  margin-bottom: 0px;
+  text-align: center;
+}
+.admin-register-form{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+.hidden{
+  display: none;
+}
+
+@media only screen and (max-width: 500px){
+  .admin-register-form{
+    width: 60%;
+  }
+}
