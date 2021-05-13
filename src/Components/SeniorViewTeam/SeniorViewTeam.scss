@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 .team-table-box{
   width: 70%;
@@ -30,6 +31,9 @@
   background-color: white;
   padding-top: 1.5%;
   padding-bottom: 1.8%;
+}
+.logHeader{
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 @media only screen and (max-width: 769px)

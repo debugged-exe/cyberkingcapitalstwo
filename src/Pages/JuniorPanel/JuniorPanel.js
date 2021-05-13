@@ -1,16 +1,17 @@
 import React from 'react';
-import {Switch,Route,useRouteMatch} from "react-router-dom";
+import {Switch,Route,withRouter} from "react-router-dom";
 import JuniorPayment from "../../Components/JuniorPayment/JuniorPayment";
 import JuniorLogs from "../../Components/JuniorLogs/JuniorLogs";
-const JuniorPanel = () => {
-    let match = useRouteMatch();
+const JuniorPanel = ({match}) => {
     return (
         <div>
-            <JuniorPayment/>
-            <JuniorLogs />
+        	<Switch>
+        		<Route path={`${match.path}/logs`}><JuniorLogs /></Route>
+        		<Route path={`${match.path}/payment`}><JuniorPayment/></Route>
+        	</Switch>
         </div>
     );
 }
 
-export default JuniorPanel;
+export default withRouter(JuniorPanel);
 

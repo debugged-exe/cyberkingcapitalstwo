@@ -37,7 +37,7 @@ const tableLogs = [
         payment: "no"
     }
 ]
-const JuniorTable = () => {
+const SeniorLogTable = () => {
     return (<div className={'senior-table-container'}>
         <table cellSpacing="1" className={'senior-table-box'}>
             <thead className={'senior-table-head-container'}>
@@ -75,4 +75,4 @@ const JuniorTable = () => {
     </div>);
 }
 
-export default JuniorTable;
+export default SeniorLogTable;

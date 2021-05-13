@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './SubMenu.scss';
 
-const SubMenu = ({item}) => {
+const SubMenu = ({item, match}) => {
 
     const [subnav, setSubNav] = useState(false);
 
@@ -41,4 +41,4 @@ const SubMenu = ({item}) => {
     );
 }
 
-export default SubMenu;
+export default withRouter(SubMenu);

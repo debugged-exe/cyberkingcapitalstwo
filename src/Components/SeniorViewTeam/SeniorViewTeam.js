@@ -45,7 +45,7 @@ const SeniorViewTeam = () => {
         </table>
     </div>
         <div className={'mt4 mb4'}>
-            <h1 className={'flex justify-center '}>View Logs Table</h1>
+            <h1 className={'flex justify-center logHeader'}>View Logs Table</h1>
             <SeniorLogTable />
         </div>
     </div>);
