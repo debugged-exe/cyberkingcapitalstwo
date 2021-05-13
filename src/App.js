@@ -45,10 +45,10 @@ class App extends Component {
             <div className="App">
                 <Sidebar designation={designation} />
                 <Switch>
-                    <Route exact path={"/admin"}><AdminPanel/></Route>
-                    <Route exact path={"/senior"}><SeniorPanel/></Route>
-                    <Route path={"/junior"}><JuniorPanel/></Route>
                     <Route exact path="/"><h1>hello world</h1></Route>
+                    <Route path={"/admin"}><AdminPanel/></Route>
+                    <Route path={"/senior"}><SeniorPanel/></Route>
+                    <Route path={"/junior"}><JuniorPanel/></Route>
                     <Route path='/signin'>
                         <SignIn setUser={this.setUser}/>
                     </Route>

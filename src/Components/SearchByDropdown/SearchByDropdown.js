@@ -1,4 +1,5 @@
 import { React, Component } from "react";
+import FormInput from '../FormInput/FormInput.js';
 import "./SearchByDropdown.scss";
 import CustomButton from "../CustomButton/CustomButton";
 
@@ -6,15 +7,14 @@ class SearchByDropdown extends Component {
     constructor() {
         super();
         this.state = {
-            telecaller_name: "",
-            telecaller_id: "",
-            language: "",
-            designation: ""
+           searchFilter: '',
+           searchValue: ''
         };
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
+        console.log(this.state);
     };
 
     handleChange = (event) => {
@@ -24,17 +24,24 @@ class SearchByDropdown extends Component {
     };
 
     render() {
-        const {
-            telecaller_name,
-            telecaller_id,
-            language,
-            designation
-        } = this.state;
+        const {searchValue, searchFilter} = this.state;
         const search_options = [
-            "telecaller_name",
-            "telecaller_id",
-            "language",
-            "designation"
+            {
+                value: 'telecaller_name',
+                title: 'Telecaller Name'
+            },
+            {
+                value: 'telecaller_id',
+                title: 'Telecaller ID'
+            },
+            {
+                value: 'language',
+                title: 'Language'
+            },
+            {
+                value: 'designation',
+                title: 'designation'
+            }
         ];
         return (
             <div className={"search-leads-container mt4"}>
@@ -43,20 +50,33 @@ class SearchByDropdown extends Component {
                     <div className={"flex justify-center items-center center mb4 w-100"}>
                         <label className={"b f3 ml1-ns mr3 "}>Search by : </label>
                         <select
-                            name="search"
+                            name="searchFilter"
                             className={"f4 ml1 "}
                             onChange={this.handleChange}
                         >
-                            <option value="---" >--select--</option>
-                            {search_options.map((items) => {
-                                return <option value={items} >{items}</option>;
+                            <option value='' >--select--</option>
+                            {search_options.map((item) => {
+                                return <option value={item.value} >{item.title}</option>;
                             })}
                         </select>
                     </div>
+                    <FormInput
+                        type="text"
+                        name="searchValue"
+                        value={searchValue}
+                        onChange={this.handleChange}
+                        label={`${searchFilter?`Enter the ${searchFilter}`:'Choose search filter'}`}
+                        style={{marginTop: '0px', marginBottom: '0px'}}
+                        required
+                        disabled={`${searchFilter?'':'true'}`}
+                    />
+                    <CustomButton 
+                    type="submit"
+                    style={{ marginLeft: '0px'}}
+                    >
+                        Search
+                    </CustomButton>
                 </form>
-                <CustomButton type="submit" style={{width: '10%', marginLeft: '-10px'}}>
-                    Search
-                </CustomButton>
             </div>
         );
     }
