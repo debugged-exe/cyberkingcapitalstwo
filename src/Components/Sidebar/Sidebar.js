@@ -6,7 +6,7 @@ import {SidebarData} from './SidebarData.js';
 import SubMenu from './SubMenu.js';
 import Logo from '../../Assets/Images/Logo_3D2.png';
 
-const Sidebar = ({designation}) => {
+const Sidebar = ({designation, signOut}) => {
 
     const [sidebar, setSidebar] = useState(false);
 
@@ -35,7 +35,7 @@ const Sidebar = ({designation}) => {
                     {
                         links[0][1].map((item,index) => {
                             return(
-                                <SubMenu key={index} item={item} designation={designation}/>
+                                <SubMenu signOut={signOut} key={index} item={item} designation={designation}/>
                             );
                         })
                     }

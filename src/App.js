@@ -39,17 +39,29 @@ class App extends Component {
         })
     }
 
+    signOut = () => {
+        const user = {
+            username: '',
+            designation: 'client',
+            telecaller_id: ''
+        }
+        this.setState({user: user}, () => {
+            this.props.history.push('/');
+        })
+    }
+
     render() {
+        console.log(this.state);
         const {designation} = this.state.user;
         return (
             <div className="App">
-                <Sidebar designation={designation} />
                 <Switch>
                     <Route exact path="/"><h1>hello world</h1></Route>
-                    <Route path={"/admin"}><AdminPanel/></Route>
-                    <Route path={"/senior"}><SeniorPanel/></Route>
-                    <Route path={"/junior"}><JuniorPanel/></Route>
+                    <Route path={"/admin"}><Sidebar designation={designation} signOut={this.signOut}/><AdminPanel/></Route>
+                    <Route path={"/senior"}><Sidebar designation={designation} signOut={this.signOut}/><SeniorPanel/></Route>
+                    <Route path={"/junior"}><Sidebar designation={designation} signOut={this.signOut}/><JuniorPanel/></Route>
                     <Route path='/signin'>
+                        <Sidebar designation={designation} />
                         <SignIn setUser={this.setUser}/>
                     </Route>
                 </Switch>
