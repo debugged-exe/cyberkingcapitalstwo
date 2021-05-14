@@ -1,53 +1,45 @@
-.admin-coded-table-container{
+.admin-view-senior-table-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.admin-coded-table-box{
+.admin-view-senior-table-box{
   width: 90%;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   border: 1px solid black;
   background-color: #bbbbbb;
 }
-.admin-coded-table-head-container{
+.admin-view-senior-table-head-container{
   font-size: 2rem;
   background-color: white;
 }
-.admin-coded-table-header-container{
+.admin-view-senior-table-header-container{
   padding-top: 1.5%;
   padding-bottom: 1.8%;
 }
-.admin-coded-table-body-container{
+.admin-view-senior-table-body-container{
 
 }
-.admin-coded-table-row-container{
+.admin-view-senior-table-row-container{
 
 }
-.admin-coded-table-data-container{
+.admin-view-senior-table-data-container{
   font-size: 1.5rem;
   background-color: white;
   padding-top: 1.5%;
   padding-bottom: 1.8%;
-
-  &:hover{
-    .btn-center{
-      transform: scale(1.5);
-    }
-  }
 }
 
-.btn-center{
-  transition: all 0.4s ease-out;
-}
+
 @media only screen and (max-width: 500px)
 {
-  .admin-coded-table-box
+  .admin-view-senior-table-box
   {
     width: 100%;
   }
-  .admin-coded-table-data-container{
+  .admin-view-senior-table-data-container{
     font-size: 1.5rem;
     background-color: white;
     padding-top: 1.5%;
@@ -58,33 +50,37 @@
 }
 
 @media only screen and (max-width: 500px){
-  .admin-coded-table-head-container{
+  .admin-view-senior-table-head-container{
     display: none;
   }
-  .admin-coded-table-box{
+  .admin-view-senior-table-box{
     width: 90%;
   }
-  .admin-coded-table-body-container, .admin-coded-table-row-container, .admin-coded-table-data-container{
+  .admin-view-senior-table-body-container, .admin-view-senior-table-row-container, .admin-view-senior-table-data-container{
     display: block;
     width: 100%;
   }
-  .btn-center{
-      padding-left: 0;
-      text-align: center;
-      margin-right: 100%;
-  }
-  .admin-coded-table-row-container{
+  .admin-view-senior-table-row-container{
     margin-bottom: 10px;
   }
 
-  .admin-coded-table-data-container{
+  .admin-view-senior-table-data-container{
     text-align: right;
     padding-left: 50%;
     margin-bottom: 1px;
     position: relative;
+
+    &:last-child{
+      padding-left: 0px;
+      text-align: center;
+    }
+
+    &:last-child button{
+      width: 50%;
+    }
   }
 
-  .admin-coded-table-data-container::before{
+  .admin-view-senior-table-data-container::before{
     content: attr(data-label);
     position: absolute;
     left: 0;

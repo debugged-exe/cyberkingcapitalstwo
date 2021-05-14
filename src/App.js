@@ -51,7 +51,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state);
         const {designation} = this.state.user;
         return (
             <div className="App">

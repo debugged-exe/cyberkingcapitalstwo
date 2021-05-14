@@ -1,0 +1,20 @@
+.admin-view-team-container{
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+.admin-view-team-count{
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+.admin-view-team-table{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+
+@media only screen and (max-width: 500px){
+	.admin-view-team-count{
+		grid-template-columns: 100%;
+	}
+}
