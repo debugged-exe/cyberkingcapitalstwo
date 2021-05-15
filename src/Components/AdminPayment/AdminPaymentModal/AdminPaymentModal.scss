@@ -1,0 +1,30 @@
+.admin-payment-modal-container{
+	
+}
+
+.form-header{
+	font-size: 2rem;
+	text-align: center;
+}
+
+.form-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: white;
+	position: fixed;
+	width: 50%;
+	height: 85%;
+	top: 10%;
+	left: 25%;
+	border: 1px solid black;
+}
+
+.visible{
+	display: block;
+}
+
+.hidden{
+	display: hidden;
+}

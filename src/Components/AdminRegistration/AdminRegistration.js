@@ -43,6 +43,7 @@ class AdminRegistration extends Component{
 		<div className={'admin-register-container'}>
 			<p className={'admin-register-header b'}>Register new Telecaller</p>
 			<form className={'admin-register-form'} onSubmit = {this.handleSubmit}>
+				<p className="form-header">Payment Portal</p>
 				<FormInput
 				type="text"
 				name="telecaller_name"

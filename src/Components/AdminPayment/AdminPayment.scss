@@ -1,5 +1,6 @@
 .admin-payment-container{
 	font-family: 'Open Sans Condensed', sans-serif;
+  position: relative;
 }
 .admin-payment-details{
 	display: flex;
@@ -42,6 +43,10 @@
   background-color: white;
   padding-top: 1.5%;
   padding-bottom: 1.8%;
+}
+
+.pay-button-center{
+
 }
 
 @media only screen and (max-width: 769px)
@@ -96,5 +101,9 @@
     font-size: 1.6rem;
     font-weight: bold;
     text-align: left;
+  }
+  .pay-button-center{
+    padding-left: 0px;
+    text-align: center;
   }
 }
