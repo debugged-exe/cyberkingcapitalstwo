@@ -4,7 +4,7 @@ import AdminRegistration from '../../Components/AdminRegistration/AdminRegistrat
 import {Route, Switch, withRouter} from 'react-router-dom';
 import AdminRequest from "../../Components/AdminRequest/AdminRequest";
 import AdminViewTeam from "../../Components/AdminViewTeam/AdminViewTeam";
-
+import AdminViewLogs from "../../Components/AdminViewLogs/AdminViewLogs";
 const AdminPanel = ({match}) => {
     return (
         <div>
@@ -13,6 +13,7 @@ const AdminPanel = ({match}) => {
         		<Route path={`${match.path}/register`}><AdminRegistration /></Route>
 				<Route path={`${match.path}/requests`}><AdminRequest /></Route>
 				<Route path={`${match.path}/overview`}><AdminViewTeam /></Route>
+				<Route path={`${match.path}/logs`}><AdminViewLogs /></Route>
         	</Switch>
         </div>
     );

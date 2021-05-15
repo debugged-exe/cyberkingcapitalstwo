@@ -1,47 +1,44 @@
-.junior-table-container{
+.admin-view-log-table-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.junior-table-box{
+.admin-view-log-table-box{
   width: 90%;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   border: 1px solid black;
   background-color: #bbbbbb;
 }
-.junior-table-head-container{
+.admin-view-log-table-head-container{
   font-size: 1.5rem;
   background-color: white;
 }
-.junior-table-header-container{
+.admin-view-log-table-header-container{
   padding-top: 1.5%;
   padding-bottom: 1.8%;
 }
-.junior-table-body-container{
+.admin-view-log-table-body-container{
 
 }
-.junior-table-row-container{
+.admin-view-log-table-row-container{
 
 }
-.junior-table-data-container{
+.admin-view-log-table-data-container{
   font-size: 1rem;
   background-color: white;
   padding-top: 1.5%;
   padding-bottom: 1.8%;
 }
 
-.request-button-center{
-
-}
 @media only screen and (max-width: 769px)
 {
-  .junior-table-box
+  .admin-view-log-table-box
   {
     width: 100%;
   }
-  .junior-table-data-container{
+  .admin-view-log-table-data-container{
     font-size: 1.5rem;
     background-color: white;
     padding-top: 1.5%;
@@ -52,33 +49,28 @@
 }
 
 @media only screen and (max-width: 769px){
-  .junior-table-head-container{
+  .admin-view-log-table-head-container{
     display: none;
   }
-  .junior-table-box{
+  .admin-view-log-table-box{
     width: 90%;
   }
-  .junior-table-body-container, .junior-table-row-container, .junior-table-data-container{
+  .admin-view-log-table-body-container, .admin-view-log-table-row-container, .admin-view-log-table-data-container{
     display: block;
     width: 100%;
   }
 
-  .junior-table-row-container{
+  .admin-view-log-table-row-container{
     margin-bottom: 10px;
   }
 
-  .junior-table-data-container{
+  .admin-view-log-table-data-container{
     text-align: right;
     padding-left: 50%;
     margin-bottom: 1px;
     position: relative;
   }
-
-  .request-button-center{
-    padding-left: 0px;
-    text-align: center;
-  }
-  .junior-table-data-container::before{
+  .admin-view-log-table-data-container::before{
     content: attr(data-label);
     position: absolute;
     left: 0;

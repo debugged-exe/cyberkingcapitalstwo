@@ -1,0 +1,17 @@
+.ul-container{
+  list-style: none;
+  background: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  margin: 1rem;
+  padding: 0.5rem;
+  width: auto;
+}
+.ul-item{
+  margin: 1px;
+  padding: 5%;
+  background: white;
+}

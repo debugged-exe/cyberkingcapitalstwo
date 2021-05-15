@@ -67,6 +67,7 @@ const JuniorTable = () => {
                         <td className={'junior-table-data-container'} data-label={'Handover Status'}>{item.handover_status}</td>
                         <td className={'junior-table-data-container'} data-label={'Coded'}>{item.coded}</td>
                         <td className={'junior-table-data-container'} data-label={'Payment'}>{item.payment}</td>
+                        <td className={'junior-table-data-container request-button-center'}><button>Request</button></td>
                     </tr>
                 )
             })}
