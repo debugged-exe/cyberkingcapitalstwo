@@ -41,6 +41,21 @@
 .btn-center{
   transition: all 0.4s ease-out;
 }
+
+.accept-all{
+  border: 1px solid gray;
+  font-size: 1.5rem;
+  margin: 2%;
+  padding: 1%;
+  background: white;
+  transition: all 0.4s ease-out;
+
+  &:hover{
+    background: green;
+    font-weight: bold;
+    color: white;
+  }
+}
 @media only screen and (max-width: 500px)
 {
   .admin-coded-table-box

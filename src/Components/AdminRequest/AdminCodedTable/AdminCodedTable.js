@@ -26,6 +26,7 @@ const tableLogs = [
 const AdminCodedTable = () => {
     return(
         <div className={'admin-coded-table-container'}>
+            <button className="accept-all">Accept All</button>
             <table cellSpacing="1" className={'admin-coded-table-box'}>
                 <thead className={'admin-coded-table-head-container'}>
                 <tr>

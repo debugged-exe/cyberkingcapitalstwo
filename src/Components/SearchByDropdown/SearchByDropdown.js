@@ -27,20 +27,20 @@ class SearchByDropdown extends Component {
         const {searchValue, searchFilter} = this.state;
         const search_options = [
             {
-                value: 'telecaller_name',
-                title: 'Telecaller Name'
+                value: 'lead_name',
+                title: 'Lead Name'
             },
             {
-                value: 'telecaller_id',
-                title: 'Telecaller ID'
+                value: 'lead_id',
+                title: 'Lead ID'
             },
             {
                 value: 'language',
                 title: 'Language'
             },
             {
-                value: 'designation',
-                title: 'designation'
+                value: 'lead_contact',
+                title: 'Lead Contact'
             }
         ];
         return (
