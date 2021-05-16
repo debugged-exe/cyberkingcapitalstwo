@@ -7,7 +7,7 @@
 	text-align: center;
 }
 
-.form-container{
+.payment-form-container{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -27,4 +27,19 @@
 
 .hidden{
 	display: hidden;
+}
+
+@media only screen and (max-width: 450px){
+	.payment-form-container{
+		width: 80%;
+		left: 10%;
+		height: 70%;
+	}
+}
+@media only screen and (max-width: 385px){
+	.payment-form-container{
+		width: 80%;
+		left: 10%;
+		height: 60%;
+	}
 }

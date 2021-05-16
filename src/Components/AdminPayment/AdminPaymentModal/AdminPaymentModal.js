@@ -28,7 +28,7 @@ class AdminPaymentModal extends Component{
 		const {paying, bonus_paying} = this.state;
 		return (
 			<div className={`${visible?'visible admin-payment-modal-container':'hidden'}`}>
-				<div className="form-container">
+				<div className="payment-form-container">
 					<p className="form-header b">Payment Portal</p>
 					<div className="telecaller-info">
 						<div className="ma2"><label className="f3 b">TeleCaller ID:</label><span className="ma1 f4">{modalInfo.telecaller_id}</span></div>
