@@ -5,10 +5,12 @@ import {Route, Switch, withRouter} from 'react-router-dom';
 import AdminRequest from "../../Components/AdminRequest/AdminRequest";
 import AdminViewTeam from "../../Components/AdminViewTeam/AdminViewTeam";
 import AdminViewLogs from "../../Components/AdminViewLogs/AdminViewLogs";
-const AdminPanel = ({match}) => {
+import ProfileSection from "../../Components/ProfileSection/ProfileSection";
+const AdminPanel = ({match,user}) => {
     return (
         <div>
         	<Switch>
+				<Route path={`${match.path}/profile`}><ProfileSection user={user}/></Route>
         		<Route path={`${match.path}/payment`}><AdminPayment /></Route>
         		<Route path={`${match.path}/register`}><AdminRegistration /></Route>
 				<Route path={`${match.path}/requests`}><AdminRequest /></Route>

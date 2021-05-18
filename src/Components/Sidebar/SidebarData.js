@@ -30,7 +30,7 @@ export const SidebarData = {
     ],
     admin: [
         {
-            path: '/admin',
+            path: '/admin/profile',
             title: "My Profile",
             icon: <CgIcons.CgProfile size={'2rem'}/>
         },
@@ -67,7 +67,7 @@ export const SidebarData = {
     ],
     junior: [
         {
-            path: '/junior',
+            path: '/junior/profile',
             title: "My Profile",
             icon: <CgIcons.CgProfile size={'2rem'}/>
         },
@@ -89,7 +89,7 @@ export const SidebarData = {
     ],
     senior: [
         {
-            path: '/senior',
+            path: '/senior/profile',
             title: "My Profile",
             icon: <CgIcons.CgProfile size={'2rem'}/>
         },

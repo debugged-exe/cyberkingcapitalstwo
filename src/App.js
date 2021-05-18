@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import AOS from 'aos';//AOS import for animation
+import 'aos/dist/aos.css';
 import './App.css';
 import 'tachyons';
 import {
@@ -13,7 +15,6 @@ import {store} from './Assets/Database/Store.js';
 import AdminPanel from "./Pages/AdminPanel/AdminPanel";
 import SeniorPanel from "./Pages/SeniorPanel/SeniorPanel";
 import JuniorPanel from "./Pages/JuniorPanel/JuniorPanel";
-import JuniorPayment from "./Components/JuniorPayment/JuniorPayment";
 
 class App extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class App extends Component {
             telecaller_id: data[0].telecaller_id
         }
         this.setState({user: user}, () => {
-            this.props.history.push(`/${this.state.user.designation}`);
+            this.props.history.push(`/${this.state.user.designation}/profile`);
         })
     }
 
@@ -52,13 +53,15 @@ class App extends Component {
 
     render() {
         const {designation} = this.state.user;
+        const {user} = this.state;
+        AOS.init();
         return (
             <div className="App">
                 <Switch>
                     <Route exact path="/"><h1>hello world</h1></Route>
-                    <Route path={"/admin"}><Sidebar designation={designation} signOut={this.signOut}/><AdminPanel/></Route>
-                    <Route path={"/senior"}><Sidebar designation={designation} signOut={this.signOut}/><SeniorPanel/></Route>
-                    <Route path={"/junior"}><Sidebar designation={designation} signOut={this.signOut}/><JuniorPanel/></Route>
+                    <Route path={"/admin"}><Sidebar designation={designation} signOut={this.signOut}/><AdminPanel user={user}/></Route>
+                    <Route path={"/senior"}><Sidebar designation={designation} signOut={this.signOut}/><SeniorPanel user={user}/></Route>
+                    <Route path={"/junior"}><Sidebar designation={designation} signOut={this.signOut}/><JuniorPanel user={user}/></Route>
                     <Route path='/signin'>
                         <Sidebar designation={designation} />
                         <SignIn setUser={this.setUser}/>
