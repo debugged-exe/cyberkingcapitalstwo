@@ -6,14 +6,13 @@ import {
     Route,
     withRouter
 } from "react-router-dom";
+import ProCourseForm from "../../Components/ProCourseForm/ProCourseForm";
 
-const HomePanel = () => {
+const HomePanel = ({}) => {
     return(<div>
-        <h1>Home Page</h1>
-        <div className={''}>
+            <h1>Home Page</h1>
             <BasicCourseForm />
-        </div>
-
+           <ProCourseForm />
     </div>);
 }
 

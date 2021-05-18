@@ -1,0 +1,32 @@
+.pro-course-form-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.pro-course-form-header{
+  font-size: 3rem;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+.pro-course-form-box{
+  width: 40%;
+}
+.pro-course-select-input{
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+@media only screen and (max-width: 768px) {
+  .pro-course-form-box{
+    width: 70%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .pro-course-form-box{
+    width: 70%;
+  }
+  .pro-course-select-input{
+    grid-template-columns: 100%;
+  }
+}
