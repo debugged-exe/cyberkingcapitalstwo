@@ -11,8 +11,6 @@ import ProCourseForm from "../../Components/ProCourseForm/ProCourseForm";
 const HomePanel = ({}) => {
     return(<div>
             <h1>Home Page</h1>
-            <BasicCourseForm />
-           <ProCourseForm />
     </div>);
 }
 

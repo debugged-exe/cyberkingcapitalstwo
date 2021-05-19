@@ -44,7 +44,7 @@ class BasicCourseForm extends Component{
                         name="lead_contact"
                         value={lead_contact}
                         onChange={this.handleChange}
-                        label="Phone Number"
+                        label="Phone Number(eg: 9998879999)"
                         style={{marginTop: '0px', marginBottom: '0px'}}
                         pattern="[0-9]{10}"
                         required

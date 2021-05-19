@@ -16,6 +16,8 @@ import AdminPanel from "./Pages/AdminPanel/AdminPanel";
 import SeniorPanel from "./Pages/SeniorPanel/SeniorPanel";
 import JuniorPanel from "./Pages/JuniorPanel/JuniorPanel";
 import HomePanel from "./Pages/HomePanel/HomePanel";
+import BasicCourseForm from "./Components/BasicCourseForm/BasicCourseForm";
+import ProCourseForm from "./Components/ProCourseForm/ProCourseForm";
 
 class App extends Component {
     constructor(props) {
@@ -60,6 +62,8 @@ class App extends Component {
             <div className="App">
                 <Switch>
                     <Route exact path="/"><HomePanel /></Route>
+                    <Route path="/basicform"><BasicCourseForm /></Route>
+                    <Route path="/proform"><ProCourseForm /></Route>
                     <Route path={"/admin"}><Sidebar designation={designation} signOut={this.signOut}/><AdminPanel user={user}/></Route>
                     <Route path={"/senior"}><Sidebar designation={designation} signOut={this.signOut}/><SeniorPanel user={user}/></Route>
                     <Route path={"/junior"}><Sidebar designation={designation} signOut={this.signOut}/><JuniorPanel user={user}/></Route>
