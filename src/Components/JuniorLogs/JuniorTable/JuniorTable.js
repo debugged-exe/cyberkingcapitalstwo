@@ -2,42 +2,40 @@ import React from 'react';
 import './JuniorTable.scss';
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
                 "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
-                "status 1", "status 2", "Handover status", "Coded", "Payment"];
+                "status 1", "status 2", "Handover status", "Coded"];
 const tableLogs = [
     {
         lead_id: 1,
         assigned_to: "xyz",
         lead_name: "abcde",
-        lead_contact: 9087389032,
-        whatsapp_no: 8903221111,
-        account_opening_no: 123,
+        lead_contact: '9087389032',
+        whatsapp_no: '8903221111',
+        account_opening_no: '123',
         city: "pune",
         trading_knowledge: "no",
         preferred_language: "hindi",
         status_1: "complete",
         status_2: "uncomplete",
         handover_status: "complete",
-        coded: "---",
-        payment: "done"
+        coded: "---"
     },
     {
         lead_id: 2,
         assigned_to: "mmmmm",
         lead_name: "oooooo",
-        lead_contact: 9000001222,
-        whatsapp_no: 9090912121,
-        account_opening_no: 8011,
+        lead_contact: '9000001222',
+        whatsapp_no: '9090912121',
+        account_opening_no: '8011',
         city: "pune",
         trading_knowledge: "no",
         preferred_language: "marathi",
         status_1: "complete",
         status_2: "uncomplete",
         handover_status: "complete",
-        coded: "---",
-        payment: "no"
+        coded: "---"
     }
 ]
-const JuniorTable = () => {
+const JuniorTable = ({leadHandler}) => {
     return (<div className={'junior-table-container'}>
         <table cellSpacing="1" className={'junior-table-box'}>
             <thead className={'junior-table-head-container'}>
@@ -66,8 +64,11 @@ const JuniorTable = () => {
                         <td className={'junior-table-data-container'} data-label={'Status 2'}>{item.status_2}</td>
                         <td className={'junior-table-data-container'} data-label={'Handover Status'}>{item.handover_status}</td>
                         <td className={'junior-table-data-container'} data-label={'Coded'}>{item.coded}</td>
-                        <td className={'junior-table-data-container'} data-label={'Payment'}>{item.payment}</td>
-                        <td className={'junior-table-data-container request-button-center'}><button>Request</button></td>
+                        <td className={'junior-table-data-container request-button-center'}>
+                            <button className="ma1" onClick={() => leadHandler(item)}>Update</button>
+                            <button className="ma1">Handover</button>
+                            <button className="w-100-l">Request</button>
+                        </td>
                     </tr>
                 )
             })}

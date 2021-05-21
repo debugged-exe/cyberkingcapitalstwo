@@ -124,6 +124,16 @@ const AdminViewLogs = () => {
         setFilter(event.target.value);
         console.log(filter);
     }
+
+    const [filterValue, setFilterValue] = useState('');
+    const setFilterValueHandler = (event) => {
+        setFilterValue(event.target.value);
+    }
+
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
+    }
+
     return (<div className={'admin-view-log-container'}>
         <div className="admin-view-log-count">
             <PaymentCard Heading={'Hindi Count'} numeric={500} icon={<FaIcons.FaLanguage size={'5rem'} color={'rgb(57, 73, 171)'}/>}/>
@@ -137,16 +147,31 @@ const AdminViewLogs = () => {
                 <option value="marathi">Marathi</option>
             </select>
         </div>
-        <div className={' admin-view-log-filter-container center  mb4 f2 w-100 mt4'}>
-            <label className={'b mr3'}>Filters : </label>
-            <FormInput type="text"
-                       name="Filter"
-                       value={filter}
-                       onChange={(event) => filterHandler(event)}
-                       label="Select Filter"
-                       style={{marginTop: '0px', marginBottom: '0px'}}
-                       required />
-            <CustomButton style={{ marginLeft:'5px'}}> Search </CustomButton>
+        <div className={'flex justify-center items-center center  f2 w-100 mt4'}>
+            <label className={'b mr3'}>Select Filter: </label>
+            <select name="lang" className={'f3 ml1'}>
+                <option value="">--Select Filter--</option>
+                <option value="lead_id">Lead ID</option>
+                <option value="assigned_to">Assigned To</option>
+                <option value="lead_name">Lead Name</option>
+                <option value="lead_contact">Lead Contact</option>
+                <option value="status_1">Status 1</option>
+                <option value="status_2">Status 2</option>
+            </select>
+        </div>
+        <div className="flex flex-column justify-center items-center mb4">
+            <form onSubmit={(event) => onSubmitHandler(event)}>
+                <FormInput
+                type="text"
+                name="filterValue"
+                value={filterValue}
+                onChange={(event) => setFilterValueHandler(event)}
+                label="Filter Value"
+                style={{marginTop: '0px', marginBottom: '0px'}}
+                required
+                />
+                <CustomButton type="submit" style={{marginLeft: '0px'}}>Fetch</CustomButton>
+            </form>
         </div>
         <div className={'w-100 mb4'}>
             <AdminViewLogsTable tableLogs = {tableLogs}/>

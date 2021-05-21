@@ -4,6 +4,7 @@ import CustomButton from '../CustomButton/CustomButton.js';
 import FormInput from '../FormInput/FormInput.js';
 import './JuniorLogs.scss';
 import JuniorTable from "./JuniorTable/JuniorTable";
+import JuniorModal from "./JuniorModal/JuniorModal";
 
 const LogStatArray = [
     {
@@ -40,6 +41,17 @@ const JuniorLogs = () => {
         setFilter(event.target.value);
     }
 
+    const [modal, setModal] = useState(false);
+    const modalHandler = (item) => {
+        setModal(item);
+    }
+
+    const [lead, setLead] = useState({});
+    const leadHandler = (item) => {
+        setLead(item);
+        setModal(true);
+    }
+
 	return (
 		<div className="junior-logs">
 			<p style={{fontFamily: 'Open Sans Condensed', fontSize: '2rem', fontWeight: 'bold', textAlign: 'center'}}>View Logs</p>
@@ -65,8 +77,9 @@ const JuniorLogs = () => {
                 </div>
             </div>
             <div className={'mt4 w-100 mb4'}>
-                <JuniorTable />
+                <JuniorTable leadHandler={leadHandler}/>
             </div>
+            <JuniorModal lead={lead} modal={modal} modalHandler={modalHandler}/>
 		</div>
 	)
 }

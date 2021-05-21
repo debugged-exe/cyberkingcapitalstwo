@@ -1,0 +1,59 @@
+.junior-modal{
+	position: fixed;
+	left: 10%;
+	top: 2%;
+	width: 70%;
+	background: white;
+	border: 1px solid black;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+.junior-modal-header{
+	padding: 0.5%;
+	border-left: 4px solid black;
+}
+.grid-div{
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+.junior-modal-lead-details{
+	text-align: center;
+	display: grid;
+	grid-template-columns: 100%;
+
+}
+
+.detail-item{
+	font-size: 1.5rem;
+	border: 1px solid gray;
+}
+
+.junior-modal-form{
+	margin: 3%;
+	margin-left: 6%; 
+}
+
+.visible{
+	display: block;
+}
+
+.hidden{
+	display: hidden;
+}
+
+@media only screen and (max-width: 768px){
+	.junior-modal{
+		width: 80%;
+	}
+}
+
+@media only screen and (max-width: 700px){
+	.grid-div{
+		grid-template-columns: 100%;
+	}
+	.junior-modal-form{
+		margin-left: 20%; 
+	}
+	.junior-modal{
+		left:15%;
+	}
+}
