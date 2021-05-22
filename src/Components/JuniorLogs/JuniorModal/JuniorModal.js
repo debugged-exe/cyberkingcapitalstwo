@@ -45,48 +45,78 @@ export default class JuniorModal extends React.Component {
 							<p className="detail-item shadow-4 ma2 pa2">Preferred Language: {lead.preferred_language}</p>
 						</div>
 					</div>
-					<form onSubmit={this.handleSubmit} className="w-60 junior-modal-form">
-						<FormInput
-						type="tel"
-						name="whatsapp_no"
-						value={whatsapp_no}
-						onChange={this.handleChange}
-						label="WhatsApp No(eg: 9998879999)"
-						style={{marginTop: '0px', marginBottom: '0px'}}
-						pattern="[0-9]{10}"
-						required
-						/>
-						<FormInput
-						type="text"
-						name="account_opening_no"
-						value={account_opening_no}
-						onChange={this.handleChange}
-						label="Account Opening No"
-						style={{marginTop: '0px', marginBottom: '0px'}}
-						required
-						/>
-						<FormInput
-						type="text"
-						name="status_1"
-						value={status_1}
-						onChange={this.handleChange}
-						label="Status 1"
-						style={{marginTop: '0px', marginBottom: '0px'}}
-						required
-						/>
-						<FormInput
-						type="text"
-						name="status_2"
-						value={status_2}
-						onChange={this.handleChange}
-						label="Status 2"
-						style={{marginTop: '0px', marginBottom: '0px'}}
-						required
-						/>
-						<CustomButton type='submit' style={{marginLeft: '0%'}}>
-							Update
-						</CustomButton>
-					</form>
+					<div className="w-60 junior-modal-form ">
+						<div className={'mt2 f3'} style={{marginBottom: "-3%"}}>
+							<label >
+								Current Value: {lead.whatsapp_no}
+							</label>
+							<div className={'junior-modal-form-component'}>
+								<FormInput
+									type="text"
+									name="Whatsapp_no"
+									value={account_opening_no}
+									onChange={this.handleChange}
+									label="Whatsapp Number"
+									style = {{marginTop: '0px', marginBottom: '0px'}}
+									required
+								/>
+								<div className={'mt4'}>
+									<CustomButton id={'button-margin-1'}>Update</CustomButton>
+								</div>
+							</div>
+						</div>
+						<div className={'mt2 f3'}>
+							<label>Current Value: {lead.account_opening_no}</label>
+							<div className={'junior-modal-form-component'}>
+								<FormInput
+									type="text"
+									name="account_opening_no"
+									value={account_opening_no}
+									onChange={this.handleChange}
+									label="Account Opening No"
+									style={{marginTop: '0px', marginBottom: '0px'}}
+									required
+								/>
+								<div className={'mt4'}>
+									<CustomButton id={'button-margin-2'}>Update</CustomButton>
+								</div>
+							</div>
+						</div>
+						<div className={'mt2 f3'}>
+							<label>Current Status 1: {lead.status_1}</label>
+							<div className={'junior-modal-form-component'}>
+								<FormInput
+									type="text"
+									name="status_1"
+									value={status_1}
+									onChange={this.handleChange}
+									label="Status 1"
+									style={{marginTop: '0px', marginBottom: '0px'}}
+									required
+								/>
+								<div className={'mt4'}>
+									<CustomButton id={'button-margin-3'}>Update</CustomButton>
+								</div>
+							</div>
+						</div>
+						<div className={'mt2 f3'}>
+							<label>Current Status 2: {lead.status_2}</label>
+							<div className={'junior-modal-form-component'}>
+								<FormInput
+									type="text"
+									name="status_2"
+									value={status_2}
+									onChange={this.handleChange}
+									label="Status 2"
+									style={{marginTop: '0px', marginBottom: '0px'}}
+									required
+								/>
+								<div className={'mt4'}>
+									<CustomButton id={'button-margin-4'}>Update</CustomButton>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				
 				

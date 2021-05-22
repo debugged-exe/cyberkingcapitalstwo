@@ -1,12 +1,13 @@
 .junior-modal{
 	position: fixed;
 	left: 10%;
-	top: 2%;
+	top: 1%;
 	width: 70%;
 	background: white;
 	border: 1px solid black;
 	font-family: 'Open Sans Condensed', sans-serif;
 }
+
 .junior-modal-header{
 	padding: 0.5%;
 	border-left: 4px solid black;
@@ -29,9 +30,13 @@
 
 .junior-modal-form{
 	margin: 3%;
-	margin-left: 6%; 
+	margin-left: 6%;
 }
-
+.junior-modal-form-component{
+	display: grid;
+	grid-template-columns: 70% 30%;
+	margin-top: -10%;
+}
 .visible{
 	display: block;
 }
@@ -39,11 +44,25 @@
 .hidden{
 	display: hidden;
 }
-
+#button-margin-1{
+}
+#button-margin-2{
+}
+#button-margin-3{
+}
+#button-margin-4{
+}
 @media only screen and (max-width: 768px){
 	.junior-modal{
 		width: 80%;
+		overflow: scroll;
+		position: absolute;
 	}
+	.grid-div{
+		display: grid;
+		grid-template-columns: 100%;
+	}
+
 }
 
 @media only screen and (max-width: 700px){
@@ -54,6 +73,29 @@
 		margin-left: 20%; 
 	}
 	.junior-modal{
-		left:15%;
+		left:10%;
+
+	}
+	#button-margin-1{
+		margin-left: 0;
+		margin-top: -30%;
+	}
+	#button-margin-2{
+		margin-left: 0;
+		margin-top: -30%;
+	}
+	#button-margin-3{
+		margin-left: 0;
+		margin-top: -30%;
+	}
+	#button-margin-4{
+		margin-left: 0;
+		margin-top: -30%;
+	}
+
+	.junior-modal-form-component{
+		display: grid;
+		grid-template-columns: 100%;
+		margin-top: -10%;
 	}
 }
