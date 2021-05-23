@@ -4,6 +4,7 @@ import SeniorPayment from "../../Components/SeniorPayment/SeniorPayment";
 import SeniorViewTeam from "../../Components/SeniorViewTeam/SeniorViewTeam";
 import SearchByDropdown from "../../Components/SearchByDropdown/SearchByDropdown";
 import ProfileSection from "../../Components/ProfileSection/ProfileSection";
+import SeniorHandoverLeads from '../../Components/SeniorHandoverLeads/SeniorHandoverLeads.js';
 
 const SeniorPanel = ({match,user}) => {
     return (
@@ -13,6 +14,7 @@ const SeniorPanel = ({match,user}) => {
         		<Route path={`${match.path}/payment`}><SeniorPayment/></Route>
         		<Route path={`${match.path}/team`}><SeniorViewTeam/></Route>
         		<Route path={`${match.path}/search`}><SearchByDropdown/></Route>
+                <Route path={`${match.path}/handover`}><SeniorHandoverLeads/></Route>
         	</Switch>
         </div>
     );

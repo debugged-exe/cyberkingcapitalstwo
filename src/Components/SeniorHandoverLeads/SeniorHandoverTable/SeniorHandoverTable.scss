@@ -1,53 +1,44 @@
-.senior-table-container{
+.senior-handover-table-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.senior-table-box{
+.senior-handover-table-box{
   width: 90%;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   border: 1px solid black;
   background-color: #bbbbbb;
 }
-.senior-table-head-container{
+.senior-handover-table-head-container{
   font-size: 1.5rem;
   background-color: white;
 }
-.senior-table-header-container{
+.senior-handover-table-header-container{
   padding-top: 1.5%;
   padding-bottom: 1.8%;
 }
-.senior-table-body-container{
+.senior-handover-table-body-container{
 
 }
-.senior-table-row-container{
+.senior-handover-table-row-container{
 
 }
-.senior-table-data-container{
+.senior-handover-table-data-container{
   font-size: 1rem;
   background-color: white;
   padding-top: 1.5%;
   padding-bottom: 1.8%;
 }
 
-.senior-button-center
-{
-
-}
-
 @media only screen and (max-width: 769px)
 {
-  .senior-table-box
+  .senior-handover-table-box
   {
     width: 100%;
   }
-  .senior-button-center{
-    padding-left: 0px;
-    text-align: center;
-  }
-  .senior-table-data-container{
+  .senior-handover-table-data-container{
     font-size: 1.5rem;
     background-color: white;
     padding-top: 1.5%;
@@ -58,32 +49,29 @@
 }
 
 @media only screen and (max-width: 769px){
-  .senior-table-head-container{
+  .senior-handover-table-head-container{
     display: none;
   }
-  .senior-table-box{
+  .senior-handover-table-box{
     width: 90%;
   }
-  .senior-table-body-container, .senior-table-row-container, .senior-table-data-container{
+  .senior-handover-table-body-container, .senior-handover-table-row-container, .senior-handover-table-data-container{
     display: block;
     width: 100%;
   }
-  .senior-button-center{
-    padding-left: 0px;
-    text-align: center;
-  }
-  .senior-table-row-container{
+
+  .senior-handover-table-row-container{
     margin-bottom: 10px;
   }
 
-  .senior-table-data-container{
+  .senior-handover-table-data-container{
     text-align: right;
     padding-left: 50%;
     margin-bottom: 1px;
     position: relative;
   }
 
-  .senior-table-data-container::before{
+  .senior-handover-table-data-container::before{
     content: attr(data-label);
     position: absolute;
     left: 0;
@@ -92,12 +80,5 @@
     font-size: 1.6rem;
     font-weight: bold;
     text-align: left;
-  }
-}
-
-@media only screen and (max-width: 500px){
-   .senior-button-center{
-    padding-left: 0px;
-    text-align: center;
   }
 }
