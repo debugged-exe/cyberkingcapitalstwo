@@ -68,7 +68,10 @@ const SeniorHandoverTable = () => {
                         <td className={'senior-handover-table-data-container'} data-label={'Status 2'}>{item.status_2}</td>
                         <td className={'senior-handover-table-data-container'} data-label={'Handover Status'}>{item.handover_status}</td>
                         <td className={'senior-handover-table-data-container'} data-label={'Coded'}>{item.coded}</td>
-                       	<td className={'senior-handover-table-data-container senior-button-center'}><button>Update</button></td>
+                       	<td className={'senior-handover-table-data-container senior-button-center'}>
+							<button className={'ma1'}>Update</button>
+							<button className={'ma1'}>Done</button>
+                       	</td>
                     </tr>
                 )
             })}

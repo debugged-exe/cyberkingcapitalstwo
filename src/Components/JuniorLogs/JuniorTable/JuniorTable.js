@@ -65,9 +65,10 @@ const JuniorTable = ({leadHandler}) => {
                         <td className={'junior-table-data-container'} data-label={'Handover Status'}>{item.handover_status}</td>
                         <td className={'junior-table-data-container'} data-label={'Coded'}>{item.coded}</td>
                         <td className={'junior-table-data-container request-button-center'}>
-                            <button className="ma1" onClick={() => leadHandler(item)}>Update</button>
-                            <button className="ma1">Handover</button>
-                            <button className="w-100-l">Request</button>
+                                <button className="ma1" onClick={() => leadHandler(item)}>Update</button>
+                                <button className="ma1">Handover</button>
+                            <button className="ma1">Request</button>
+                            <button className={'ma1'}>Delete</button>
                         </td>
                     </tr>
                 )
