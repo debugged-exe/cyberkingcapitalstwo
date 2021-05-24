@@ -10,7 +10,7 @@ const SeniorPanel = ({match,user}) => {
     return (
         <div>
         	<Switch>
-				<Route path={`${match.path}/profile`}><ProfileSection user={user}/></Route>
+				<Route path={`${match.path}/profile`}><ProfileSection/></Route>
         		<Route path={`${match.path}/payment`}><SeniorPayment/></Route>
         		<Route path={`${match.path}/team`}><SeniorViewTeam/></Route>
         		<Route path={`${match.path}/search`}><SearchByDropdown/></Route>

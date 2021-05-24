@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    user: {
+    currentUser: {
         username: '',
         designation: 'client',
         telecaller_id: '',
@@ -10,7 +10,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case 'SET_CURRENT_USER':
             return {
                 ...state,
-
+                currentUser: action.payload
             }
+        default: 
+            return state;
     }
 }
+
+export default userReducer;

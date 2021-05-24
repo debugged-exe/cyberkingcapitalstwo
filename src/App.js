@@ -1,14 +1,25 @@
 import React, {Component} from 'react';
+
 import AOS from 'aos';//AOS import for animation
 import 'aos/dist/aos.css';
+
+// redux
+import {connect} from 'react-redux';
+import {setCurrentUser} from './redux/user/user.actions.js';
+
+// css
 import './App.css';
 import 'tachyons';
+
+// router
 import {
     Switch,
     Route,
     Redirect,
     withRouter
 } from "react-router-dom";
+
+// components
 import SignIn from './Pages/SignIn/SignIn.js';
 import Sidebar from "./Components/Sidebar/Sidebar";
 import {store} from './Assets/Database/Store.js';
@@ -20,43 +31,31 @@ import BasicCourseForm from "./Components/BasicCourseForm/BasicCourseForm";
 import ProCourseForm from "./Components/ProCourseForm/ProCourseForm";
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: {
-                username: '',
-                designation: 'client',
-                telecaller_id: '',
-            }
-        }
-    }
 
     setUser = (username,password) => {
+        const {setCurrentUser} = this.props;
         const data = store.users.filter((item) => item.username===username && item.password===password);
         const user = {
             username: data[0].username,
             designation: data[0].designation,
             telecaller_id: data[0].telecaller_id
         }
-        this.setState({user: user}, () => {
-            this.props.history.push(`/${this.state.user.designation}/profile`);
-        })
+        setCurrentUser(user)
+        this.props.history.push(`/${data[0].designation}/profile`);
     }
 
     signOut = () => {
+        const {setCurrentUser} = this.props;
         const user = {
             username: '',
             designation: 'client',
             telecaller_id: ''
         }
-        this.setState({user: user}, () => {
-            this.props.history.push('/');
-        })
+        setCurrentUser(user);
+        this.props.history.push('/');
     }
 
     render() {
-        const {designation} = this.state.user;
-        const {user} = this.state;
         AOS.init();
         return (
             <div className="App">
@@ -64,11 +63,11 @@ class App extends Component {
                     <Route exact path="/"><HomePanel /></Route>
                     <Route path="/basicform"><BasicCourseForm /></Route>
                     <Route path="/proform"><ProCourseForm /></Route>
-                    <Route path={"/admin"}><Sidebar designation={designation} signOut={this.signOut}/><AdminPanel user={user}/></Route>
-                    <Route path={"/senior"}><Sidebar designation={designation} signOut={this.signOut}/><SeniorPanel user={user}/></Route>
-                    <Route path={"/junior"}><Sidebar designation={designation} signOut={this.signOut}/><JuniorPanel user={user}/></Route>
+                    <Route path={"/admin"}><Sidebar signOut={this.signOut}/><AdminPanel /></Route>
+                    <Route path={"/senior"}><Sidebar signOut={this.signOut}/><SeniorPanel /></Route>
+                    <Route path={"/junior"}><Sidebar signOut={this.signOut}/><JuniorPanel /></Route>
                     <Route path='/signin'>
-                        <Sidebar designation={designation} />
+                        <Sidebar />
                         <SignIn setUser={this.setUser}/>
                     </Route>
                 </Switch>
@@ -77,4 +76,8 @@ class App extends Component {
     }
 }
 
-export default withRouter(App);
+const mapDispatchToProps = dispatch => ({
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null, mapDispatchToProps)(withRouter(App));

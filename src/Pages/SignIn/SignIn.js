@@ -18,8 +18,9 @@ class SignIn extends Component{
         this.setState({[name]: value});
     }
 
-    handleSubmit = () =>
+    handleSubmit = (event) =>
     {
+        event.preventDefault();
         this.props.setUser(this.state.username, this.state.password);
         this.setState({username: '', password: ''});
     }
@@ -29,7 +30,7 @@ class SignIn extends Component{
             <div className="signin-container">
                 <h1 className="signin-header">SIGN IN</h1>
                 <div className="form-container">
-                    <form>
+                    <form onSubmit={(event) => this.handleSubmit(event)}>
                         <FormInput
                             label="UserName"
                             name="username"
@@ -46,7 +47,7 @@ class SignIn extends Component{
                             handleChange={this.handleChange}
                             required
                         />
-                        <CustomButton onClick={() => this.handleSubmit()}>Sign In</CustomButton>
+                        <CustomButton type="submit">Sign In</CustomButton>
                     </form>
                 </div>
             </div>

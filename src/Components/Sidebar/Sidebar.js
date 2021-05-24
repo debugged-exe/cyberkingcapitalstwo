@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {connect} from 'react-redux';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import './Sidebar.scss';
@@ -46,4 +47,8 @@ const Sidebar = ({designation, signOut}) => {
     )
 }
 
-export default Sidebar;
+const mapStateToProps = ({user: {currentUser}}) => ({
+    designation: currentUser.designation
+});
+
+export default connect(mapStateToProps)(Sidebar);
