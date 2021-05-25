@@ -1,7 +1,7 @@
 import React from 'react';
 import './JuniorTable.scss';
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
-                "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
+                "Account Opening No.", "City", "Trading knowledge", "Preferred Language","MicroSoft ID",
                 "status 1", "status 2", "Handover status", "Coded"];
 const tableLogs = [
     {
@@ -14,6 +14,7 @@ const tableLogs = [
         city: "pune",
         trading_knowledge: "no",
         preferred_language: "hindi",
+        microsoft_id: '1234',
         status_1: "complete",
         status_2: "uncomplete",
         handover_status: "complete",
@@ -29,6 +30,7 @@ const tableLogs = [
         city: "pune",
         trading_knowledge: "no",
         preferred_language: "marathi",
+        microsoft_id: '1234',
         status_1: "complete",
         status_2: "uncomplete",
         handover_status: "complete",
@@ -60,6 +62,7 @@ const JuniorTable = ({leadHandler}) => {
                         <td className={'junior-table-data-container'} data-label={'City'}>{item.city}</td>
                         <td className={'junior-table-data-container'} data-label={'Trading Knowledge'}>{item.trading_knowledge}</td>
                         <td className={'junior-table-data-container'} data-label={'Preferred Language'}>{item.preferred_language}</td>
+                        <td className={'junior-table-data-container'} data-label={'Microsoft ID'}>{item.microsoft_id}</td>
                         <td className={'junior-table-data-container'} data-label={'Status 1'}>{item.status_1}</td>
                         <td className={'junior-table-data-container'} data-label={'Status 2'}>{item.status_2}</td>
                         <td className={'junior-table-data-container'} data-label={'Handover Status'}>{item.handover_status}</td>
