@@ -1,3 +1,5 @@
+import {setModalLead} from "./junior.logs.actions";
+
 const INITIAL_STATE = {
 	log_stat_array: [],
 	filter: '*',
@@ -18,6 +20,28 @@ const juniorLogsReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				junior_table_logs: action.payload
+			}
+		case 'SET_MODAL_LEAD':
+			return {
+				...state,
+				modal_lead: action.payload,
+				modal_visibility: true
+			}
+		case 'SET_MODAL_VISIBILITY':
+			if (!action.payload)
+			{
+				return {
+					...state,
+					modal_lead: {},
+					modal_visibility: action.payload
+				}
+			}
+			else
+			{
+				return {
+					...state,
+					modal_visibility: action.payload
+				}
 			}
 		default:
 		return state;

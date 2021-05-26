@@ -2,7 +2,11 @@ import React,{useState, useEffect} from 'react';
 
 // redux
 import { connect } from 'react-redux';
-import {setJuniorTableLogArray, setLogStatArray} from '../../redux/junior-panel/junior-logs/junior.logs.actions.js';
+import {
+    setJuniorTableLogArray,
+    setLogStatArray,
+    setModalVisibility
+} from '../../redux/junior-panel/junior-logs/junior.logs.actions.js';
 
 // components
 import LogCard from './LogCard.js';
@@ -74,7 +78,7 @@ const LogStatArray = [
     },
 ]
 
-const JuniorLogs = ({setLogStatArray, log_stat_array,setJuniorTableLogArray}) => {
+const JuniorLogs = ({setLogStatArray, log_stat_array,setJuniorTableLogArray, setModalVisibility}) => {
 
     useEffect(() => {
         setLogStatArray(LogStatArray);
@@ -88,17 +92,6 @@ const JuniorLogs = ({setLogStatArray, log_stat_array,setJuniorTableLogArray}) =>
     const [filterValue, setFilterValue] = useState('');
     const handleFilterValue = (event) => {
         setFilterValue(event.target.value);
-    }
-
-    const [modal, setModal] = useState(false);
-    const modalHandler = (item) => {
-        setModal(item);
-    }
-
-    const [lead, setLead] = useState({});
-    const leadHandler = (item) => {
-        setLead(item);
-        setModal(true);
     }
 
 	return (
@@ -142,9 +135,9 @@ const JuniorLogs = ({setLogStatArray, log_stat_array,setJuniorTableLogArray}) =>
                 <CustomButton style={{marginLeft: '0'}} onClick={()=> {setJuniorTableLogArray(tableLogs)}}>GO</CustomButton>
             </div>
             <div className={'mt4 w-100 mb4'}>
-                <JuniorTable leadHandler={leadHandler}/>
+                <JuniorTable />
             </div>
-            <JuniorModal lead={lead} modal={modal} modalHandler={modalHandler}/>
+            <JuniorModal />
 		</div>
 	)
 }
@@ -155,7 +148,8 @@ const mapStateToProps = ({junior_panel: {junior_logs}}) => ({
 
 const mapDispatchToProps = dispatch => ({
     setLogStatArray: array => dispatch(setLogStatArray(array)),
-    setJuniorTableLogArray: array => dispatch(setJuniorTableLogArray(array))
+    setJuniorTableLogArray: array => dispatch(setJuniorTableLogArray(array)),
+    setModalVisibility: visible => dispatch(setModalVisibility(visible))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(JuniorLogs);

@@ -1,12 +1,15 @@
 import React from 'react';
 import './JuniorTable.scss';
 import {connect} from "react-redux";
+import {
+    setModalLead
+} from "../../../redux/junior-panel/junior-logs/junior.logs.actions";
 
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
                 "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
                 "status 1", "status 2", "Handover status", "Coded"];
 
-const JuniorTable = ({leadHandler, junior_table_logs}) => {
+const JuniorTable = ({ junior_table_logs,setModalLead}) => {
     return (<div className={'junior-table-container'}>
         <table cellSpacing="1" className={'junior-table-box'}>
             <thead className={'junior-table-head-container'}>
@@ -36,7 +39,7 @@ const JuniorTable = ({leadHandler, junior_table_logs}) => {
                         <td className={'junior-table-data-container'} data-label={'Handover Status'}>{item.handover_status}</td>
                         <td className={'junior-table-data-container'} data-label={'Coded'}>{item.coded}</td>
                         <td className={'junior-table-data-container request-button-center'}>
-                                <button className="ma1" onClick={() => leadHandler(item)}>Update</button>
+                                <button className="ma1" onClick={() => {setModalLead(item)}}>Update</button>
                                 <button className="ma1">Handover</button>
                             <button className="ma1">Request</button>
                             <button className={'ma1'}>Delete</button>
@@ -51,4 +54,8 @@ const JuniorTable = ({leadHandler, junior_table_logs}) => {
 const mapStateToProps = ({junior_panel: {junior_logs}}) => ({
     junior_table_logs: junior_logs.junior_table_logs
 });
-export default connect(mapStateToProps)(JuniorTable);
+
+const mapDispatchToProps = dispatch => ({
+    setModalLead: lead => dispatch(setModalLead(lead))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(JuniorTable);

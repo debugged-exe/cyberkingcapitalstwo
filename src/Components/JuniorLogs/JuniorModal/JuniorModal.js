@@ -3,8 +3,12 @@ import * as AiIcons from 'react-icons/ai';
 import FormInput from '../../FormInput/FormInput.js';
 import CustomButton from '../../CustomButton/CustomButton.js';
 import './JuniorModal.scss';
-
-export default class JuniorModal extends React.Component {
+import {connect} from 'react-redux';
+import {
+	setModalLead,
+	setModalVisibility
+} from "../../../redux/junior-panel/junior-logs/junior.logs.actions";
+class JuniorModal extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -26,29 +30,30 @@ export default class JuniorModal extends React.Component {
     }
 
 	render() {
+
 		const {whatsapp_no, account_opening_no, status_1, status_2} = this.state;
-		const {lead, modal, modalHandler} = this.props;
+		const {modal_lead,modal_visibility,setModalVisibility} = this.props;
 		return (
-			<div className={`${modal?'visible junior-modal':'hidden'}`}>
+			<div className={`${modal_visibility?'visible junior-modal':'hidden'}`}>
 				<div className="flex justify-between items-center">
 					<h1 className="ml3 junior-modal-header">Update Details</h1>
-					<AiIcons.AiOutlineClose size={'2rem'} color={'black'} className="mr3" onClick={() => modalHandler(false)}/>
+					<AiIcons.AiOutlineClose size={'2rem'} color={'black'} className="mr3" onClick={() => {setModalVisibility(false)}}/>
 				</div>
 				
 				<div className="grid-div">
 					<div className="flex flex-column justify-center items-center">
 						<div className="junior-modal-lead-details">
-							<p className="detail-item shadow-4 ma2 pa2">Lead ID: {lead.lead_id}</p>
-							<p className="detail-item shadow-4 ma2 pa2">Lead Name: {lead.lead_name}</p>
-							<p className="detail-item shadow-4 ma2 pa2">Lead Contact: {lead.lead_contact}</p>
-							<p className="detail-item shadow-4 ma2 pa2">City: {lead.city}</p>
-							<p className="detail-item shadow-4 ma2 pa2">Preferred Language: {lead.preferred_language}</p>
+							<p className="detail-item shadow-4 ma2 pa2">Lead ID: {modal_lead.lead_id}</p>
+							<p className="detail-item shadow-4 ma2 pa2">Lead Name: {modal_lead.lead_name}</p>
+							<p className="detail-item shadow-4 ma2 pa2">Lead Contact: {modal_lead.lead_contact}</p>
+							<p className="detail-item shadow-4 ma2 pa2">City: {modal_lead.city}</p>
+							<p className="detail-item shadow-4 ma2 pa2">Preferred Language: {modal_lead.preferred_language}</p>
 						</div>
 					</div>
 					<div className="w-60 junior-modal-form ">
 						<div className={'mt2 f3'} style={{marginBottom: "-3%"}}>
 							<label >
-								Current Value: {lead.whatsapp_no}
+								Current Value: {modal_lead.whatsapp_no}
 							</label>
 							<div className={'junior-modal-form-component'}>
 								<FormInput
@@ -66,7 +71,7 @@ export default class JuniorModal extends React.Component {
 							</div>
 						</div>
 						<div className={'mt2 f3'}>
-							<label>Current Value: {lead.account_opening_no}</label>
+							<label>Current Value: {modal_lead.account_opening_no}</label>
 							<div className={'junior-modal-form-component'}>
 								<FormInput
 									type="text"
@@ -83,7 +88,7 @@ export default class JuniorModal extends React.Component {
 							</div>
 						</div>
 						<div className={'mt2 f3'}>
-							<label>Current Status 1: {lead.status_1}</label>
+							<label>Current Status 1: {modal_lead.status_1}</label>
 							<div className={'junior-modal-form-component'}>
 								<FormInput
 									type="text"
@@ -100,7 +105,7 @@ export default class JuniorModal extends React.Component {
 							</div>
 						</div>
 						<div className={'mt2 f3'}>
-							<label>Current Status 2: {lead.status_2}</label>
+							<label>Current Status 2: {modal_lead.status_2}</label>
 							<div className={'junior-modal-form-component'}>
 								<FormInput
 									type="text"
@@ -124,6 +129,16 @@ export default class JuniorModal extends React.Component {
 		)
 	}
 }
+
+const mapStateToProps = ({junior_panel: {junior_logs}}) => ({
+	modal_lead: junior_logs.modal_lead,
+	modal_visibility: junior_logs.modal_visibility
+})
+const mapDispatchToProps = dispatch => ({
+	setModalVisibility: visible => dispatch(setModalVisibility(visible))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(JuniorModal);
+
 
 	// whatsapp_no: this.props.item.whatsapp_no,
 	// 		account_opening_no: this.props.item.account_opening_no,
