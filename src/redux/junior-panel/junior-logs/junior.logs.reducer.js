@@ -14,6 +14,11 @@ const juniorLogsReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				log_stat_array: action.payload
 			}
+		case 'SET_JUNIOR_TABLE_LOG_ARRAY':
+			return {
+				...state,
+				junior_table_logs: action.payload
+			}
 		default:
 		return state;
 	}

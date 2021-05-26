@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 
 // redux
 import { connect } from 'react-redux';
-import {setLogStatArray} from '../../redux/junior-panel/junior-logs/junior.logs.actions.js';
+import {setJuniorTableLogArray, setLogStatArray} from '../../redux/junior-panel/junior-logs/junior.logs.actions.js';
 
 // components
 import LogCard from './LogCard.js';
@@ -14,6 +14,38 @@ import JuniorModal from "./JuniorModal/JuniorModal";
 // css
 import './JuniorLogs.scss';
 
+const tableLogs = [
+    {
+        lead_id: 1,
+        assigned_to: "xyz",
+        lead_name: "abcde",
+        lead_contact: '9087389032',
+        whatsapp_no: '8903221111',
+        account_opening_no: '123',
+        city: "pune",
+        trading_knowledge: "no",
+        preferred_language: "hindi",
+        status_1: "complete",
+        status_2: "uncomplete",
+        handover_status: "complete",
+        coded: "---"
+    },
+    {
+        lead_id: 2,
+        assigned_to: "mmmmm",
+        lead_name: "oooooo",
+        lead_contact: '9000001222',
+        whatsapp_no: '9090912121',
+        account_opening_no: '8011',
+        city: "pune",
+        trading_knowledge: "no",
+        preferred_language: "marathi",
+        status_1: "complete",
+        status_2: "uncomplete",
+        handover_status: "complete",
+        coded: "---"
+    }
+]
 
 const LogStatArray = [
     {
@@ -42,7 +74,7 @@ const LogStatArray = [
     },
 ]
 
-const JuniorLogs = ({setLogStatArray, log_stat_array}) => {
+const JuniorLogs = ({setLogStatArray, log_stat_array,setJuniorTableLogArray}) => {
 
     useEffect(() => {
         setLogStatArray(LogStatArray);
@@ -107,7 +139,7 @@ const JuniorLogs = ({setLogStatArray, log_stat_array}) => {
                     required
                     />
                 </div>
-                <CustomButton style={{marginLeft: '0'}}>GO</CustomButton>
+                <CustomButton style={{marginLeft: '0'}} onClick={()=> {setJuniorTableLogArray(tableLogs)}}>GO</CustomButton>
             </div>
             <div className={'mt4 w-100 mb4'}>
                 <JuniorTable leadHandler={leadHandler}/>
@@ -122,7 +154,8 @@ const mapStateToProps = ({junior_panel: {junior_logs}}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    setLogStatArray: array => dispatch(setLogStatArray(array))
+    setLogStatArray: array => dispatch(setLogStatArray(array)),
+    setJuniorTableLogArray: array => dispatch(setJuniorTableLogArray(array))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(JuniorLogs);
