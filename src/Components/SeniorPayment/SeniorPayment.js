@@ -1,5 +1,13 @@
-import React from 'react';
+import React,{useEffect}from 'react';
+
+// redux
+import { connect } from 'react-redux';
+import {setSeniorPaymentArray, setSeniorPaymentTableLog} from '../../redux/senior-panel/senior-payment/senior.payment.actions.js';
+
+// css
 import './SeniorPayment.scss';
+
+// component
 import PaymentCard from "../PaymentCard/PaymentCard";
 import * as HiIcons from 'react-icons/hi';
 import * as RiIcons from 'react-icons/ri';
@@ -25,13 +33,37 @@ const PaymentCardArray = [
     }
 ]
 
-const SeniorPayment = () => {
+const tableData = [
+    {
+        telecaller_id: "Jr001",
+        telecaller_name: "xyz",
+        points_earned: 50
+    },
+    {
+        telecaller_id: "Jr002",
+        telecaller_name: "abc",
+        points_earned: 60
+    },
+    {
+        telecaller_id: "Jr003",
+        telecaller_name: "lmn",
+        points_earned: 70
+    }
+]
+
+const SeniorPayment = ({setSeniorPaymentArray, setSeniorPaymentTableLog, senior_payment_array}) => {
+
+    useEffect(() => {
+        setSeniorPaymentArray(PaymentCardArray);
+        setSeniorPaymentTableLog(tableData);
+    }, []);
+
     return(
         <div className={''}>
             <p style={{fontFamily: 'Open Sans Condensed', fontSize: '2rem', fontWeight: 'bold', textAlign: 'center'}}>Senior Payment Details</p>
             <div className="card-array-container-senior">
                 {
-                    PaymentCardArray.map((item,index) => {
+                    senior_payment_array.map((item,index) => {
                         return(<PaymentCard key={index} Heading={item.title} numeric={item.numeric} icon={item.icon} />);
                     })
                 }
@@ -44,5 +76,13 @@ const SeniorPayment = () => {
     );
 }
 
-export default SeniorPayment;
+const mapStateToProps = ({senior_panel: {senior_payment}}) => ({
+    senior_payment_array: senior_payment.senior_payment_array
+});
 
+const mapDispatchToProps = dispatch => ({
+    setSeniorPaymentArray: array => dispatch(setSeniorPaymentArray(array)),
+    setSeniorPaymentTableLog: array => dispatch(setSeniorPaymentTableLog(array))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SeniorPayment);
