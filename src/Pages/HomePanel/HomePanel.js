@@ -1,16 +1,16 @@
 import React from 'react';
 import './HomePanel.scss';
-import BasicCourseForm from "../../Components/BasicCourseForm/BasicCourseForm";
 import {
     Switch,
     Route,
-    withRouter
+    withRouter,
+    Link
 } from "react-router-dom";
-import ProCourseForm from "../../Components/ProCourseForm/ProCourseForm";
 
 const HomePanel = ({}) => {
     return(<div>
             <h1>Home Page</h1>
+            <button className={'bg-light-red'}><Link to={'/signin'}>SIGN IN</Link></button>
     </div>);
 }
 
