@@ -1,43 +1,15 @@
 import React from 'react';
+
+// redux
+import { connect } from 'react-redux';
+
+// css
 import './SeniorHandoverTable.scss';
 
-const SeniorHandoverTable = () => {
+const SeniorHandoverTable = ({handover_leads_array}) => {
 	const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
     "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
     "status 1", "status 2", "Handover status", "Coded"];
-
-	const tableLogs = [
-	    {
-	        lead_id: 1,
-	        assigned_to: "xyz",
-	        lead_name: "abcde",
-	        lead_contact: 9087389032,
-	        whatsapp_no: 8903221111,
-	        account_opening_no: 123,
-	        city: "pune",
-	        trading_knowledge: "no",
-	        preferred_language: "hindi",
-	        status_1: "complete",
-	        status_2: "uncomplete",
-	        handover_status: "complete",
-	        coded: "---"
-	    },
-	    {
-	        lead_id: 2,
-	        assigned_to: "mmmmm",
-	        lead_name: "oooooo",
-	        lead_contact: 9000001222,
-	        whatsapp_no: 9090912121,
-	        account_opening_no: 8011,
-	        city: "pune",
-	        trading_knowledge: "no",
-	        preferred_language: "marathi",
-	        status_1: "complete",
-	        status_2: "uncomplete",
-	        handover_status: "complete",
-	        coded: "---"
-	    }
-	]
 
 	return (
 		<div className="senior-handover-table-container">
@@ -52,7 +24,7 @@ const SeniorHandoverTable = () => {
             </tr>
             </thead>
             <tbody className={'senior-handover-table-body-container'}>
-            {tableLogs.map((item, index) => {
+            {handover_leads_array.map((item, index) => {
                 return (
                     <tr className="senior-handover-table-row-container">
                         <td className={'senior-handover-table-data-container'} data-label={'Lead ID'}>{item.lead_id}</td>
@@ -81,4 +53,8 @@ const SeniorHandoverTable = () => {
 	)
 }
 
-export default SeniorHandoverTable;
+const mapStateToProps = ({senior_panel: {senior_handover}}) => ({
+	handover_leads_array: senior_handover.handover_leads_array
+});
+
+export default connect(mapStateToProps)(SeniorHandoverTable);

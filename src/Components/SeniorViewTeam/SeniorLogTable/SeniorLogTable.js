@@ -1,44 +1,16 @@
 import React from 'react';
+
+// redux
+import { connect } from 'react-redux';
+
 import './SeniorLogTable.scss';
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
     "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
     "status 1", "status 2", "Handover status", "Coded", "Payment"];
-const tableLogs = [
-    {
-        lead_id: 1,
-        assigned_to: "xyz",
-        lead_name: "abcde",
-        lead_contact: 9087389032,
-        whatsapp_no: 8903221111,
-        account_opening_no: 123,
-        city: "pune",
-        trading_knowledge: "no",
-        preferred_language: "hindi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete",
-        coded: "---",
-        payment: "done"
-    },
-    {
-        lead_id: 2,
-        assigned_to: "mmmmm",
-        lead_name: "oooooo",
-        lead_contact: 9000001222,
-        whatsapp_no: 9090912121,
-        account_opening_no: 8011,
-        city: "pune",
-        trading_knowledge: "no",
-        preferred_language: "marathi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete",
-        coded: "---",
-        payment: "no"
-    }
-]
-const SeniorLogTable = () => {
-    return (<div className={'senior-table-container'}>
+
+const SeniorLogTable = ({junior_lead_array, junior_lead_table_visibility}) => {
+    return (<div className={`${junior_lead_table_visibility?'senior-table-container':'hidden'}`}>
+        <h1 className={'flex justify-center logHeader'}>View Logs Table</h1>
         <table cellSpacing="1" className={'senior-table-box'}>
             <thead className={'senior-table-head-container'}>
             <tr>
@@ -50,7 +22,7 @@ const SeniorLogTable = () => {
             </tr>
             </thead>
             <tbody className={'senior-table-body-container'}>
-            {tableLogs.map((item, index) => {
+            {junior_lead_array.map((item, index) => {
                 return (
                     <tr className="senior-table-row-container">
                         <td className={'senior-table-data-container'} data-label={'Lead ID'}>{item.lead_id}</td>
@@ -75,4 +47,9 @@ const SeniorLogTable = () => {
     </div>);
 }
 
-export default SeniorLogTable;
+const mapStateToProps = ({senior_panel: {senior_view_team}}) => ({
+    junior_lead_array: senior_view_team.junior_lead_array,
+    junior_lead_table_visibility: senior_view_team.junior_lead_table_visibility
+});
+
+export default connect(mapStateToProps)(SeniorLogTable);

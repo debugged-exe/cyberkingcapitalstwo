@@ -1,6 +1,15 @@
-import React from 'react';
-import './SeniorViewTeam.scss';
+import React,{useEffect} from 'react';
+
+// redux
+import { connect } from 'react-redux';
+import {setTeamArray, setJuniorLeadArray} from '../../redux/senior-panel/senior-view-team/senior.view.team.actions.js'
+
+// components
 import SeniorLogTable from "./SeniorLogTable/SeniorLogTable";
+
+// css
+import './SeniorViewTeam.scss';
+
 const header = ["Sr No.", "Telecaller ID", "Telecaller Name"];
 const tableData = [
     {
@@ -16,7 +25,48 @@ const tableData = [
         telecaller_name: "lmn"
     }
 ]
-const SeniorViewTeam = () => {
+
+const tableLogs = [
+    {
+        lead_id: 1,
+        assigned_to: "xyz",
+        lead_name: "abcde",
+        lead_contact: 9087389032,
+        whatsapp_no: 8903221111,
+        account_opening_no: 123,
+        city: "pune",
+        trading_knowledge: "no",
+        preferred_language: "hindi",
+        status_1: "complete",
+        status_2: "uncomplete",
+        handover_status: "complete",
+        coded: "---",
+        payment: "done"
+    },
+    {
+        lead_id: 2,
+        assigned_to: "mmmmm",
+        lead_name: "oooooo",
+        lead_contact: 9000001222,
+        whatsapp_no: 9090912121,
+        account_opening_no: 8011,
+        city: "pune",
+        trading_knowledge: "no",
+        preferred_language: "marathi",
+        status_1: "complete",
+        status_2: "uncomplete",
+        handover_status: "complete",
+        coded: "---",
+        payment: "no"
+    }
+]
+
+const SeniorViewTeam = ({setTeamArray, setJuniorLeadArray, team_array}) => {
+
+    useEffect(() => {
+       setTeamArray(tableData);
+    }, [])
+
     return (<div>
         <div className={'team-table-container'}>
         <h1>My Team</h1>
@@ -31,13 +81,13 @@ const SeniorViewTeam = () => {
             </tr>
             </thead>
             <tbody className={'team-table-body-container'}>
-            {tableData.map((item, index) => {
+            {team_array.map((item, index) => {
                 return (
                     <tr className={'team-table-row-container'}>
                         <td className={'team-table-data-container'} data-label={'Sr No.'}>{index + 1}</td>
                         <td className={'team-table-data-container'} data-label={'Telecaller ID'}>{item.telecaller_id}</td>
                         <td className={'team-table-data-container'} data-label={'Telecaller Name'}>{item.telecaller_name}</td>
-                        <td className={'team-table-data-container'}><button>View Logs</button></td>
+                        <td className={'team-table-data-container'}><button onClick={() => setJuniorLeadArray(tableLogs)}>View Logs</button></td>
                     </tr>
                 )
             })}
@@ -45,10 +95,18 @@ const SeniorViewTeam = () => {
         </table>
     </div>
         <div className={'mt4 mb4'}>
-            <h1 className={'flex justify-center logHeader'}>View Logs Table</h1>
             <SeniorLogTable />
         </div>
     </div>);
 }
 
-export default SeniorViewTeam;
+const mapStateToProps = ({senior_panel: {senior_view_team}}) => ({
+    team_array: senior_view_team.team_array
+});
+
+const mapDispatchToProps = dispatch => ({
+    setTeamArray: array => dispatch(setTeamArray(array)),
+    setJuniorLeadArray: array => dispatch(setJuniorLeadArray(array))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SeniorViewTeam);
