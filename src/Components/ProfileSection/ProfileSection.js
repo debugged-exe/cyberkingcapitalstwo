@@ -2,9 +2,11 @@ import React from "react";
 
 // redux
 import {connect} from 'react-redux';
+
 //reselect
 import {createStructuredSelector} from "reselect";
 import {selectCurrentUser} from "../../redux/user/user.selectors";
+
 // css
 import './ProfileSection.scss';
 

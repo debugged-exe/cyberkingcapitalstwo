@@ -4,6 +4,9 @@ import React,{useEffect}from 'react';
 import { connect } from 'react-redux';
 import {setSeniorPaymentArray, setSeniorPaymentTableLog} from '../../redux/senior-panel/senior-payment/senior.payment.actions.js';
 
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectSeniorPaymentArray} from "../../redux/senior-panel/senior-payment/senior.payment.selectors";
 // css
 import './SeniorPayment.scss';
 
@@ -76,8 +79,8 @@ const SeniorPayment = ({setSeniorPaymentArray, setSeniorPaymentTableLog, senior_
     );
 }
 
-const mapStateToProps = ({senior_panel: {senior_payment}}) => ({
-    senior_payment_array: senior_payment.senior_payment_array
+const mapStateToProps = createStructuredSelector({
+    senior_payment_array: selectSeniorPaymentArray
 });
 
 const mapDispatchToProps = dispatch => ({

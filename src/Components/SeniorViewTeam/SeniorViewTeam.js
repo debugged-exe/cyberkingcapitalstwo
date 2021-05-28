@@ -4,13 +4,19 @@ import React,{useEffect} from 'react';
 import { connect } from 'react-redux';
 import {setTeamArray, setJuniorLeadArray} from '../../redux/senior-panel/senior-view-team/senior.view.team.actions.js'
 
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectSeniorTeamArray} from "../../redux/senior-panel/senior-view-team/senior.view.team.selectors";
+
 // components
 import SeniorLogTable from "./SeniorLogTable/SeniorLogTable";
 
 // css
 import './SeniorViewTeam.scss';
 
+// table header data
 const header = ["Sr No.", "Telecaller ID", "Telecaller Name"];
+
 const tableData = [
     {
         telecaller_id: "Jr001",
@@ -100,8 +106,8 @@ const SeniorViewTeam = ({setTeamArray, setJuniorLeadArray, team_array}) => {
     </div>);
 }
 
-const mapStateToProps = ({senior_panel: {senior_view_team}}) => ({
-    team_array: senior_view_team.team_array
+const mapStateToProps = createStructuredSelector({
+    team_array: selectSeniorTeamArray
 });
 
 const mapDispatchToProps = dispatch => ({

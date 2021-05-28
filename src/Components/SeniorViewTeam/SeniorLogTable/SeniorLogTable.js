@@ -3,7 +3,14 @@ import React from 'react';
 // redux
 import { connect } from 'react-redux';
 
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectSeniorJuniorLeadArray, selectSeniorJuniorLeadTableVisibility} from "../../../redux/senior-panel/senior-view-team/senior.view.team.selectors";
+
+//css
 import './SeniorLogTable.scss';
+
+//table header data
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
     "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
     "status 1", "status 2", "Handover status", "Coded", "Payment"];
@@ -47,9 +54,9 @@ const SeniorLogTable = ({junior_lead_array, junior_lead_table_visibility}) => {
     </div>);
 }
 
-const mapStateToProps = ({senior_panel: {senior_view_team}}) => ({
-    junior_lead_array: senior_view_team.junior_lead_array,
-    junior_lead_table_visibility: senior_view_team.junior_lead_table_visibility
+const mapStateToProps = createStructuredSelector({
+    junior_lead_array: selectSeniorJuniorLeadArray,
+    junior_lead_table_visibility: selectSeniorJuniorLeadTableVisibility
 });
 
 export default connect(mapStateToProps)(SeniorLogTable);

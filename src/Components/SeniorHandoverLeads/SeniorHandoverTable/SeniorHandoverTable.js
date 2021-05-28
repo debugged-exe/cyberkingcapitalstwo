@@ -3,6 +3,10 @@ import React from 'react';
 // redux
 import { connect } from 'react-redux';
 
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectSeniorHandoverLeadsArray} from "../../../redux/senior-panel/senior-handover/senior.handover.selectors";
+
 // css
 import './SeniorHandoverTable.scss';
 
@@ -53,8 +57,8 @@ const SeniorHandoverTable = ({handover_leads_array}) => {
 	)
 }
 
-const mapStateToProps = ({senior_panel: {senior_handover}}) => ({
-	handover_leads_array: senior_handover.handover_leads_array
+const mapStateToProps = createStructuredSelector({
+	handover_leads_array: selectSeniorHandoverLeadsArray
 });
 
 export default connect(mapStateToProps)(SeniorHandoverTable);

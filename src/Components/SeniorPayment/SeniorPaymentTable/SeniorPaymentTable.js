@@ -3,6 +3,10 @@ import React from 'react';
 // redux
 import { connect } from 'react-redux';
 
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectSeniorPaymentTableLogs} from "../../../redux/senior-panel/senior-payment/senior.payment.selectors";
+
 // css
 import './SeniorPaymentTable.scss';
 const header = ["Sr No.", "Telecaller ID", "Telecaller Name", "Points earned"];
@@ -36,8 +40,8 @@ const SeniorPaymentTable = ({senior_payment_table_log}) => {
     </div>);
 }
 
-const mapStateToProps = ({senior_panel: {senior_payment}}) => ({
-    senior_payment_table_log: senior_payment.senior_payment_table_log
+const mapStateToProps = createStructuredSelector({
+    senior_payment_table_log: selectSeniorPaymentTableLogs
 });
 
 export default connect(mapStateToProps)(SeniorPaymentTable);
