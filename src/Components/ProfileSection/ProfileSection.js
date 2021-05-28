@@ -2,7 +2,9 @@ import React from "react";
 
 // redux
 import {connect} from 'react-redux';
-
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectCurrentUser} from "../../redux/user/user.selectors";
 // css
 import './ProfileSection.scss';
 
@@ -14,8 +16,8 @@ const ProfileSection = ({currentUser}) => {
     </div>);
 }
 
-const mapStateToProps = ({user: {currentUser}}) => ({
-	currentUser: currentUser
-})
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+});
 
 export default connect(mapStateToProps)(ProfileSection);

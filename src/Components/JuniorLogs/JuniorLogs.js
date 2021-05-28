@@ -8,6 +8,9 @@ import {
     setModalVisibility
 } from '../../redux/junior-panel/junior-logs/junior.logs.actions.js';
 
+// reselect
+import {createStructuredSelector} from "reselect";
+import {selectJuniorLogStatArray} from "../../redux/junior-panel/junior-logs/junior.logs.selectors";
 // components
 import LogCard from './LogCard.js';
 import CustomButton from '../CustomButton/CustomButton.js';
@@ -142,8 +145,8 @@ const JuniorLogs = ({setLogStatArray, log_stat_array,setJuniorTableLogArray, set
 	)
 }
 
-const mapStateToProps = ({junior_panel: {junior_logs}}) => ({
-    log_stat_array: junior_logs.log_stat_array
+const mapStateToProps = createStructuredSelector({
+    log_stat_array: selectJuniorLogStatArray
 })
 
 const mapDispatchToProps = dispatch => ({

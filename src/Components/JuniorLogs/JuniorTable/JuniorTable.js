@@ -1,9 +1,15 @@
 import React from 'react';
+//css
 import './JuniorTable.scss';
+//redux
 import {connect} from "react-redux";
 import {
     setModalLead
 } from "../../../redux/junior-panel/junior-logs/junior.logs.actions";
+
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectJuniorTableLogs} from "../../../redux/junior-panel/junior-logs/junior.logs.selectors";
 
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
                 "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
@@ -51,8 +57,8 @@ const JuniorTable = ({ junior_table_logs,setModalLead}) => {
         </table>
     </div>);
 }
-const mapStateToProps = ({junior_panel: {junior_logs}}) => ({
-    junior_table_logs: junior_logs.junior_table_logs
+const mapStateToProps = createStructuredSelector({
+    junior_table_logs: selectJuniorTableLogs
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,13 +1,24 @@
 import React from 'react';
+
+//components
 import * as AiIcons from 'react-icons/ai';
 import FormInput from '../../FormInput/FormInput.js';
 import CustomButton from '../../CustomButton/CustomButton.js';
+
+//css
 import './JuniorModal.scss';
+
+//redux
 import {connect} from 'react-redux';
 import {
 	setModalLead,
 	setModalVisibility
 } from "../../../redux/junior-panel/junior-logs/junior.logs.actions";
+
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectJuniorModalLead, selectJuniorModalVisibility} from "../../../redux/junior-panel/junior-logs/junior.logs.selectors";
+
 class JuniorModal extends React.Component {
 	constructor(props){
 		super(props);
@@ -123,24 +134,18 @@ class JuniorModal extends React.Component {
 						</div>
 					</div>
 				</div>
-				
-				
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = ({junior_panel: {junior_logs}}) => ({
-	modal_lead: junior_logs.modal_lead,
-	modal_visibility: junior_logs.modal_visibility
+const mapStateToProps = createStructuredSelector({
+	modal_lead: selectJuniorModalLead,
+	modal_visibility: selectJuniorModalVisibility
 })
+
 const mapDispatchToProps = dispatch => ({
 	setModalVisibility: visible => dispatch(setModalVisibility(visible))
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(JuniorModal);
-
-
-	// whatsapp_no: this.props.item.whatsapp_no,
-	// 		account_opening_no: this.props.item.account_opening_no,
-	// 		status_1: this.props.item.status_1,
-	// 		status_2: this.props.item.status_2

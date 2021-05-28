@@ -1,12 +1,23 @@
 import React, {useEffect} from 'react';
+
+//redux
+import {setJuniorPaymentArray} from "../../redux/junior-panel/junior-payment/junior.payment.actions";
+import {connect} from "react-redux";
+
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectJuniorPaymentArray} from "../../redux/junior-panel/junior-payment/junior.payment.selectors";
+
+//css
 import './JuniorPayment.scss';
+
+//components
 import PaymentCard from "../PaymentCard/PaymentCard";
 import * as HiIcons from 'react-icons/hi';
 import * as RiIcons from 'react-icons/ri';
 import * as BsIcons from 'react-icons/bs';
 import * as BiIcons from 'react-icons/bi';
-import {connect} from "react-redux";
-import {setJuniorPaymentArray} from "../../redux/junior-panel/junior-payment/junior.payment.actions";
+
 const PaymentCardArray = [
     {
         title: 'Points Earned',
@@ -42,8 +53,8 @@ const JuniorPayment = ({setJuniorPaymentArray, junior_payment_array}) => {
         </div>
     );
 }
-const mapStateToProps = ({junior_panel: {junior_payment}}) => ({
-    junior_payment_array: junior_payment.junior_payment_array
+const mapStateToProps = createStructuredSelector({
+    junior_payment_array: selectJuniorPaymentArray
 });
 const mapDispatchToProps = dispatch => ({
     setJuniorPaymentArray: array => dispatch(setJuniorPaymentArray(array))
