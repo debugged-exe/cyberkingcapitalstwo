@@ -1,11 +1,24 @@
 import React, {useState} from 'react';
+
+//redux
+import {connect} from 'react-redux';
+import {setAdminLogsArray} from "../../redux/admin-panel/admin-logs/admin.logs.actions";
+
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectAdminCountArray} from "../../redux/admin-panel/admin-count/admin.count.selectors";
+
+//css
 import './AdminViewLogs.scss';
+
+//Components
 import PaymentCard from "../PaymentCard/PaymentCard";
 import * as FaIcons from "react-icons/fa";
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
 import AdminViewLogsTable from "./AdminViewLogsTable/AdminViewLogsTable";
 import Pagination from "../Pagination/Pagination";
+import {useReduxContext} from "react-redux/lib/hooks/useReduxContext";
 
 const tableLogs = [
     {
@@ -107,7 +120,7 @@ const tableLogs = [
 ]
 
 
-const AdminViewLogs = () => {
+const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
     const [filter,setFilter] = useState("");
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -136,8 +149,13 @@ const AdminViewLogs = () => {
 
     return (<div className={'admin-view-log-container'}>
         <div className="admin-view-log-count">
-            <PaymentCard Heading={'Hindi Count'} numeric={500} icon={<FaIcons.FaLanguage size={'5rem'} color={'rgb(57, 73, 171)'}/>}/>
-            <PaymentCard Heading={'Marathi Count'} numeric={500} icon={<FaIcons.FaLanguage size={'5rem'} color={'rgb(67, 160, 71)'}/>}/>
+            {
+                admin_count_array.map((item,index) => {
+                    return(
+                        <PaymentCard Heading={item.Heading} numeric={item.numeric} icon={<FaIcons.FaLanguage size={'5rem'} color={item.color}/>}/>
+                    );
+                })
+            }
         </div>
         <hr color={'grey'} className={'mt4 mb4'}/>
         <div className={'flex justify-center items-center center mb4 f2 w-100 mt4'}>
@@ -170,7 +188,7 @@ const AdminViewLogs = () => {
                 style={{marginTop: '0px', marginBottom: '0px'}}
                 required
                 />
-                <CustomButton type="submit" style={{marginLeft: '0px'}}>Fetch</CustomButton>
+                <CustomButton style={{marginLeft: '0px'}} onClick ={() => setAdminLogsArray(tableLogs)} >Fetch</CustomButton>
             </form>
         </div>
         <div className={'w-100 mb4'}>
@@ -181,8 +199,14 @@ const AdminViewLogs = () => {
                 paginate={paginate}
             />
         </div>
-
     </div>);
 }
 
-export default AdminViewLogs;
+const mapStateToProps = createStructuredSelector({
+    admin_count_array: selectAdminCountArray
+});
+
+const mapDispatchToProps = dispatch =>({
+    setAdminLogsArray: array => dispatch(setAdminLogsArray(array))
+});
+export default connect(mapStateToProps,mapDispatchToProps)(AdminViewLogs);

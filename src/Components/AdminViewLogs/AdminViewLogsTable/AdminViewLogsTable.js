@@ -1,5 +1,12 @@
 import React from 'react';
+//redux
+import {connect} from 'react-redux';
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectAdminLeadTableArray} from "../../../redux/admin-panel/admin-logs/admin.logs.selectors";
+//css
 import './AdminViewLogsTable.scss';
+
 const header = [
     "Lead Id",
     "Assigned to",
@@ -13,9 +20,9 @@ const header = [
     "Preffered Language",
     "Coded",
     "Payment"
-]
+];
 
-const AdminViewLogsTable = ({tableLogs}) => {
+const AdminViewLogsTable = ({lead_table_array}) => {
     return (
         <div className={'admin-view-log-table-container'}>
             <table cellSpacing="1" className={'admin-view-log-table-box'}>
@@ -29,7 +36,7 @@ const AdminViewLogsTable = ({tableLogs}) => {
                 </tr>
                 </thead>
                 <tbody className={'admin-view-log-table-body-container'}>
-                {tableLogs.map((item, index) => {
+                {lead_table_array.map((item, index) => {
                     return (
                         <tr className="admin-view-log-table-row-container">
                             <td className={'admin-view-log-table-data-container'} data-label={'Lead ID'}>{item.lead_id}</td>
@@ -53,4 +60,8 @@ const AdminViewLogsTable = ({tableLogs}) => {
     );
 }
 
-export default AdminViewLogsTable;
+const mapStateToProps = createStructuredSelector({
+    lead_table_array: selectAdminLeadTableArray
+});
+
+export default connect(mapStateToProps,null)(AdminViewLogsTable);
