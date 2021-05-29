@@ -32,6 +32,10 @@ import ProCourseForm from "./Components/ProCourseForm/ProCourseForm";
 
 class App extends Component {
 
+    componentDidMount() {
+
+    }
+
     setUser = (username,password) => {
         const {setCurrentUser} = this.props;
         const data = store.users.filter((item) => item.username===username && item.password===password);
