@@ -1,3 +1,8 @@
+import {AdminCountActionTypes} from "./admin.count.types";
+
+//destructing the action types
+const {SET_ADMIN_COUNT_ARRAY} = AdminCountActionTypes;
+
 const initialState = {
 	admin_count_array: [
 		{
@@ -14,7 +19,7 @@ const initialState = {
 };
 const adminCountReducer =  (state = initialState, { type, payload }) => {
 	switch (type) {
-		case 'SET_ADMIN_COUNT_ARRAY':
+		case SET_ADMIN_COUNT_ARRAY:
 			return {
 				...state,
 				admin_count_array: payload

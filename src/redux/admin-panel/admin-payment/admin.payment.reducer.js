@@ -1,3 +1,8 @@
+import {AdminPaymentActionTypes} from "./admin.payment.types";
+
+//destructing the action types
+const {SET_ADMIN_PAYMENT_TEAM_ARRAY, SET_ADMIN_MODAL_LEAD, SET_ADMIN_MODAL_VISIBILITY} = AdminPaymentActionTypes;
+
 const initialState = {
 	admin_payment_team_array: [],
 	admin_modal_lead: {},
@@ -6,12 +11,12 @@ const initialState = {
 
 const adminPaymentReducer =  (state = initialState, { type, payload }) => {
 	switch (type) {
-		case 'SET_ADMIN_PAYMENT_TEAM_ARRAY':
+		case SET_ADMIN_PAYMENT_TEAM_ARRAY:
 			return {
 				...state,
 				admin_payment_team_array: payload
 			}
-		case 'SET_ADMIN_MODAL_LEAD':
+		case SET_ADMIN_MODAL_LEAD:
 			if(payload.telecaller_id)
 			{
 				return {
@@ -27,7 +32,7 @@ const adminPaymentReducer =  (state = initialState, { type, payload }) => {
 					admin_modal_lead: payload
 				}
 			}
-		case 'SET_ADMIN_MODAL_VISIBILITY':
+		case SET_ADMIN_MODAL_VISIBILITY:
 			if(!payload)
 			{
 				return {
