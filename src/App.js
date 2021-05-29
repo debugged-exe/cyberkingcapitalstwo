@@ -7,6 +7,10 @@ import 'aos/dist/aos.css';
 import {connect} from 'react-redux';
 import {setCurrentUser} from './redux/user/user.actions.js';
 
+// reselect
+import {createStructuredSelector} from "reselect";
+import {selectCurrentUser} from "./redux/user/user.selectors";
+
 // css
 import './App.css';
 import 'tachyons';
@@ -33,7 +37,12 @@ import ProCourseForm from "./Components/ProCourseForm/ProCourseForm";
 class App extends Component {
 
     componentDidMount() {
-
+        const {currentUser} = this.props;
+        const {designation} = currentUser;
+        if(currentUser.designation!=='client')
+        {
+            this.props.history.push(`/${designation}/profile`);
+        }
     }
 
     setUser = (username,password) => {
@@ -80,8 +89,12 @@ class App extends Component {
     }
 }
 
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+});
+
 const mapDispatchToProps = dispatch => ({
     setCurrentUser: user => dispatch(setCurrentUser(user))
-})
+});
 
-export default connect(null, mapDispatchToProps)(withRouter(App));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

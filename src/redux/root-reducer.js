@@ -7,6 +7,7 @@ import storage from 'redux-persist/lib/storage';
 import userReducer from './user/user.reducer';
 import juniorPanelReducer from './junior-panel/junior.panel.reducer.js';
 import seniorPanelReducer from './senior-panel/senior.panel.reducer.js';
+import adminPanelReducer from './admin-panel/admin.panel.reducer.js';
 
 const persistConfig = {
 	key: 'root',
@@ -17,6 +18,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	user: userReducer,
 	junior_panel: juniorPanelReducer,
-	senior_panel: seniorPanelReducer
+	senior_panel: seniorPanelReducer,
+	admin_panel: adminPanelReducer
 });
 export default persistReducer(persistConfig, rootReducer);

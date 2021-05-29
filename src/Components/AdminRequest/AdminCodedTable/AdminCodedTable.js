@@ -1,7 +1,19 @@
 import React from 'react';
+
+// redux
+import { connect } from 'react-redux';
+
+// reselect
+import {createStructuredSelector} from 'reselect';
+import {selectAdminCodedRequestArray} from '../../../redux/admin-panel/admin-request/admin.request.selectors.js';
+
+// components
 import * as AiIcons from 'react-icons/ai';
 import * as ImIcons from 'react-icons/im';
+
+// css
 import './AdminCodedTable.scss';
+
 const header = [
     "Sr.No",
     "Telecaller Id",
@@ -9,21 +21,8 @@ const header = [
     "Lead Id",
     "Lead Name"
 ]
-const tableLogs = [
-    {
-        telecaller_id: "JR0001",
-        telecaller_name: "tanmay",
-        lead_id: "SR9012",
-        lead_name: "tejas"
-    },
-    {
-        telecaller_id: "JR002",
-        telecaller_name: "soham",
-        lead_id: "SR99283",
-        lead_name: "sumedh"
-    }
-]
-const AdminCodedTable = () => {
+
+const AdminCodedTable = ({admin_coded_request_array}) => {
     return(
         <div className={'admin-coded-table-container'}>
             <button className="accept-all">Accept All</button>
@@ -38,7 +37,7 @@ const AdminCodedTable = () => {
                 </tr>
                 </thead>
                 <tbody className={'admin-coded-table-body-container'}>
-                {tableLogs.map((item, index) => {
+                {admin_coded_request_array.map((item, index) => {
                     return (
                         <tr className="admin-coded-table-row-container">
                             <td className={'admin-coded-table-data-container'} data-label={'Sr.No'}>{index+1}</td>
@@ -57,4 +56,12 @@ const AdminCodedTable = () => {
     );
 }
 
-export default AdminCodedTable;
+const mapStateToProps = createStructuredSelector({
+    admin_coded_request_array: selectAdminCodedRequestArray
+})
+
+const mapDispatchToProps = {
+    
+}
+
+export default connect(mapStateToProps)(AdminCodedTable);

@@ -1,7 +1,21 @@
-import React,{useState} from 'react';
+import React,{useEffect} from 'react';
+
+// redux
+import { connect } from 'react-redux';
+import {setAdminCountArray} from '../../redux/admin-panel/admin-count/admin.count.actions.js';
+import {setAdminPaymentTeamArray, setAdminModalLead} from '../../redux/admin-panel/admin-payment/admin.payment.actions.js';
+
+// reselect
+import {createStructuredSelector} from 'reselect';
+import {selectAdminCountArray} from '../../redux/admin-panel/admin-count/admin.count.selectors.js';
+import {selectAdminPaymentTeamArray} from '../../redux/admin-panel/admin-payment/admin.payment.selectors.js';
+
+// component
 import PaymentCard from '../PaymentCard/PaymentCard.js';
 import AdminPaymentModal from './AdminPaymentModal/AdminPaymentModal.js';
 import * as FaIcons from 'react-icons/fa';
+
+// css
 import './AdminPayment.scss';
 
 const header = ['Sr No', 'Telecaller ID', 'Telecaller Name', 'Designation', 'Points', 'Paid', 'Bonus Paid'];
@@ -34,32 +48,36 @@ const tableData = [
 	}
 ]
 
-const AdminPayment = () => {
-
-	const [modalVisible, setModalVisible] = useState(false);
-	const toggleModalVisibility = (flag) => {
-		setModalVisible(flag);
+const countArray =[
+	{
+		Heading: 'Hindi Count',
+		numeric: 500,
+		color: 'rgb(57, 73, 171)'
+	},
+	{
+		Heading: 'Marathi Count',
+		numeric: 500,
+		color: 'rgb(67, 160, 71)'
 	}
+]
 
-	const [telecaller_id, setTeleCallerID] = useState('');
-	const [telecaller_name, setTeleCallerName] = useState('');
-	const [designation, setDesignation] = useState('');
-	const [modalInfo, setModalInfo] = useState({});
-	const setModalInfoField = (telecaller_id, telecaller_name, designation)	=> {
-		const modalInfo = {
-			telecaller_id: telecaller_id,
-			telecaller_name: telecaller_name,
-			designation: designation
-		}
-		setModalInfo(modalInfo);
-		toggleModalVisibility(true);
-	}
+const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminModalLead, admin_count_array, admin_payment_team_array}) => {
+
+	useEffect(() => {
+		setAdminCountArray(countArray);
+		setAdminPaymentTeamArray(tableData);
+	}, []);
 
 	return (
 		<div className="admin-payment-container">
 			<div className="admin-payment-disection">
-				<PaymentCard Heading={'Hindi Count'} numeric={500} icon={<FaIcons.FaLanguage size={'5rem'} color={'rgb(57, 73, 171)'}/>}/>
-				<PaymentCard Heading={'Marathi Count'} numeric={500} icon={<FaIcons.FaLanguage size={'5rem'} color={'rgb(67, 160, 71)'}/>}/>
+				{
+					admin_count_array.map((item,index) => {
+						return(
+							<PaymentCard Heading={item.Heading} numeric={item.numeric} icon={<FaIcons.FaLanguage size={'5rem'} color={item.color}/>}/>
+						);
+					})
+				}
 			</div>
 			<hr color={'grey'} className={'mt4 mb4'}/>
 			<div className="admin-payment-details">
@@ -83,7 +101,7 @@ const AdminPayment = () => {
 							</tr>
 						</thead>
 						<tbody className={'admin-payment-table-body-container'}>
-							{tableData.map((item, index) => {
+							{admin_payment_team_array.map((item, index) => {
 								return (
 									<tr className="admin-payment-table-row-container">
 										<td className={'admin-payment-table-data-container'} data-label={'Sr.No'}>{index + 1}</td>
@@ -93,17 +111,28 @@ const AdminPayment = () => {
 										<td className={'admin-payment-table-data-container'} data-label={'Points'}>{item.points}</td>
 										<td className={'admin-payment-table-data-container'} data-label={'Paid'}>{item.paid}</td>
 										<td className={'admin-payment-table-data-container'} data-label={'Bonus Paid'}>{item.bonus_paid}</td>
-										<td className={'admin-payment-table-data-container pay-button-center'}><button onClick={() => setModalInfoField(item.telecaller_id,item.telecaller_name,item.designation)}>Pay</button></td>
+										<td className={'admin-payment-table-data-container pay-button-center'}><button onClick={() => setAdminModalLead(item)}>Pay</button></td>
 									</tr>
 								)
 							})}
 						</tbody>
 					</table>
-					<AdminPaymentModal modalInfo={modalInfo} visible={modalVisible} toggleModalVisibility={toggleModalVisibility}/>
+					<AdminPaymentModal />
 				</div>
 			</div>
 		</div>
 	)
 }
 
-export default AdminPayment;
+const mapStateToProps = createStructuredSelector({
+	admin_count_array: selectAdminCountArray,
+	admin_payment_team_array: selectAdminPaymentTeamArray
+});
+
+const mapDispatchToProps = dispatch => ({
+	setAdminCountArray: array => dispatch(setAdminCountArray(array)),
+	setAdminPaymentTeamArray: array => dispatch(setAdminPaymentTeamArray(array)),
+	setAdminModalLead: lead => dispatch(setAdminModalLead(lead))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminPayment);

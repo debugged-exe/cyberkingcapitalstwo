@@ -1,9 +1,53 @@
-import React from 'react';
-import './AdminRequest.scss';
+import React,{useEffect} from 'react';
+
+// redux
+import { connect } from 'react-redux';
+import {setAdminCodedRequestArray, setAdminDeleteRequestArray} from '../../redux/admin-panel/admin-request/admin.request.actions.js'
+
+// component
 import AdminCodedTable from "./AdminCodedTable/AdminCodedTable";
 import AdminDeleteTable from "./AdminDeleteTable/AdminDeleteTable";
 
-const AdminRequest = () => {
+// css
+import './AdminRequest.scss';
+
+const codedtableLogs = [
+    {
+        telecaller_id: "JR0001",
+        telecaller_name: "tanmay",
+        lead_id: "SR9012",
+        lead_name: "tejas"
+    },
+    {
+        telecaller_id: "JR002",
+        telecaller_name: "soham",
+        lead_id: "SR99283",
+        lead_name: "sumedh"
+    }
+]
+
+const deletetableLogs = [
+    {
+        telecaller_id: "JR0001",
+        telecaller_name: "tanmay",
+        lead_id: "SR9012",
+        lead_name: "tejas"
+    },
+    {
+        telecaller_id: "JR002",
+        telecaller_name: "soham",
+        lead_id: "SR99283",
+        lead_name: "sumedh"
+    }
+]
+
+const AdminRequest = ({setAdminCodedRequestArray, setAdminDeleteRequestArray}) => {
+
+    useEffect(() => {
+       setAdminCodedRequestArray(codedtableLogs);
+       setAdminDeleteRequestArray(deletetableLogs);
+    }, [])
+
     return (
         <div className={'admin-request-container'}>
             <h1 className="f1 b">Coded Requests</h1>
@@ -26,4 +70,14 @@ const AdminRequest = () => {
     );
 }
 
-export default AdminRequest;
+const mapStateToProps = (state) => ({
+    
+
+})
+
+const mapDispatchToProps = dispatch => ({
+    setAdminCodedRequestArray: array => dispatch(setAdminCodedRequestArray(array)),
+    setAdminDeleteRequestArray: array => dispatch(setAdminDeleteRequestArray(array))
+});
+
+export default connect(null, mapDispatchToProps)(AdminRequest);

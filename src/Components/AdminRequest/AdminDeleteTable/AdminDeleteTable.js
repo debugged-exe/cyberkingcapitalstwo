@@ -1,6 +1,17 @@
 import React from 'react';
+
+// redux
+import { connect } from 'react-redux';
+
+// reselect
+import {createStructuredSelector} from 'reselect';
+import {selectAdminDeleteRequestArray} from '../../../redux/admin-panel/admin-request/admin.request.selectors.js';
+
+// components
 import * as AiIcons from 'react-icons/ai';
 import * as ImIcons from 'react-icons/im';
+
+// css
 import './AdminDeleteTable.scss';
 
 const header = [
@@ -11,22 +22,7 @@ const header = [
     "Lead Name"
 ]
 
-const tableLogs = [
-    {
-        telecaller_id: "JR0001",
-        telecaller_name: "tanmay",
-        lead_id: "SR9012",
-        lead_name: "tejas"
-    },
-    {
-        telecaller_id: "JR002",
-        telecaller_name: "soham",
-        lead_id: "SR99283",
-        lead_name: "sumedh"
-    }
-]
-
-const AdminDeleteTable = () => {
+const AdminDeleteTable = ({admin_delete_request_array}) => {
 	return (
 		<div className={'admin-delete-table-container'}>
             <button className="delete-all">Delete All</button>
@@ -41,7 +37,7 @@ const AdminDeleteTable = () => {
                 </tr>
                 </thead>
                 <tbody className={'admin-delete-table-body-container'}>
-                {tableLogs.map((item, index) => {
+                {admin_delete_request_array.map((item, index) => {
                     return (
                         <tr className="admin-delete-table-row-container">
                             <td className={'admin-delete-table-data-container'} data-label={'Sr.No'}>{index+1}</td>
@@ -60,4 +56,12 @@ const AdminDeleteTable = () => {
 	)
 }
 
-export default AdminDeleteTable;
+const mapStateToProps = createStructuredSelector({
+    admin_delete_request_array: selectAdminDeleteRequestArray
+});
+
+const mapDispatchToProps = {
+    
+}
+
+export default connect(mapStateToProps)(AdminDeleteTable);
