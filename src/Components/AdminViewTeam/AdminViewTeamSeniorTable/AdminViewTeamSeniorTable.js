@@ -1,4 +1,13 @@
 import React from 'react';
+
+// redux
+import { connect } from 'react-redux';
+
+// reselect
+import {createStructuredSelector} from 'reselect';
+import {selectAdminSeniorTelecallerArray, selectAdminOverviewFilter} from '../../../redux/admin-panel/admin-overview/admin.overview.selectors.js';
+
+// css
 import './AdminViewTeamSeniorTable.scss';
 
 const header = [
@@ -7,26 +16,7 @@ const header = [
 	'Sr Caller Name'
 ]
 
-const tableLogs = [
-	{
-		telecaller_id: 'SR001',
-		telecaller_name: 'Tejas'
-	},
-	{
-		telecaller_id: 'SR002',
-		telecaller_name: 'Soham'
-	},
-	{
-		telecaller_id: 'SR003',
-		telecaller_name: 'mahos'
-	},
-	{
-		telecaller_id: 'SR004',
-		telecaller_name: 'Sajet'
-	}
-]
-
-const AdminViewTeamSeniorTable = ({setJrViewField}) => {
+const AdminViewTeamSeniorTable = ({setJrViewField, senior_telecaller_array, overview_filter}) => {
 	return (
 		<div className="admin-view-senior-table-container">
 			<table cellSpacing="1" className={'admin-view-senior-table-box'}>
@@ -40,7 +30,8 @@ const AdminViewTeamSeniorTable = ({setJrViewField}) => {
 	                </tr>
 	                </thead>
 	                <tbody className={'admin-view-senior-table-body-container'}>
-	                {tableLogs.map((item, index) => {
+	                {senior_telecaller_array.filter(item => item.preferred_language===overview_filter)
+	                	.map((item, index) => {
 	                    return (
 	                        <tr className="admin-view-senior-table-row-container">
 	                            <td className={'admin-view-senior-table-data-container'} data-label={'Sr.No'}>{index+1}</td>
@@ -56,4 +47,13 @@ const AdminViewTeamSeniorTable = ({setJrViewField}) => {
 	)
 }
 
-export default AdminViewTeamSeniorTable;
+const mapStateToProps = createStructuredSelector({
+	senior_telecaller_array: selectAdminSeniorTelecallerArray,
+	overview_filter: selectAdminOverviewFilter
+});
+
+const mapDispatchToProps = {
+	
+}
+
+export default connect(mapStateToProps)(AdminViewTeamSeniorTable);

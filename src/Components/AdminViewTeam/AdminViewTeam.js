@@ -1,16 +1,55 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
+
+// redux
+import { connect } from 'react-redux';
+import {setAdminSeniorTelecallerArray, setAdminOverviewFilter} from '../../redux/admin-panel/admin-overview/admin.overview.actions.js';
+
+// component
 import PaymentCard from '../PaymentCard/PaymentCard.js';
 import AdminViewTeamSeniorTable from './AdminViewTeamSeniorTable/AdminViewTeamSeniorTable.js';
 import AdminViewTeamJuniorTable from './AdminViewTeamJuniorTable/AdminViewTeamJuniorTable.js';
 import * as FaIcons from 'react-icons/fa';
+
+// css
 import './AdminViewTeam.scss';
 
-const AdminViewTeam = () => {
+const tableLogs = [
+	{
+		telecaller_id: 'SR001',
+		telecaller_name: 'Tejas',
+		preferred_language: 'hindi'
+	},
+	{
+		telecaller_id: 'SR002',
+		telecaller_name: 'Soham',
+		preferred_language: 'marathi'
+	},
+	{
+		telecaller_id: 'SR003',
+		telecaller_name: 'mahos',
+		preferred_language: 'hindi'
+	},
+	{
+		telecaller_id: 'SR004',
+		telecaller_name: 'Sajet',
+		preferred_language: 'marathi'
+	}
+]
+
+const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) => {
 
 	const [jrView, setJrView] = useState(false);
 	const setJrViewField = () => {
 		setJrView(!jrView);
 	}
+
+	const filterHandler = event => {
+		setAdminOverviewFilter(event.target.value);
+	}
+
+	useEffect(() => {
+		setAdminSeniorTelecallerArray(tableLogs);
+	}, [])
 
 	return (
 		<div className={'admin-view-team-container '}>
@@ -22,7 +61,7 @@ const AdminViewTeam = () => {
 			<div className=" admin-view-team-table">
 				<div className={'flex justify-center items-center center f2 w-90 ma4 w-50-s'}>
 	                <label className={'b mr3'}>Select preferred Language: </label>
-	                <select name="lang" className={'f3 ml1'}>
+	                <select name="lang" className={'f3 ml1'} onChange={(event) => filterHandler(event)}>
 	                    <option value="hindi">Hindi</option>
 	                    <option value="marathi">Marathi</option>
 	                </select>
@@ -36,4 +75,13 @@ const AdminViewTeam = () => {
 	)
 }
 
-export default AdminViewTeam;
+const mapStateToProps = (state) => ({
+	
+})
+
+const mapDispatchToProps = dispatch => ({
+	setAdminSeniorTelecallerArray: array => dispatch(setAdminSeniorTelecallerArray(array)),
+	setAdminOverviewFilter: filter => dispatch(setAdminOverviewFilter(filter))
+})
+
+export default connect(null, mapDispatchToProps)(AdminViewTeam);
