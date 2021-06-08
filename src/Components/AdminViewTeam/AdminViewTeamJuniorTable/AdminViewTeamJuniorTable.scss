@@ -23,7 +23,7 @@
   z-index: 4;
 }
 .table-container-responsive{
-  overflow: scroll;
+
   z-index: 4;
   background: none;
   width: 80%;
@@ -72,6 +72,7 @@
   }
   .table-container-responsive{
     width: 95%;
+    overflow-y: scroll;
   }
   .admin-view-junior-table-data-container{
     font-size: 1.5rem;
@@ -95,8 +96,7 @@
     display: none;
   }
   .admin-view-junior-table-box{
-    width: 90%;
-    overflow: scroll;
+    width: 100%;
   }
   .admin-view-junior-table-body-container, .admin-view-junior-table-row-container, .admin-view-junior-table-data-container{
     display: block;

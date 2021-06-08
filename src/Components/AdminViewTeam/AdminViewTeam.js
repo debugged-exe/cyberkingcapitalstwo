@@ -38,11 +38,6 @@ const tableLogs = [
 
 const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) => {
 
-	const [jrView, setJrView] = useState(false);
-	const setJrViewField = () => {
-		setJrView(!jrView);
-	}
-
 	const filterHandler = event => {
 		setAdminOverviewFilter(event.target.value);
 	}
@@ -67,8 +62,8 @@ const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) 
 	                </select>
             	</div>
             	<div className="admin-view-team-senior-table w-100">
-        			<AdminViewTeamSeniorTable setJrViewField={setJrViewField} />
-        			<AdminViewTeamJuniorTable jrView={jrView} setJrViewField={setJrViewField} />
+        			<AdminViewTeamSeniorTable  />
+        			<AdminViewTeamJuniorTable  />
             	</div>
 			</div>
 		</div>

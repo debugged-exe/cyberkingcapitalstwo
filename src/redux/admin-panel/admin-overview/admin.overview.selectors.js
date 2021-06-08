@@ -16,3 +16,9 @@ export const selectAdminOverviewFilter = createSelector(
 	[selectAdminOverview],
 	(filter) => filter.overview_filter
 );
+
+export const selectAdminJrView = createSelector(
+	[selectAdminOverview],
+	(visibility) => visibility.jrView
+);
+

@@ -1,6 +1,10 @@
 import React from 'react';
 import './AdminViewTeamJuniorTable.scss';
 import * as AiIcons from "react-icons/ai";
+import {connect} from "react-redux";
+import {createStructuredSelector} from "reselect";
+import {selectAdminJrView} from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
+import {setJrView} from "../../../redux/admin-panel/admin-overview/admin.overview.actions";
 
 const header = [
     'Sr No',
@@ -27,7 +31,7 @@ const tableLogs = [
     }
 ]
 
-const AdminViewTeamJuniorTable = ({jrView, setJrViewField}) => {
+const AdminViewTeamJuniorTable = ({jrView, setJrView}) => {
     console.log(jrView);
     return (
 
@@ -37,8 +41,8 @@ const AdminViewTeamJuniorTable = ({jrView, setJrViewField}) => {
             </div>
             <div className={'flex justify-between items-end w-100 pointer-div'}>
                 <h3 className={''}></h3><AiIcons.AiOutlineClose size={'3rem'} color={'black'}
-                                                                className="pointer ma3 ba br3 " onClick={() => {
-                setJrViewField()
+                                                                className="pointer ma3 ba br3" onClick={() => {
+                setJrView(false)
             }}/>
             </div>
             <div className={'table-container-responsive'} >
@@ -78,5 +82,10 @@ const AdminViewTeamJuniorTable = ({jrView, setJrViewField}) => {
         </div>
     )
 }
-
-export default AdminViewTeamJuniorTable;
+const mapStateToProps = createStructuredSelector({
+    jrView: selectAdminJrView
+});
+const mapDispatchToProps = dispatch => ({
+    setJrView :visible => dispatch(setJrView(visible))
+})
+export default connect(mapStateToProps,mapDispatchToProps)(AdminViewTeamJuniorTable);

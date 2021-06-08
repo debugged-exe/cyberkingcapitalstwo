@@ -5,10 +5,15 @@ import { connect } from 'react-redux';
 
 // reselect
 import {createStructuredSelector} from 'reselect';
-import {selectAdminSeniorTelecallerArray, selectAdminOverviewFilter} from '../../../redux/admin-panel/admin-overview/admin.overview.selectors.js';
+import {
+	selectAdminSeniorTelecallerArray,
+	selectAdminOverviewFilter,
+	selectAdminJrView
+} from '../../../redux/admin-panel/admin-overview/admin.overview.selectors.js';
 
 // css
 import './AdminViewTeamSeniorTable.scss';
+import {setJrView} from "../../../redux/admin-panel/admin-overview/admin.overview.actions";
 
 const header = [
 	'Sr No',
@@ -16,7 +21,7 @@ const header = [
 	'Sr Caller Name'
 ]
 
-const AdminViewTeamSeniorTable = ({setJrViewField, senior_telecaller_array, overview_filter}) => {
+const AdminViewTeamSeniorTable = ({setJrView, senior_telecaller_array, overview_filter}) => {
 	return (
 		<div className="admin-view-senior-table-container">
 			<table cellSpacing="1" className={'admin-view-senior-table-box'}>
@@ -37,7 +42,7 @@ const AdminViewTeamSeniorTable = ({setJrViewField, senior_telecaller_array, over
 	                            <td className={'admin-view-senior-table-data-container'} data-label={'Sr.No'}>{index+1}</td>
 	                            <td className={'admin-view-senior-table-data-container'} data-label={'Sr Caller Id'}>{item.telecaller_id}</td>
 	                            <td className={'admin-view-senior-table-data-container'} data-label={'Sr Caller Name'}>{item.telecaller_name}</td>
-	                            <td className={'admin-view-senior-table-data-container'}><button onClick={() => setJrViewField()}>View Team</button></td>
+	                            <td className={'admin-view-senior-table-data-container'}><button onClick={() => setJrView(true)}>View Team</button></td>
 	                        </tr>
 	                    )
 	                })}
@@ -49,11 +54,11 @@ const AdminViewTeamSeniorTable = ({setJrViewField, senior_telecaller_array, over
 
 const mapStateToProps = createStructuredSelector({
 	senior_telecaller_array: selectAdminSeniorTelecallerArray,
-	overview_filter: selectAdminOverviewFilter
+	overview_filter: selectAdminOverviewFilter,
 });
 
-const mapDispatchToProps = {
-	
-}
+const mapDispatchToProps = dispatch => ({
+	setJrView: visible => dispatch(setJrView(visible))
+});
 
-export default connect(mapStateToProps)(AdminViewTeamSeniorTable);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminViewTeamSeniorTable);
