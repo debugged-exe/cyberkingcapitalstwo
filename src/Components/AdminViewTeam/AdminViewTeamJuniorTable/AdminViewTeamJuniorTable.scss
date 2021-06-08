@@ -1,17 +1,40 @@
 .admin-view-junior-table-container{
+  position: fixed;
+  top: 0%;
+  left: 0%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
-  margin-top: 20px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+.tint{
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.5;
+}
+.pointer-div{
+  z-index: 4;
+}
+.table-container-responsive{
+  overflow: scroll;
+  z-index: 4;
+  background: none;
+  width: 80%;
 }
 .admin-view-junior-table-box{
-  width: 90%;
+  width: 100%;
+  height: 100%;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
-  border: 1px solid black;
   background-color: #bbbbbb;
+  border: 2px solid black;
 }
 .admin-view-junior-table-head-container{
   font-size: 2rem;
@@ -47,6 +70,9 @@
   {
     width: 100%;
   }
+  .table-container-responsive{
+    width: 95%;
+  }
   .admin-view-junior-table-data-container{
     font-size: 1.5rem;
     background-color: white;
@@ -54,6 +80,10 @@
     padding-bottom: 1.8%;
     padding-right: 2%;
     padding-left: 2%;
+    width: 90%;
+    height: 100%;
+    position: absolute;
+    top: 2%;
   }
 }
 .button-center
@@ -66,6 +96,7 @@
   }
   .admin-view-junior-table-box{
     width: 90%;
+    overflow: scroll;
   }
   .admin-view-junior-table-body-container, .admin-view-junior-table-row-container, .admin-view-junior-table-data-container{
     display: block;

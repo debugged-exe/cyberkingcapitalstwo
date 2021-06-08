@@ -68,7 +68,7 @@ const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) 
             	</div>
             	<div className="admin-view-team-senior-table w-100">
         			<AdminViewTeamSeniorTable setJrViewField={setJrViewField} />
-        			<AdminViewTeamJuniorTable jrView={jrView} />
+        			<AdminViewTeamJuniorTable jrView={jrView} setJrViewField={setJrViewField} />
             	</div>
 			</div>
 		</div>

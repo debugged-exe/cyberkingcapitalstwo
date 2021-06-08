@@ -39,15 +39,14 @@ class App extends Component {
     componentDidMount() {
         const {currentUser} = this.props;
         const {designation} = currentUser;
-        if(currentUser.designation!=='client')
-        {
+        if (currentUser.designation !== 'client') {
             this.props.history.push(`/${designation}/profile`);
         }
     }
 
-    setUser = (username,password) => {
+    setUser = (username, password) => {
         const {setCurrentUser} = this.props;
-        const data = store.users.filter((item) => item.username===username && item.password===password);
+        const data = store.users.filter((item) => item.username === username && item.password === password);
         const user = {
             username: data[0].username,
             designation: data[0].designation,
@@ -73,14 +72,14 @@ class App extends Component {
         return (
             <div className="App">
                 <Switch>
-                    <Route exact path="/"><HomePanel /></Route>
-                    <Route path="/basicform"><BasicCourseForm /></Route>
-                    <Route path="/proform"><ProCourseForm /></Route>
-                    <Route path={"/admin"}><Sidebar signOut={this.signOut}/><AdminPanel /></Route>
-                    <Route path={"/senior"}><Sidebar signOut={this.signOut}/><SeniorPanel /></Route>
-                    <Route path={"/junior"}><Sidebar signOut={this.signOut}/><JuniorPanel /></Route>
+                    <Route exact path="/"><HomePanel/></Route>
+                    <Route path="/basicform"><BasicCourseForm/></Route>
+                    <Route path="/proform"><ProCourseForm/></Route>
+                    <Route path={"/admin"}><Sidebar signOut={this.signOut}/><AdminPanel/></Route>
+                    <Route path={"/senior"}><Sidebar signOut={this.signOut}/><SeniorPanel/></Route>
+                    <Route path={"/junior"}><Sidebar signOut={this.signOut}/><JuniorPanel/></Route>
                     <Route path='/signin'>
-                        <Sidebar />
+                        <Sidebar signOut={this.signOut}/>
                         <SignIn setUser={this.setUser}/>
                     </Route>
                 </Switch>
