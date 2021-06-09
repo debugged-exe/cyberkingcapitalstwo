@@ -8,7 +8,11 @@ import * as AiIcons from "react-icons/ai";
 
 // redux
 import {connect} from "react-redux";
-import {setJrView, setJuniorLogArray} from "../../../redux/admin-panel/admin-overview/admin.overview.actions";
+import {
+    setJrView,
+    setJuniorCountView,
+    setJuniorLogArray
+} from "../../../redux/admin-panel/admin-overview/admin.overview.actions";
 
 
 // reselect
@@ -39,7 +43,7 @@ const juniorLog = [
     }
 ]
 
-const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, senior_telecaller_array, setJuniorLogArray}) => {
+const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, senior_telecaller_array, setJuniorLogArray,setJuniorCountView}) => {
     return (
 
         <div className={`${jrView ? 'admin-view-junior-table-container' : 'hidden'} pb4`}>
@@ -47,14 +51,17 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, seni
             </div>
             <div className={'flex justify-between items-end w-100 pointer-div'}>
                 <h3 className={''}></h3>
-                <AiIcons.AiOutlineClose 
-                size={'3rem'} 
-                color={'black'}
-                className="pointer ma3 ba br3" 
-                onClick={() => {
-                    setJrView({visible: false, senior_telecaller_id: ''})
-                }}
-                />
+                <div className="pointer-hover ma3 ba br3">
+                    <AiIcons.AiOutlineClose
+                        size={'3rem'}
+                        color={''}
+                        className={'close-button'}
+                        onClick={() => {
+                            setJrView({visible: false, senior_telecaller_id: ''})
+                        }}
+                    />
+                </div>
+
             </div>
             <div className={'table-container-responsive'} >
                 <table cellSpacing="1" className={'admin-view-junior-table-box'}>
@@ -82,7 +89,7 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, seni
                                     <button onClick={() => setJuniorLogArray(juniorLog)}>View Logs</button>
                                 </td>
                                 <td className={'admin-view-junior-table-data-container button-center'}>
-                                    <button>View Count</button>
+                                    <button onClick={() => setJuniorCountView(true)}>View Count</button>
                                 </td>
                             </tr>
                         )
@@ -102,7 +109,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
     setJrView :visible => dispatch(setJrView(visible)),
-    setJuniorLogArray: array => dispatch(setJuniorLogArray(array))
+    setJuniorLogArray: array => dispatch(setJuniorLogArray(array)),
+    setJuniorCountView : visible => dispatch(setJuniorCountView(visible))
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(AdminViewTeamJuniorTable);

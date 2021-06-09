@@ -27,14 +27,16 @@ const AdminViewTeamJuniorLog = ({juniorLogView, junior_log_array, setJuniorLogVi
             <div className={'tintLog'}>
             </div>
             <div className={'flex justify-between items-end w-100 pointer-divLog'}>
-                <IoIcons.IoMdArrowRoundBack 
-                size={'3rem'} 
-                color={'white'}
-                className="pointer ma3 ba br3" 
-                onClick={() => {
-                    setJuniorLogView({visible: false, array: []})
-                }}
-                />
+                <div className="pointer-back-button ma3 ba br3 white">
+                    <IoIcons.IoMdArrowRoundBack
+                        size={'3rem'}
+                        color={''}
+                        onClick={() => {
+                            setJuniorLogView({visible: false, array: []})
+                        }}
+                    />
+                </div>
+
                 <h3 className={''}></h3>
             </div>
             <div className={'log-container-responsive'} >

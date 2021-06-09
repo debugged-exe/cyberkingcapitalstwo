@@ -1,4 +1,4 @@
-.admin-view-junior-table-container{
+.admin-view-junior-count-view-container{
   position: fixed;
   top: 0%;
   left: 0%;
@@ -10,38 +10,34 @@
   width: 100%;
   height: 100%;
 }
-.tint{
+.tintCountView{
   position: absolute;
   top: 0%;
   left: 0%;
   width: 100%;
   height: 100%;
   background: black;
-  opacity: 0.5;
+  opacity: 0.75;
 }
-
-.pointer-div{
-  z-index: 4;
+.pointer-divCountView{
+  z-index: 6;
 }
-
-.pointer-hover{
-  color: black;
+.pointer-count-back{
+  color: white;
   transition: all 0.3s ease-out;
 }
-.pointer-hover:hover{
-  background: red;
+.pointer-count-back:hover{
+  background: rgb(67, 160, 71);
   border: none;
   color: white;
   transform: scale(1.2);
 }
-
-.table-container-responsive{
-  overflow-y: scroll;
-  z-index: 4;
+.count-view-container-responsive{
+  z-index: 6;
   background: none;
   width: 80%;
 }
-.admin-view-junior-table-box{
+.admin-view-junior-count-view-box{
   width: 100%;
   height: 100%;
   text-align: center;
@@ -49,21 +45,21 @@
   background-color: #bbbbbb;
   border: 2px solid black;
 }
-.admin-view-junior-table-head-container{
+.admin-view-junior-count-view-head-container{
   font-size: 2rem;
   background-color: white;
 }
-.admin-view-junior-table-header-container{
+.admin-view-junior-count-view-header-container{
   padding-top: 1.5%;
   padding-bottom: 1.8%;
 }
-.admin-view-junior-table-body-container{
+.admin-view-junior-count-view-body-container{
 
 }
-.admin-view-junior-table-row-container{
+.admin-view-junior-count-view-row-container{
 
 }
-.admin-view-junior-table-data-container{
+.admin-view-junior-count-view-data-container{
   font-size: 1.5rem;
   background-color: white;
   padding-top: 1.5%;
@@ -79,15 +75,18 @@
 
 @media only screen and (max-width: 500px)
 {
-  .admin-view-junior-table-box
+  .admin-view-junior-count-view-box
   {
     width: 100%;
   }
-  .table-container-responsive{
-    width: 95%;
-    overflow-y: scroll;
+  .hide-count{
+    display: none;
   }
-  .admin-view-junior-table-data-container{
+  .count-view-container-responsive{
+    overflow-y: scroll;
+    width: 95%;
+  }
+  .admin-view-junior-count-view-data-container{
     font-size: 1.5rem;
     background-color: white;
     padding-top: 1.5%;
@@ -100,38 +99,32 @@
     top: 2%;
   }
 }
-.button-center
-{
-
-}
 @media only screen and (max-width: 500px){
-  .admin-view-junior-table-head-container{
+  .admin-view-junior-count-view-head-container{
     display: none;
   }
-  .admin-view-junior-table-box{
+  .hide-count{
+    display: none;
+  }
+  .admin-view-junior-count-view-box{
     width: 100%;
   }
-  .admin-view-junior-table-body-container, .admin-view-junior-table-row-container, .admin-view-junior-table-data-container{
+  .admin-view-junior-count-view-body-container, .admin-view-junior-count-view-row-container, .admin-view-junior-count-view-data-container{
     display: block;
     width: 100%;
   }
-  .admin-view-junior-table-row-container{
+  .admin-view-junior-count-view-row-container{
     margin-bottom: 10px;
   }
 
-  .admin-view-junior-table-data-container{
+  .admin-view-junior-count-view-data-container{
     text-align: right;
     padding-left: 50%;
     margin-bottom: 1px;
     position: relative;
   }
 
-  .button-center{
-    padding-left: 0px;
-    text-align: center;
-  }
-
-  .admin-view-junior-table-data-container::before{
+  .admin-view-junior-count-view-data-container::before{
     content: attr(data-label);
     position: absolute;
     left: 0;
