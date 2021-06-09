@@ -1,12 +1,15 @@
 import {AdminOverviewActionTypes} from "./admin.overview.types";
 
 //destructing the action types
-const {SET_SENIOR_TELECALLER_ARRAY, SET_OVERVIEW_FILTER, SET_JR_VIEW} = AdminOverviewActionTypes;
+const {SET_SENIOR_TELECALLER_ARRAY, SET_OVERVIEW_FILTER, SET_JR_VIEW, SET_JUNIOR_LOG_ARRAY, SET_JUNIOR_LOG_VIEW} = AdminOverviewActionTypes;
 
 const initialState = {
     senior_telecaller_array: [],
     overview_filter: 'hindi',
-    jrView: false
+    jrView: false,
+    senior_telecaller_id: '',
+    juniorLogView: false,
+    junior_log_array: [],
 }
 
 const adminOverviewReducer = (state = initialState, {type, payload}) => {
@@ -27,9 +30,37 @@ const adminOverviewReducer = (state = initialState, {type, payload}) => {
         case SET_JR_VIEW:
             return {
                 ...state,
-                jrView: payload
+                jrView: payload.visible,
+                senior_telecaller_id: payload.senior_telecaller_id
             }
-
+        case SET_JUNIOR_LOG_ARRAY:
+            if(payload.length)
+            {
+                return {
+                    ...state,
+                    junior_log_array: payload,
+                    juniorLogView: true,
+                    jrView: false
+                }
+            }
+        case SET_JUNIOR_LOG_VIEW:
+            if(payload.visible)
+            {
+                return {
+                    ...state,
+                    juniorLogView: payload.visible,
+                    junior_log_array: payload.array
+                }
+            }
+            else
+            {
+                return {
+                    ...state,
+                    juniorLogView: payload.visible,
+                    junior_log_array: payload.array,
+                    jrView: true
+                }
+            }
         default:
             return state
     }

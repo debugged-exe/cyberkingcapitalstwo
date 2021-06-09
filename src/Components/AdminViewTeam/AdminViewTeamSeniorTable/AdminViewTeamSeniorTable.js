@@ -35,14 +35,14 @@ const AdminViewTeamSeniorTable = ({setJrView, senior_telecaller_array, overview_
 	                </tr>
 	                </thead>
 	                <tbody className={'admin-view-senior-table-body-container'}>
-	                {senior_telecaller_array.filter(item => item.preferred_language===overview_filter)
+	                {senior_telecaller_array.filter(item => item.preferred_language===overview_filter && item.designation==='senior')
 	                	.map((item, index) => {
 	                    return (
 	                        <tr className="admin-view-senior-table-row-container">
 	                            <td className={'admin-view-senior-table-data-container'} data-label={'Sr.No'}>{index+1}</td>
 	                            <td className={'admin-view-senior-table-data-container'} data-label={'Sr Caller Id'}>{item.telecaller_id}</td>
 	                            <td className={'admin-view-senior-table-data-container'} data-label={'Sr Caller Name'}>{item.telecaller_name}</td>
-	                            <td className={'admin-view-senior-table-data-container'}><button onClick={() => setJrView(true)}>View Team</button></td>
+	                            <td className={'admin-view-senior-table-data-container'}><button onClick={() => setJrView({visible: true, senior_telecaller_id: item.telecaller_id})}>View Team</button></td>
 	                        </tr>
 	                    )
 	                })}

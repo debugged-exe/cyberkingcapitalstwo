@@ -8,6 +8,7 @@ import {setAdminSeniorTelecallerArray, setAdminOverviewFilter} from '../../redux
 import PaymentCard from '../PaymentCard/PaymentCard.js';
 import AdminViewTeamSeniorTable from './AdminViewTeamSeniorTable/AdminViewTeamSeniorTable.js';
 import AdminViewTeamJuniorTable from './AdminViewTeamJuniorTable/AdminViewTeamJuniorTable.js';
+import AdminViewTeamJuniorLog from './AdminViewTeamJuniorLog/AdminViewTeamJuniorLog.js';
 import * as FaIcons from 'react-icons/fa';
 
 // css
@@ -17,23 +18,87 @@ const tableLogs = [
 	{
 		telecaller_id: 'SR001',
 		telecaller_name: 'Tejas',
-		preferred_language: 'hindi'
+		assigned_to: '',
+		preferred_language: 'hindi',
+		designation: 'senior'
 	},
 	{
 		telecaller_id: 'SR002',
 		telecaller_name: 'Soham',
-		preferred_language: 'marathi'
+		assigned_to: '',
+		preferred_language: 'marathi',
+		designation: 'senior'
 	},
 	{
 		telecaller_id: 'SR003',
 		telecaller_name: 'mahos',
-		preferred_language: 'hindi'
+		assigned_to: '',
+		preferred_language: 'hindi',
+		designation: 'senior'
 	},
 	{
 		telecaller_id: 'SR004',
 		telecaller_name: 'Sajet',
-		preferred_language: 'marathi'
-	}
+		assigned_to: '',
+		preferred_language: 'marathi',
+		designation: 'senior'
+	},
+    {
+        telecaller_id: 'JR001',
+        telecaller_name: 'Tejas',
+        assigned_to: 'SR001',
+        preferred_language: 'hindi',
+        designation: 'junior'
+    },
+    {
+        telecaller_id: 'JR002',
+        telecaller_name: 'Soham',
+        assigned_to: 'SR001',
+        preferred_language: 'hindi',
+        designation: 'junior'
+    },
+    {
+        telecaller_id: 'JR003',
+        telecaller_name: 'mahos',
+        assigned_to: 'SR002',
+        preferred_language: 'marathi',
+        designation: 'junior'
+    },
+    {
+        telecaller_id: 'JR004',
+        telecaller_name: 'Sajet',
+        assigned_to: 'SR002',
+        preferred_language: 'marathi',
+        designation: 'junior'
+    },
+    {
+        telecaller_id: 'JR005',
+        telecaller_name: 'Gojo',
+        assigned_to: 'SR003',
+        preferred_language: 'hindi',
+        designation: 'junior'
+    },
+    {
+        telecaller_id: 'JR006',
+        telecaller_name: 'Itadori',
+        assigned_to: 'SR003',
+        preferred_language: 'hindi',
+        designation: 'junior'
+    },
+    {
+        telecaller_id: 'JR007',
+        telecaller_name: 'Nobara',
+        assigned_to: 'SR004',
+        preferred_language: 'marathi',
+        designation: 'junior'
+    },
+    {
+        telecaller_id: 'JR008',
+        telecaller_name: 'Fushiguro',
+        assigned_to: 'SR004',
+        preferred_language: 'marathi',
+        designation: 'junior'
+    }
 ]
 
 const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) => {
@@ -64,6 +129,7 @@ const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) 
             	<div className="admin-view-team-senior-table w-100">
         			<AdminViewTeamSeniorTable  />
         			<AdminViewTeamJuniorTable  />
+        			<AdminViewTeamJuniorLog />
             	</div>
 			</div>
 		</div>
