@@ -1,7 +1,7 @@
 import {AdminOverviewActionTypes} from "./admin.overview.types";
 
 //destructing the action types
-const {SET_SENIOR_TELECALLER_ARRAY, SET_OVERVIEW_FILTER, SET_JR_VIEW, SET_JUNIOR_LOG_ARRAY, SET_JUNIOR_LOG_VIEW} = AdminOverviewActionTypes;
+const {SET_SENIOR_TELECALLER_ARRAY, SET_OVERVIEW_FILTER, SET_JR_VIEW, SET_JUNIOR_LOG_ARRAY, SET_JUNIOR_LOG_VIEW,SET_JUNIOR_COUNT_VIEW} = AdminOverviewActionTypes;
 
 export const setAdminSeniorTelecallerArray = array => ({
 	type: SET_SENIOR_TELECALLER_ARRAY,
@@ -25,5 +25,10 @@ export const setJuniorLogArray = array => ({
 
 export const setJuniorLogView = visible => ({
 	type: SET_JUNIOR_LOG_VIEW,
+	payload: visible
+});
+
+export const setJuniorCountView = visible => ({
+	type: SET_JUNIOR_COUNT_VIEW,
 	payload: visible
 });

@@ -22,6 +22,16 @@
 .pointer-divLog{
   z-index: 6;
 }
+.pointer-back-button{
+  color: white;
+  transition: all 0.3s ease-out;
+}
+.pointer-back-button:hover{
+  background: rgb(67, 160, 71);
+  border: none;
+  color: white;
+  transform: scale(1.2);
+}
 .log-container-responsive{
   overflow-y: scroll;
   z-index: 6;

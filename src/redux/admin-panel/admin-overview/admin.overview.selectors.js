@@ -36,3 +36,8 @@ export const selectJuniorLogArray = createSelector(
 	[selectAdminOverview],
 	(juniorLogArray) => juniorLogArray.junior_log_array
 );
+
+export const selectJuniorCountView = createSelector(
+	[selectAdminOverview],
+	(junior) => junior.jrCount
+);

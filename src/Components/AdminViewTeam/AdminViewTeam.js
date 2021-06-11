@@ -13,6 +13,7 @@ import * as FaIcons from 'react-icons/fa';
 
 // css
 import './AdminViewTeam.scss';
+import AdminViewTeamJuniorCount from "./AdminViewTeamJuniorCount/AdminViewTeamJuniorCount";
 
 const tableLogs = [
 	{
@@ -130,6 +131,7 @@ const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) 
         			<AdminViewTeamSeniorTable  />
         			<AdminViewTeamJuniorTable  />
         			<AdminViewTeamJuniorLog />
+					<AdminViewTeamJuniorCount />
             	</div>
 			</div>
 		</div>
