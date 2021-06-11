@@ -45,15 +45,35 @@ class App extends Component {
     }
 
     setUser = (username, password) => {
+
         const {setCurrentUser} = this.props;
-        const data = store.users.filter((item) => item.username === username && item.password === password);
-        const user = {
-            username: data[0].username,
-            designation: data[0].designation,
-            telecaller_id: data[0].telecaller_id
-        }
-        setCurrentUser(user)
-        this.props.history.push(`/${data[0].designation}/profile`);
+
+        fetch('https://aqueous-mesa-28052.herokuapp.com/signin', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                username: username,
+                password: password
+                })
+             })
+        .then(response => response.json())
+        .then(resp => {
+            if(resp[0].telecaller_id)
+            {
+                const user = {
+                    username: resp[0].telecaller_name,
+                    designation: resp[0].designation,
+                    telecaller_id: resp[0].telecaller_id
+                }
+                setCurrentUser(user)
+                this.props.history.push(`/${resp[0].designation}/profile`);
+            }
+            else if(resp==='Wrong Credentails')
+            {
+                alert(resp);
+            }
+        })
+        .catch(err => console.log(err))
     }
 
     signOut = () => {

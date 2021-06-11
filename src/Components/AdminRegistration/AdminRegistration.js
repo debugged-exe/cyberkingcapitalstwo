@@ -11,7 +11,7 @@ class AdminRegistration extends Component{
 			telecaller_id: '',
 			password: '',
 			confirm_password: '',
-			language: '',
+			preferred_language: '',
 			designation: '',
 			assigned_to: '',
 			srCallerArray: [
@@ -29,11 +29,49 @@ class AdminRegistration extends Component{
 
 	handleSubmit = (event) => {
 		event.preventDefault();
+		const {telecaller_name, telecaller_id, password, confirm_password, preferred_language, designation, assigned_to} = this.state;
+		if(password!==confirm_password)
+		{
+			this.setState({
+				password: '',
+				confirm_password: ''
+			}, () => {
+				alert('The two passwords do not match');
+			});
+			return;
+		}
+		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/register', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                telecaller_name: telecaller_name,
+                telecaller_id: telecaller_id,
+                password: password,
+                preferred_language: preferred_language,
+                designation: designation,
+                assigned_to: assigned_to
+                })
+             })
+        .then(response => response.json())
+        .then(resp => {
+            if(resp==='Registered successfully')
+            {
+               alert('New Telecaller Added successfully');
+            }
+            else if(resp==='not found')
+            {
+                alert('Senior caller to which caller is assigned does not exist');
+            }
+            else if(resp==='Unable to register')
+            {
+            	alert('Unable to register.Please try again');
+            }
+        })
+        .catch(err => console.log(err))
 	}
 
 	handleChange = event => {
 		const {name, value} = event.target;
-
 		this.setState({[name]: value});
 	}
 
@@ -80,20 +118,22 @@ class AdminRegistration extends Component{
 				required
 				/>
 				<div className={'flex justify-center items-center center mb4 w-100'}>
-					<label className={'b f3 mr3'}>Select Language: </label>
-					<select name="language" className={'f4 ml1'} onChange={this.handleChange}>
+					<label className={'b f3 mr3'}>Select Preferred Language: </label>
+					<select name="preferred_language" className={'f4 ml1'} onChange={this.handleChange} required>
+						<option value="">--Language--</option>
 						<option value="hindi">Hindi</option>
 						<option value="marathi">Marathi</option>
 					</select>
 				</div>
 				<div className={'flex justify-center items-center center mb4 w-100'}>
 					<label className={'b f3 mr3'}>Select Designation: </label>
-					<select name="designation" className={'f4 ml1'} onChange={this.handleChange}>
-						<option value="SrCaller">SrCaller</option>
-						<option value="JrCaller">JrCaller</option>
+					<select name="designation" className={'f4 ml1'} onChange={this.handleChange} required>
+						<option value="">--Select Designation--</option>
+						<option value="senior">Senior Caller</option>
+						<option value="junior">Junior Caller</option>
 					</select>
 				</div>
-				<div className={`${designation==='JrCaller'?'flex justify-center items-center center mb4 w-100':'hidden'}`}>
+				<div className={`${designation==='junior'?'flex justify-center items-center center mb4 w-100':'hidden'}`}>
 					<label className={'b f3 mr3'}>Select Senior Caller: </label>
 					<select 
 					name="assigned_to" 
