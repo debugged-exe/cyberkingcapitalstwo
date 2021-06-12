@@ -115,7 +115,7 @@ class AdminRegistration extends Component {
                         name="telecaller_name"
                         value={telecaller_name}
                         onChange={this.handleChange}
-                        label="UserName"
+                        label="Telecaller Name"
                         style={{marginTop: '0px', marginBottom: '0px'}}
                         required
                     />

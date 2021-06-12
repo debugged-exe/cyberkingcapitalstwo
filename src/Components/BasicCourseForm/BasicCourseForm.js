@@ -17,7 +17,40 @@ class BasicCourseForm extends Component{
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
+        const {lead_name, lead_contact, city, prior_knowledge, preferred_language, course_type} = this.state;
+        fetch('https://aqueous-mesa-28052.herokuapp.com/basicform', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                lead_name: lead_name,
+                lead_contact: lead_contact,
+                city: city,
+                preferred_language: preferred_language,
+                prior_knowledge: prior_knowledge,
+                course_type: course_type
+            })
+        })
+            .then(response => response.json())
+            .then(response => {
+                if(response === "Basic Course Form Registered"){
+                    alert("Registered Successful.");
+                    this.setState({
+                        lead_name: '',
+                        lead_contact: '',
+                        city: '',
+                        preferred_language: '',
+                        prior_knowledge: '',
+                        course_type: ''
+                    })
+                }else if(response === "Failed"){
+                    alert("Failed to register for the course. Please try again");
+                }else if(response === "Not Unique"){
+                    alert("Contact has been already registered.Please try with new contact");
+                }
+            }).catch(err => {
+            console.log(err)
+        })
+
     }
 
     handleChange = event => {
@@ -60,7 +93,7 @@ class BasicCourseForm extends Component{
                     />
                     <div className={'basic-course-select-input mb4'}>
                         <label className={'b f3 mr3'}> Do you have any prior knowledge of Stock-market? </label>
-                        <select name="prior_knowledge" className={'f4 ml1'} onChange={this.handleChange}>
+                        <select name="prior_knowledge" className={'f4 ml1'} onChange={this.handleChange} required>
                             <option value={''}>--select--</option>
                             <option value="yes">yes</option>
                             <option value="no">no</option>
@@ -68,7 +101,7 @@ class BasicCourseForm extends Component{
                     </div>
                     <div className={'basic-course-select-input mb4 '}>
                         <label className={'b f3 mr3'}>Which language do you prefer for Attending Trading Sessions? </label>
-                        <select name="preferred_language" className={'f4 ml1'} onChange={this.handleChange}>
+                        <select name="preferred_language" className={'f4 ml1'} onChange={this.handleChange} required>
                             <option value={''}>--select--</option>
                             <option value="hindi">Hindi</option>
                             <option value="marathi">Marathi</option>
