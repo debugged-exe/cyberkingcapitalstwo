@@ -40,7 +40,7 @@ class BasicCourseForm extends Component{
                         city: '',
                         preferred_language: '',
                         prior_knowledge: '',
-                        course_type: ''
+                        course_type: 'basic'
                     })
                 }else if(response === "Failed"){
                     alert("Failed to register for the course. Please try again");
@@ -93,7 +93,7 @@ class BasicCourseForm extends Component{
                     />
                     <div className={'basic-course-select-input mb4'}>
                         <label className={'b f3 mr3'}> Do you have any prior knowledge of Stock-market? </label>
-                        <select name="prior_knowledge" className={'f4 ml1'} onChange={this.handleChange} required>
+                        <select name="prior_knowledge" className={'f4 ml1'} value={prior_knowledge} onChange={this.handleChange} required>
                             <option value={''}>--select--</option>
                             <option value="yes">yes</option>
                             <option value="no">no</option>
@@ -101,7 +101,7 @@ class BasicCourseForm extends Component{
                     </div>
                     <div className={'basic-course-select-input mb4 '}>
                         <label className={'b f3 mr3'}>Which language do you prefer for Attending Trading Sessions? </label>
-                        <select name="preferred_language" className={'f4 ml1'} onChange={this.handleChange} required>
+                        <select name="preferred_language" className={'f4 ml1'} value={preferred_language} onChange={this.handleChange} required>
                             <option value={''}>--select--</option>
                             <option value="hindi">Hindi</option>
                             <option value="marathi">Marathi</option>
