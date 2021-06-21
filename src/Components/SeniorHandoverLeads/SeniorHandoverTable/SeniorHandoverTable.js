@@ -47,6 +47,7 @@ const SeniorHandoverTable = ({handover_leads_array}) => {
                        	<td className={'senior-handover-table-data-container senior-button-center'}>
 							<button className={'ma1'}>Update</button>
 							<button className={'ma1'}>Done</button>
+                            <button className={'ma1'}>Delete</button>
                        	</td>
                     </tr>
                 )

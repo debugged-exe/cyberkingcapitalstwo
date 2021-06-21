@@ -47,8 +47,7 @@ const JuniorTable = ({ junior_table_logs,setModalLead}) => {
                         <td className={'junior-table-data-container request-button-center'}>
                                 <button className="ma1" onClick={() => {setModalLead(item)}}>Update</button>
                                 <button className="ma1">Handover</button>
-                            <button className="ma1">Request</button>
-                            <button className={'ma1'}>Delete</button>
+                                <button className="ma1">Request</button>
                         </td>
                     </tr>
                 )
