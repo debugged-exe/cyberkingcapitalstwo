@@ -7,4 +7,3 @@ export const selectCurrentUser = createSelector(
     (user) => user.currentUser
 );
 
-
