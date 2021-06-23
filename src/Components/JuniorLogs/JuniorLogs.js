@@ -28,39 +28,6 @@ import {selectCurrentUser} from "../../redux/user/user.selectors";
 
 toast.configure();
 
-const tableLogs = [
-    {
-        lead_id: 1,
-        assigned_to: "xyz",
-        lead_name: "abcde",
-        lead_contact: '9087389032',
-        whatsapp_no: '8903221111',
-        account_opening_no: '123',
-        city: "pune",
-        trading_knowledge: "no",
-        preferred_language: "hindi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete",
-        coded: "---"
-    },
-    {
-        lead_id: 2,
-        assigned_to: "mmmmm",
-        lead_name: "oooooo",
-        lead_contact: '9000001222',
-        whatsapp_no: '9090912121',
-        account_opening_no: '8011',
-        city: "pune",
-        trading_knowledge: "no",
-        preferred_language: "marathi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete",
-        coded: "---"
-    }
-]
-
 const LogStatArray = [
     // {
     //     title: 'Handed Over Leads',

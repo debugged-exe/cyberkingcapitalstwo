@@ -1,8 +1,29 @@
-.junior-modal{
+.junior-modal-container{
 	position: fixed;
-	left: 10%;
-	top: 1%;
+	left: 0%;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+}
+.junior-tint{
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background: black;
+	opacity: 0.6;
+	z-index: 4;
+}
+
+.junior-modal{
+	position: absolute;
+	top: 5%;
+	left: 15%;
 	width: 70%;
+	height: 80%;
+	z-index: 6;
+	overflow-y: scroll;
 	background: white;
 	border: 1px solid black;
 	font-family: 'Open Sans Condensed', sans-serif;
@@ -53,11 +74,6 @@
 #button-margin-4{
 }
 @media only screen and (max-width: 768px){
-	.junior-modal{
-		width: 80%;
-		overflow: scroll;
-		position: absolute;
-	}
 	.grid-div{
 		display: grid;
 		grid-template-columns: 100%;
@@ -65,35 +81,36 @@
 }
 
 @media only screen and (max-width: 700px){
+	#button-margin-1{
+        margin-left: 0;
+        margin-top: -30%;
+    }
+    #button-margin-2{
+        margin-left: 0;
+        margin-top: -30%;
+    }
+    #button-margin-3{
+        margin-left: 0;
+        margin-top: -30%;
+    }
+    #button-margin-4{
+        margin-left: 0;
+        margin-top: -30%;
+    }
 	.grid-div{
 		grid-template-columns: 100%;
-	}
-	.junior-modal-form{
-		margin-left: 20%; 
-	}
-	.junior-modal{
-		left:10%;
-	}
-	#button-margin-1{
-		margin-left: 0;
-		margin-top: -30%;
-	}
-	#button-margin-2{
-		margin-left: 0;
-		margin-top: -30%;
-	}
-	#button-margin-3{
-		margin-left: 0;
-		margin-top: -30%;
-	}
-	#button-margin-4{
-		margin-left: 0;
-		margin-top: -30%;
 	}
 
 	.junior-modal-form-component{
 		display: grid;
 		grid-template-columns: 100%;
-		margin-top: -10%;
+	}
+}
+
+@media only screen and (max-width: 500px){
+	.junior-modal{
+		left: 5%;
+		width: 90%;
+		height: 90%;
 	}
 }

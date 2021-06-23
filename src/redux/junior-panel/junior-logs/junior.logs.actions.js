@@ -1,7 +1,13 @@
 import {JuniorLogsAcitonTypes} from "./junior.logs.types";
 
 //destructing the action types
-const {SET_LOG_STAT_ARRAY, SET_JUNIOR_TABLE_LOG_ARRAY,SET_MODAL_LEAD,SET_MODAL_VISIBILITY, APPEND_NEW_LEADS} = JuniorLogsAcitonTypes;
+const {
+	SET_LOG_STAT_ARRAY, 
+	SET_JUNIOR_TABLE_LOG_ARRAY,
+	SET_MODAL_LEAD,
+	SET_MODAL_VISIBILITY,
+	REASSIGN_LEAD
+	} = JuniorLogsAcitonTypes;
 
 export const setLogStatArray = array => ({
 	type: SET_LOG_STAT_ARRAY,
@@ -21,4 +27,9 @@ export const setModalLead = lead => ({
 export const setModalVisibility = visible => ({
 	type: SET_MODAL_VISIBILITY,
 	payload: visible
+});
+
+export const reassignLead = obj => ({
+	type: REASSIGN_LEAD,
+	payload: obj
 });
