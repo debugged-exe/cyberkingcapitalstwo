@@ -36,7 +36,6 @@ class AdminRegistration extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.setVisible(true);
         const {
             telecaller_name,
             telecaller_id,
