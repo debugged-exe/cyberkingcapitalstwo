@@ -58,12 +58,14 @@ class App extends Component {
              })
         .then(response => response.json())
         .then(resp => {
+            console.log(resp);
             if(resp[0].telecaller_id)
             {
                 const user = {
                     username: resp[0].telecaller_name,
                     designation: resp[0].designation,
-                    telecaller_id: resp[0].telecaller_id
+                    telecaller_id: resp[0].telecaller_id,
+                    preferred_language: resp[0].preferred_language
                 }
                 setCurrentUser(user)
                 this.props.history.push(`/${resp[0].designation}/profile`);

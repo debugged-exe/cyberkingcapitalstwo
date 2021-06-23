@@ -8,6 +8,7 @@ const INITIAL_STATE = {
         username: '',
         designation: 'client',
         telecaller_id: '',
+        preferred_language: ''
     }
 }
 const userReducer = (state = INITIAL_STATE, action) => {

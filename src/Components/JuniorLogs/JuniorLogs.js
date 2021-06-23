@@ -1,16 +1,20 @@
 import React,{useState, useEffect} from 'react';
+import {ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // redux
 import { connect } from 'react-redux';
 import {
     setJuniorTableLogArray,
     setLogStatArray,
-    setModalVisibility
+    setModalVisibility,
+    appendNewLeads
 } from '../../redux/junior-panel/junior-logs/junior.logs.actions.js';
 
 // reselect
 import {createStructuredSelector} from "reselect";
 import {selectJuniorLogStatArray} from "../../redux/junior-panel/junior-logs/junior.logs.selectors";
+
 // components
 import LogCard from './LogCard.js';
 import CustomButton from '../CustomButton/CustomButton.js';
@@ -21,6 +25,8 @@ import JuniorModal from "./JuniorModal/JuniorModal";
 // css
 import './JuniorLogs.scss';
 import {selectCurrentUser} from "../../redux/user/user.selectors";
+
+toast.configure();
 
 const tableLogs = [
     {
@@ -116,6 +122,25 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                 setLogStatArray(LogStatArray);
             })
         })
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            console.log(resp)
+            setJuniorTableLogArray(resp)
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Error Loading Table", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
+        })
     }, [])
 
     const [filter, setFilter] = useState('*');
@@ -126,6 +151,44 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
     const [filterValue, setFilterValue] = useState('');
     const handleFilterValue = (event) => {
         setFilterValue(event.target.value);
+    }
+
+    const fetchNewLeads = () => {
+        const {telecaller_id, username, preferred_language} = currentUser;
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_new', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id,
+                telecaller_name: username,
+                preferred_language: preferred_language
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            if(resp==='Less than 1')
+            {
+                toast.error("1 hour not yet elapsed from previous fetch", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
+            }
+            else if(resp!=='Unable to assign you leads' || resp!=='Unable to fetch')
+            {
+                setJuniorTableLogArray(resp);
+                toast.success("New Leads assigned successfully", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Unable to fetch new leads", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
+        })
     }
 
 	return (
@@ -139,7 +202,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
            		}
             </div>
             <div className="button-container center">
-                <CustomButton style={{marginLeft: '0'}}>Fetch New Leads</CustomButton>
+                <CustomButton style={{marginLeft: '0'}} onClick={() => fetchNewLeads()}>Fetch New Leads</CustomButton>
                 <div className={"flex justify-center items-center center mt4 mb4 w-100"}>
                     <label className={"b f3 ml1-ns mr3 "}>Search by : </label>
                     <select
@@ -166,12 +229,13 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                     required
                     />
                 </div>
-                <CustomButton style={{marginLeft: '0'}} onClick={()=> {setJuniorTableLogArray(tableLogs)}}>GO</CustomButton>
+                <CustomButton style={{marginLeft: '0'}}>GO</CustomButton>
             </div>
             <div className={'mt4 w-100 mb4'}>
                 <JuniorTable />
             </div>
             <JuniorModal />
+            <ToastContainer/>
 		</div>
 	)
 }

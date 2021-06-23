@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import './BasicCourseForm.scss';
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
+import PuffLoader from "react-spinners/PuffLoader";
 
 class BasicCourseForm extends Component{
     constructor() {
@@ -12,11 +13,18 @@ class BasicCourseForm extends Component{
             city: '',
             course_type: 'basic',
             prior_knowledge: '',
-            preferred_language: ''
+            preferred_language: '',
+            visible: false
         }
     }
+
+    setVisible = (item) => {
+        this.setState({visible: item});
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
+        this.setVisible(true);
         const {lead_name, lead_contact, city, prior_knowledge, preferred_language, course_type} = this.state;
         fetch('https://aqueous-mesa-28052.herokuapp.com/basicform', {
             method: 'post',
@@ -33,6 +41,7 @@ class BasicCourseForm extends Component{
             .then(response => response.json())
             .then(response => {
                 if(response === "Basic Course Form Registered"){
+                    this.setVisible(false);
                     alert("Registered Successful.");
                     this.setState({
                         lead_name: '',
@@ -114,6 +123,9 @@ class BasicCourseForm extends Component{
                         Submit
                     </CustomButton>
                 </form>
+                <div className="puff-loader" style={{display: `${this.state.visible?'flex': 'none'}`}}>
+                    <PuffLoader loading={true} size={200} color={"red"}/>
+                </div>
             </div>
             );
     }
