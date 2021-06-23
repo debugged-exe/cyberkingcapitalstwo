@@ -32,7 +32,7 @@ class SignIn extends Component{
                 <div className="form-container">
                     <form onSubmit={(event) => this.handleSubmit(event)}>
                         <FormInput
-                            label="UserName"
+                            label="Username"
                             name="username"
                             type="text"
                             value={this.state.username}

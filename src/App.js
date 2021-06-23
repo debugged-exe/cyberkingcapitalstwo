@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 
+import PuffLoader from "react-spinners/PuffLoader";
+import {toast} from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import AOS from 'aos';//AOS import for animation
 import 'aos/dist/aos.css';
 
@@ -34,7 +38,20 @@ import HomePanel from "./Pages/HomePanel/HomePanel";
 import BasicCourseForm from "./Components/BasicCourseForm/BasicCourseForm";
 import ProCourseForm from "./Components/ProCourseForm/ProCourseForm";
 
+toast.configure();
+
 class App extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            visible: false
+        }
+    }
+
+    setVisible = (item) => {
+        this.setState({visible: item});
+    }
 
     componentDidMount() {
         const {currentUser} = this.props;
@@ -47,7 +64,7 @@ class App extends Component {
     setUser = (username, password) => {
 
         const {setCurrentUser} = this.props;
-
+        this.setVisible(true);
         fetch('https://aqueous-mesa-28052.herokuapp.com/signin', {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
@@ -67,12 +84,21 @@ class App extends Component {
                     telecaller_id: resp[0].telecaller_id,
                     preferred_language: resp[0].preferred_language
                 }
-                setCurrentUser(user)
+                setCurrentUser(user);
+                this.setVisible(false);
+                toast.success('Sign in Successful',{
+                    position: toast.POSITION.BOTTOM_CENTER,
+                    autoClose: 4000,
+                });
                 this.props.history.push(`/${resp[0].designation}/profile`);
             }
             else if(resp==='Wrong Credentails')
             {
-                alert(resp);
+                this.setVisible(false);
+                toast.error('Sign in UnSuccessful',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
             }
         })
         .catch(err => console.log(err))
@@ -86,6 +112,10 @@ class App extends Component {
             telecaller_id: ''
         }
         setCurrentUser(user);
+        toast.info('Sign out',{
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 3000
+        });
         this.props.history.push('/');
     }
 
@@ -105,6 +135,9 @@ class App extends Component {
                         <SignIn setUser={this.setUser}/>
                     </Route>
                 </Switch>
+                <div className="puff-loader" style={{display: `${this.state.visible?'flex': 'none'}`}}>
+                    <PuffLoader loading={true} size={200} color={"red"}/>
+                </div>
             </div>
         );
     }

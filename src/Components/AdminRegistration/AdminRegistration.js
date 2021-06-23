@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import FormInput from '../FormInput/FormInput.js';
 import CustomButton from '../CustomButton/CustomButton.js';
 import './AdminRegistration.scss';
+import PuffLoader from "react-spinners/PuffLoader";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 class AdminRegistration extends Component {
     componentDidMount() {
@@ -26,12 +31,16 @@ class AdminRegistration extends Component {
             preferred_language: '',
             designation: '',
             assigned_to: '',
-            srCallerArray: []
+            srCallerArray: [],
+            visible: false
         }
     }
-
+    setVisible = (item) => {
+        this.setState({visible: item});
+    }
     handleSubmit = (event) => {
         event.preventDefault();
+        this.setVisible(true);
         const {
             telecaller_name,
             telecaller_id,
@@ -42,19 +51,27 @@ class AdminRegistration extends Component {
             assigned_to
         } = this.state;
         if (password !== confirm_password) {
+            this.setVisible(false);
             this.setState({
                 password: '',
                 confirm_password: ''
             }, () => {
-                alert('The two passwords do not match');
+                toast.error('The two passwords do not match',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000
+                });
             });
             return;
         }
         if (designation === 'junior' && assigned_to === '') {
-            alert("Set Senior Caller");
+            this.setVisible(false);
+            toast.error("Set Senior Caller",{
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 4000
+            });
             return;
         }
-        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/register', {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/registe', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -68,8 +85,12 @@ class AdminRegistration extends Component {
         })
             .then(response => response.json())
             .then(resp => {
+                this.setVisible(false);
                 if (resp === 'Registered successfully') {
-                    alert('New Telecaller Added successfully');
+                    toast.success('New Telecaller Added successfully',{
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 4000
+                    });
                     this.setState({
                         telecaller_name: '',
                         telecaller_id: '',
@@ -81,12 +102,28 @@ class AdminRegistration extends Component {
                         srCallerArray: []
                     })
                 } else if (resp === 'not found') {
-                    alert('Senior caller to which caller is assigned does not exist');
+                    this.setVisible(false);
+                    toast.error('Senior caller to which caller is assigned does not exist',{
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 4000
+                    });
                 } else if (resp === 'Unable to register') {
-                    alert('Unable to register.Please try again');
+                    this.setVisible(false);
+                    toast.error('Unable to register.Please try again',{
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 4000
+                    });
                 }
+                this.setVisible(false);
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                this.setVisible(false);
+                toast.error('Not able to register',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000
+                });
+            })
     }
 
     handleChange = event => {
@@ -188,6 +225,9 @@ class AdminRegistration extends Component {
                         Register Caller
                     </CustomButton>
                 </form>
+                <div className="puff-loader" style={{display: `${this.state.visible?'flex': 'none'}`}}>
+                    <PuffLoader loading={true} size={200} color={"red"}/>
+                </div>
             </div>
         );
     }
