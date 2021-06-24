@@ -1,30 +1,15 @@
 import React from 'react';
 import './Pagination.scss';
-const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+const Pagination = ({ postsPerPage, totalPosts }) => {
     const pageNumbers = [];
-
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
         pageNumbers.push(i);
     }
-
     return (
-        <div className={'w-100 flex justify-center items-center'}>
-            <ul className={'ul-container'}>
-                {pageNumbers.map(number=>(
-                    <li className={'ul-item'}>
-                        {number}
-                    </li>
-                ))}
-            </ul>
-            {/*<ul className=' flex justify-center items-center' style={{background:'gray',listStyleType:'none',paddingLeft:'none'}}>*/}
-            {/*    {pageNumbers.map(number => (*/}
-            {/*        <li key={number} className=' ma2 '>*/}
-            {/*            <div onClick={() => paginate(number)} href='!#' className=''>*/}
-            {/*                {number}*/}
-            {/*            </div>*/}
-            {/*        </li>*/}
-            {/*    ))}*/}
-            {/*</ul>*/}
+        <div className="junior-log-pagination-container pb4">
+            {pageNumbers.map((number) => (
+                <button className="ma2">{number}</button>
+            ))}
         </div>
     );
 };

@@ -25,6 +25,7 @@ import JuniorModal from "./JuniorModal/JuniorModal";
 // css
 import './JuniorLogs.scss';
 import {selectCurrentUser} from "../../redux/user/user.selectors";
+import Pagination from "../Pagination/Pagination";
 
 toast.configure();
 
@@ -57,6 +58,13 @@ const LogStatArray = [
 
 const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTableLogArray, setModalVisibility}) => {
 
+    const [pages, setPages] = useState(0);
+    const [pageNumbers, setPageNumbers] = useState([]);
+    const perPage = 10;
+
+    for (let i = 1; i <= Math.ceil(pages / perPage); i++) {
+        pageNumbers.push(i);
+    }
     useEffect(() => {
         const {telecaller_id} = currentUser;
         fetch('https://aqueous-mesa-28052.herokuapp.com/junior/counts',{
@@ -89,6 +97,26 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                 setLogStatArray(LogStatArray);
             })
         })
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_pgcount',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id
+            })
+        })
+            .then(resp => resp.json())
+            .then( response => {
+                console.log(response);
+                setPages(response.count);
+                var arr = [];
+                for (let i = 1; i <= Math.ceil(pages / perPage); i++) {
+                    arr.push(i);
+                }
+                setPageNumbers(arr);
+            })
+            .catch(err => {
+                console.log(err);
+            })
         fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -157,9 +185,29 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                     autoClose: 4000,
                 });
         })
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_pgcount',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id
+            })
+        })
+            .then(resp => resp.json())
+            .then( response => {
+                console.log(response);
+                setPages(response.count);
+                var arr = [];
+                for (let i = 1; i <= Math.ceil(pages / perPage); i++) {
+                    arr.push(i);
+                }
+                setPageNumbers(arr);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
-	return (
+    return (
 		<div className="junior-logs">
 			<p style={{fontFamily: 'Open Sans Condensed', fontSize: '2rem', fontWeight: 'bold', textAlign: 'center'}}>View Logs</p>
 			<div className="stats">
@@ -204,6 +252,11 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
             </div>
             <JuniorModal />
             <ToastContainer/>
+            <div className="junior-log-pagination-container pb4">
+                {pageNumbers.map((number) => (
+                    <button className="ma2 hover-bg-dark-blue hover-white grow-large">{number}</button>
+                ))}
+            </div>
 		</div>
 	)
 }
