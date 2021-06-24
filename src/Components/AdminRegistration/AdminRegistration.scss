@@ -18,9 +18,42 @@
 .hidden{
 	display: none;
 }
+.puff-loader-register
+{
+  position: absolute;
+  top: 15%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+
+@media only screen and (max-width: 768px){
+	.puff-loader-register{
+		top: 45%;
+	}
+}
 
 @media only screen and (max-width: 500px){
 	.admin-register-form{
 		width: 60%;
+	}
+	.puff-loader-register{
+		top: 50%;
+	}
+}
+
+@media only screen and (max-width: 376px){
+	.puff-loader-register{
+		top: 58%;
+	}
+}
+
+@media only screen and (max-width: 320px){
+	.puff-loader-register{
+		top: 68%;
 	}
 }

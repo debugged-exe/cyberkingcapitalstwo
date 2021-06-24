@@ -93,7 +93,8 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                telecaller_id: telecaller_id
+                telecaller_id: telecaller_id,
+                pgNo: 0
             })
         })
         .then(response => response.json())

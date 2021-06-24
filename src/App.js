@@ -88,20 +88,27 @@ class App extends Component {
                 this.setVisible(false);
                 toast.success('Sign in Successful',{
                     position: toast.POSITION.BOTTOM_CENTER,
-                    autoClose: 4000,
+                    autoClose: 2500,
                 });
                 this.props.history.push(`/${resp[0].designation}/profile`);
             }
             else if(resp==='Wrong Credentails')
             {
                 this.setVisible(false);
-                toast.error('Sign in UnSuccessful',{
+                toast.error('Wrong Credentails',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 2500,
                 });
             }
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            this.setVisible(false);
+            toast.error('Sign in error.Something went wrong.Please try again.', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
     }
 
     signOut = () => {
@@ -112,9 +119,9 @@ class App extends Component {
             telecaller_id: ''
         }
         setCurrentUser(user);
-        toast.info('Sign out',{
+        toast.info('Signed out',{
             position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 3000
+            autoClose: 2500
         });
         this.props.history.push('/');
     }

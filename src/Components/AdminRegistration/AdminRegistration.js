@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import FormInput from '../FormInput/FormInput.js';
 import CustomButton from '../CustomButton/CustomButton.js';
+import PuffLoader from "react-spinners/PuffLoader";
 import './AdminRegistration.scss';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +20,6 @@ class AdminRegistration extends Component {
             })
     }
 
-
     constructor() {
         super();
         this.state = {
@@ -30,12 +30,18 @@ class AdminRegistration extends Component {
             preferred_language: '',
             designation: '',
             assigned_to: '',
-            srCallerArray: []
+            srCallerArray: [],
+            visible: false
         }
+    }
+
+    setVisible = (item) => {
+        this.setState({visible: item});
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.setVisible(true);
         const {
             telecaller_name,
             telecaller_id,
@@ -46,6 +52,7 @@ class AdminRegistration extends Component {
             assigned_to
         } = this.state;
         if (password !== confirm_password) {
+            this.setVisible(false);
             this.setState({
                 password: '',
                 confirm_password: ''
@@ -58,6 +65,7 @@ class AdminRegistration extends Component {
             return;
         }
         if (designation === 'junior' && assigned_to === '') {
+            this.setVisible(false);
             toast.error("Set Senior Caller",{
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 4000
@@ -79,6 +87,7 @@ class AdminRegistration extends Component {
             .then(response => response.json())
             .then(resp => {
                 if (resp === 'Registered successfully') {
+                    this.setVisible(false);
                     toast.success('New Telecaller Added successfully',{
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000
@@ -94,11 +103,13 @@ class AdminRegistration extends Component {
                         srCallerArray: []
                     })
                 } else if (resp === 'not found') {
+                    this.setVisible(false);
                     toast.error('Senior caller to which caller is assigned does not exist',{
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000
                     });
                 } else if (resp === 'Unable to register') {
+                    this.setVisible(false);
                     toast.error('Unable to register.Please try again',{
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000
@@ -106,6 +117,7 @@ class AdminRegistration extends Component {
                 }
             })
             .catch(err => {
+                this.setVisible(false);
                 console.log(err);
                 toast.error('Not able to register',{
                     position: toast.POSITION.TOP_CENTER,
@@ -213,6 +225,9 @@ class AdminRegistration extends Component {
                         Register Caller
                     </CustomButton>
                 </form>
+                <div className="puff-loader-register" style={{display: `${this.state.visible?'flex': 'none'}`}}>
+                    <PuffLoader loading={true} size={200} color={"red"}/>
+                </div>
             </div>
         );
     }
