@@ -1,3 +1,5 @@
+$base-blue: #00449E;
+
 .junior-logs{
 	position: relative;
 	font-family: 'Open Sans Condensed', sans-serif;
@@ -8,6 +10,21 @@
 	justify-content: center;
 	align-items: center;
 }
+
+.junior-log-page-btn{
+	font-weight: bold;
+	border: 1px solid black;
+	margin: 1%;
+	transition: all 0.3s ease-in;
+
+	&:hover{
+		border: none;
+		background: $base-blue;
+		color: white;
+		transform: scale(1.5);
+	}
+}
+
 .stats{
 	display: grid;
 	grid-template-columns: 33% 34% 33%;
@@ -21,6 +38,7 @@
 	justify-content: center;
 	align-items: center;
 }
+
 @media only screen and (max-width: 428px){
   .stats
   {

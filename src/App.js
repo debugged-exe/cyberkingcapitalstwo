@@ -82,7 +82,8 @@ class App extends Component {
                     username: resp[0].telecaller_name,
                     designation: resp[0].designation,
                     telecaller_id: resp[0].telecaller_id,
-                    preferred_language: resp[0].preferred_language
+                    preferred_language: resp[0].preferred_language,
+                    assigned_to: resp[0].assigned_to
                 }
                 setCurrentUser(user);
                 this.setVisible(false);
