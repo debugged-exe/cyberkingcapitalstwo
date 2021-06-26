@@ -6,7 +6,8 @@ const {
 	SET_JUNIOR_TABLE_LOG_ARRAY,
 	SET_MODAL_LEAD,
 	SET_MODAL_VISIBILITY,
-	REASSIGN_LEAD
+	REASSIGN_LEAD,
+	REASSIGN_HANDOVER_FLAG
 	} = JuniorLogsAcitonTypes;
 
 export const setLogStatArray = array => ({
@@ -33,3 +34,8 @@ export const reassignLead = obj => ({
 	type: REASSIGN_LEAD,
 	payload: obj
 });
+
+export const reassignHandoverFlag = flag => ({
+	type: REASSIGN_HANDOVER_FLAG,
+	payload: flag
+})

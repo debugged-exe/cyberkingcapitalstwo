@@ -272,7 +272,6 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                 <JuniorTable />
             </div>
             <JuniorModal />
-            <ToastContainer/>
             <div className="junior-log-pagination-container pb4">
                 <p>. . </p>
                 {pageNumbers.map((number, index) => (

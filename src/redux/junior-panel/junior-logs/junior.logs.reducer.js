@@ -5,7 +5,8 @@ const {
 	SET_LOG_STAT_ARRAY, 
 	SET_JUNIOR_TABLE_LOG_ARRAY,
 	SET_MODAL_LEAD,SET_MODAL_VISIBILITY, 
-	REASSIGN_LEAD
+	REASSIGN_LEAD,
+	REASSIGN_HANDOVER_FLAG
 	} = JuniorLogsAcitonTypes;
 
 const INITIAL_STATE = {
@@ -66,6 +67,23 @@ const juniorLogsReducer = (state = INITIAL_STATE, action) => {
 				return {
 					...state,
 					junior_table_logs: reassigned
+				}
+			case REASSIGN_HANDOVER_FLAG:
+				const handover = [];
+				state.junior_table_logs.map(item => {
+					if(item.lead_id===action.payload.lead_id)
+					{
+						item.handover_flag = action.payload.flag;
+						handover.push(item)
+					}
+					else
+					{
+						handover.push(item);
+					}
+				})
+				return {
+					...state,
+					junior_table_logs: handover
 				}
 		default:
 		return state;

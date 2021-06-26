@@ -1,21 +1,58 @@
 import React from 'react';
+import {ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 //css
 import './JuniorTable.scss';
 //redux
 import {connect} from "react-redux";
 import {
-    setModalLead
+    setModalLead,
+    reassignHandoverFlag
 } from "../../../redux/junior-panel/junior-logs/junior.logs.actions";
 
 //reselect
 import {createStructuredSelector} from "reselect";
 import {selectJuniorTableLogs} from "../../../redux/junior-panel/junior-logs/junior.logs.selectors";
+import {selectCurrentUser} from "../../../redux/user/user.selectors";
 
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
                 "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
                 "status 1", "status 2", "Handover status", "Coded"];
 
-const JuniorTable = ({ junior_table_logs,setModalLead}) => {
+toast.configure();
+
+const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandoverFlag}) => {
+
+    const handoverHandler = (lead_id, lead_phone_no) => {
+        const {telecaller_id, assigned_to} = currentUser;
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    lead_id: lead_id,
+                    lead_phone_no: lead_phone_no,
+                    telecaller_id: telecaller_id,
+                    senior_id: assigned_to
+                })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            reassignHandoverFlag({lead_id: resp.lead_id, flag: 'yes'});
+            toast.success("Handed over successfully", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 4000,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Unable to handover.Please try again.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 4000,
+            });
+        })
+    }
+
     return (<div className={'junior-table-container'}>
         <table cellSpacing="1" className={'junior-table-box'}>
             <thead className={'junior-table-head-container'}>
@@ -30,23 +67,23 @@ const JuniorTable = ({ junior_table_logs,setModalLead}) => {
             <tbody className={'junior-table-body-container'}>
             {junior_table_logs.map((item, index) => {
                 return (
-                    <tr className="junior-table-row-container">
-                        <td className={'junior-table-data-container'} data-label={'Lead ID'}>{item.lead_id}</td>
-                        <td className={'junior-table-data-container'} data-label={'Assigned to'}>{item.assigned_to}</td>
-                        <td className={'junior-table-data-container'} data-label={'Lead Name'}>{item.lead_name}</td>
-                        <td className={'junior-table-data-container'} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
-                        <td className={'junior-table-data-container'} data-label={'Whatsapp Number'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:"NULL"}`}</td>
-                        <td className={'junior-table-data-container'} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}</td>
-                        <td className={'junior-table-data-container'} data-label={'City'}>{item.lead_city}</td>
-                        <td className={'junior-table-data-container'} data-label={'Trading Knowledge'}>{item.prior_knowledge}</td>
-                        <td className={'junior-table-data-container'} data-label={'Preferred Language'}>{item.preferred_language}</td>
-                        <td className={'junior-table-data-container'} data-label={'Status 1'}>{`${item.status_1?item.status_1:"NULL"}`}</td>
-                        <td className={'junior-table-data-container'} data-label={'Status 2'}>{`${item.status_2?item.status_2:"NULL"}`}</td>
-                        <td className={'junior-table-data-container'} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
-                        <td className={'junior-table-data-container'} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
-                        <td className={'junior-table-data-container request-button-center'}>
+                    <tr className={`junior-table-row-container`}>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Lead ID'}>{item.lead_id}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Assigned to'}>{item.assigned_to}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Lead Name'}>{item.lead_name}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Whatsapp Number'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:"NULL"}`}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'City'}>{item.lead_city}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Trading Knowledge'}>{item.prior_knowledge}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Preferred Language'}>{item.preferred_language}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Status 1'}>{`${item.status_1?item.status_1:"NULL"}`}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Status 2'}>{`${item.status_2?item.status_2:"NULL"}`}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
+                        <td className={`junior-table-data-container request-button-center ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`}>
                                 <button className="ma1" onClick={() => {setModalLead(item)}}>Update</button>
-                                <button className="ma1">Handover</button>
+                                <button className="ma1" onClick={() => handoverHandler(item.lead_id, item.lead_phone_no)}>Handover</button>
                                 <button className="ma1">Request</button>
                         </td>
                     </tr>
@@ -57,10 +94,12 @@ const JuniorTable = ({ junior_table_logs,setModalLead}) => {
     </div>);
 }
 const mapStateToProps = createStructuredSelector({
-    junior_table_logs: selectJuniorTableLogs
+    junior_table_logs: selectJuniorTableLogs,
+    currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
-    setModalLead: lead => dispatch(setModalLead(lead))
+    setModalLead: lead => dispatch(setModalLead(lead)),
+    reassignHandoverFlag: flag => dispatch(reassignHandoverFlag(flag))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(JuniorTable);
