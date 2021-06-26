@@ -8,7 +8,8 @@ import './JuniorTable.scss';
 import {connect} from "react-redux";
 import {
     setModalLead,
-    reassignHandoverFlag
+    reassignHandoverFlag,
+    reassignCodedFlag
 } from "../../../redux/junior-panel/junior-logs/junior.logs.actions";
 
 //reselect
@@ -22,7 +23,7 @@ const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp
 
 toast.configure();
 
-const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandoverFlag}) => {
+const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandoverFlag,reassignCodedFlag}) => {
 
     const handoverHandler = (lead_id, lead_phone_no) => {
         const {telecaller_id, assigned_to} = currentUser;
@@ -38,15 +39,45 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
         })
         .then(response => response.json())
         .then(resp => {
+            console.log(resp)
             reassignHandoverFlag({lead_id: resp.lead_id, flag: 'yes'});
             toast.success("Handed over successfully", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Unable to handover.Please try again.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
+    }
+
+    const requestHandler = (lead_id, lead_phone_no) => {
+        const {telecaller_id, username} = currentUser;
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                lead_id: lead_id,
+                lead_phone_no: lead_phone_no,
+                telecaller_id: telecaller_id,
+                telecaller_name: username
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            reassignCodedFlag({lead_id: lead_id})
+            toast.success(" Coded Request Successful", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 4000,
             });
         })
         .catch(err => {
             console.log(err);
-            toast.error("Unable to handover.Please try again.", {
+            toast.error("Error during Coded Request.Please try again.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 4000,
             });
@@ -66,6 +97,15 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
             </thead>
             <tbody className={'junior-table-body-container'}>
             {junior_table_logs.map((item, index) => {
+                var flag;
+                if(item.handover_flag==='yes')
+                {
+                    flag = true;
+                }
+                else
+                {
+                    flag = null;
+                }
                 return (
                     <tr className={`junior-table-row-container`}>
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Lead ID'}>{item.lead_id}</td>
@@ -82,9 +122,9 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
                         <td className={`junior-table-data-container request-button-center ${item.handover_flag==='yes'?'bg-moon-gray fw5':'bg-white'}`}>
-                                <button className="ma1" onClick={() => {setModalLead(item)}}>Update</button>
-                                <button className="ma1" onClick={() => handoverHandler(item.lead_id, item.lead_phone_no)}>Handover</button>
-                                <button className="ma1">Request</button>
+                                <button className="ma1" disabled={flag} onClick={() => {setModalLead(item)}}>Update</button>
+                                <button className="ma1" disabled={flag} onClick={() => handoverHandler(item.lead_id, item.lead_phone_no)}>Handover</button>
+                                <button className="ma1" disabled={flag} onClick={() => requestHandler(item.lead_id, item.lead_phone_no)}>Request</button>
                         </td>
                     </tr>
                 )
@@ -100,6 +140,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
     setModalLead: lead => dispatch(setModalLead(lead)),
-    reassignHandoverFlag: flag => dispatch(reassignHandoverFlag(flag))
+    reassignHandoverFlag: flag => dispatch(reassignHandoverFlag(flag)),
+    reassignCodedFlag: flag => dispatch(reassignCodedFlag(flag))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(JuniorTable);

@@ -73,7 +73,6 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
         })
             .then(resp => resp.json())
             .then(resp => {
-            console.log(resp);
             LogStatArray.map(item => {
                 switch(item.title){
                     case 'Status 1 Updated':
@@ -103,14 +102,12 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
         })
             .then(resp => resp.json())
             .then( response => {
-                console.log(response);
                 setPages(response.count);
                 var arr = [];
                 for (let i = 1; i <= Math.ceil(response.count / perPage); i++) {
                     arr.push(i);
                 }
                 setPageNumbers(arr);
-                console.log("pAGE: "+pages+"Page numbers"+pageNumbers);
             })
             .catch(err => {
                 console.log(err);
@@ -191,14 +188,12 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
         })
             .then(resp => resp.json())
             .then( response => {
-                console.log(response);
                 setPages(response.count);
                 var arr = [];
                 for (let i = 1; i <= Math.ceil(response.count / perPage); i++) {
                     arr.push(i);
                 }
                 setPageNumbers(arr);
-                console.log("pAGE: "+pages+"Page numbers"+pageNumbers);
             })
             .catch(err => {
                 console.log(err);
