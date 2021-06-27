@@ -2,6 +2,7 @@ import { React, Component } from "react";
 import FormInput from '../FormInput/FormInput.js';
 import "./SearchByDropdown.scss";
 import CustomButton from "../CustomButton/CustomButton";
+import SearchTable from "./SearchTable/SearchTable";
 
 class SearchByDropdown extends Component {
     constructor() {
@@ -77,6 +78,9 @@ class SearchByDropdown extends Component {
                         Search
                     </CustomButton>
                 </form>
+                <div className={'w-100 pt4 pb4'}>
+                    <SearchTable />
+                </div>
             </div>
         );
     }
