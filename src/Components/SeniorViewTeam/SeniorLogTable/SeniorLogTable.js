@@ -9,16 +9,37 @@ import {selectSeniorJuniorLeadArray, selectSeniorJuniorLeadTableVisibility} from
 
 //css
 import './SeniorLogTable.scss';
+import * as AiIcons from "react-icons/ai";
+import {
+    setJuniorLeadArray,
+    setJuniorLeadTableVisibility,
+    setTeamArray
+} from "../../../redux/senior-panel/senior-view-team/senior.view.team.actions";
 
 //table header data
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
     "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
-    "status 1", "status 2", "Handover status", "Coded", "Payment"];
+    "status 1", "status 2", "Handover status", "Coded"];
 
-const SeniorLogTable = ({junior_lead_array, junior_lead_table_visibility}) => {
+const SeniorLogTable = ({junior_lead_array, junior_lead_table_visibility,setJuniorLeadTableVisibility}) => {
     return (<div className={`${junior_lead_table_visibility?'senior-table-container':'hidden'}`}>
-        <h1 className={'flex justify-center logHeader'}>View Logs Table</h1>
-        <table cellSpacing="1" className={'senior-table-box'}>
+        <div className={'tint'}>
+        </div>
+        <div className={'flex justify-between items-end w-100 pointer-div'}>
+            <h3 className={''}></h3>
+            <div className="pointer-hover ma3 ba br3">
+                <AiIcons.AiOutlineClose
+                    size={'3rem'}
+                    color={''}
+                    className={'close-button'}
+                    onClick={() => {
+                        setJuniorLeadTableVisibility(false);
+                    }}
+                />
+            </div>
+        </div>
+        <div className={'senior-view-table-container-responsive bg-white'} >
+        <table cellSpacing="1" className={'senior-table-box bg-white'}>
             <thead className={'senior-table-head-container'}>
             <tr>
                 {header.map((item, index) => {
@@ -45,12 +66,12 @@ const SeniorLogTable = ({junior_lead_array, junior_lead_table_visibility}) => {
                         <td className={'senior-table-data-container'} data-label={'Status 2'}>{item.status_2}</td>
                         <td className={'senior-table-data-container'} data-label={'Handover Status'}>{item.handover_status}</td>
                         <td className={'senior-table-data-container'} data-label={'Coded'}>{item.coded}</td>
-                        <td className={'senior-table-data-container'} data-label={'Payment'}>{item.payment}</td>
                     </tr>
                 )
             })}
             </tbody>
         </table>
+        </div>
     </div>);
 }
 
@@ -59,4 +80,9 @@ const mapStateToProps = createStructuredSelector({
     junior_lead_table_visibility: selectSeniorJuniorLeadTableVisibility
 });
 
-export default connect(mapStateToProps)(SeniorLogTable);
+const mapDispatchToProps = dispatch => ({
+        setJuniorLeadTableVisibility: visible => dispatch(setJuniorLeadTableVisibility(visible))
+    }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SeniorLogTable);
