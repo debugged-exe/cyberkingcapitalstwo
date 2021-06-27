@@ -59,7 +59,7 @@ class JuniorModal extends React.Component {
         		reassignLead(resp[0]);
         		toast.success(`${name} updated successfully`, {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 2500,
                 });
 	        	this.setState(initialState, () => {
 	        		console.log('')
@@ -71,7 +71,7 @@ class JuniorModal extends React.Component {
         	console.log(err);
         	toast.error("Unable to update.Please try again", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 2500,
                 });
         })
     }

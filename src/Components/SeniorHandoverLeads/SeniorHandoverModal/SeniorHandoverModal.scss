@@ -65,13 +65,13 @@
 .senior-handover-hidden{
 	display: hidden;
 }
-#button-margin-1{
+#senior-button-margin-1{
 }
-#button-margin-2{
+#senior-button-margin-2{
 }
-#button-margin-3{
+#senior-button-margin-3{
 }
-#button-margin-4{
+#senior-button-margin-4{
 }
 @media only screen and (max-width: 768px){
 	.grid-div{
@@ -81,34 +81,34 @@
 }
 
 @media only screen and (max-width: 700px){
-	#button-margin-1{
+	#senior-button-margin-1{
         margin-left: 0;
-        margin-top: -30%;
+        margin-top: 5%;
     }
-    #button-margin-2{
+    #senior-button-margin-2{
         margin-left: 0;
-        margin-top: -30%;
+        margin-top: 5%;
     }
-    #button-margin-3{
+    #senior-button-margin-3{
         margin-left: 0;
-        margin-top: -30%;
+        margin-top: 5%;
     }
-    #button-margin-4{
+    #senior-button-margin-4{
         margin-left: 0;
-        margin-top: -30%;
+        margin-top: 5%;
     }
-	.grid-div{
+	.senior-handover-grid-div{
 		grid-template-columns: 100%;
 	}
 
-	.junior-modal-form-component{
+	.senior-handover-form-component{
 		display: grid;
 		grid-template-columns: 100%;
 	}
 }
 
 @media only screen and (max-width: 500px){
-	.junior-modal{
+	.senior-handover-modal{
 		left: 5%;
 		width: 90%;
 		height: 90%;

@@ -11,3 +11,13 @@ export const selectSeniorHandoverLeadsArray = createSelector(
     [selectSeniorHandover],
     (handover) => handover.handover_leads_array
 );
+
+export const selectSeniorHandoverLead = createSelector(
+    [selectSeniorHandover],
+    (lead) => lead.senior_modal_lead
+);
+
+export const selectSeniorHandoverLeadVisibility = createSelector(
+    [selectSeniorHandover],
+    (lead) => lead.senior_modal_visibility
+);

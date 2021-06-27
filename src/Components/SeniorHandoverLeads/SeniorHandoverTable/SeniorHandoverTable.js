@@ -2,6 +2,9 @@ import React from 'react';
 
 // redux
 import { connect } from 'react-redux';
+import {
+    setSeniorModelLead
+} from '../../../redux/senior-panel/senior-handover/senior.handover.actions.js';
 
 //reselect
 import {createStructuredSelector} from "reselect";
@@ -10,7 +13,7 @@ import {selectSeniorHandoverLeadsArray} from "../../../redux/senior-panel/senior
 // css
 import './SeniorHandoverTable.scss';
 
-const SeniorHandoverTable = ({handover_leads_array}) => {
+const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead}) => {
 	const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
     "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
     "status 1", "status 2", "Handover status", "Coded"];
@@ -45,7 +48,7 @@ const SeniorHandoverTable = ({handover_leads_array}) => {
                         <td className={'senior-handover-table-data-container'} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
                         <td className={'senior-handover-table-data-container'} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
                        	<td className={'senior-handover-table-data-container senior-button-center'}>
-							<button className={'ma1'}>Update</button>
+							<button className={'ma1'} onClick={() => setSeniorModelLead(item)}>Update</button>
 							<button className={'ma1'}>Done</button>
                             <button className={'ma1'}>Delete</button>
                        	</td>
@@ -62,4 +65,8 @@ const mapStateToProps = createStructuredSelector({
 	handover_leads_array: selectSeniorHandoverLeadsArray
 });
 
-export default connect(mapStateToProps)(SeniorHandoverTable);
+const mapDispatchToProps = dispatch => ({
+    setSeniorModelLead: lead => dispatch(setSeniorModelLead(lead))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SeniorHandoverTable);
