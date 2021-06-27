@@ -23,7 +23,7 @@ const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp
 
 toast.configure();
 
-const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandoverFlag,reassignCodedFlag}) => {
+const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandoverFlag,reassignCodedFlag, filter, filterValue}) => {
 
     const handoverHandler = (lead_id, lead_phone_no) => {
         const {telecaller_id, assigned_to} = currentUser;
@@ -96,7 +96,18 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
             </tr>
             </thead>
             <tbody className={'junior-table-body-container'}>
-            {junior_table_logs.map((item, index) => {
+            {
+                junior_table_logs.filter(
+                    item => {
+                        if(filter === "*")
+                            return item
+                        if(filterValue === null)
+                            return item
+                        if(filter === 'lead_id')
+                            filterValue = parseInt(filterValue);
+                        return item.[filter] === filterValue
+                    }
+                ).map((item, index) => {
                 var flag;
                 if(item.handover_flag==='yes')
                 {

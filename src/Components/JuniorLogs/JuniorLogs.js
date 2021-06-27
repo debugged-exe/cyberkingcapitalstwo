@@ -245,7 +245,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                         <option value='*' >--select--</option>
                         <option value='lead_id'>Lead ID</option>
                         <option value="lead_name">Lead Name</option>
-                        <option value="lead_contact">Lead Contact</option>
+                        <option value="lead_phone_no">Lead Contact</option>
                     </select>
                 </div>
                 <div className={"flex justify-center items-center center w-100"}>
@@ -261,10 +261,9 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                     required
                     />
                 </div>
-                <CustomButton style={{marginLeft: '0'}}>GO</CustomButton>
             </div>
             <div className={'mt4 w-100 mb4'}>
-                <JuniorTable />
+                <JuniorTable filter={filter} filterValue={filterValue}/>
             </div>
             <JuniorModal />
             <div className="junior-log-pagination-container pb4">
