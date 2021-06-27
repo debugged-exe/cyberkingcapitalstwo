@@ -1,8 +1,14 @@
 import React,{useEffect} from 'react';
+import {ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // redux
 import { connect } from 'react-redux';
 import {setHandoverLeadArray} from '../../redux/senior-panel/senior-handover/senior.handover.actions.js';
+
+// reselect
+import {createStructuredSelector} from "reselect";
+import {selectCurrentUser} from "../../redux/user/user.selectors";
 
 // components
 import SeniorHandoverTable from './SeniorHandoverTable/SeniorHandoverTable.js';
@@ -43,10 +49,30 @@ const tableLogs = [
 	    }
 	]
 
-const SeniorHandoverLeads = ({setHandoverLeadArray}) => {
+toast.configure();
+
+const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
 
 	useEffect(() => {
-		setHandoverLeadArray(tableLogs)
+		const {telecaller_id} = currentUser;
+		fetch('https://aqueous-mesa-28052.herokuapp.com/senior/fetch_handover_leads',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+    		setHandoverLeadArray(resp)
+        })
+		.catch(err => {
+			console.log(err);
+			toast.error('Error loading handover requests.Please Refresh', {
+				position: toast.POSITION.TOP_CENTER,
+                autoClose: 4000,
+			});
+		})
 	}, [])
 
 	return (
@@ -57,8 +83,12 @@ const SeniorHandoverLeads = ({setHandoverLeadArray}) => {
 	)
 }
 
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+});
+
 const mapDispatchToProps = dispatch => ({
 	setHandoverLeadArray: array => dispatch(setHandoverLeadArray(array))
 });
 
-export default connect(null, mapDispatchToProps)(SeniorHandoverLeads);
+export default connect(mapStateToProps, mapDispatchToProps)(SeniorHandoverLeads);
