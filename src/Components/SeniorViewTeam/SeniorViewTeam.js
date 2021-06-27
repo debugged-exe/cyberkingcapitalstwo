@@ -1,8 +1,12 @@
-import React,{useEffect} from 'react';
+import React, {useEffect} from 'react';
 
 // redux
-import { connect } from 'react-redux';
-import {setTeamArray, setJuniorLeadArray} from '../../redux/senior-panel/senior-view-team/senior.view.team.actions.js'
+import {connect} from 'react-redux';
+import {
+    setTeamArray,
+    setJuniorLeadArray,
+    setJuniorLeadTableVisibility
+} from '../../redux/senior-panel/senior-view-team/senior.view.team.actions.js'
 
 //reselect
 import {createStructuredSelector} from "reselect";
@@ -46,8 +50,7 @@ const tableLogs = [
         status_1: "complete",
         status_2: "uncomplete",
         handover_status: "complete",
-        coded: "---",
-        payment: "done"
+        coded: "---"
     },
     {
         lead_id: 2,
@@ -62,57 +65,68 @@ const tableLogs = [
         status_1: "complete",
         status_2: "uncomplete",
         handover_status: "complete",
-        coded: "---",
-        payment: "no"
+        coded: "---"
     }
 ]
 
-const SeniorViewTeam = ({setTeamArray, setJuniorLeadArray, team_array}) => {
+const SeniorViewTeam = ({setTeamArray, setJuniorLeadArray, team_array, setJuniorLeadTableVisibility}) => {
 
     useEffect(() => {
-       setTeamArray(tableData);
+        setTeamArray(tableData);
     }, [])
 
     return (<div>
         <div className={'team-table-container'}>
-        <h1>My Team</h1>
-        <table cellspacing="1" className={'team-table-box'} >
-            <thead className={'team-table-head-container'}>
-            <tr>
-                {header.map((item, index) => {
+            <h1>My Team</h1>
+            <table cellspacing="1" className={'team-table-box'}>
+                <thead className={'team-table-head-container'}>
+                <tr>
+                    {header.map((item, index) => {
+                        return (
+                            <th className={'team-table-header-container'}>{item}</th>
+                        );
+                    })}
+                </tr>
+                </thead>
+                <tbody className={'team-table-body-container'}>
+                {team_array.map((item, index) => {
                     return (
-                        <th className={'team-table-header-container'}>{item}</th>
-                    );
+                        <tr className={'team-table-row-container'}>
+                            <td className={'team-table-data-container'} data-label={'Sr No.'}>{index + 1}</td>
+                            <td className={'team-table-data-container'}
+                                data-label={'Telecaller ID'}>{item.telecaller_id}</td>
+                            <td className={'team-table-data-container'}
+                                data-label={'Telecaller Name'}>{item.telecaller_name}</td>
+                            <td className={'team-table-data-container'}>
+                                <button onClick={() => {
+                                    setJuniorLeadArray(tableLogs);
+                                    setJuniorLeadTableVisibility(true)
+                                }}>View Logs
+                                </button>
+                            </td>
+                        </tr>
+                    )
                 })}
-            </tr>
-            </thead>
-            <tbody className={'team-table-body-container'}>
-            {team_array.map((item, index) => {
-                return (
-                    <tr className={'team-table-row-container'}>
-                        <td className={'team-table-data-container'} data-label={'Sr No.'}>{index + 1}</td>
-                        <td className={'team-table-data-container'} data-label={'Telecaller ID'}>{item.telecaller_id}</td>
-                        <td className={'team-table-data-container'} data-label={'Telecaller Name'}>{item.telecaller_name}</td>
-                        <td className={'team-table-data-container'}><button onClick={() => setJuniorLeadArray(tableLogs)}>View Logs</button></td>
-                    </tr>
-                )
-            })}
-            </tbody>
-        </table>
-    </div>
-        <div className={'mt4 mb4'}>
-            <SeniorLogTable />
-        </div>
-    </div>);
-}
+                    </tbody>
+                    </table>
+                    </div>
+                    <div className={'mt4 mb4'}>
+                        <SeniorLogTable />
+                    </div>
+                    </div>);
+                }
 
-const mapStateToProps = createStructuredSelector({
+const mapStateToProps = createStructuredSelector(
+{
     team_array: selectSeniorTeamArray
-});
+}
+);
 
 const mapDispatchToProps = dispatch => ({
     setTeamArray: array => dispatch(setTeamArray(array)),
-    setJuniorLeadArray: array => dispatch(setJuniorLeadArray(array))
-});
+        setJuniorLeadArray: array => dispatch(setJuniorLeadArray(array)),
+        setJuniorLeadTableVisibility: visible => dispatch(setJuniorLeadTableVisibility(visible))
+}
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SeniorViewTeam);
