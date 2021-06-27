@@ -261,10 +261,9 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                     required
                     />
                 </div>
-                <CustomButton style={{marginLeft: '0'}}>GO</CustomButton>
             </div>
             <div className={'mt4 w-100 mb4'}>
-                <JuniorTable />
+                <JuniorTable filter={filter} filterValue={filterValue} />
             </div>
             <JuniorModal />
             <div className="junior-log-pagination-container pb4">
