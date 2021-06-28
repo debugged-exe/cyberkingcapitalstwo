@@ -1,3 +1,5 @@
+$base-blue: #00449E;
+
 .senior-table-container{
   display: flex;
   flex-direction: column;
@@ -68,7 +70,26 @@
 {
 
 }
+.senior-view-log-pagination-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+.senior-view-log-page-btn{
+  font-weight: bold;
+  border: 1px solid black;
+  margin: 1%;
+  transition: all 0.3s ease-in;
 
+  &:hover{
+    border: none;
+    background: $base-blue;
+    color: white;
+    transform: scale(1.5);
+  }
+}
 @media only screen and (max-width: 769px)
 {
   .senior-table-box

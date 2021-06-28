@@ -21,3 +21,8 @@ export const selectSeniorJuniorLeadTableVisibility = createSelector(
     [selectSeniorViewTeam],
     (team) => team.junior_lead_table_visibility
 );
+
+export const selectCurrentJuniorCallerId = createSelector(
+    [selectSeniorViewTeam],
+    (team) => team.current_junior_caller_id
+);
