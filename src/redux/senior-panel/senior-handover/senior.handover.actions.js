@@ -5,7 +5,8 @@ const {
 	SET_HANDOVER_LEAD_ARRAY,
 	SET_SENIOR_MODEL_LEAD,
 	SET_SENIOR_MODAL_VISIBILITY,
-	REASSIGN_HANDOVER_LEAD
+	REASSIGN_HANDOVER_LEAD,
+	HANDBACK_LEAD
 	} = SeniorHandoverActionTypes;
 
 export const setHandoverLeadArray = array => ({
@@ -27,3 +28,8 @@ export const reassignHandoverLead = obj => ({
 	type: REASSIGN_HANDOVER_LEAD,
 	payload: obj
 });
+
+export const handbackLead = lead => ({
+	type: HANDBACK_LEAD,
+	payload: lead
+})

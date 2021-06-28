@@ -5,7 +5,8 @@ const {
 	SET_HANDOVER_LEAD_ARRAY,
 	SET_SENIOR_MODEL_LEAD,
 	SET_SENIOR_MODAL_VISIBILITY,
-	REASSIGN_HANDOVER_LEAD
+	REASSIGN_HANDOVER_LEAD,
+	HANDBACK_LEAD
 	} = SeniorHandoverActionTypes;
 
 const initialState = {
@@ -45,20 +46,30 @@ const seniorHandoverReducer = (state = initialState, { type, payload }) => {
 			}
 		case REASSIGN_HANDOVER_LEAD:
 			const reassigned = [];
-				state.handover_leads_array.map(item => {
-					if(item.lead_id===payload.lead_id)
-					{
-						reassigned.push(payload)
-					}
-					else
-					{
-						reassigned.push(item);
-					}
-				})
-				return {
-					...state,
-					handover_leads_array: reassigned
+			state.handover_leads_array.map(item => {
+				if(item.lead_id===payload.lead_id)
+				{
+					reassigned.push(payload)
 				}
+				else
+				{
+					reassigned.push(item);
+				}
+			})
+			return {
+				...state,
+				handover_leads_array: reassigned
+			}
+		case HANDBACK_LEAD:
+			const handedBack = [];
+			state.handover_leads_array.filter(item => item.lead_id!==payload)
+			.map(item => {
+				handedBack.push(item);
+			})
+			return{
+				...state,
+				handover_leads_array: handedBack
+			}
 		default:
 			return state
 	}
