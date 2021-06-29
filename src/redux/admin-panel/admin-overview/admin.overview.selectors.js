@@ -41,3 +41,8 @@ export const selectJuniorCountView = createSelector(
 	[selectAdminOverview],
 	(junior) => junior.jrCount
 );
+
+export const selectAssignedJuniorArray = createSelector(
+	[selectAdminOverview],
+	(juniorArray) => juniorArray.assigned_junior_array
+)

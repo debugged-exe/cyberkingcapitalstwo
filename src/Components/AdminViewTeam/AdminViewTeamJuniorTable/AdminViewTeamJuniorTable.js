@@ -9,6 +9,7 @@ import * as AiIcons from "react-icons/ai";
 // redux
 import {connect} from "react-redux";
 import {
+    setAssignedJuniorArray,
     setJrView,
     setJuniorCountView,
     setJuniorLogArray
@@ -17,13 +18,19 @@ import {
 
 // reselect
 import {createStructuredSelector} from "reselect";
-import {selectAdminJrView, selectSeniorTelecallerId, selectAdminSeniorTelecallerArray} from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
+import {
+    selectAdminJrView,
+    selectSeniorTelecallerId,
+    selectAdminSeniorTelecallerArray,
+    selectJuniorLogArray, selectAssignedJuniorArray
+} from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
 
 
 const header = [
     'Sr No',
     'Jr Caller ID',
-    'Jr Caller Name'
+    'Jr Caller Name',
+    'Language'
 ]
 
 const juniorLog = [
@@ -43,9 +50,8 @@ const juniorLog = [
     }
 ]
 
-const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, senior_telecaller_array, setJuniorLogArray,setJuniorCountView}) => {
+const AdminViewTeamJuniorTable = ({jrView, setJrView,assigned_junior_array,setAssignedJuniorArray, setJuniorLogArray,setJuniorCountView}) => {
     return (
-
         <div className={`${jrView ? 'admin-view-junior-table-container' : 'hidden'} pb4`}>
             <div className={'tint'}>
             </div>
@@ -57,7 +63,8 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, seni
                         color={''}
                         className={'close-button'}
                         onClick={() => {
-                            setJrView({visible: false, senior_telecaller_id: ''})
+                            setJrView({visible: false, senior_telecaller_id: ''});
+                            setAssignedJuniorArray([])
                         }}
                     />
                 </div>
@@ -75,8 +82,7 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, seni
                     </tr>
                     </thead>
                     <tbody className={'admin-view-junior-table-body-container'}>
-                    {senior_telecaller_array.filter(item => item.assigned_to===senior_telecaller_id)
-                        .map((item, index) => {
+                    {assigned_junior_array.map((item, index) => {
                         return (
                             <tr className="admin-view-junior-table-row-container">
                                 <td className={'admin-view-junior-table-data-container'}
@@ -89,7 +95,7 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, seni
                                     <button onClick={() => setJuniorLogArray(juniorLog)}>View Logs</button>
                                 </td>
                                 <td className={'admin-view-junior-table-data-container button-center'}>
-                                    <button onClick={() => setJuniorCountView(true)}>View Count</button>
+                                    <button onClick={() => {setJuniorCountView(true); }}>View Count</button>
                                 </td>
                             </tr>
                         )
@@ -104,13 +110,15 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, seni
 const mapStateToProps = createStructuredSelector({
     jrView: selectAdminJrView,
     senior_telecaller_id: selectSeniorTelecallerId,
-    senior_telecaller_array: selectAdminSeniorTelecallerArray
+    junior_log_array: selectJuniorLogArray,
+    assigned_junior_array: selectAssignedJuniorArray
 });
 
 const mapDispatchToProps = dispatch => ({
     setJrView :visible => dispatch(setJrView(visible)),
     setJuniorLogArray: array => dispatch(setJuniorLogArray(array)),
-    setJuniorCountView : visible => dispatch(setJuniorCountView(visible))
+    setJuniorCountView : visible => dispatch(setJuniorCountView(visible)),
+    setAssignedJuniorArray: array => dispatch(setAssignedJuniorArray(array))
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(AdminViewTeamJuniorTable);

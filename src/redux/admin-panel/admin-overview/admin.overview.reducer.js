@@ -1,7 +1,14 @@
 import {AdminOverviewActionTypes} from "./admin.overview.types";
 
 //destructing the action types
-const {SET_SENIOR_TELECALLER_ARRAY, SET_OVERVIEW_FILTER, SET_JR_VIEW, SET_JUNIOR_LOG_ARRAY, SET_JUNIOR_LOG_VIEW,SET_JUNIOR_COUNT_VIEW} = AdminOverviewActionTypes;
+const {
+    SET_SENIOR_TELECALLER_ARRAY,
+    SET_OVERVIEW_FILTER,
+    SET_JR_VIEW,
+    SET_JUNIOR_LOG_ARRAY,
+    SET_JUNIOR_LOG_VIEW,
+    SET_JUNIOR_COUNT_VIEW,
+    SET_ASSIGNED_JUNIOR_ARRAY} = AdminOverviewActionTypes;
 
 const initialState = {
     senior_telecaller_array: [],
@@ -10,7 +17,9 @@ const initialState = {
     senior_telecaller_id: '',
     juniorLogView: false,
     junior_log_array: [],
-    jrCount: false
+    jrCount: false,
+    assigned_junior_array: [],
+    jr_count_array: []
 }
 
 const adminOverviewReducer = (state = initialState, {type, payload}) => {
@@ -78,6 +87,11 @@ const adminOverviewReducer = (state = initialState, {type, payload}) => {
                     jrCount: payload,
                     jrView: true
                 }
+            }
+        case SET_ASSIGNED_JUNIOR_ARRAY:
+            return {
+                ...state,
+                assigned_junior_array: payload
             }
         default:
             return state
