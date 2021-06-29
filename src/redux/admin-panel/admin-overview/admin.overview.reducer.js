@@ -8,7 +8,8 @@ const {
     SET_JUNIOR_LOG_ARRAY,
     SET_JUNIOR_LOG_VIEW,
     SET_JUNIOR_COUNT_VIEW,
-    SET_ASSIGNED_JUNIOR_ARRAY} = AdminOverviewActionTypes;
+    SET_ASSIGNED_JUNIOR_ARRAY,
+    SET_JR_COUNT_ARRAY} = AdminOverviewActionTypes;
 
 const initialState = {
     senior_telecaller_array: [],
@@ -92,6 +93,11 @@ const adminOverviewReducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 assigned_junior_array: payload
+            }
+        case SET_JR_COUNT_ARRAY:
+            return {
+                ...state,
+                jr_count_array: payload
             }
         default:
             return state

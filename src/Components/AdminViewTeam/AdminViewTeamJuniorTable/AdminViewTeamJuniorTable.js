@@ -1,5 +1,7 @@
 import React from 'react';
+import {toast} from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 // css
 import './AdminViewTeamJuniorTable.scss';
 
@@ -9,7 +11,7 @@ import * as AiIcons from "react-icons/ai";
 // redux
 import {connect} from "react-redux";
 import {
-    setAssignedJuniorArray,
+    setAssignedJuniorArray, setJrCountArray,
     setJrView,
     setJuniorCountView,
     setJuniorLogArray
@@ -25,7 +27,7 @@ import {
     selectJuniorLogArray, selectAssignedJuniorArray
 } from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
 
-
+toast.configure();
 const header = [
     'Sr No',
     'Jr Caller ID',
@@ -50,7 +52,29 @@ const juniorLog = [
     }
 ]
 
-const AdminViewTeamJuniorTable = ({jrView, setJrView,assigned_junior_array,setAssignedJuniorArray, setJuniorLogArray,setJuniorCountView}) => {
+const AdminViewTeamJuniorTable = ({jrView, setJrCountArray,setJrView,assigned_junior_array,setAssignedJuniorArray, setJuniorLogArray,setJuniorCountView}) => {
+
+    const fetchJrCounts = (telecaller_id) => {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/senior/junior/counts',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id
+            })
+        })
+            .then(resp => resp.json())
+            .then( resp => {
+                setJrCountArray(resp);
+            })
+            .catch( err => {
+                console.log(err);
+                toast.error('Error count. try again', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                })
+            })
+    }
+
     return (
         <div className={`${jrView ? 'admin-view-junior-table-container' : 'hidden'} pb4`}>
             <div className={'tint'}>
@@ -95,7 +119,7 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView,assigned_junior_array,setAs
                                     <button onClick={() => setJuniorLogArray(juniorLog)}>View Logs</button>
                                 </td>
                                 <td className={'admin-view-junior-table-data-container button-center'}>
-                                    <button onClick={() => {setJuniorCountView(true); }}>View Count</button>
+                                    <button onClick={() => {setJuniorCountView(true); fetchJrCounts(item.telecaller_id) }}>View Count</button>
                                 </td>
                             </tr>
                         )
@@ -118,7 +142,8 @@ const mapDispatchToProps = dispatch => ({
     setJrView :visible => dispatch(setJrView(visible)),
     setJuniorLogArray: array => dispatch(setJuniorLogArray(array)),
     setJuniorCountView : visible => dispatch(setJuniorCountView(visible)),
-    setAssignedJuniorArray: array => dispatch(setAssignedJuniorArray(array))
+    setAssignedJuniorArray: array => dispatch(setAssignedJuniorArray(array)),
+    setJrCountArray: array => dispatch(setJrCountArray(array))
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(AdminViewTeamJuniorTable);

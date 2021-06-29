@@ -46,3 +46,8 @@ export const selectAssignedJuniorArray = createSelector(
 	[selectAdminOverview],
 	(juniorArray) => juniorArray.assigned_junior_array
 )
+
+export const selectJrCountArray = createSelector(
+	[selectAdminOverview],
+	(count) => count.jr_count_array
+)
