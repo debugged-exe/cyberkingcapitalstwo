@@ -51,3 +51,13 @@ export const selectJrCountArray = createSelector(
 	[selectAdminOverview],
 	(count) => count.jr_count_array
 )
+
+export const selectPgCount = createSelector(
+	[selectAdminOverview],
+	(pg) => pg.pg_count
+)
+
+export const selectJuniorId = createSelector(
+	[selectAdminOverview],
+	(admin) => admin.junior_id
+)

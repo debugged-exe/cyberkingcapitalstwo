@@ -9,7 +9,9 @@ const {
 	SET_JUNIOR_LOG_VIEW,
 	SET_JUNIOR_COUNT_VIEW,
 	SET_ASSIGNED_JUNIOR_ARRAY,
-	SET_JR_COUNT_ARRAY} = AdminOverviewActionTypes;
+	SET_JR_COUNT_ARRAY,
+	SET_PG_COUNT,
+	SET_JUNIOR_ID} = AdminOverviewActionTypes;
 
 export const setAdminSeniorTelecallerArray = array => ({
 	type: SET_SENIOR_TELECALLER_ARRAY,
@@ -49,4 +51,14 @@ export const setAssignedJuniorArray = array => ({
 export const setJrCountArray = array => ({
 	type: SET_JR_COUNT_ARRAY,
 	payload: array
+})
+
+export const setPgCount = number => ({
+	type: SET_PG_COUNT,
+	payload: number
+})
+
+export const setJuniorId = id => ({
+	type: SET_JUNIOR_ID,
+	payload: id
 })

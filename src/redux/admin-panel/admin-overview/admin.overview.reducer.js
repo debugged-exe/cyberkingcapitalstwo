@@ -9,7 +9,9 @@ const {
     SET_JUNIOR_LOG_VIEW,
     SET_JUNIOR_COUNT_VIEW,
     SET_ASSIGNED_JUNIOR_ARRAY,
-    SET_JR_COUNT_ARRAY} = AdminOverviewActionTypes;
+    SET_JR_COUNT_ARRAY,
+    SET_PG_COUNT,
+    SET_JUNIOR_ID} = AdminOverviewActionTypes;
 
 const initialState = {
     senior_telecaller_array: [],
@@ -20,7 +22,9 @@ const initialState = {
     junior_log_array: [],
     jrCount: false,
     assigned_junior_array: [],
-    jr_count_array: []
+    jr_count_array: [],
+    pg_count: 0,
+    junior_id: ''
 }
 
 const adminOverviewReducer = (state = initialState, {type, payload}) => {
@@ -50,6 +54,13 @@ const adminOverviewReducer = (state = initialState, {type, payload}) => {
                 return {
                     ...state,
                     junior_log_array: payload,
+                    juniorLogView: true,
+                    jrView: false
+                }
+            }else{
+                return {
+                    ...state,
+                    junior_log_array: [],
                     juniorLogView: true,
                     jrView: false
                 }
@@ -98,6 +109,16 @@ const adminOverviewReducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 jr_count_array: payload
+            }
+        case SET_PG_COUNT:
+            return {
+                ...state,
+                pg_count: payload
+            }
+        case SET_JUNIOR_ID:
+            return {
+                ...state,
+                junior_id: payload
             }
         default:
             return state
