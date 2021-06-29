@@ -1,3 +1,5 @@
+$base-blue: #00449E;
+
 .admin-view-log-container{
   font-family: 'Open Sans Condensed', sans-serif;
 }
@@ -10,7 +12,25 @@
   display: grid;
   grid-template-columns: 50% 50%;
 }
+.admin-view-log-pagination-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.admin-view-log-page-btn{
+  font-weight: bold;
+  border: 1px solid black;
+  margin: 1%;
+  transition: all 0.3s ease-in;
 
+  &:hover{
+    border: none;
+    background: $base-blue;
+    color: white;
+    transform: scale(1.5);
+  }
+}
 @media only screen and (max-width: 500px) {
   .admin-view-log-count{
     grid-template-columns: 100%;

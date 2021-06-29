@@ -125,10 +125,10 @@ const AdminViewTeamJuniorLog = ({setJuniorId,junior_id,pg_count,setJuniorLogArra
                     </tbody>
                 </table>
             </div>
-            <div className="senior-view-log-pagination-container w-100 pb4">
+            <div className="admin-view-junior-log-pagination-container w-100 pb4">
                 <p>. . </p>
                 {pageNumbers.map((number, index) => (
-                    <button key={index} onClick={() => fetchJuniorLogsNewPage(number-1)} className="senior-view-log-page-btn">{number}</button>
+                    <button key={index} onClick={() => fetchJuniorLogsNewPage(number-1)} className="admin-view-junior-log-page-btn">{number}</button>
                 ))}
                 <p>. . </p>
             </div>
