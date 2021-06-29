@@ -13,41 +13,7 @@ const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp
     "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
     "status 1", "status 2", "Handover status"];
 
-const tableLogs = [
-    {
-        lead_id: 1,
-        assigned_to: "xyz",
-        lead_name: "abcde",
-        lead_phone_no: 9087389032,
-        lead_whatsapp_no: 8903221111,
-        account_opening_no: 123,
-        lead_city: "pune",
-        prior_knowledge: "no",
-        preferred_language: "hindi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete"
-    },
-    {
-        lead_id: 2,
-        assigned_to: "mmmmm",
-        lead_name: "oooooo",
-        lead_phone_no: 9000001222,
-        lead_whatsapp_no: 9090912121,
-        account_opening_no: 8011,
-        lead_city: "pune",
-        prior_knowledge: "no",
-        preferred_language: "marathi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete"
-    }
-]
-
 const SearchTable = ({search_table_logs,setSeniorSearchTableArray}) => {
-    useEffect(() => {
-        setSeniorSearchTableArray(tableLogs);
-    },[]);
 
     return (<div className={'senior-search-table-container'}>
         <table cellSpacing="1" className={'senior-search-table-box'}>
