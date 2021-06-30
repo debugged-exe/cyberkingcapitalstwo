@@ -31,7 +31,7 @@ const SearchTable = ({search_table_logs,setSeniorSearchTableArray}) => {
                 return (
                     <tr className={`senior-search-table-row-container`}>
                         <td className={`senior-search-table-data-container`} data-label={'Lead ID'}>{item.lead_id}</td>
-                        <td className={`senior-search-table-data-container`} data-label={'Assigned to'}>{item.assigned_to}</td>
+                        <td className={`senior-search-table-data-container`} data-label={'Assigned to'}>{`${item.assigned_to?item.assigned_to:"NULL"}`}</td>
                         <td className={`senior-search-table-data-container`} data-label={'Lead Name'}>{item.lead_name}</td>
                         <td className={`senior-search-table-data-container`} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
                         <td className={`senior-search-table-data-container`} data-label={'Whatsapp Number'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:"NULL"}`}</td>

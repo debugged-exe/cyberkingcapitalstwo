@@ -168,6 +168,7 @@ class SearchByDropdown extends Component {
                             name="searchFilter"
                             className={"f4 ml1 "}
                             onChange={this.handleChange}
+                            required
                         >
                             <option value='' >--select--</option>
                             {search_options.map((item) => {
@@ -195,10 +196,10 @@ class SearchByDropdown extends Component {
                 <div className={'w-100 pt4 pb4'}>
                     <SearchTable />
                 </div>
-                <div className="senior-handover-pagination-container pb4">
+                <div className="senior-search-pagination-container w-100 pb4">
                     <p>. . </p>
                     {pageNumbers.map((number, index) => (
-                        <button key={index} onClick={() => this.fetchNewPage(number-1)} className="junior-log-page-btn">{number}</button>
+                        <button key={index} onClick={() => this.fetchNewPage(number-1)} className="senior-search-log-page-btn">{number}</button>
                     ))}
                     <p>. . </p>
                 </div>

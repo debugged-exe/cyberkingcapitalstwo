@@ -16,3 +16,8 @@ export const selectAdminDeleteRequestArray = createSelector(
 	[selectAdminRequest],
 	(delete1) => delete1.admin_delete_request_array
 );
+
+export const selectAdminRequestLanguage = createSelector(
+	[selectAdminRequest],
+	(lang) => lang.admin_request_language
+);

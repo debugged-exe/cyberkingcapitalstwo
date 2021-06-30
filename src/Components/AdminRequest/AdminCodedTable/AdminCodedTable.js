@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 // reselect
 import {createStructuredSelector} from 'reselect';
-import {selectAdminCodedRequestArray} from '../../../redux/admin-panel/admin-request/admin.request.selectors.js';
+import {selectAdminCodedRequestArray, selectAdminRequestLanguage} from '../../../redux/admin-panel/admin-request/admin.request.selectors.js';
 
 // components
 import * as AiIcons from 'react-icons/ai';
@@ -22,7 +22,7 @@ const header = [
     "Lead Name"
 ]
 
-const AdminCodedTable = ({admin_coded_request_array}) => {
+const AdminCodedTable = ({admin_coded_request_array, admin_request_language}) => {
     return(
         <div className={'admin-coded-table-container'}>
             <button className="accept-all">Accept All</button>
@@ -37,9 +37,9 @@ const AdminCodedTable = ({admin_coded_request_array}) => {
                 </tr>
                 </thead>
                 <tbody className={'admin-coded-table-body-container'}>
-                {admin_coded_request_array.map((item, index) => {
+                {admin_coded_request_array.filter(item => item.preferred_language===admin_request_language).map((item, index) => {
                     return (
-                        <tr className="admin-coded-table-row-container">
+                        <tr key={index} className="admin-coded-table-row-container">
                             <td className={'admin-coded-table-data-container'} data-label={'Sr.No'}>{index+1}</td>
                             <td className={'admin-coded-table-data-container'} data-label={'Telecaller Id'}>{item.telecaller_id}</td>
                             <td className={'admin-coded-table-data-container'} data-label={'Telecaller Name'}>{item.telecaller_name}</td>
@@ -57,7 +57,8 @@ const AdminCodedTable = ({admin_coded_request_array}) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    admin_coded_request_array: selectAdminCodedRequestArray
+    admin_coded_request_array: selectAdminCodedRequestArray,
+    admin_request_language: selectAdminRequestLanguage
 })
 
 const mapDispatchToProps = {
