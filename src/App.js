@@ -132,7 +132,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Switch>
-                    <Route exact path="/"><div>Hello</div> <HomePanel/></Route>
+                    <Route exact path="/"><HomePanel/></Route>
                     <Route path="/basicform"><BasicCourseForm/></Route>
                     <Route path="/proform"><ProCourseForm/></Route>
                     <Route path={"/admin"}><Sidebar signOut={this.signOut}/><AdminPanel/></Route>
