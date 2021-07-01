@@ -126,9 +126,9 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
                         <td className={`junior-table-data-container request-button-center ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`}>
-                                <button className="ma1" disabled={flag} onClick={() => {setModalLead(item)}}>Update</button>
-                                <button className="ma1" disabled={flag} onClick={() => handoverHandler(item.lead_id, item.lead_phone_no)}>Handover</button>
-                                <button className="ma1" disabled={flag} onClick={() => requestHandler(item.lead_id, item.lead_phone_no)}>Request</button>
+                            <button className="ma1" disabled={flag} onClick={() => {setModalLead(item)}}>Update</button>
+                            <button className="ma1" disabled={flag} onClick={() => handoverHandler(item.lead_id, item.lead_phone_no)}>Handover</button>
+                            <button className="ma1" disabled={flag} onClick={() => requestHandler(item.lead_id, item.lead_phone_no)}>Request</button>
                         </td>
                     </tr>
                 )
