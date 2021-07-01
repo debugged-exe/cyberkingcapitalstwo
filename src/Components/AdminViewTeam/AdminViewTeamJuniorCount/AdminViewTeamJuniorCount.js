@@ -20,21 +20,21 @@ import {
 } from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
 
 const header = [
-    'Handed Over leads',
     'Status 1',
     'Status 2',
     'Unattended',
     'Coded',
+    'Handed Over leads',
     'Pending'
 ]
 
 const LogStatArray = [
     {
-        handed_over_leads: 0,
         status_1: 0,
         status_2: 0,
         unattended: 0,
         coded: 0,
+        handover: 0,
         pending: 0
     }
 ]
