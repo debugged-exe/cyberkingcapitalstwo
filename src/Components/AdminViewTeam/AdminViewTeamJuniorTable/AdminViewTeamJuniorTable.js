@@ -1,5 +1,5 @@
 import React from 'react';
-import {toast} from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 // css
@@ -163,7 +163,7 @@ const AdminViewTeamJuniorTable = ({setJuniorId,setPgCount,jrView, setJrCountArra
                     </tbody>
                 </table>
             </div>
-
+            <ToastContainer />
         </div>
     )
 }

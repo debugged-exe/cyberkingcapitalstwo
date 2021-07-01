@@ -3,7 +3,7 @@ import FormInput from '../FormInput/FormInput.js';
 import CustomButton from '../CustomButton/CustomButton.js';
 import PuffLoader from "react-spinners/PuffLoader";
 import './AdminRegistration.scss';
-import {toast} from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure();
@@ -228,6 +228,7 @@ class AdminRegistration extends Component {
                 <div className="puff-loader-register" style={{display: `${this.state.visible?'flex': 'none'}`}}>
                     <PuffLoader loading={true} size={200} color={"red"}/>
                 </div>
+                <ToastContainer />
             </div>
         );
     }

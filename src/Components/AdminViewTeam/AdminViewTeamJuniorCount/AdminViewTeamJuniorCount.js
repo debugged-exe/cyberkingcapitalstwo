@@ -18,6 +18,7 @@ import {
     selectJuniorLogArray,
     selectJuniorCountView, selectJrCountArray
 } from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
+import {ToastContainer} from "react-toastify";
 
 const header = [
     'Status 1',
@@ -96,7 +97,7 @@ const AdminViewTeamJuniorCount = ({jr_count_array,setJrCountArray,jrCount, setJu
                     </tbody>
                 </table>
             </div>
-
+            <ToastContainer />
         </div>
     )
 }

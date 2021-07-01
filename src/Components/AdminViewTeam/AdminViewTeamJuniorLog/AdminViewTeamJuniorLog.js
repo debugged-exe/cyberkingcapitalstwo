@@ -19,7 +19,7 @@ import {
     selectJuniorLogArray,
     selectPgCount, selectJuniorId
 } from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
-import {toast} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 const header = [
     'Sr No',
@@ -132,6 +132,7 @@ const AdminViewTeamJuniorLog = ({setJuniorId,junior_id,pg_count,setJuniorLogArra
                 ))}
                 <p>. . </p>
             </div>
+            <ToastContainer />
         </div>
     )
 }

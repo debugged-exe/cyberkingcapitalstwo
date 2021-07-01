@@ -3,6 +3,7 @@ import './BasicCourseForm.scss';
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
 import PuffLoader from "react-spinners/PuffLoader";
+import {ToastContainer} from "react-toastify";
 
 class BasicCourseForm extends Component{
     constructor() {
@@ -126,6 +127,7 @@ class BasicCourseForm extends Component{
                 <div className="puff-loader" style={{display: `${this.state.visible?'flex': 'none'}`}}>
                     <PuffLoader loading={true} size={200} color={"red"}/>
                 </div>
+                <ToastContainer />
             </div>
             );
     }

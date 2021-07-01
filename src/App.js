@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import PuffLoader from "react-spinners/PuffLoader";
-import {toast} from 'react-toastify';
+import {ToastContainer,toast} from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import AOS from 'aos';//AOS import for animation
@@ -146,6 +146,7 @@ class App extends Component {
                 <div className="puff-loader" style={{display: `${this.state.visible?'flex': 'none'}`}}>
                     <PuffLoader loading={true} size={200} color={"red"}/>
                 </div>
+                <ToastContainer />
             </div>
         );
     }

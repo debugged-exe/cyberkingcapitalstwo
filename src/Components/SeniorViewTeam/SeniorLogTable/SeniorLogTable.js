@@ -19,7 +19,7 @@ import {
     setJuniorLeadTableVisibility,
     setTeamArray
 } from "../../../redux/senior-panel/senior-view-team/senior.view.team.actions";
-import {toast} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 //table header data
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
@@ -117,6 +117,7 @@ const SeniorLogTable = ({current_junior_caller_id, pgCount, setPgCount,junior_le
             ))}
             <p>. . </p>
         </div>
+        <ToastContainer />
     </div>);
 }
 

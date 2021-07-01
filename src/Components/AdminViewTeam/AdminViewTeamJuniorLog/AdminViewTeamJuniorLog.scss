@@ -23,7 +23,7 @@ $base-blue: #00449E;
   border: 1px solid black;
   margin: 1%;
   transition: all 0.3s ease-in;
-
+  z-index: 6;
   &:hover{
     border: none;
     background: $base-blue;

@@ -6,6 +6,7 @@ import {createStructuredSelector} from "reselect";
 import {selectAdminLeadTableArray} from "../../../redux/admin-panel/admin-logs/admin.logs.selectors";
 //css
 import './AdminViewLogsTable.scss';
+import {ToastContainer} from "react-toastify";
 
 const header = [
     "Lead Id",
@@ -62,6 +63,7 @@ const AdminViewLogsTable = ({lead_table_array, language}) => {
                 })}
                 </tbody>
             </table>
+            <ToastContainer />
         </div>
     );
 }

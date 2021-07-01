@@ -114,6 +114,7 @@ const AdminDeleteTable = ({admin_delete_request_array, admin_request_language,re
                 })}
                 </tbody>
             </table>
+            <ToastContainer />
         </div>
 	)
 }

@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import {ToastContainer,toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Pagination from "../Pagination/Pagination";
 
 // redux
 import { connect } from 'react-redux';
@@ -117,6 +116,10 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
             })
             .catch(err => {
                 console.log(err);
+                toast.error("Error pg count", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
             })
         fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
             method: 'post',
@@ -279,6 +282,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                 ))}
                 <p>. . </p>
             </div>
+            <ToastContainer />
 		</div>
 	)
 }

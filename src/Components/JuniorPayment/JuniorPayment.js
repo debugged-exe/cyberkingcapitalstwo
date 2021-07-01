@@ -73,7 +73,6 @@ const JuniorPayment = ({currentUser,setJuniorPaymentArray, junior_payment_array}
     },[]);
     return(
         <div>
-            <ToastContainer/>
             <p style={{fontFamily: 'Open Sans Condensed', fontSize: '2rem', fontWeight: 'bold', textAlign: 'center'}}>Junior Payment Details</p>
             <div className="card-array-container">
             	{
@@ -82,6 +81,7 @@ const JuniorPayment = ({currentUser,setJuniorPaymentArray, junior_payment_array}
                     })
                 }
             </div>
+            <ToastContainer/>
         </div>
     );
 }

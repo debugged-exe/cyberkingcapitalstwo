@@ -135,6 +135,7 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
             })}
             </tbody>
         </table>
+        <ToastContainer />
     </div>);
 }
 const mapStateToProps = createStructuredSelector({

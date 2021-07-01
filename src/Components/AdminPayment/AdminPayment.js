@@ -97,7 +97,6 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 
 	return (
 		<div className="admin-payment-container">
-			<ToastContainer />
 			<div className="admin-payment-disection">
 				{
 					admin_count_array.map((item,index) => {
@@ -148,6 +147,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 					<AdminPaymentModal />
 				</div>
 			</div>
+			<ToastContainer />
 		</div>
 	)
 }

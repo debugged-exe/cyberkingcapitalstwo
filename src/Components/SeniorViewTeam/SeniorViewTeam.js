@@ -17,7 +17,7 @@ import SeniorLogTable from "./SeniorLogTable/SeniorLogTable";
 
 // css
 import './SeniorViewTeam.scss';
-import {toast} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 import {selectCurrentUser} from "../../redux/user/user.selectors";
 
 // table header data
@@ -132,6 +132,7 @@ const SeniorViewTeam = ({currentUser,setTeamArray, setJuniorLeadArray, team_arra
                     <div className={'mt4 mb4'}>
                         <SeniorLogTable pgCount={pgCount} setPgCount={setPgCount} />
                     </div>
+        <ToastContainer />
                     </div>);
                 }
 

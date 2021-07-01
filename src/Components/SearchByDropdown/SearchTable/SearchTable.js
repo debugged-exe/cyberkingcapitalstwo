@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {createStructuredSelector} from "reselect";
 import {selectSeniorSearchTableArray} from "../../../redux/senior-panel/senior-search/senior.search.selectors";
 import {setSeniorSearchTableArray} from "../../../redux/senior-panel/senior-search/senior.search.actions";
+import {ToastContainer} from "react-toastify";
 
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
     "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
@@ -47,6 +48,7 @@ const SearchTable = ({search_table_logs,setSeniorSearchTableArray}) => {
             })}
             </tbody>
         </table>
+        <ToastContainer/>
     </div>);
 }
 

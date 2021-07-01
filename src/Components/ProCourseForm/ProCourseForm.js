@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import './ProCourseForm.scss';
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
+import {ToastContainer} from "react-toastify";
 
 class ProCourseForm extends Component{
     constructor() {
@@ -114,6 +115,7 @@ class ProCourseForm extends Component{
                         Submit
                     </CustomButton>
                 </form>
+                <ToastContainer/>
             </div>
         );
     }

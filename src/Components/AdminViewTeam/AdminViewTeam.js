@@ -152,7 +152,6 @@ const AdminViewTeam = ({admin_count_array, setAdminSeniorTelecallerArray, setAdm
 
 	return (
 		<div className={'admin-view-team-container '}>
-			<ToastContainer/>
 			<div className="admin-view-team-count">
 				{
 					admin_count_array.map( (item, index) => (
@@ -176,6 +175,7 @@ const AdminViewTeam = ({admin_count_array, setAdminSeniorTelecallerArray, setAdm
 					<AdminViewTeamJuniorCount />
             	</div>
 			</div>
+			<ToastContainer/>
 		</div>
 	)
 }

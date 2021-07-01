@@ -9,6 +9,7 @@ import {selectSeniorPaymentTableLogs} from "../../../redux/senior-panel/senior-p
 
 // css
 import './SeniorPaymentTable.scss';
+import {ToastContainer} from "react-toastify";
 const header = ["Sr No.", "Telecaller ID", "Telecaller Name", "Points earned"];
 
 const SeniorPaymentTable = ({senior_payment_table_log}) => {
@@ -37,6 +38,7 @@ const SeniorPaymentTable = ({senior_payment_table_log}) => {
             })}
             </tbody>
         </table>
+        <ToastContainer />
     </div>);
 }
 

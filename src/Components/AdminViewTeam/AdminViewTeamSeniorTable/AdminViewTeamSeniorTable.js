@@ -18,7 +18,7 @@ import {
     setJrView,
     setJuniorLogArray
 } from "../../../redux/admin-panel/admin-overview/admin.overview.actions";
-import {toast} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 const header = [
     'Sr No',
@@ -90,6 +90,7 @@ const AdminViewTeamSeniorTable = ({setJrView, senior_telecaller_array, setAssign
                 })}
                 </tbody>
             </table>
+            <ToastContainer />
         </div>
     )
 }

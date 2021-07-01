@@ -248,7 +248,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
 
     return (
         <div className={'admin-view-log-container'}>
-            <ToastContainer />
+
         <div className="admin-view-log-count">
             {
                 admin_count_array.map((item,index) => {
@@ -303,6 +303,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
                 <p>. . </p>
             </div>
         </div>
+            <ToastContainer />
     </div>);
 }
 

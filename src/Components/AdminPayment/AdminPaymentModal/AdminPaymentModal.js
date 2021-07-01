@@ -15,6 +15,7 @@ import * as ImIcons from 'react-icons/im';
 
 // css
 import './AdminPaymentModal.scss';
+import {ToastContainer} from "react-toastify";
 
 class AdminPaymentModal extends Component{
 	constructor(props){
@@ -74,6 +75,7 @@ class AdminPaymentModal extends Component{
 						>Cancel</CustomButton>
 					</form>
 				</div>
+				<ToastContainer />
 			</div>
 		);
 	}

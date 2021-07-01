@@ -97,7 +97,7 @@ const SeniorPayment = ({currentUser,setSeniorPaymentArray, setSeniorPaymentTable
 
     return(
         <div className={''}>
-            <ToastContainer />
+
             <p style={{fontFamily: 'Open Sans Condensed', fontSize: '2rem', fontWeight: 'bold', textAlign: 'center'}}>Senior Payment Details</p>
             <div className="card-array-container-senior">
                 {
@@ -110,6 +110,7 @@ const SeniorPayment = ({currentUser,setSeniorPaymentArray, setSeniorPaymentTable
             <div className={'mb5'}>
                 <SeniorPaymentTable/>
             </div>
+            <ToastContainer />
         </div>
     );
 }
