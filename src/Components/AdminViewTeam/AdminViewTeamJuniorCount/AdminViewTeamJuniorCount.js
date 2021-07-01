@@ -72,9 +72,6 @@ const AdminViewTeamJuniorCount = ({jr_count_array,setJrCountArray,jrCount, setJu
                     {jr_count_array.map((item, index) => {
                         return (
                             <tr className="admin-view-junior-count-view-row-container">
-                                {/*<td className={'admin-view-junior-count-view-data-container'}*/}
-                                {/*    data-label={'Handover Status'}>{item.handed_over_leads}*/}
-                                {/*</td>*/}
                                 <td className={'admin-view-junior-count-view-data-container'}
                                     data-label={'Status 1'}>{item.status_1}
                                 </td>
@@ -87,9 +84,12 @@ const AdminViewTeamJuniorCount = ({jr_count_array,setJrCountArray,jrCount, setJu
                                 <td className={'admin-view-junior-count-view-data-container'}
                                     data-label={'Coded'}>{item.coded}
                                 </td>
-                                {/*<td className={'admin-view-junior-count-view-data-container'}*/}
-                                {/*    data-label={'Pending'}>{item.pending}*/}
-                                {/*</td>*/}
+                                <td className={'admin-view-junior-count-view-data-container'}
+                                    data-label={'Handover Status'}>{item.handover}
+                                </td>
+                                <td className={'admin-view-junior-count-view-data-container'}
+                                    data-label={'Pending'}>{item.pending}
+                                </td>
                             </tr>
                         )
                     })}
