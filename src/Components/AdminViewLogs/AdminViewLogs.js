@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-
+import {ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 //redux
 import {connect} from 'react-redux';
 import {setAdminLogsArray} from "../../redux/admin-panel/admin-logs/admin.logs.actions";
@@ -17,8 +18,8 @@ import * as FaIcons from "react-icons/fa";
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
 import AdminViewLogsTable from "./AdminViewLogsTable/AdminViewLogsTable";
-import Pagination from "../Pagination/Pagination";
-import {useReduxContext} from "react-redux/lib/hooks/useReduxContext";
+
+toast.configure();
 
 const tableLogs = [
     {
@@ -121,19 +122,20 @@ const tableLogs = [
 
 
 const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
+
+    const [pages, setPages] = useState(0);
+    const [pageNumbers, setPageNumbers] = useState([]);
+    const perPage = 10;
+
+    const [language,setLanguage] = useState("*");
+
+    const setLanguageHandler = (event) => {
+        setLanguage(event.target.value);
+    }
+
     const [filter,setFilter] = useState("");
-    const [posts, setPosts] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(2);
-    //
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-    // Change page
-    const paginate = pageNumber => setCurrentPage(pageNumber);
-
-    const filterHandler = (event) => {
+    const setFilterHandler = (event) => {
         setFilter(event.target.value);
         console.log(filter);
     }
@@ -145,6 +147,75 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/view_logs/count',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                field: filter,
+                payload: filterValue
+            })
+        })
+            .then( resp => resp.json())
+            .then( resp => {
+                setPages(resp.count);
+                var arr = [];
+                for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                    arr.push(i);
+                }
+                setPageNumbers(arr);
+            })
+            .catch( err => {
+                console.log(err);
+                toast.error( 'count error. try again', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                })
+            })
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/view_logs', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                field: filter,
+                payload: filterValue,
+                pgNo: 0
+            })
+        }).then( resp => resp.json())
+            .then( resp => {
+                console.log(resp);
+                if(resp !== "fail" )
+                    setAdminLogsArray(resp);
+            })
+            .catch( err => {
+                console.log(err);
+                toast.error('error table. try again',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                })
+            })
+    }
+
+    const fetchViewLogsNewPage = (pgNo) => {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/view_logs', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                field: filter,
+                payload: filterValue,
+                pgNo: pgNo
+            })
+        })
+            .then( resp => resp.json())
+            .then( resp => {
+                if( resp !== 'fail')
+                    setAdminLogsArray(resp);
+            })
+            .catch( err => {
+                console.log(err);
+                toast.error('error table. try again',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                })
+            })
     }
 
     return (<div className={'admin-view-log-container'}>
@@ -160,19 +231,20 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
         <hr color={'grey'} className={'mt4 mb4'}/>
         <div className={'flex justify-center items-center center mb4 f2 w-100 mt4'}>
             <label className={'b mr3'}>Select Language: </label>
-            <select name="lang" className={'f3 ml1'}>
+            <select name="lang" className={'f3 ml1'} onChange={(event) => setLanguageHandler(event)}>
+                <option value="*" >--select--</option>
                 <option value="hindi">Hindi</option>
                 <option value="marathi">Marathi</option>
             </select>
         </div>
         <div className={'flex justify-center items-center center  f2 w-100 mt4'}>
             <label className={'b mr3'}>Select Filter: </label>
-            <select name="lang" className={'f3 ml1'}>
+            <select name="lang" className={'f3 ml1'} onChange={(event) => setFilterHandler(event)} required>
                 <option value="">--Select Filter--</option>
                 <option value="lead_id">Lead ID</option>
                 <option value="assigned_to">Assigned To</option>
                 <option value="lead_name">Lead Name</option>
-                <option value="lead_contact">Lead Contact</option>
+                <option value="lead_phone_no">Lead Contact</option>
                 <option value="status_1">Status 1</option>
                 <option value="status_2">Status 2</option>
             </select>
@@ -188,16 +260,18 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
                 style={{marginTop: '0px', marginBottom: '0px'}}
                 required
                 />
-                <CustomButton style={{marginLeft: '0px'}} onClick ={() => setAdminLogsArray(tableLogs)} >Fetch</CustomButton>
+                <CustomButton style={{marginLeft: '0px'}}  type='submit' >Fetch</CustomButton>
             </form>
         </div>
         <div className={'w-100 mb4'}>
-            <AdminViewLogsTable tableLogs = {tableLogs}/>
-            <Pagination
-                postsPerPage={postsPerPage}
-                totalPosts={tableLogs.length}
-                paginate={paginate}
-            />
+            <AdminViewLogsTable language={language}/>
+            <div className="admin-view-log-pagination-container pb4">
+                <p>. . </p>
+                {pageNumbers.map((number, index) => (
+                    <button key={index} onClick={() => fetchViewLogsNewPage(number-1)} className="admin-view-log-page-btn">{number}</button>
+                ))}
+                <p>. . </p>
+            </div>
         </div>
     </div>);
 }

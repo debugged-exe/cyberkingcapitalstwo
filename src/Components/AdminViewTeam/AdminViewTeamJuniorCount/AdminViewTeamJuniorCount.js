@@ -1,18 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './AdminViewTeamJuniorCount.scss';
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from 'react-icons/io';
 
 // redux
 import {connect} from "react-redux";
-import {setJuniorCountView, setJuniorLogView} from "../../../redux/admin-panel/admin-overview/admin.overview.actions";
+import {
+    setJrCountArray,
+    setJuniorCountView,
+    setJuniorLogView
+} from "../../../redux/admin-panel/admin-overview/admin.overview.actions";
 
 // reselect
 import {createStructuredSelector} from "reselect";
 import {
     selectJuniorLogView,
     selectJuniorLogArray,
-    selectJuniorCountView
+    selectJuniorCountView, selectJrCountArray
 } from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
 
 const header = [
@@ -26,16 +30,16 @@ const header = [
 
 const LogStatArray = [
     {
-        handed_over_leads: 70,
-        status_1_updated: 70,
-        status_2_updated: 70,
-        unattended: 70,
-        coded: 70,
-        pending: 70
+        handed_over_leads: 0,
+        status_1: 0,
+        status_2: 0,
+        unattended: 0,
+        coded: 0,
+        pending: 0
     }
 ]
 
-const AdminViewTeamJuniorCount = ({jrCount, setJuniorCountView}) => {
+const AdminViewTeamJuniorCount = ({jr_count_array,setJrCountArray,jrCount, setJuniorCountView}) => {
     return (
         <div className={`${jrCount ? 'admin-view-junior-count-view-container' : 'hidden'} pb4`}>
             <div className={'tintCountView'}>
@@ -47,6 +51,7 @@ const AdminViewTeamJuniorCount = ({jrCount, setJuniorCountView}) => {
                         color={''}
                         onClick={() => {
                             setJuniorCountView(false);
+                            setJrCountArray([]);
                         }}
                     />
                 </div>
@@ -64,17 +69,17 @@ const AdminViewTeamJuniorCount = ({jrCount, setJuniorCountView}) => {
                     </tr>
                     </thead>
                     <tbody className={'admin-view-junior-count-view-body-container'}>
-                    {LogStatArray.map((item, index) => {
+                    {jr_count_array.map((item, index) => {
                         return (
                             <tr className="admin-view-junior-count-view-row-container">
+                                {/*<td className={'admin-view-junior-count-view-data-container'}*/}
+                                {/*    data-label={'Handover Status'}>{item.handed_over_leads}*/}
+                                {/*</td>*/}
                                 <td className={'admin-view-junior-count-view-data-container'}
-                                    data-label={'Handover Status'}>{item.handed_over_leads}
+                                    data-label={'Status 1'}>{item.status_1}
                                 </td>
                                 <td className={'admin-view-junior-count-view-data-container'}
-                                    data-label={'Status 1'}>{item.status_1_updated}
-                                </td>
-                                <td className={'admin-view-junior-count-view-data-container'}
-                                    data-label={'Status 2'}>{item.status_2_updated}
+                                    data-label={'Status 2'}>{item.status_2}
                                 </td>
                                 <td className={'admin-view-junior-count-view-data-container'}
                                     data-label={'Unattended'}>{item.unattended}
@@ -82,9 +87,9 @@ const AdminViewTeamJuniorCount = ({jrCount, setJuniorCountView}) => {
                                 <td className={'admin-view-junior-count-view-data-container'}
                                     data-label={'Coded'}>{item.coded}
                                 </td>
-                                <td className={'admin-view-junior-count-view-data-container'}
-                                    data-label={'Pending'}>{item.pending}
-                                </td>
+                                {/*<td className={'admin-view-junior-count-view-data-container'}*/}
+                                {/*    data-label={'Pending'}>{item.pending}*/}
+                                {/*</td>*/}
                             </tr>
                         )
                     })}
@@ -97,11 +102,13 @@ const AdminViewTeamJuniorCount = ({jrCount, setJuniorCountView}) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    jrCount: selectJuniorCountView
+    jrCount: selectJuniorCountView,
+    jr_count_array: selectJrCountArray
 });
 
 const mapDispatchToProps = dispatch => ({
-    setJuniorCountView: visible => dispatch(setJuniorCountView(visible))
+    setJuniorCountView: visible => dispatch(setJuniorCountView(visible)),
+    setJrCountArray: array => dispatch(setJrCountArray(array))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminViewTeamJuniorCount);

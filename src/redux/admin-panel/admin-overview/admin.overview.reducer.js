@@ -1,7 +1,17 @@
 import {AdminOverviewActionTypes} from "./admin.overview.types";
 
 //destructing the action types
-const {SET_SENIOR_TELECALLER_ARRAY, SET_OVERVIEW_FILTER, SET_JR_VIEW, SET_JUNIOR_LOG_ARRAY, SET_JUNIOR_LOG_VIEW,SET_JUNIOR_COUNT_VIEW} = AdminOverviewActionTypes;
+const {
+    SET_SENIOR_TELECALLER_ARRAY,
+    SET_OVERVIEW_FILTER,
+    SET_JR_VIEW,
+    SET_JUNIOR_LOG_ARRAY,
+    SET_JUNIOR_LOG_VIEW,
+    SET_JUNIOR_COUNT_VIEW,
+    SET_ASSIGNED_JUNIOR_ARRAY,
+    SET_JR_COUNT_ARRAY,
+    SET_PG_COUNT,
+    SET_JUNIOR_ID} = AdminOverviewActionTypes;
 
 const initialState = {
     senior_telecaller_array: [],
@@ -10,7 +20,11 @@ const initialState = {
     senior_telecaller_id: '',
     juniorLogView: false,
     junior_log_array: [],
-    jrCount: false
+    jrCount: false,
+    assigned_junior_array: [],
+    jr_count_array: [],
+    pg_count: 0,
+    junior_id: ''
 }
 
 const adminOverviewReducer = (state = initialState, {type, payload}) => {
@@ -40,6 +54,13 @@ const adminOverviewReducer = (state = initialState, {type, payload}) => {
                 return {
                     ...state,
                     junior_log_array: payload,
+                    juniorLogView: true,
+                    jrView: false
+                }
+            }else{
+                return {
+                    ...state,
+                    junior_log_array: [],
                     juniorLogView: true,
                     jrView: false
                 }
@@ -78,6 +99,26 @@ const adminOverviewReducer = (state = initialState, {type, payload}) => {
                     jrCount: payload,
                     jrView: true
                 }
+            }
+        case SET_ASSIGNED_JUNIOR_ARRAY:
+            return {
+                ...state,
+                assigned_junior_array: payload
+            }
+        case SET_JR_COUNT_ARRAY:
+            return {
+                ...state,
+                jr_count_array: payload
+            }
+        case SET_PG_COUNT:
+            return {
+                ...state,
+                pg_count: payload
+            }
+        case SET_JUNIOR_ID:
+            return {
+                ...state,
+                junior_id: payload
             }
         default:
             return state

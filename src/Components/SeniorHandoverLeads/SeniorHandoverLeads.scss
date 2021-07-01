@@ -1,7 +1,18 @@
 .senior-handover-leads{
+	position: relative;
 	font-family: 'Open Sans Condensed', sans-serif;
 	text-align: center;
+	height: 100vh;
+	padding-top: 10%;
 }
+
+.senior-handover-pagination-container{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
 .senior-handover-leads-header{
 	font-size: 3rem;
 	font-weight: bold;

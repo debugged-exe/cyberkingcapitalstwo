@@ -1,7 +1,12 @@
 import {SeniorViewTeamActionTypes} from "./senior.view.team.types";
 
 //destructing the action types
-const {SET_JUNIOR_LEAD_ARRAY, SET_TEAM_ARRAY, SET_JUNIOR_LEAD_TABLE_VISIBILITY} = SeniorViewTeamActionTypes;
+const {
+	SET_JUNIOR_LEAD_ARRAY,
+	SET_TEAM_ARRAY,
+	SET_JUNIOR_LEAD_TABLE_VISIBILITY,
+	SET_CURRENT_JUNIOR_CALLER_ID
+} = SeniorViewTeamActionTypes;
 
 export const setJuniorLeadArray = array => ({
 	type: SET_JUNIOR_LEAD_ARRAY,
@@ -16,4 +21,9 @@ export const setTeamArray = array => ({
 export const setJuniorLeadTableVisibility = visible => ({
 	type: SET_JUNIOR_LEAD_TABLE_VISIBILITY,
 	payload: visible
+});
+
+export const setCurrentJuniorCallerId = id => ({
+	type: SET_CURRENT_JUNIOR_CALLER_ID,
+	payload: id
 });

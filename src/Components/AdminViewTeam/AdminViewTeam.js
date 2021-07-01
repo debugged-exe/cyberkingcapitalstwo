@@ -109,7 +109,14 @@ const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) 
 	}
 
 	useEffect(() => {
-		setAdminSeniorTelecallerArray(tableLogs);
+		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/seniors')
+			.then( resp => resp.json())
+			.then( resp => {
+				setAdminSeniorTelecallerArray(resp);
+			})
+			.catch( err => {
+				console.log(err);
+			})
 	}, [])
 
 	return (
@@ -127,7 +134,7 @@ const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) 
 	                    <option value="marathi">Marathi</option>
 	                </select>
             	</div>
-            	<div className="admin-view-team-senior-table w-100">
+            	<div className="admin-view-team-senior-table w-100 pb4-l pb2-m pb2-ns pb2">
         			<AdminViewTeamSeniorTable  />
         			<AdminViewTeamJuniorTable  />
         			<AdminViewTeamJuniorLog />

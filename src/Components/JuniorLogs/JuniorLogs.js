@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import {ToastContainer,toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Pagination from "../Pagination/Pagination";
 
 // redux
 import { connect } from 'react-redux';
@@ -14,6 +15,7 @@ import {
 // reselect
 import {createStructuredSelector} from "reselect";
 import {selectJuniorLogStatArray} from "../../redux/junior-panel/junior-logs/junior.logs.selectors";
+import {selectCurrentUser} from "../../redux/user/user.selectors";
 
 // components
 import LogCard from './LogCard.js';
@@ -24,8 +26,6 @@ import JuniorModal from "./JuniorModal/JuniorModal";
 
 // css
 import './JuniorLogs.scss';
-import {selectCurrentUser} from "../../redux/user/user.selectors";
-import Pagination from "../Pagination/Pagination";
 
 toast.configure();
 
@@ -168,7 +168,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                 setJuniorTableLogArray(resp);
                 toast.success("New Leads assigned successfully", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 2500,
                 });
             }
         })

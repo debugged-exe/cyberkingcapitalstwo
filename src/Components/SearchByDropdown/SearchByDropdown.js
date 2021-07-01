@@ -1,30 +1,145 @@
 import { React, Component } from "react";
 import FormInput from '../FormInput/FormInput.js';
-import "./SearchByDropdown.scss";
 import CustomButton from "../CustomButton/CustomButton";
+import SearchTable from "./SearchTable/SearchTable";
+import {ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+//redux
+import {connect} from "react-redux";
+import {setSeniorSearchTableArray} from "../../redux/senior-panel/senior-search/senior.search.actions";
+
+// css
+import "./SearchByDropdown.scss";
+
+toast.configure();
 
 class SearchByDropdown extends Component {
     constructor() {
         super();
         this.state = {
            searchFilter: '',
-           searchValue: ''
+           searchValue: '',
+           pages: 0,
+           pageNumbers: [],
+           perPage: 10
         };
     }
 
     handleSubmit = (event) => {
+        const {searchValue, searchFilter, pageNumbers, perPage} = this.state;
+        const {setSeniorSearchTableArray} = this.props;
         event.preventDefault();
-        console.log(this.state);
+        fetch('https://aqueous-mesa-28052.herokuapp.com/senior/search_leads_pgcount',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                field: searchFilter,
+                payload: searchValue
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            this.setState({pages: resp.count}, () =>{
+                var arr = [];
+                for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                    arr.push(i);
+                }
+                this.setState({pageNumbers: arr}, () => {
+                    console.log('')
+                })
+                fetch('https://aqueous-mesa-28052.herokuapp.com/senior/search_leads',{
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        field: searchFilter,
+                        payload: searchValue,
+                        pgNo: 0
+                    })
+                })
+                .then(response => response.json())
+                .then(resp => {
+                    if(resp!=='fail' || resp!=='Incorrect Submission')
+                    {
+                      setSeniorSearchTableArray(resp);  
+                    } 
+                })
+                .catch(err => {
+                    console.log(err)
+                    toast.error('Failed to fetch logs.Please Refresh', {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 2500,
+                    });
+                })
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            fetch('https://aqueous-mesa-28052.herokuapp.com/senior/search_leads',{
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    field: searchFilter,
+                    payload: searchValue,
+                    pgNo: 0
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                if(resp!=='fail' || resp!=='Incorrect Submission')
+                {
+                  setSeniorSearchTableArray(resp);  
+                } 
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error('Failed to fetch logs.Please Refresh', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+            toast.error('Failed to fetch page count.Please Refresh', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
     };
 
     handleChange = (event) => {
         const { name, value } = event.target;
-
-        this.setState({ [name]: value });
+        this.setState({ [name]: value })
     };
 
-    render() {
+    fetchNewPage = (pgNo) => {
         const {searchValue, searchFilter} = this.state;
+        const {setSeniorSearchTableArray} = this.props;
+        fetch('https://aqueous-mesa-28052.herokuapp.com/senior/search_leads',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                field: searchFilter,
+                payload: searchValue,
+                pgNo: pgNo
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            if(resp!=='fail' || resp!=='Incorrect Submission')
+            {
+              setSeniorSearchTableArray(resp);  
+            } 
+        })
+        .catch(err => {
+            console.log(err)
+            toast.error('Failed to fetch logs.Please Refresh', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
+    }
+
+    render() {
+        const {searchValue, searchFilter, pageNumbers} = this.state;
         const search_options = [
             {
                 value: 'lead_name',
@@ -35,11 +150,11 @@ class SearchByDropdown extends Component {
                 title: 'Lead ID'
             },
             {
-                value: 'language',
+                value: 'preferred_language',
                 title: 'Language'
             },
             {
-                value: 'lead_contact',
+                value: 'lead_phone_no',
                 title: 'Lead Contact'
             }
         ];
@@ -53,6 +168,7 @@ class SearchByDropdown extends Component {
                             name="searchFilter"
                             className={"f4 ml1 "}
                             onChange={this.handleChange}
+                            required
                         >
                             <option value='' >--select--</option>
                             {search_options.map((item) => {
@@ -67,8 +183,8 @@ class SearchByDropdown extends Component {
                         onChange={this.handleChange}
                         label={`${searchFilter?`Enter the ${searchFilter}`:'Choose search filter'}`}
                         style={{marginTop: '0px', marginBottom: '0px'}}
-                        required
                         disabled={`${searchFilter?'':'true'}`}
+                        required
                     />
                     <CustomButton 
                     type="submit"
@@ -77,9 +193,23 @@ class SearchByDropdown extends Component {
                         Search
                     </CustomButton>
                 </form>
+                <div className={'w-100 pt4 pb4'}>
+                    <SearchTable />
+                </div>
+                <div className="senior-search-pagination-container w-100 pb4">
+                    <p>. . </p>
+                    {pageNumbers.map((number, index) => (
+                        <button key={index} onClick={() => this.fetchNewPage(number-1)} className="senior-search-log-page-btn">{number}</button>
+                    ))}
+                    <p>. . </p>
+                </div>
             </div>
         );
     }
 }
 
-export default SearchByDropdown;
+const mapDispatchToProps = dispatch => ({
+    setSeniorSearchTableArray: array => dispatch(setSeniorSearchTableArray(array))
+})
+
+export default connect(null, mapDispatchToProps)(SearchByDropdown);

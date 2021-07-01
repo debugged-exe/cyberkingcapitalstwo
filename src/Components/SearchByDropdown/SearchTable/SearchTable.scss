@@ -1,46 +1,44 @@
-.team-table-container{
+.senior-search-table-container{
   display: flex;
   flex-direction: column;
-  position: relative;
   justify-content: center;
   align-items: center;
-  font-family: 'Open Sans Condensed', sans-serif;
 }
-.team-table-box{
-  width: 70%;
+.senior-search-table-box{
+  width: 90%;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   border: 1px solid black;
   background-color: #bbbbbb;
 }
-.team-table-head-container{
-  font-size: 2rem;
-  background-color: white;
-}
-.team-table-header-container{
-  padding-top: 1.5%;
-  padding-bottom: 1.8%;
-}
-.team-table-body-container{
-
-}
-.team-table-row-container{
-
-}
-.team-table-data-container{
+.senior-search-table-head-container{
   font-size: 1.5rem;
   background-color: white;
+}
+.senior-search-table-header-container{
   padding-top: 1.5%;
   padding-bottom: 1.8%;
+}
+.senior-search-table-body-container{
+
+}
+.senior-search-table-row-container{
+
+}
+.senior-search-table-data-container{
+  font-size: 1rem;
+  padding-top: 1.5%;
+  padding-bottom: 1.8%;
+  background-color: white;
 }
 
 @media only screen and (max-width: 769px)
 {
-  .team-table-box
+  .senior-search-table-box
   {
-    width: 90%;
+    width: 100%;
   }
-  .team-table-data-container{
+  .senior-search-table-data-container{
     font-size: 1.5rem;
     background-color: white;
     padding-top: 1.5%;
@@ -50,37 +48,30 @@
   }
 }
 
-@media only screen and (max-width: 500px){
-  .team-table-head-container{
+@media only screen and (max-width: 769px){
+  .senior-search-table-head-container{
     display: none;
   }
-
-  .team-table-body-container, .team-table-row-container, .team-table-data-container{
+  .senior-search-table-box{
+    width: 90%;
+  }
+  .senior-search-table-body-container, .senior-search-table-row-container, .senior-search-table-data-container{
     display: block;
     width: 100%;
   }
 
-  .team-table-row-container{
+  .senior-search-table-row-container{
     margin-bottom: 10px;
   }
 
-  .team-table-data-container{
+  .senior-search-table-data-container{
     text-align: right;
     padding-left: 50%;
     margin-bottom: 1px;
     position: relative;
-
-    &:last-child{
-      padding-left: 0px;
-      text-align: center;
-    }
-
-    &:last-child button{
-      width: 50%;
-    }
   }
 
-  .team-table-data-container::before{
+  .senior-search-table-data-container::before{
     content: attr(data-label);
     position: absolute;
     left: 0;
@@ -89,9 +80,5 @@
     font-size: 1.6rem;
     font-weight: bold;
     text-align: left;
-
-    &:last-child{
-      display: none;
-    }
   }
 }

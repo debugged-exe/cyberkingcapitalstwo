@@ -1,5 +1,7 @@
 import React from 'react';
+import {toast} from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 // css
 import './AdminViewTeamJuniorTable.scss';
 
@@ -9,21 +11,28 @@ import * as AiIcons from "react-icons/ai";
 // redux
 import {connect} from "react-redux";
 import {
+    setAssignedJuniorArray, setJrCountArray,
     setJrView,
     setJuniorCountView,
-    setJuniorLogArray
+    setJuniorLogArray, setJuniorLogView, setPgCount,setJuniorId
 } from "../../../redux/admin-panel/admin-overview/admin.overview.actions";
 
 
 // reselect
 import {createStructuredSelector} from "reselect";
-import {selectAdminJrView, selectSeniorTelecallerId, selectAdminSeniorTelecallerArray} from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
+import {
+    selectAdminJrView,
+    selectSeniorTelecallerId,
+    selectAdminSeniorTelecallerArray,
+    selectJuniorLogArray, selectAssignedJuniorArray
+} from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
 
-
+toast.configure();
 const header = [
     'Sr No',
     'Jr Caller ID',
-    'Jr Caller Name'
+    'Jr Caller Name',
+    'Language'
 ]
 
 const juniorLog = [
@@ -43,9 +52,66 @@ const juniorLog = [
     }
 ]
 
-const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, senior_telecaller_array, setJuniorLogArray,setJuniorCountView}) => {
-    return (
+const AdminViewTeamJuniorTable = ({setJuniorId,setPgCount,jrView, setJrCountArray,setJrView,assigned_junior_array,setAssignedJuniorArray, setJuniorLogArray,setJuniorCountView}) => {
+    const fetchJuniorLogs =(telecaller_id, pgNo) => {
+        setJuniorId(telecaller_id);
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/senior/junior/pg',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id,
+            })
+        })
+            .then( resp => resp.json())
+            .then( resp => {
+                setPgCount(resp.count);
+            })
+            .catch( err => {
+                console.log(err);
+            })
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/senior/junior/logs',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id,
+                pgNo: pgNo
+            })
+        })
+            .then(resp => resp.json())
+            .then( resp => {
+                setJuniorLogArray(resp);
+            })
+            .catch( err => {
+                setJuniorLogArray([]);
+                console.log(err);
+                toast.error('log error. try again',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                });
+            })
+    }
+    const fetchJrCounts = (telecaller_id) => {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/senior/junior/counts',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id
+            })
+        })
+            .then(resp => resp.json())
+            .then( resp => {
+                setJrCountArray(resp);
+            })
+            .catch( err => {
+                console.log(err);
+                toast.error('Error count. try again', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                })
+            })
+    }
 
+    return (
         <div className={`${jrView ? 'admin-view-junior-table-container' : 'hidden'} pb4`}>
             <div className={'tint'}>
             </div>
@@ -57,7 +123,8 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, seni
                         color={''}
                         className={'close-button'}
                         onClick={() => {
-                            setJrView({visible: false, senior_telecaller_id: ''})
+                            setJrView({visible: false, senior_telecaller_id: ''});
+                            setAssignedJuniorArray([])
                         }}
                     />
                 </div>
@@ -75,8 +142,7 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, seni
                     </tr>
                     </thead>
                     <tbody className={'admin-view-junior-table-body-container'}>
-                    {senior_telecaller_array.filter(item => item.assigned_to===senior_telecaller_id)
-                        .map((item, index) => {
+                    {assigned_junior_array.map((item, index) => {
                         return (
                             <tr className="admin-view-junior-table-row-container">
                                 <td className={'admin-view-junior-table-data-container'}
@@ -86,10 +152,10 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, seni
                                 <td className={'admin-view-junior-table-data-container'}
                                     data-label={'Jr Caller Name'}>{item.telecaller_name}</td>
                                 <td className={'admin-view-junior-table-data-container button-center'}>
-                                    <button onClick={() => setJuniorLogArray(juniorLog)}>View Logs</button>
+                                    <button onClick={() => {fetchJuniorLogs(item.telecaller_id,0)}}>View Logs</button>
                                 </td>
                                 <td className={'admin-view-junior-table-data-container button-center'}>
-                                    <button onClick={() => setJuniorCountView(true)}>View Count</button>
+                                    <button onClick={() => {setJuniorCountView(true); fetchJrCounts(item.telecaller_id) }}>View Count</button>
                                 </td>
                             </tr>
                         )
@@ -104,13 +170,18 @@ const AdminViewTeamJuniorTable = ({jrView, setJrView, senior_telecaller_id, seni
 const mapStateToProps = createStructuredSelector({
     jrView: selectAdminJrView,
     senior_telecaller_id: selectSeniorTelecallerId,
-    senior_telecaller_array: selectAdminSeniorTelecallerArray
+    junior_log_array: selectJuniorLogArray,
+    assigned_junior_array: selectAssignedJuniorArray
 });
 
 const mapDispatchToProps = dispatch => ({
     setJrView :visible => dispatch(setJrView(visible)),
     setJuniorLogArray: array => dispatch(setJuniorLogArray(array)),
-    setJuniorCountView : visible => dispatch(setJuniorCountView(visible))
+    setJuniorCountView : visible => dispatch(setJuniorCountView(visible)),
+    setAssignedJuniorArray: array => dispatch(setAssignedJuniorArray(array)),
+    setJrCountArray: array => dispatch(setJrCountArray(array)),
+    setPgCount: number => dispatch(setPgCount(number)),
+    setJuniorId: id => dispatch(setJuniorId(id))
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(AdminViewTeamJuniorTable);

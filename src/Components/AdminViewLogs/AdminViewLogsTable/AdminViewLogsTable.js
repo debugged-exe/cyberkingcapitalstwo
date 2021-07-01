@@ -14,15 +14,15 @@ const header = [
     "Lead contact",
     "Whatsapp number",
     "Account opening number",
+    "City",
     "status 1",
     "status 2",
     "Handover status",
     "Preffered Language",
     "Coded",
-    "Payment"
 ];
 
-const AdminViewLogsTable = ({lead_table_array}) => {
+const AdminViewLogsTable = ({lead_table_array, language}) => {
     return (
         <div className={'admin-view-log-table-container'}>
             <table cellSpacing="1" className={'admin-view-log-table-box'}>
@@ -36,21 +36,27 @@ const AdminViewLogsTable = ({lead_table_array}) => {
                 </tr>
                 </thead>
                 <tbody className={'admin-view-log-table-body-container'}>
-                {lead_table_array.map((item, index) => {
+                {lead_table_array.filter((item, i) =>{
+                    if(language === item.preferred_language)
+                        return item
+                    else if (language==='*'){
+                        return item
+                    }
+                }).map((item, index) => {
                     return (
                         <tr className="admin-view-log-table-row-container">
                             <td className={'admin-view-log-table-data-container'} data-label={'Lead ID'}>{item.lead_id}</td>
-                            <td className={'admin-view-log-table-data-container'} data-label={'Assigned to'}>{item.assigned_to}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'Assigned to'}>{`${item.assigned_to?item.assigned_to:"NULL"}`}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Lead Name'}>{item.lead_name}</td>
-                            <td className={'admin-view-log-table-data-container'} data-label={'Lead Contact'}>{item.lead_contact}</td>
-                            <td className={'admin-view-log-table-data-container'} data-label={'Whatsapp Number'}>{item.whatsapp_no}</td>
-                            <td className={'admin-view-log-table-data-container'} data-label={'Account Opening Number'}>{item.account_opening_no}</td>
-                            <td className={'admin-view-log-table-data-container'} data-label={'Status 1'}>{item.status_1}</td>
-                            <td className={'admin-view-log-table-data-container'} data-label={'Status 2'}>{item.status_2}</td>
-                            <td className={'admin-view-log-table-data-container'} data-label={'Handover Status'}>{item.handover_status}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'Whatsapp Number'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:"NULL"}`}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'City'}>{item.lead_city}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'Status 1'}>{`${item.status_1?item.status_1:"NULL"}`}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'Status 2'}>{`${item.status_2?item.status_2:"NULL"}`}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Preferred Language'}>{item.preferred_language}</td>
-                            <td className={'admin-view-log-table-data-container'} data-label={'Coded'}>{item.coded}</td>
-                            <td className={'admin-view-log-table-data-container'} data-label={'Payment'}>{item.payment}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
                         </tr>
                     )
                 })}
