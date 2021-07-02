@@ -17,7 +17,6 @@ import * as ImIcons from 'react-icons/im';
 
 // css
 import './AdminCodedTable.scss';
-import {ToastContainer} from "react-toastify";
 
 const header = [
     "Sr.No",
@@ -74,7 +73,7 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
             if(resp==='Success')
             {
                 reassignCodedRequestArray(lead_id)
-                toast.success('Coded request cancelled successfully.', {
+                toast.success('Coded request accepted successfully.', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -91,7 +90,7 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
 
     return(
         <div className={'admin-coded-table-container'}>
-            <button className="accept-all">Accept All</button>
+            {/*<button className="accept-all">Accept All</button>*/}
             <table cellSpacing="1" className={'admin-coded-table-box'}>
                 <thead className={'admin-coded-table-head-container'}>
                 <tr>

@@ -87,7 +87,7 @@ const AdminDeleteTable = ({admin_delete_request_array, admin_request_language,re
 
 	return (
 		<div className={'admin-delete-table-container'}>
-            <button className="delete-all">Delete All</button>
+            {/*<button className="delete-all">Delete All</button>*/}
             <table cellSpacing="1" className={'admin-delete-table-box'}>
                 <thead className={'admin-delete-table-head-container'}>
                 <tr>
