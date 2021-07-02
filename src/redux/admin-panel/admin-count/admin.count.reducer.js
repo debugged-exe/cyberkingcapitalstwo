@@ -7,12 +7,12 @@ const initialState = {
 	admin_count_array: [
 		{
 			Heading: 'Hindi Count',
-			numeric: 500,
+			numeric: 0,
 			color: 'rgb(57, 73, 171)'
 		},
 		{
 			Heading: 'Marathi Count',
-			numeric: 500,
+			numeric: 0,
 			color: 'rgb(67, 160, 71)'
 		}
 	]
