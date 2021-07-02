@@ -30,10 +30,10 @@ import './JuniorLogs.scss';
 toast.configure();
 
 const LogStatArray = [
-    // {
-    //     title: 'Handed Over Leads',
-    //     numeric: 70,
-    // },
+    {
+        title: 'Handed Over Leads',
+        numeric: 0,
+    },
     {
         title: 'Status 1 Updated',
         numeric: 0,
@@ -49,11 +49,11 @@ const LogStatArray = [
     {
         title: 'Coded',
         numeric: 0,
+    },
+    {
+        title: 'Pending Requests',
+        numeric: 0,
     }
-    // {
-    //     title: 'Pending Requests',
-    //     numeric: 70,
-    // },
 ]
 
 const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTableLogArray, setModalVisibility}) => {
@@ -86,6 +86,12 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                         break;
                     case 'Coded':
                         item.numeric = resp[0].coded;
+                        break;
+                    case 'Pending Requests':
+                        item.numeric = resp[0].pending;
+                        break;
+                    case 'Handed Over Leads':
+                        item.numeric = resp[0].handover;
                         break;
                     default:
                         break;

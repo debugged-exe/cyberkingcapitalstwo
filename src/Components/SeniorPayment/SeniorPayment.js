@@ -1,4 +1,6 @@
 import React,{useEffect}from 'react';
+import {ToastContainer,toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // redux
 import { connect } from 'react-redux';
@@ -17,6 +19,7 @@ import * as RiIcons from 'react-icons/ri';
 import * as BsIcons from 'react-icons/bs';
 import * as BiIcons from 'react-icons/bi';
 import SeniorPaymentTable from "./SeniorPaymentTable/SeniorPaymentTable";
+import {selectCurrentUser} from "../../redux/user/user.selectors";
 
 const PaymentCardArray = [
     {
@@ -25,7 +28,7 @@ const PaymentCardArray = [
         icon: <HiIcons.HiCurrencyRupee size={'4rem'} color={'rgb(57, 73, 171)'}/>
     },
     {
-        title: 'Payment Recieved',
+        title: 'Payment Received',
         numeric: <><BiIcons.BiRupee size={'2rem'}/>70</>,
         icon: <RiIcons.RiHandCoinLine size={'4rem'} color={'rgb(67, 160, 71)'}/>
     },
@@ -54,15 +57,47 @@ const tableData = [
     }
 ]
 
-const SeniorPayment = ({setSeniorPaymentArray, setSeniorPaymentTableLog, senior_payment_array}) => {
+const SeniorPayment = ({currentUser,setSeniorPaymentArray, setSeniorPaymentTableLog, senior_payment_array}) => {
 
     useEffect(() => {
-        setSeniorPaymentArray(PaymentCardArray);
+        const {telecaller_id} = currentUser;
+        fetch('https://aqueous-mesa-28052.herokuapp.com/senior/payments',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id
+            })
+        })
+            .then( resp => resp.json())
+            .then( resp => {
+                console.log(resp[0]);
+                PaymentCardArray.map((item) =>{
+                    if(item.title === 'Points Earned'){
+                        item.numeric = resp[0].points_earned
+                    }
+                    if(item.title === 'Payment Received'){
+                        item.numeric = resp[0].payment_received
+                    }
+                    if(item.title === 'Bonus Received'){
+                        item.numeric = resp[0].bonus_received
+                    }
+                })
+                setSeniorPaymentArray(PaymentCardArray);
+            })
+            .catch( err => {
+                console.log(err);
+                toast.error( 'Error during payment details',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                })
+            })
+
         setSeniorPaymentTableLog(tableData);
     }, []);
 
     return(
         <div className={''}>
+            <ToastContainer />
             <p style={{fontFamily: 'Open Sans Condensed', fontSize: '2rem', fontWeight: 'bold', textAlign: 'center'}}>Senior Payment Details</p>
             <div className="card-array-container-senior">
                 {
@@ -80,7 +115,8 @@ const SeniorPayment = ({setSeniorPaymentArray, setSeniorPaymentTableLog, senior_
 }
 
 const mapStateToProps = createStructuredSelector({
-    senior_payment_array: selectSeniorPaymentArray
+    senior_payment_array: selectSeniorPaymentArray,
+    currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({

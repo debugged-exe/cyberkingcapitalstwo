@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
-
+import { ToastContainer, toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 // redux
 import { connect } from 'react-redux';
 import {setAdminSeniorTelecallerArray, setAdminOverviewFilter} from '../../redux/admin-panel/admin-overview/admin.overview.actions.js';
@@ -14,6 +15,11 @@ import * as FaIcons from 'react-icons/fa';
 // css
 import './AdminViewTeam.scss';
 import AdminViewTeamJuniorCount from "./AdminViewTeamJuniorCount/AdminViewTeamJuniorCount";
+import {createStructuredSelector} from "reselect";
+import {selectJuniorLogStatArray} from "../../redux/junior-panel/junior-logs/junior.logs.selectors";
+import {selectCurrentUser} from "../../redux/user/user.selectors";
+import {selectAdminCountArray} from "../../redux/admin-panel/admin-count/admin.count.selectors";
+import {setAdminCountArray} from "../../redux/admin-panel/admin-count/admin.count.actions";
 
 const tableLogs = [
 	{
@@ -102,7 +108,7 @@ const tableLogs = [
     }
 ]
 
-const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) => {
+const AdminViewTeam = ({admin_count_array, setAdminSeniorTelecallerArray, setAdminOverviewFilter}) => {
 
 	const filterHandler = event => {
 		setAdminOverviewFilter(event.target.value);
@@ -117,13 +123,42 @@ const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) 
 			.catch( err => {
 				console.log(err);
 			})
+		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/processed_counts',{
+		})
+			.then( resp => resp.json())
+			.then( resp => {
+				admin_count_array.map( (item, index) => {
+					switch (item.Heading){
+						case 'Hindi Count':
+							item.numeric = resp[0].hindi;
+							break;
+						case 'Marathi Count':
+							item.numeric = resp[0].marathi;
+							break;
+						default:
+							break;
+					}
+				})
+				setAdminCountArray(admin_count_array);
+			})
+			.catch( err => {
+				console.log(err);
+				toast.error('counts error',{
+					position: toast.POSITION.TOP_CENTER,
+					autoClose: 2500
+				})
+			})
 	}, [])
 
 	return (
 		<div className={'admin-view-team-container '}>
+			<ToastContainer/>
 			<div className="admin-view-team-count">
-				<PaymentCard Heading={'Hindi Count'} numeric={500} icon={<FaIcons.FaLanguage size={'5rem'} color={'rgb(57, 73, 171)'}/>}/>
-				<PaymentCard Heading={'Marathi Count'} numeric={500} icon={<FaIcons.FaLanguage size={'5rem'} color={'rgb(67, 160, 71)'}/>}/>
+				{
+					admin_count_array.map( (item, index) => (
+						<PaymentCard key={index} Heading={item.Heading} numeric={item.numeric} icon={<FaIcons.FaLanguage size={'5rem'} color={item.color}/>}/>
+					))
+				}
 			</div>
 			<hr color={'grey'} className={'mt4 mb4'}/>
 			<div className=" admin-view-team-table">
@@ -145,8 +180,8 @@ const AdminViewTeam = ({setAdminSeniorTelecallerArray, setAdminOverviewFilter}) 
 	)
 }
 
-const mapStateToProps = (state) => ({
-	
+const mapStateToProps = createStructuredSelector({
+	admin_count_array: selectAdminCountArray
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -154,4 +189,4 @@ const mapDispatchToProps = dispatch => ({
 	setAdminOverviewFilter: filter => dispatch(setAdminOverviewFilter(filter))
 })
 
-export default connect(null, mapDispatchToProps)(AdminViewTeam);
+export default connect( mapStateToProps, mapDispatchToProps)(AdminViewTeam);

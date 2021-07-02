@@ -20,21 +20,21 @@ import {
 } from "../../../redux/admin-panel/admin-overview/admin.overview.selectors";
 
 const header = [
-    'Handed Over leads',
     'Status 1',
     'Status 2',
     'Unattended',
     'Coded',
+    'Handed Over leads',
     'Pending'
 ]
 
 const LogStatArray = [
     {
-        handed_over_leads: 0,
         status_1: 0,
         status_2: 0,
         unattended: 0,
         coded: 0,
+        handover: 0,
         pending: 0
     }
 ]
@@ -72,9 +72,6 @@ const AdminViewTeamJuniorCount = ({jr_count_array,setJrCountArray,jrCount, setJu
                     {jr_count_array.map((item, index) => {
                         return (
                             <tr className="admin-view-junior-count-view-row-container">
-                                {/*<td className={'admin-view-junior-count-view-data-container'}*/}
-                                {/*    data-label={'Handover Status'}>{item.handed_over_leads}*/}
-                                {/*</td>*/}
                                 <td className={'admin-view-junior-count-view-data-container'}
                                     data-label={'Status 1'}>{item.status_1}
                                 </td>
@@ -87,9 +84,12 @@ const AdminViewTeamJuniorCount = ({jr_count_array,setJrCountArray,jrCount, setJu
                                 <td className={'admin-view-junior-count-view-data-container'}
                                     data-label={'Coded'}>{item.coded}
                                 </td>
-                                {/*<td className={'admin-view-junior-count-view-data-container'}*/}
-                                {/*    data-label={'Pending'}>{item.pending}*/}
-                                {/*</td>*/}
+                                <td className={'admin-view-junior-count-view-data-container'}
+                                    data-label={'Handover Status'}>{item.handover}
+                                </td>
+                                <td className={'admin-view-junior-count-view-data-container'}
+                                    data-label={'Pending'}>{item.pending}
+                                </td>
                             </tr>
                         )
                     })}

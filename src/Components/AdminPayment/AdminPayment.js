@@ -1,4 +1,6 @@
 import React,{useEffect} from 'react';
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // redux
 import { connect } from 'react-redux';
@@ -17,6 +19,7 @@ import * as FaIcons from 'react-icons/fa';
 
 // css
 import './AdminPayment.scss';
+
 
 const header = ['Sr No', 'Telecaller ID', 'Telecaller Name', 'Designation', 'Points', 'Paid', 'Bonus Paid'];
 
@@ -64,17 +67,42 @@ const countArray =[
 const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminModalLead, admin_count_array, admin_payment_team_array}) => {
 
 	useEffect(() => {
-		setAdminCountArray(countArray);
+		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/processed_counts',{
+		})
+			.then( resp => resp.json())
+			.then( resp => {
+				admin_count_array.map( (item, index) => {
+					switch (item.Heading){
+						case 'Hindi Count':
+							item.numeric = resp[0].hindi;
+							break;
+						case 'Marathi Count':
+							item.numeric = resp[0].marathi;
+							break;
+						default:
+							break;
+					}
+				})
+				setAdminCountArray(admin_count_array);
+			})
+			.catch( err => {
+				console.log(err);
+				toast.error('counts error',{
+					position: toast.POSITION.TOP_CENTER,
+					autoClose: 2500
+				})
+			})
 		setAdminPaymentTeamArray(tableData);
 	}, []);
 
 	return (
 		<div className="admin-payment-container">
+			<ToastContainer />
 			<div className="admin-payment-disection">
 				{
 					admin_count_array.map((item,index) => {
 						return(
-							<PaymentCard Heading={item.Heading} numeric={item.numeric} icon={<FaIcons.FaLanguage size={'5rem'} color={item.color}/>}/>
+							<PaymentCard key={index} Heading={item.Heading} numeric={item.numeric} icon={<FaIcons.FaLanguage size={'5rem'} color={item.color}/>}/>
 						);
 					})
 				}

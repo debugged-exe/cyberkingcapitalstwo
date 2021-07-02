@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ToastContainer,toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 //redux
@@ -18,6 +18,7 @@ import * as FaIcons from "react-icons/fa";
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
 import AdminViewLogsTable from "./AdminViewLogsTable/AdminViewLogsTable";
+import {setAdminCountArray} from "../../redux/admin-panel/admin-count/admin.count.actions";
 
 toast.configure();
 
@@ -123,6 +124,33 @@ const tableLogs = [
 
 const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
 
+    useEffect(() => {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/processed_counts',{
+        })
+            .then( resp => resp.json())
+            .then( resp => {
+                admin_count_array.map( (item, index) => {
+                    switch (item.Heading){
+                        case 'Hindi Count':
+                            item.numeric = resp[0].hindi;
+                            break;
+                        case 'Marathi Count':
+                            item.numeric = resp[0].marathi;
+                            break;
+                        default:
+                            break;
+                    }
+                })
+                setAdminCountArray(admin_count_array);
+            })
+            .catch( err => {
+                console.log(err);
+                toast.error('counts error',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                })
+            })
+    }, [])
     const [pages, setPages] = useState(0);
     const [pageNumbers, setPageNumbers] = useState([]);
     const perPage = 10;
@@ -218,7 +246,9 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
             })
     }
 
-    return (<div className={'admin-view-log-container'}>
+    return (
+        <div className={'admin-view-log-container'}>
+            <ToastContainer />
         <div className="admin-view-log-count">
             {
                 admin_count_array.map((item,index) => {
