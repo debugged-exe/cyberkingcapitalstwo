@@ -13,19 +13,9 @@ import * as GrIcons from 'react-icons/gr';
 export const SidebarData = {
     client: [
         {
-            title: 'Home',
+            title: 'Sign in',
             path: '/',
             icon: <AiIcons.AiFillHome />
-        },
-        {
-            title: 'About Us',
-            path: '/aboutus',
-            icon: <FaIcons.FaInfo />
-        },
-        {
-            title: 'Sign In',
-            path: '/signin',
-            icon: <FiIcons.FiLogIn />
         }
     ],
     admin: [

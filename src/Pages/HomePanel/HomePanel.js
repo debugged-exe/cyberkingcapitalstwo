@@ -9,8 +9,10 @@ import {
 
 const HomePanel = ({}) => {
     return(<div>
-            <h1>Home Page</h1>
+            <h1 className={'f1 tc'}>Press Sign in Button to proceed further</h1>
+        <div className={'w-100 flex justify-center items-center'}>
             <button className={'bg-light-red'}><Link to={'/signin'}>SIGN IN</Link></button>
+        </div>
     </div>);
 }
 

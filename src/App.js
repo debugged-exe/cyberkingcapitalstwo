@@ -132,15 +132,16 @@ class App extends Component {
         return (
             <div className="App">
                 <Switch>
-                    <Route exact path="/"><HomePanel/></Route>
+                    <Route exact path="/">
+                        <Sidebar signOut={this.signOut}/>
+                        <SignIn setUser={this.setUser}/>
+                    </Route>
                     <Route path="/basicform"><BasicCourseForm/></Route>
                     <Route path="/proform"><ProCourseForm/></Route>
                     <Route path={"/admin"}><Sidebar signOut={this.signOut}/><AdminPanel/></Route>
                     <Route path={"/senior"}><Sidebar signOut={this.signOut}/><SeniorPanel/></Route>
                     <Route path={"/junior"}><Sidebar signOut={this.signOut}/><JuniorPanel/></Route>
                     <Route path='/signin'>
-                        <Sidebar signOut={this.signOut}/>
-                        <SignIn setUser={this.setUser}/>
                     </Route>
                 </Switch>
                 <div className="puff-loader" style={{display: `${this.state.visible?'flex': 'none'}`}}>
