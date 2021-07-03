@@ -10,7 +10,7 @@ import {selectSeniorPaymentTableLogs} from "../../../redux/senior-panel/senior-p
 // css
 import './SeniorPaymentTable.scss';
 import {ToastContainer} from "react-toastify";
-const header = ["Sr No.", "Telecaller ID", "Telecaller Name", "Points earned"];
+const header = ["Sr No.", "Telecaller ID", "Points earned"];
 
 const SeniorPaymentTable = ({senior_payment_table_log}) => {
     return (<div className={'table-container'}>
@@ -31,7 +31,6 @@ const SeniorPaymentTable = ({senior_payment_table_log}) => {
                     <tr className="table-row-container">
                         <td className={'table-data-container'} data-label={'Sr.No'}>{index + 1}</td>
                         <td className={'table-data-container'} data-label={'Telecaller ID'}>{item.telecaller_id}</td>
-                        <td className={'table-data-container'} data-label={'Telecaller Name'}>{item.telecaller_name}</td>
                         <td className={'table-data-container'} data-label={'Points Earned'}>{item.points_earned}</td>
                     </tr>
                 )

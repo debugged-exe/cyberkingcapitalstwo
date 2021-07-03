@@ -36,7 +36,7 @@ const Sidebar = ({designation, signOut}) => {
                     {
                         links[0][1].map((item,index) => {
                             return(
-                                <SubMenu signOut={signOut} key={index} item={item} designation={designation}/>
+                                <SubMenu signOut={signOut} key={index} item={item} designation={designation} showSidebar={showSidebar}/>
                             );
                         })
                     }

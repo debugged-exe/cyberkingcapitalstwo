@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import './SubMenu.scss';
 
-const SubMenu = ({item, match, signOut}) => {
+const SubMenu = ({item, match, signOut, showSidebar}) => {
 
     const [subnav, setSubNav] = useState(false);
 
@@ -12,7 +12,7 @@ const SubMenu = ({item, match, signOut}) => {
         item.title!=='Sign Out'?
         <>
             <Link className="sidebar-link " to={item.path} onClick={item.subNav && showSubNav}>
-                <div className="sidebar-label">
+                <div className="sidebar-label" onClick={() => showSidebar()}>
 					<span className="icon">
 						{item.icon}
 					</span>
@@ -41,7 +41,10 @@ const SubMenu = ({item, match, signOut}) => {
         </>
         :
         <>
-            <div className="sidebar-link "  onClick={() => signOut()}>
+            <div className="sidebar-link "  onClick={() => {
+                signOut();
+                showSidebar();
+            }}>
                 <div className="sidebar-label">
                     <span className="icon">
                         {item.icon}

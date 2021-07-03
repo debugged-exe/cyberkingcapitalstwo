@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import FormInput from '../FormInput/FormInput.js';
 import CustomButton from '../CustomButton/CustomButton.js';
 import PuffLoader from "react-spinners/PuffLoader";
@@ -13,10 +14,16 @@ class AdminRegistration extends Component {
         fetch('https://aqueous-mesa-28052.herokuapp.com/admin/register/fetch')
             .then(resp => resp.json())
             .then(response => {
-                console.log(response);
                 this.setState({
                     srCallerArray: response
                 })
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error('Senior caller fetch failed.Please refresh',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000
+                });
             })
     }
 
@@ -102,18 +109,63 @@ class AdminRegistration extends Component {
                         assigned_to: '',
                         srCallerArray: []
                     })
+                    document.getElementById('registerForm').reset();
+                    fetch('https://aqueous-mesa-28052.herokuapp.com/admin/register/fetch')
+                    .then(resp => resp.json())
+                    .then(response => {
+                        this.setState({
+                            srCallerArray: response
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        toast.error('Senior caller fetch failed.Please refresh',{
+                            position: toast.POSITION.TOP_CENTER,
+                            autoClose: 4000
+                        });
+                    })
                 } else if (resp === 'not found') {
                     this.setVisible(false);
                     toast.error('Senior caller to which caller is assigned does not exist',{
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000
                     });
+                    document.getElementById('registerForm').reset();
+                    fetch('https://aqueous-mesa-28052.herokuapp.com/admin/register/fetch')
+                    .then(resp => resp.json())
+                    .then(response => {
+                        this.setState({
+                            srCallerArray: response
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        toast.error('Senior caller fetch failed.Please refresh',{
+                            position: toast.POSITION.TOP_CENTER,
+                            autoClose: 4000
+                        });
+                    })
                 } else if (resp === 'Unable to register') {
                     this.setVisible(false);
                     toast.error('Unable to register.Please try again',{
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000
                     });
+                    document.getElementById('registerForm').reset();
+                    fetch('https://aqueous-mesa-28052.herokuapp.com/admin/register/fetch')
+                    .then(resp => resp.json())
+                    .then(response => {
+                        this.setState({
+                            srCallerArray: response
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        toast.error('Senior caller fetch failed.Please refresh',{
+                            position: toast.POSITION.TOP_CENTER,
+                            autoClose: 4000
+                        });
+                    })
                 }
             })
             .catch(err => {
@@ -123,13 +175,28 @@ class AdminRegistration extends Component {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000
                 });
+                const form = document.getElementById('registerForm');
+                form.reset();
+                fetch('https://aqueous-mesa-28052.herokuapp.com/admin/register/fetch')
+                    .then(resp => resp.json())
+                    .then(response => {
+                        this.setState({
+                            srCallerArray: response
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        toast.error('Senior caller fetch failed.Please refresh',{
+                            position: toast.POSITION.TOP_CENTER,
+                            autoClose: 4000
+                        });
+                    })
             })
     }
 
     handleChange = event => {
         const {name, value} = event.target;
         this.setState({[name]: value});
-        console.log(value);
     }
 
     render() {
@@ -146,7 +213,7 @@ class AdminRegistration extends Component {
         return (
             <div className={'admin-register-container'}>
                 <p className={'admin-register-header b'}>Register new Telecaller</p>
-                <form className={'admin-register-form'} onSubmit={this.handleSubmit}>
+                <form id='registerForm' className={'admin-register-form'} onSubmit={this.handleSubmit}>
                     <FormInput
                         type="text"
                         name="telecaller_name"
@@ -235,4 +302,4 @@ class AdminRegistration extends Component {
 
 }
 
-export default AdminRegistration;
+export default withRouter(AdminRegistration);

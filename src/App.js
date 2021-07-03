@@ -75,7 +75,6 @@ class App extends Component {
              })
         .then(response => response.json())
         .then(resp => {
-            console.log(resp);
             if(resp[0].telecaller_id)
             {
                 const user = {

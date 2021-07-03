@@ -91,8 +91,24 @@ const SeniorPayment = ({currentUser,setSeniorPaymentArray, setSeniorPaymentTable
                     autoClose: 2500
                 })
             })
-
-        setSeniorPaymentTableLog(tableData);
+            fetch('https://aqueous-mesa-28052.herokuapp.com/senior/junior_payments',{
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    telecaller_id: telecaller_id
+                })
+            })
+            .then( resp => resp.json())
+            .then( resp => {
+                setSeniorPaymentTableLog(resp);
+            })
+            .catch( err => {
+                console.log( err );
+                toast.error('junior payment table error.Refresh again',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                });
+            })
     }, []);
 
     return(
