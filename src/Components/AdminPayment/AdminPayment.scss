@@ -1,3 +1,5 @@
+$base-blue: #00449E;
+
 .admin-payment-container{
 	font-family: 'Open Sans Condensed', sans-serif;
   position: relative;
@@ -47,6 +49,27 @@
 
 .pay-button-center{
 
+}
+
+.admin-payment-pagination-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-payment-page-btn{
+  font-weight: bold;
+  border: 1px solid black;
+  margin: 1%;
+  transition: all 0.3s ease-in;
+
+  &:hover{
+    border: none;
+    background: $base-blue;
+    color: white;
+    transform: scale(1.5);
+  }
 }
 
 @media only screen and (max-width: 769px)

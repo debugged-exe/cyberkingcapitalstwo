@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,52 +23,16 @@ import './AdminPayment.scss';
 
 const header = ['Sr No', 'Telecaller ID', 'Telecaller Name', 'Designation', 'Points', 'Paid', 'Bonus Paid'];
 
-const tableData = [
-	{
-		telecaller_id: 'SR001',
-		telecaller_name: 'Soham Khade',
-		designation: 'SrCaller',
-		points: 50,
-		paid: 10,
-		bonus_paid: 100,
-		
-	},
-	{
-		telecaller_id: 'JR001',
-		telecaller_name: 'Tanmay Jagtap',
-		designation: 'JrCaller',
-		points: 50,
-		paid: 10,
-		bonus_paid: 100,
-	},
-	{
-		telecaller_id: 'AD001',
-		telecaller_name: 'Tejas Machkar',
-		designation: 'Admin',
-		points: 50,
-		paid: 10,
-		bonus_paid: 100
-	}
-]
-
-const countArray =[
-	{
-		Heading: 'Hindi Count',
-		numeric: 500,
-		color: 'rgb(57, 73, 171)'
-	},
-	{
-		Heading: 'Marathi Count',
-		numeric: 500,
-		color: 'rgb(67, 160, 71)'
-	}
-]
-
 const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminModalLead, admin_count_array, admin_payment_team_array}) => {
 
+	const [pages, setPages] = useState(0);
+    const [pageNumbers, setPageNumbers] = useState([]);
+    const perPage = 10;
+
+    const [filter, setFilter] = useState('marathi');
+
 	useEffect(() => {
-		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/processed_counts',{
-		})
+		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/processed_counts')
 			.then( resp => resp.json())
 			.then( resp => {
 				admin_count_array.map( (item, index) => {
@@ -92,8 +56,62 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 					autoClose: 2500
 				})
 			})
-		setAdminPaymentTeamArray(tableData);
+		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count')
+		.then(response => response.json())
+		.then(resp => {
+			var arr = [];
+			for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                arr.push(i);
+            }
+            setPageNumbers(arr);
+		})
+		.catch(err => {
+            console.log(err);
+            toast.error("Failed to fetch telecaller count.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
+		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: 0
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+        	setAdminPaymentTeamArray(resp);
+        })
+        .catch(err => {
+        	console.log(err);
+            toast.error("Failed to fetch telecallers.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
 	}, []);
+
+	const fetchNewPage = (pgNo) => {
+		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: pgNo
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+        	setAdminPaymentTeamArray(resp);
+        })
+        .catch(err => {
+        	console.log(err);
+            toast.error("Failed to fetch telecallers.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
+	}
 
 	return (
 		<div className="admin-payment-container">
@@ -110,9 +128,9 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 			<div className="admin-payment-details">
 				<div className={'flex justify-center items-center center mb4 w-100'}>
 					<label className={'b f3 mr3'}>Select Language: </label>
-					<select name="lang" className={'f4 ml1'}>
-						<option value="hindi">Hindi</option>
+					<select name="lang" className={'f4 ml1'} onChange={(event) => setFilter(event.target.value)}>
 						<option value="marathi">Marathi</option>
+						<option value="hindi">Hindi</option>
 					</select>
 				</div>
 				
@@ -128,15 +146,16 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 							</tr>
 						</thead>
 						<tbody className={'admin-payment-table-body-container'}>
-							{admin_payment_team_array.map((item, index) => {
+							{admin_payment_team_array.filter(item => item.preferred_language===filter)
+								.map((item, index) => {
 								return (
 									<tr className="admin-payment-table-row-container">
 										<td className={'admin-payment-table-data-container'} data-label={'Sr.No'}>{index + 1}</td>
 										<td className={'admin-payment-table-data-container'} data-label={'Telecaller ID'}>{item.telecaller_id}</td>
 										<td className={'admin-payment-table-data-container'} data-label={'Telecaller Name'}>{item.telecaller_name}</td>
 										<td className={'admin-payment-table-data-container'} data-label={'Designation'}>{item.designation}</td>
-										<td className={'admin-payment-table-data-container'} data-label={'Points'}>{item.points}</td>
-										<td className={'admin-payment-table-data-container'} data-label={'Paid'}>{item.paid}</td>
+										<td className={'admin-payment-table-data-container'} data-label={'Points'}>{item.points_earned}</td>
+										<td className={'admin-payment-table-data-container'} data-label={'Paid'}>{item.points_paid}</td>
 										<td className={'admin-payment-table-data-container'} data-label={'Bonus Paid'}>{item.bonus_paid}</td>
 										<td className={'admin-payment-table-data-container pay-button-center'}><button onClick={() => setAdminModalLead(item)}>Pay</button></td>
 									</tr>
@@ -144,6 +163,13 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 							})}
 						</tbody>
 					</table>
+					<div className="admin-payment-pagination-container w-100 pb4">
+			            <p>. . </p>
+			            {pageNumbers.map((number, index) => (
+			                <button key={index} onClick={() => fetchNewPage(number)} className="admin-payment-page-btn">{number}</button>
+			            ))}
+			            <p>. . </p>
+			        </div>
 					<AdminPaymentModal />
 				</div>
 			</div>
