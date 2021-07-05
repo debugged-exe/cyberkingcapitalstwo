@@ -172,6 +172,13 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                     autoClose: 4000,
                 });
             }
+            else if(resp==='less than 5')
+            {
+                toast.error("Not enough leads to assign you.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            }
             else if(resp!=='Unable to assign you leads' || resp!=='Unable to fetch')
             {
                 setJuniorTableLogArray(resp);
