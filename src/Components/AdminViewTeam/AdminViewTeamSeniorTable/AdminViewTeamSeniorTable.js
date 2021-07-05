@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 // redux
 import {connect} from 'react-redux';
@@ -24,7 +24,8 @@ const header = [
     'Sr No',
     'Sr Caller ID',
     'Sr Caller Name',
-    'Language'
+    'Language',
+    'Handover Counts'
 ]
 
 const AdminViewTeamSeniorTable = ({setJrView, senior_telecaller_array, setAssignedJuniorArray,overview_filter}) => {
@@ -48,6 +49,30 @@ const AdminViewTeamSeniorTable = ({setJrView, senior_telecaller_array, setAssign
                 });
             })
     }
+
+    const fetchSeniorHandoverCounts = (telecaller_id) => {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_senior_handover_counts',{
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id
+            })
+        })
+            .then( resp => resp.json())
+            .then( resp => {
+                toast.info(`${telecaller_id} Handover leads: ${resp[0].count} `,{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000
+                })
+            })
+            .catch( err => {
+                toast.error('count not fetched. try again',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                })
+            })
+    }
+
     return (
         <div className="admin-view-senior-table-container">
             <table cellSpacing="1" className={'admin-view-senior-table-box'}>
@@ -76,6 +101,13 @@ const AdminViewTeamSeniorTable = ({setJrView, senior_telecaller_array, setAssign
                                 data-label={'Sr Caller Name'}>{item.telecaller_name}</td>
                             <td className={'admin-view-senior-table-data-container'}
                                 data-label={'Sr Caller Name'}>{item.preferred_language}</td>
+                            <td className={'admin-view-senior-table-data-container'}
+                                data-label={'Handover'}>
+                                <button onClick={() => {
+                                    fetchSeniorHandoverCounts(item.telecaller_id);
+                                }}>View Counts
+                                </button>
+                            </td>
                             <td className={'admin-view-senior-table-data-container'}>
                                 <button onClick={() =>{ setJrView({
                                     visible: true,
