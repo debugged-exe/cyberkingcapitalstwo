@@ -151,6 +151,8 @@ const AdminViewTeamJuniorTable = ({setJuniorId,setPgCount,jrView, setJrCountArra
                                     data-label={'Jr Caller Id'}>{item.telecaller_id}</td>
                                 <td className={'admin-view-junior-table-data-container'}
                                     data-label={'Jr Caller Name'}>{item.telecaller_name}</td>
+                                <td className={'admin-view-junior-table-data-container'}
+                                    data-label={'Language'}>{item.preferred_language}</td>
                                 <td className={'admin-view-junior-table-data-container button-center'}>
                                     <button onClick={() => {fetchJuniorLogs(item.telecaller_id,0)}}>View Logs</button>
                                 </td>
