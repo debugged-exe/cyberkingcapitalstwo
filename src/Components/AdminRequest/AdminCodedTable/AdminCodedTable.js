@@ -23,7 +23,8 @@ const header = [
     "Telecaller Id",
     "Telecaller Name",
     "Lead Id",
-    "Lead Name"
+    "Lead Name",
+    "Lead Phone No."
 ]
 
 toast.configure();
@@ -110,6 +111,7 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
                             <td className={'admin-coded-table-data-container'} data-label={'Telecaller Name'}>{item.telecaller_name}</td>
                             <td className={'admin-coded-table-data-container'} data-label={'Lead Id'}>{item.lead_id}</td>
                             <td className={'admin-coded-table-data-container'} data-label={'Lead Name'}>{item.lead_name}</td>
+                            <td className={'admin-coded-table-data-container'} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
                             <td className={'admin-coded-table-data-container pointer'}><AiIcons.AiFillCheckCircle className={'btn-center'} size={'2rem'} color={'green'} onClick={() => codedLead(item.lead_id, item.lead_phone_no, item.telecaller_id)}/></td>
                             <td className={'admin-coded-table-data-container pointer'}><ImIcons.ImCross className={'btn-center'} size={'1.5rem'} color={'red'} onClick={() => cancelCodedRequest(item.lead_id)}/></td>
                         </tr>
