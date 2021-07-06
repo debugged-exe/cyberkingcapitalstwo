@@ -50,6 +50,11 @@ export const SidebarData = {
             icon: <AiIcons.AiOutlineUserAdd size={'2rem'}/>
         },
         {
+            path: '/admin/counts',
+            title: "View Counts",
+            icon: <GrIcons.GrScorecard size={'2rem'}/>
+        },
+        {
             path: '/',
             title: "Sign Out",
             icon: <FiIcons.FiLogOut size={'2rem'}/>
