@@ -9,6 +9,7 @@ import AdminViewTeam from "../../Components/AdminViewTeam/AdminViewTeam";
 import AdminViewLogs from "../../Components/AdminViewLogs/AdminViewLogs";
 import ProfileSection from "../../Components/ProfileSection/ProfileSection";
 import AdminCounts from "../../Components/AdminCounts/AdminCounts";
+
 const AdminPanel = ({match}) => {
     return (
         <div>

@@ -3,8 +3,8 @@ import {ToastContainer,toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import PaymentCard from "../PaymentCard/PaymentCard";
 import * as FaIcons from "react-icons/fa";
-import './AdminCounts.scss';
-const AdminCounts = () => {
+import './SeniorCounts.scss';
+const SeniorCounts = () => {
     const [counts, setCounts] = useState({
         hindi_assigned:0,
         hindi_pending: 0,
@@ -16,7 +16,7 @@ const AdminCounts = () => {
         marathi_unassigned: 0
     });
     useEffect(() => {
-        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/view_counts')
+        fetch('https://aqueous-mesa-28052.herokuapp.com/senior/view_counts')
             .then( resp=>resp.json())
             .then( resp => {
                 setCounts(resp[0]);
@@ -30,7 +30,7 @@ const AdminCounts = () => {
             })
     },[])
     return (
-        <div className={'admin-counts-container'}>
+        <div className={'senior-counts-container'}>
             <PaymentCard Heading={'Unassigned Hindi'} icon={<FaIcons.FaLanguage size={'5rem'} color={'red'}/>} numeric={counts.hindi_unassigned}/>
             <PaymentCard Heading={'Unassigned marathi'} icon={<FaIcons.FaLanguage size={'5rem'} color={'green'}/>} numeric={counts.marathi_unassigned}/>
             <PaymentCard Heading={'Assigned Hindi'} icon={<FaIcons.FaLanguage size={'5rem'} color={'red'}/>} numeric={counts.hindi_assigned}/>
@@ -44,4 +44,4 @@ const AdminCounts = () => {
     );
 }
 
-export default AdminCounts;
+export default SeniorCounts;

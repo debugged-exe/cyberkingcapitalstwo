@@ -109,6 +109,11 @@ export const SidebarData = {
             icon: <BsIcons.BsSearch size={'2rem'}/>
         },
         {
+            path: '/senior/counts',
+            title: "View Counts",
+            icon: <GrIcons.GrScorecard size={'2rem'}/>
+        },
+        {
             path: '/',
             title: "Sign Out",
             icon: <FiIcons.FiLogOut size={'2rem'}/>
