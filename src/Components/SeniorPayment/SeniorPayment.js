@@ -71,15 +71,15 @@ const SeniorPayment = ({currentUser,setSeniorPaymentArray, setSeniorPaymentTable
             .then( resp => resp.json())
             .then( resp => {
                 console.log(resp[0]);
-                PaymentCardArray.map((item) =>{
+                PaymentCardArray.map((item) => {
                     if(item.title === 'Points Earned'){
                         item.numeric = resp[0].points_earned
                     }
                     if(item.title === 'Payment Received'){
-                        item.numeric = resp[0].payment_received
+                        item.numeric = resp[0].points_paid
                     }
                     if(item.title === 'Bonus Received'){
-                        item.numeric = resp[0].bonus_received
+                        item.numeric = resp[0].bonus_earned
                     }
                 })
                 setSeniorPaymentArray(PaymentCardArray);

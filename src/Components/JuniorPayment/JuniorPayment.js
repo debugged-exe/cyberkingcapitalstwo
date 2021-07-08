@@ -55,10 +55,10 @@ const JuniorPayment = ({currentUser,setJuniorPaymentArray, junior_payment_array}
                         item.numeric = resp[0].points_earned
                     }
                     if(item.title === 'Payment Received'){
-                        item.numeric = resp[0].payment_received
+                        item.numeric = resp[0].points_paid
                     }
                     if(item.title === 'Bonus Earned'){
-                        item.numeric = resp[0].bonus_received
+                        item.numeric = resp[0].bonus_earned
                     }
                 })
                 setJuniorPaymentArray(PaymentCardArray);

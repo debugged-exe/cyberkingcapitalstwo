@@ -50,6 +50,11 @@ export const SidebarData = {
             icon: <AiIcons.AiOutlineUserAdd size={'2rem'}/>
         },
         {
+            path: '/admin/counts',
+            title: "View Counts",
+            icon: <GrIcons.GrScorecard size={'2rem'}/>
+        },
+        {
             path: '/',
             title: "Sign Out",
             icon: <FiIcons.FiLogOut size={'2rem'}/>
@@ -102,6 +107,11 @@ export const SidebarData = {
             path: '/senior/search',
             title: "Search For Leads",
             icon: <BsIcons.BsSearch size={'2rem'}/>
+        },
+        {
+            path: '/senior/counts',
+            title: "View Counts",
+            icon: <GrIcons.GrScorecard size={'2rem'}/>
         },
         {
             path: '/',
