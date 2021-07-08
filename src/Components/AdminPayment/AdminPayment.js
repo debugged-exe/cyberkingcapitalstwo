@@ -156,7 +156,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 										<td className={'admin-payment-table-data-container'} data-label={'Designation'}>{item.designation}</td>
 										<td className={'admin-payment-table-data-container'} data-label={'Points'}>{item.points_earned}</td>
 										<td className={'admin-payment-table-data-container'} data-label={'Paid'}>{item.points_paid}</td>
-										<td className={'admin-payment-table-data-container'} data-label={'Bonus Paid'}>{item.bonus_paid}</td>
+										<td className={'admin-payment-table-data-container'} data-label={'Bonus Paid'}>{item.bonus_earned}</td>
 										<td className={'admin-payment-table-data-container pay-button-center'}><button onClick={() => setAdminModalLead(item)}>Pay</button></td>
 									</tr>
 								)

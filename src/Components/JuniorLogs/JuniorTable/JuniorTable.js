@@ -39,7 +39,6 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
         })
         .then(response => response.json())
         .then(resp => {
-            console.log(resp)
             reassignHandoverFlag({lead_id: resp.lead_id, flag: 'yes'});
             toast.success("Handed over successfully", {
                 position: toast.POSITION.TOP_CENTER,
