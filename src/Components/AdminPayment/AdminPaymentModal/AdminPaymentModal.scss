@@ -1,5 +1,20 @@
 .admin-payment-modal-container{
-	
+	position: fixed;
+	left: 0%;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+}
+
+.admin-payment-tint{
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background: black;
+	opacity: 0.6;
+	z-index: 4;
 }
 
 .form-header{
@@ -8,17 +23,43 @@
 }
 
 .payment-form-container{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	position: absolute;
+	top: 5%;
+	left: 15%;
+	width: 70%;
+	height: 80%;
+	z-index: 6;
+	overflow-y: scroll;
 	background: white;
-	position: fixed;
-	width: 50%;
-	height: 85%;
-	top: 10%;
-	left: 25%;
 	border: 1px solid black;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.admin-grid-div{
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+
+.admin-payment-modal-header{
+	padding: 0.5%;
+	border-left: 4px solid black;
+}
+
+.admin-payment-modal-lead-details{
+	display: grid;
+	grid-template-columns: 100%;
+
+}
+
+.admin-payment-modal-form{
+	margin: 3%;
+	margin-left: 6%;
+}
+
+.admin-payment-modal-form-component{
+	display: grid;
+	grid-template-columns: 70% 30%;
+	margin-top: -5%;
 }
 
 .visible{
@@ -29,17 +70,45 @@
 	display: hidden;
 }
 
-@media only screen and (max-width: 450px){
-	.payment-form-container{
-		width: 80%;
-		left: 10%;
-		height: 70%;
+#admin-payment-button-margin-1{
+}
+
+#admin-payment-button-margin-2{
+}
+
+@media only screen and (max-width: 768px){
+	.admin-grid-div{
+		display: grid;
+		grid-template-columns: 100%;
 	}
 }
-@media only screen and (max-width: 385px){
+
+@media only screen and (max-width: 700px){
+	.admin-grid-div{
+		grid-template-columns: 100%;
+	}
+
+	#admin-payment-button-margin-1{
+		margin-left: 0;
+        margin-top: -30%;
+	}
+
+	#admin-payment-button-margin-2{
+		margin-left: 0;
+        margin-top: -30%;
+	}
+
+	.admin-payment-modal-form-component{
+		display: grid;
+		grid-template-columns: 100%;
+	}
+}
+
+
+@media only screen and (max-width: 500px){
 	.payment-form-container{
-		width: 80%;
-		left: 10%;
-		height: 60%;
+		left: 5%;
+		width: 90%;
+		height: 90%;
 	}
 }

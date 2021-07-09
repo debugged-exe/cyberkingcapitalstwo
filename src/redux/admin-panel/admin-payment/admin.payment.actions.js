@@ -1,7 +1,7 @@
 import {AdminPaymentActionTypes} from "./admin.payment.types";
 
 //destructing the action types
-const {SET_ADMIN_PAYMENT_TEAM_ARRAY, SET_ADMIN_MODAL_LEAD, SET_ADMIN_MODAL_VISIBILITY} = AdminPaymentActionTypes;
+const {SET_ADMIN_PAYMENT_TEAM_ARRAY, SET_ADMIN_MODAL_LEAD, SET_ADMIN_MODAL_VISIBILITY, UPDATE_POINTS} = AdminPaymentActionTypes;
 
 export const setAdminPaymentTeamArray = array => ({
 	type: SET_ADMIN_PAYMENT_TEAM_ARRAY,
@@ -16,4 +16,9 @@ export const setAdminModalLead = lead => ({
 export const setAdminModalVisibility = visible => ({
 	type: SET_ADMIN_MODAL_VISIBILITY,
 	payload: visible
+});
+
+export const updatePoints = obj => ({
+	type: UPDATE_POINTS,
+	payload: obj
 });
