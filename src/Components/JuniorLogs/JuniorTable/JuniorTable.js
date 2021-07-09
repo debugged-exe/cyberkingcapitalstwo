@@ -18,7 +18,7 @@ import {selectJuniorTableLogs} from "../../../redux/junior-panel/junior-logs/jun
 import {selectCurrentUser} from "../../../redux/user/user.selectors";
 
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
-                "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
+                "Account Opening No.", "Account Opening Name", "City", "Trading knowledge", "Preferred Language",
                 "status 1", "status 2", "Handover status", "Coded"];
 
 toast.configure();
@@ -39,7 +39,6 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
         })
         .then(response => response.json())
         .then(resp => {
-            console.log(resp)
             reassignHandoverFlag({lead_id: resp.lead_id, flag: 'yes'});
             toast.success("Handed over successfully", {
                 position: toast.POSITION.TOP_CENTER,
@@ -83,7 +82,6 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
             });
         })
     }
-
     return (<div className={'junior-table-container'}>
         <table cellSpacing="1" className={'junior-table-box'}>
             <thead className={'junior-table-head-container'}>
@@ -117,7 +115,8 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'Lead Name'}>{item.lead_name}</td>
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'Whatsapp Number'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:"NULL"}`}</td>
-                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'Acc Opening Number'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'Acc Opening Name'}>{`${item.account_opening_name?item.account_opening_name:"NULL"}`}</td>
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'City'}>{item.lead_city}</td>
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'Trading Knowledge'}>{item.prior_knowledge}</td>
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):'bg-white'}`} data-label={'Preferred Language'}>{item.preferred_language}</td>

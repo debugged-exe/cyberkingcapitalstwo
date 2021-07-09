@@ -26,7 +26,8 @@ const initialState = {
 	lead_whatsapp_no: '',
 	account_opening_no: '',
 	status_1: '',
-	status_2: ''
+	status_2: '',
+	account_opening_name: ''
 }
 
 toast.configure();
@@ -83,7 +84,7 @@ class JuniorModal extends React.Component {
 
 	render() {
 
-		const {lead_whatsapp_no, account_opening_no, status_1, status_2} = this.state;
+		const {lead_whatsapp_no, account_opening_no, status_1, status_2, account_opening_name} = this.state;
 		const {modal_lead,modal_visibility,setModalVisibility} = this.props;
 		return (
 			<div className={`${modal_visibility?'visible junior-modal-container':'hidden'}`}>
@@ -138,6 +139,25 @@ class JuniorModal extends React.Component {
 								/>
 								<div className={'mt4'}>
 									<CustomButton type="submit" id={'button-margin-2'}>Update</CustomButton>
+								</div>
+							</form>
+						</div>
+						<div className={'mt2 f3'} style={{marginBottom: "-3%"}}>
+							<label >
+								Current Value: {modal_lead.account_opening_name}
+							</label>
+							<form name="account_opening_name" className={'junior-modal-form-component'} onSubmit={this.handleSubmit}>
+								<FormInput
+									type="text"
+									name="account_opening_name"
+									value={account_opening_name}
+									onChange={this.handleChange}
+									label="Account Opening Name"
+									style = {{marginTop: '0px', marginBottom: '0px'}}
+									required
+								/>
+								<div className={'mt4'}>
+									<CustomButton type="submit" id={'button-margin-1'}>Update</CustomButton>
 								</div>
 							</form>
 						</div>

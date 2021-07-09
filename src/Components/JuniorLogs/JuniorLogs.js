@@ -131,7 +131,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
         })
         .then(response => response.json())
         .then(resp => {
-            setJuniorTableLogArray(resp)
+            setJuniorTableLogArray(resp);
         })
         .catch(err => {
             console.log(err);

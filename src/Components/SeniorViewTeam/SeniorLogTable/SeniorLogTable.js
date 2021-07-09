@@ -23,7 +23,7 @@ import {toast, ToastContainer} from "react-toastify";
 
 //table header data
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
-    "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
+    "Account Opening No.", "Account Opening Name", "City", "Trading knowledge", "Preferred Language",
     "status 1", "status 2", "Handover status"];
 
 const SeniorLogTable = ({current_junior_caller_id, pgCount, setPgCount,junior_lead_array, junior_lead_table_visibility,setJuniorLeadTableVisibility, setJuniorLeadArray}) => {
@@ -50,7 +50,6 @@ const SeniorLogTable = ({current_junior_caller_id, pgCount, setPgCount,junior_le
         })
             .then(response => response.json())
             .then(resp => {
-                console.log(resp);
                 setJuniorLeadArray(resp);
             })
             .catch(err => {
@@ -98,6 +97,7 @@ const SeniorLogTable = ({current_junior_caller_id, pgCount, setPgCount,junior_le
                         <td className={'senior-table-data-container'} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
                         <td className={'senior-table-data-container'} data-label={'Whatsapp Number'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:"NULL"}`}</td>
                         <td className={'senior-table-data-container'} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}</td>
+                        <td className={'senior-table-data-container'} data-label={'Account Opening Name'}>{`${item.account_opening_name?item.account_opening_name:"NULL"}`}</td>
                         <td className={'senior-table-data-container'} data-label={'City'}>{item.lead_city}</td>
                         <td className={'senior-table-data-container'} data-label={'Trading Knowledge'}>{item.prior_knowledge}</td>
                         <td className={'senior-table-data-container'} data-label={'Preferred Language'}>{item.preferred_language}</td>

@@ -29,7 +29,8 @@ const initialState = {
 	account_opening_no: '',
 	status_1: '',
 	status_2: '',
-	handover_status: ''
+	handover_status: '',
+	account_opening_name: ''
 }
 
 toast.configure();
@@ -85,7 +86,7 @@ class SeniorHandoverModal extends React.Component {
 
 	render() {
 
-		const {lead_whatsapp_no, account_opening_no, status_1, status_2,handover_status} = this.state;
+		const {lead_whatsapp_no, account_opening_no, status_1, status_2,handover_status, account_opening_name} = this.state;
 		const {senior_modal_lead, senior_modal_visibility,setSeniorModalVisibility} = this.props;
 
 		return (
@@ -141,6 +142,25 @@ class SeniorHandoverModal extends React.Component {
 								/>
 								<div className={'mt4'}>
 									<CustomButton type="submit" id={'senior-button-margin-2'}>Update</CustomButton>
+								</div>
+							</form>
+						</div>
+						<div className={'mt2 f3'} style={{marginBottom: "-3%"}}>
+							<label >
+								Current Value: {senior_modal_lead.account_opening_name}
+							</label>
+							<form name="account_opening_name" className={'senior-handover-modal-form-component'} onSubmit={this.handleSubmit}>
+								<FormInput
+									type="text"
+									name="account_opening_name"
+									value={account_opening_name}
+									onChange={this.handleChange}
+									label="Account Opening Name"
+									style = {{marginTop: '0px', marginBottom: '0px'}}
+									required
+								/>
+								<div className={'mt4'}>
+									<CustomButton type="submit" id={'senior-button-margin-1'}>Update</CustomButton>
 								</div>
 							</form>
 						</div>

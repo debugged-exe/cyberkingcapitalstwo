@@ -15,6 +15,7 @@ const header = [
     "Lead contact",
     "Whatsapp number",
     "Account opening number",
+    "Account opening Name",
     "City",
     "status 1",
     "status 2",
@@ -52,6 +53,7 @@ const AdminViewLogsTable = ({lead_table_array, language}) => {
                             <td className={'admin-view-log-table-data-container'} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Whatsapp Number'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:"NULL"}`}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'Account Opening Name'}>{`${item.account_opening_name?item.account_opening_name:"NULL"}`}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'City'}>{item.lead_city}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Status 1'}>{`${item.status_1?item.status_1:"NULL"}`}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Status 2'}>{`${item.status_2?item.status_2:"NULL"}`}</td>

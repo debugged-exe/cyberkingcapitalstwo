@@ -21,7 +21,7 @@ toast.configure();
 
 const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLead,currentUser}) => {
 	const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
-    "Account Opening No.", "City", "Trading knowledge", "Preferred Language",
+    "Account Opening No.", "Account Opening Name", "City", "Trading knowledge", "Preferred Language",
     "status 1", "status 2", "Handover status", "Coded"];
 
     const onDoneHandler = (lead_id) => {
@@ -106,6 +106,7 @@ const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLe
                         <td className={'senior-handover-table-data-container'} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
                         <td className={'senior-handover-table-data-container'} data-label={'Whatsapp Number'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:"NULL"}`}</td>
                         <td className={'senior-handover-table-data-container'} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}</td>
+                        <td className={'senior-handover-table-data-container'} data-label={'Account Opening Name'}>{`${item.account_opening_name?item.account_opening_name:"NULL"}`}</td>
                         <td className={'senior-handover-table-data-container'} data-label={'City'}>{item.lead_city}</td>
                         <td className={'senior-handover-table-data-container'} data-label={'Trading Knowledge'}>{item.prior_knowledge}</td>
                         <td className={'senior-handover-table-data-container'} data-label={'Preferred Language'}>{item.preferred_language}</td>

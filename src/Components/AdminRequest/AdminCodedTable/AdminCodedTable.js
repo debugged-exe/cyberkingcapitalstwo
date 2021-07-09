@@ -24,7 +24,9 @@ const header = [
     "Telecaller Name",
     "Lead Id",
     "Lead Name",
-    "Lead Phone No."
+    "Lead Phone No.",
+    "Account Opening Number",
+    "Account Opening Name"
 ]
 
 toast.configure();
@@ -112,6 +114,8 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
                             <td className={'admin-coded-table-data-container'} data-label={'Lead Id'}>{item.lead_id}</td>
                             <td className={'admin-coded-table-data-container'} data-label={'Lead Name'}>{item.lead_name}</td>
                             <td className={'admin-coded-table-data-container'} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
+                            <td className={'admin-coded-table-data-container'} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:'NULL'}`}</td>
+                            <td className={'admin-coded-table-data-container'} data-label={'Account Opening Name'}>{`${item.account_opening_name?item.account_opening_name:'NULL'}`}</td>
                             <td className={'admin-coded-table-data-container pointer'}><AiIcons.AiFillCheckCircle className={'btn-center'} size={'2rem'} color={'green'} onClick={() => codedLead(item.lead_id, item.lead_phone_no, item.telecaller_id)}/></td>
                             <td className={'admin-coded-table-data-container pointer'}><ImIcons.ImCross className={'btn-center'} size={'1.5rem'} color={'red'} onClick={() => cancelCodedRequest(item.lead_id)}/></td>
                         </tr>
