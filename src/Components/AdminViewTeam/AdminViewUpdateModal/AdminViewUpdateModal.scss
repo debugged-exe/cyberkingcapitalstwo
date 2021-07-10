@@ -1,0 +1,116 @@
+.admin-modal-container{
+	position: fixed;
+	left: 0%;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+}
+.admin-tint{
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background: black;
+	opacity: 0.6;
+	z-index: 4;
+}
+
+.admin-modal{
+	position: absolute;
+	top: 5%;
+	left: 15%;
+	width: 70%;
+	height: 80%;
+	z-index: 6;
+	overflow-y: scroll;
+	background: white;
+	border: 1px solid black;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.admin-modal-header{
+	padding: 0.5%;
+	border-left: 4px solid black;
+}
+.admin-grid-div{
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+.admin-modal-lead-details{
+	text-align: center;
+	display: grid;
+	grid-template-columns: 100%;
+
+}
+
+.admin-detail-item{
+	font-size: 1.5rem;
+	border: 1px solid gray;
+}
+
+.admin-modal-form{
+	margin: 3%;
+	margin-left: 6%;
+}
+.admin-modal-form-component{
+	display: grid;
+	grid-template-columns: 70% 30%;
+	margin-top: -10%;
+}
+.visible{
+	display: block;
+}
+
+.hidden{
+	display: hidden;
+}
+#admin-button-margin-1{
+}
+#admin-button-margin-2{
+}
+#admin-button-margin-3{
+}
+#admin-button-margin-4{
+}
+@media only screen and (max-width: 768px){
+	.admin-grid-div{
+		display: grid;
+		grid-template-columns: 100%;
+	}
+}
+
+@media only screen and (max-width: 700px){
+	#admin-button-margin-1{
+        margin-left: 0;
+        margin-top: -30%;
+    }
+    #admin-button-margin-2{
+        margin-left: 0;
+        margin-top: -30%;
+    }
+    #admin-button-margin-3{
+        margin-left: 0;
+        margin-top: -30%;
+    }
+    #admin-button-margin-4{
+        margin-left: 0;
+        margin-top: -30%;
+    }
+	.admin-grid-div{
+		grid-template-columns: 100%;
+	}
+
+	.admin-modal-form-component{
+		display: grid;
+		grid-template-columns: 100%;
+	}
+}
+
+@media only screen and (max-width: 500px){
+	.admin-modal{
+		left: 5%;
+		width: 90%;
+		height: 90%;
+	}
+}

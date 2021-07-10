@@ -11,7 +11,11 @@ const {
     SET_ASSIGNED_JUNIOR_ARRAY,
     SET_JR_COUNT_ARRAY,
     SET_PG_COUNT,
-    SET_JUNIOR_ID} = AdminOverviewActionTypes;
+    SET_JUNIOR_ID,
+    SET_UPDATE_MODAL_VISIBILITY,
+    SET_UPDATE_MODAL_LEAD,
+    REASSIGN_JR_LOG_ARRAY
+} = AdminOverviewActionTypes;
 
 const initialState = {
     senior_telecaller_array: [],
@@ -24,7 +28,9 @@ const initialState = {
     assigned_junior_array: [],
     jr_count_array: [],
     pg_count: 0,
-    junior_id: ''
+    junior_id: '',
+    update_modal_visibility: false,
+    update_modal_lead: {}
 }
 
 const adminOverviewReducer = (state = initialState, {type, payload}) => {
@@ -119,6 +125,44 @@ const adminOverviewReducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 junior_id: payload
+            }
+        case SET_UPDATE_MODAL_VISIBILITY:
+            return {
+                ...state,
+                update_modal_visibility: payload
+            }
+        case SET_UPDATE_MODAL_LEAD:
+            if(payload.lead_id)
+            {
+                 return{
+                    ...state,
+                    update_modal_lead: payload,
+                    update_modal_visibility: true
+                }
+            }
+            else
+            {
+                return{
+                    ...state,
+                    update_modal_lead: payload,
+                    update_modal_visibility: false
+                }
+            }
+        case REASSIGN_JR_LOG_ARRAY:
+            const reassigned = [];
+            state.junior_log_array.map(item => {
+                if(item.lead_id===payload.lead_id)
+                {
+                    reassigned.push(payload)
+                }
+                else
+                {
+                    reassigned.push(item);
+                }
+            })
+            return {
+                ...state,
+                junior_log_array: reassigned
             }
         default:
             return state

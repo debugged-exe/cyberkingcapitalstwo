@@ -11,7 +11,11 @@ const {
 	SET_ASSIGNED_JUNIOR_ARRAY,
 	SET_JR_COUNT_ARRAY,
 	SET_PG_COUNT,
-	SET_JUNIOR_ID} = AdminOverviewActionTypes;
+	SET_JUNIOR_ID,
+	SET_UPDATE_MODAL_VISIBILITY,
+	SET_UPDATE_MODAL_LEAD,
+	REASSIGN_JR_LOG_ARRAY
+} = AdminOverviewActionTypes;
 
 export const setAdminSeniorTelecallerArray = array => ({
 	type: SET_SENIOR_TELECALLER_ARRAY,
@@ -62,3 +66,18 @@ export const setJuniorId = id => ({
 	type: SET_JUNIOR_ID,
 	payload: id
 })
+
+export const setUpdateModalVisibility = visible => ({
+	type: SET_UPDATE_MODAL_VISIBILITY,
+	payload: visible
+});
+
+export const setUpdateModalLead = obj => ({
+	type: SET_UPDATE_MODAL_LEAD,
+	payload: obj
+});
+
+export const reassignJrLogArray = obj => ({
+	type: REASSIGN_JR_LOG_ARRAY,
+	payload: obj
+});

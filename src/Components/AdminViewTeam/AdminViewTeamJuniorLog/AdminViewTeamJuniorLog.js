@@ -9,7 +9,8 @@ import {
     setJuniorId,
     setJuniorLogArray,
     setJuniorLogView,
-    setPgCount
+    setPgCount,
+    setUpdateModalLead
 } from "../../../redux/admin-panel/admin-overview/admin.overview.actions";
 
 // reselect
@@ -25,12 +26,14 @@ const header = [
     'Sr No',
     'Lead ID',
     'Lead Name',
+    'Account Opening No',
+    'Account Opening Name',
     'Status 1',
     'Status 2',
     'Handover Update'
 ]
 
-const AdminViewTeamJuniorLog = ({setJuniorId,junior_id,pg_count,setJuniorLogArray,setPgCount,juniorLogView, junior_log_array, setJuniorLogView}) => {
+const AdminViewTeamJuniorLog = ({setJuniorId,junior_id,pg_count,setJuniorLogArray,setPgCount,juniorLogView, junior_log_array, setJuniorLogView,setUpdateModalLead}) => {
     const [pages, setPages] = useState(0);
     const [pageNumbers, setPageNumbers] = useState([]);
     const perPage = 10;
@@ -111,6 +114,12 @@ const AdminViewTeamJuniorLog = ({setJuniorId,junior_id,pg_count,setJuniorLogArra
                                     data-label={'Lead Name'}>{item.lead_name}
                                 </td>
                                 <td className={'admin-view-junior-log-data-container'}
+                                    data-label={'Account Opening No'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}
+                                </td>
+                                <td className={'admin-view-junior-log-data-container'}
+                                    data-label={'Account Opening Name'}>{`${item.account_opening_name?item.account_opening_name:"NULL"}`}
+                                </td>
+                                <td className={'admin-view-junior-log-data-container'}
                                     data-label={'Status 1'}>{`${item.status_1?item.status_1:"NULL"}`}
                                 </td>
                                 <td className={'admin-view-junior-log-data-container'}
@@ -118,6 +127,9 @@ const AdminViewTeamJuniorLog = ({setJuniorId,junior_id,pg_count,setJuniorLogArra
                                 </td>
                                 <td className={'admin-view-junior-log-data-container'}
                                     data-label={'Handover'}>{`${item.handover_status?item.handover_status:"NULL"}`}
+                                </td>
+                                <td className={'admin-view-junior-log-data-container'}>
+                                    <button className="ma1" onClick={() => setUpdateModalLead(item)}>Update</button>
                                 </td>
                             </tr>
                         )
@@ -148,7 +160,8 @@ const mapDispatchToProps = dispatch => ({
     setJuniorLogView: visible => dispatch(setJuniorLogView(visible)),
     setPgCount: number => dispatch(setPgCount(number)),
     setJuniorLogArray: array => dispatch(setJuniorLogArray(array)),
-    setJuniorId: id => dispatch(setJuniorId(id))
+    setJuniorId: id => dispatch(setJuniorId(id)),
+    setUpdateModalLead: obj => dispatch(setUpdateModalLead(obj))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminViewTeamJuniorLog);

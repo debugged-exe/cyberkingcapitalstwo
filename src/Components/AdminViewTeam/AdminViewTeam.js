@@ -10,6 +10,7 @@ import PaymentCard from '../PaymentCard/PaymentCard.js';
 import AdminViewTeamSeniorTable from './AdminViewTeamSeniorTable/AdminViewTeamSeniorTable.js';
 import AdminViewTeamJuniorTable from './AdminViewTeamJuniorTable/AdminViewTeamJuniorTable.js';
 import AdminViewTeamJuniorLog from './AdminViewTeamJuniorLog/AdminViewTeamJuniorLog.js';
+import AdminViewUpdateModal from './AdminViewUpdateModal/AdminViewUpdateModal.js';
 import * as FaIcons from 'react-icons/fa';
 
 // css
@@ -173,6 +174,7 @@ const AdminViewTeam = ({admin_count_array, setAdminSeniorTelecallerArray, setAdm
         			<AdminViewTeamJuniorTable  />
         			<AdminViewTeamJuniorLog />
 					<AdminViewTeamJuniorCount />
+					<AdminViewUpdateModal />
             	</div>
 			</div>
 			<ToastContainer/>

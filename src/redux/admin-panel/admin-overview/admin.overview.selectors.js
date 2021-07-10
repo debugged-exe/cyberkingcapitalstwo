@@ -61,3 +61,13 @@ export const selectJuniorId = createSelector(
 	[selectAdminOverview],
 	(admin) => admin.junior_id
 )
+
+export const selectUpdateModalLead = createSelector(
+	[selectAdminOverview],
+	(lead) => lead.update_modal_lead
+)
+
+export const selectUpdateModalVisibility = createSelector(
+	[selectAdminOverview],
+	(visibility) => visibility.update_modal_visibility
+)
