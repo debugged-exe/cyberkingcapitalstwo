@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from 'react';
+import PuffLoader from "react-spinners/PuffLoader";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,8 +26,12 @@ const header = ['Sr No', 'Telecaller ID', 'Telecaller Name', 'Designation', 'Poi
 
 const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminModalLead, admin_count_array, admin_payment_team_array}) => {
 
+	const [loader, setLoader] = useState(true)
+
+	const [pageNumbersMarathi, setPageNumbersMarathi] = useState([]);
+	const [pageNumbersHindi, setPageNumbersHindi] = useState([]);
+
 	const [pages, setPages] = useState(0);
-    const [pageNumbers, setPageNumbers] = useState([]);
     const perPage = 10;
 
     const [filter, setFilter] = useState('marathi');
@@ -56,14 +61,14 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 					autoClose: 2500
 				})
 			})
-		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count')
+		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count_marathi')
 		.then(response => response.json())
 		.then(resp => {
 			var arr = [];
 			for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
                 arr.push(i);
             }
-            setPageNumbers(arr);
+            setPageNumbersMarathi(arr);
 		})
 		.catch(err => {
             console.log(err);
@@ -72,7 +77,23 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
                 autoClose: 2500,
             });
         })
-		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers',{
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count_hindi')
+		.then(response => response.json())
+		.then(resp => {
+			var arr = [];
+			for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                arr.push(i);
+            }
+            setPageNumbersHindi(arr);
+		})
+		.catch(err => {
+            console.log(err);
+            toast.error("Failed to fetch telecaller count.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_marathi',{
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -82,6 +103,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
         .then(response => response.json())
         .then(resp => {
         	setAdminPaymentTeamArray(resp);
+        	setLoader(false);
         })
         .catch(err => {
         	console.log(err);
@@ -89,28 +111,110 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
+            setLoader(false);
         })
 	}, []);
 
+
 	const fetchNewPage = (pgNo) => {
-		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers',{
+		setLoader(true);
+		if(filter==='marathi')
+		{
+			fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_marathi',{
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 pgNo: pgNo
             })
-        })
-        .then(response => response.json())
-        .then(resp => {
-        	setAdminPaymentTeamArray(resp);
-        })
-        .catch(err => {
-        	console.log(err);
-            toast.error("Failed to fetch telecallers.", {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
-            });
-        })
+	        })
+	        .then(response => response.json())
+	        .then(resp => {
+	        	setAdminPaymentTeamArray(resp);
+	        	setLoader(false)
+	        })
+	        .catch(err => {
+	        	console.log(err);
+	            toast.error("Failed to fetch telecallers.", {
+	                position: toast.POSITION.TOP_CENTER,
+	                autoClose: 2500,
+	            });
+	            setLoader(false);
+	        })
+		}
+		else
+		{
+			fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_hindi',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: pgNo
+            })
+	        })
+	        .then(response => response.json())
+	        .then(resp => {
+	        	setAdminPaymentTeamArray(resp);
+	        	setLoader(false);
+	        })
+	        .catch(err => {
+	        	console.log(err);
+	            toast.error("Failed to fetch telecallers.", {
+	                position: toast.POSITION.TOP_CENTER,
+	                autoClose: 2500,
+	            });
+	            setLoader(false);
+	        })
+		}
+	}
+
+	const filterHandler = (filter) => {
+		setLoader(true);
+		setFilter(filter);
+		if(filter==='marathi')
+		{
+			fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_marathi',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: 0
+            })
+	        })
+	        .then(response => response.json())
+	        .then(resp => {
+	        	setAdminPaymentTeamArray(resp);
+	        	setLoader(false);
+	        })
+	        .catch(err => {
+	        	console.log(err);
+	            toast.error("Failed to fetch telecallers.", {
+	                position: toast.POSITION.TOP_CENTER,
+	                autoClose: 2500,
+	            });
+	            setLoader(false);
+	        })
+		}
+		else
+		{
+			fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_hindi',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: 0
+            })
+	        })
+	        .then(response => response.json())
+	        .then(resp => {
+	        	setAdminPaymentTeamArray(resp);
+	        	setLoader(false);
+	        })
+	        .catch(err => {
+	        	console.log(err);
+	            toast.error("Failed to fetch telecallers.", {
+	                position: toast.POSITION.TOP_CENTER,
+	                autoClose: 2500,
+	            });
+	            setLoader(false);
+	        })
+		}
 	}
 
 	return (
@@ -128,7 +232,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 			<div className="admin-payment-details">
 				<div className={'flex justify-center items-center center mb4 w-100'}>
 					<label className={'b f3 mr3'}>Select Language: </label>
-					<select name="lang" className={'f4 ml1'} onChange={(event) => setFilter(event.target.value)}>
+					<select name="lang" className={'f4 ml1'} onChange={(event) => filterHandler(event.target.value)}>
 						<option value="marathi">Marathi</option>
 						<option value="hindi">Hindi</option>
 					</select>
@@ -163,11 +267,23 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 							})}
 						</tbody>
 					</table>
+					<div className="puff-loader" style={{display: `${loader?'flex': 'none'}`}}>
+                    	<PuffLoader loading={true} size={200} color={"red"}/>
+                	</div>
 					<div className="admin-payment-pagination-container w-100 pb4">
 			            <p>. . </p>
-			            {pageNumbers.map((number, index) => (
-			                <button key={index} onClick={() => fetchNewPage(number)} className="admin-payment-page-btn">{number}</button>
-			            ))}
+			            {
+
+			            	filter==='marathi'
+			            	?
+			            	pageNumbersMarathi.map((number, index) => (
+			                	<button key={index} onClick={() => fetchNewPage(number-1)} className="admin-payment-page-btn">{number}</button>
+			            	))
+			            	:
+			            	pageNumbersHindi.map((number, index) => (
+			                	<button key={index} onClick={() => fetchNewPage(number-1)} className="admin-payment-page-btn">{number}</button>
+			            	))
+			            }
 			            <p>. . </p>
 			        </div>
 					<AdminPaymentModal />
