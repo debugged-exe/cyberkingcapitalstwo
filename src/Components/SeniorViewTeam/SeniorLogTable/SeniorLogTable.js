@@ -82,7 +82,7 @@ const SeniorLogTable = ({current_junior_caller_id, pgCount, setPgCount,junior_le
             <tr>
                 {header.map((item, index) => {
                     return (
-                        <th className={'senior-table-header-container'}>{item}</th>
+                        <th className={'senior-table-header-container'} key={index}>{item}</th>
                     );
                 })}
             </tr>
@@ -90,7 +90,7 @@ const SeniorLogTable = ({current_junior_caller_id, pgCount, setPgCount,junior_le
             <tbody className={'senior-table-body-container'}>
             {junior_lead_array.map((item, index) => {
                 return (
-                    <tr className="senior-table-row-container">
+                    <tr className="senior-table-row-container" key={index}>
                         <td className={'senior-table-data-container'} data-label={'Lead ID'}>{item.lead_id}</td>
                         <td className={'senior-table-data-container'} data-label={'Assigned to'}>{item.assigned_to}</td>
                         <td className={'senior-table-data-container'} data-label={'Lead Name'}>{item.lead_name}</td>

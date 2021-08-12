@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware } from 'redux';
+import {createStore } from 'redux';
 
 //for session management
 import {persistStore} from 'redux-persist';
@@ -14,5 +14,5 @@ if(process.env.NODE_ENV==='development')
 	middlewares.push(logger);
 }
 
-export const store = createStore(rootReducer, applyMiddleware(...middlewares));
+export const store = createStore(rootReducer);
 export const persistor = persistStore(store);

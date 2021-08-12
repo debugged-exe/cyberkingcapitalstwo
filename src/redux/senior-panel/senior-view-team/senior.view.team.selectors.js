@@ -26,3 +26,13 @@ export const selectCurrentJuniorCallerId = createSelector(
     [selectSeniorViewTeam],
     (team) => team.current_junior_caller_id
 );
+
+export const selectJuniorCountArray = createSelector(
+    [selectSeniorViewTeam],
+    (team) => team.junior_count_array
+);
+
+export const selectJuniorCountVisibility = createSelector(
+    [selectSeniorViewTeam],
+    (team) => team.junior_count_visibility
+);
