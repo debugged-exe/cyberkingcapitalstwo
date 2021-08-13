@@ -167,7 +167,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
         .then(resp => {
             if(resp==='Less than 1')
             {
-                toast.error("1 hour not yet elapsed from previous fetch", {
+                toast.error("15 minutes not yet elapsed from previous fetch", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
