@@ -6,6 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { connect } from 'react-redux';
 import {setAdminCodedRequestArray, setAdminDeleteRequestArray, setAdminRequestLanguage} from '../../redux/admin-panel/admin-request/admin.request.actions.js'
 
+// reselect
+import {createStructuredSelector} from 'reselect';
+import {selectAdminRequestLanguage} from '../../redux/admin-panel/admin-request/admin.request.selectors.js';
+
 // component
 import AdminCodedTable from "./AdminCodedTable/AdminCodedTable";
 import AdminDeleteTable from "./AdminDeleteTable/AdminDeleteTable";
@@ -49,27 +53,30 @@ const deletetableLogs = [
 
 toast.configure();
 
-const AdminRequest = ({setAdminCodedRequestArray, setAdminDeleteRequestArray, setAdminRequestLanguage}) => {
+const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdminDeleteRequestArray, setAdminRequestLanguage}) => {
+
+    const [codedPageNumbersMarathi, setCodedPageNumbersMarathi] = useState([]);
+    const [codedPageNumbersHindi, setCodedPageNumbersHindi] = useState([]);
 
     const [codedPages, setCodedPages] = useState(0);
-    const [codedPageNumbers, setCodedPageNumbers] = useState([]);
     const perPage = 10;
 
+    const [deletePageNumbersHindi, setDeletePageNumbersHindi] = useState([]);
+    const [deletePageNumbersMarathi, setDeletePageNumbersMarathi] = useState([]);
+
     const [deletePages, setDeletePages] = useState(0);
-    const [deletePageNumbers, setDeletePageNumbers] = useState([]);
 
     const fetchHandover = () => {
-        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request_pgcount')
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request_pgcount_hindi')
         .then(response => response.json())
         .then(resp => {
             if(resp.count)
             {
-                setCodedPages(resp.count)
                 var arr = [];
                 for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
                     arr.push(i);
                 }
-                setCodedPageNumbers(arr)
+                setCodedPageNumbersHindi(arr)
             }
         })
         .catch(err => {
@@ -80,7 +87,7 @@ const AdminRequest = ({setAdminCodedRequestArray, setAdminDeleteRequestArray, se
             });
         })
 
-        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request', {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request_hindi', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -104,17 +111,16 @@ const AdminRequest = ({setAdminCodedRequestArray, setAdminDeleteRequestArray, se
     }
 
     const fetchDelete = () => {
-        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request_pgcount')
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request_pgcount_hindi')
         .then(response => response.json())
         .then(resp => {
             if(resp.count)
             {
-                setDeletePages(resp.count)
                 var arr = [];
                 for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
                     arr.push(i);
                 }
-                setDeletePageNumbers(arr)
+                setDeletePageNumbersHindi(arr)
             }
         })
         .catch(err => {
@@ -125,7 +131,7 @@ const AdminRequest = ({setAdminCodedRequestArray, setAdminDeleteRequestArray, se
             });
         })
 
-        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request', {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request_hindi', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -149,51 +155,105 @@ const AdminRequest = ({setAdminCodedRequestArray, setAdminDeleteRequestArray, se
     }
 
     const fetchHandoverNewPage = (pgNo) => {
-        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request', {
+        if(admin_request_language==='hindi')
+        {
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request_hindi', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 pgNo: pgNo
             })
-        })
-        .then(response => response.json())
-        .then(resp => {
-            if(resp!=='fail')
-            {
-                setAdminCodedRequestArray(resp);
-            }
-        })
-        .catch(err => {
-            console.log(err)
-            toast.error("Error loading handover requests.", {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
-            });
-        })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                if(resp!=='fail')
+                {
+                    setAdminCodedRequestArray(resp);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error("Error loading handover requests.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+        }
+        else
+        {
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request_marathi', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: pgNo
+            })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                if(resp!=='fail')
+                {
+                    setAdminCodedRequestArray(resp);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error("Error loading handover requests.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+        }
     }
 
     const fetchDeleteNewPage = (pgNo) => {
-        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request', {
+        if(admin_request_language==='hindi')
+        {
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request_hindi', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 pgNo: pgNo
             })
-        })
-        .then(response => response.json())
-        .then(resp => {
-            if(resp!=='fail')
-            {
-                setAdminDeleteRequestArray(resp);
-            }
-        })
-        .catch(err => {
-            console.log(err)
-            toast.error("Error loading handover requests.", {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
-            });
-        })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                if(resp!=='fail')
+                {
+                    setAdminDeleteRequestArray(resp);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error("Error loading handover requests.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+        }
+        else
+        {
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request_marathi', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: pgNo
+            })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                if(resp!=='fail')
+                {
+                    setAdminDeleteRequestArray(resp);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error("Error loading handover requests.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+        }
     }
 
     useEffect(() => {
@@ -203,6 +263,178 @@ const AdminRequest = ({setAdminCodedRequestArray, setAdminDeleteRequestArray, se
 
     const langHandler = (event) => {
         setAdminRequestLanguage(event.target.value)
+        if(event.target.value==='hindi')
+        {
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request_pgcount_hindi')
+            .then(response => response.json())
+            .then(resp => {
+                if(resp.count)
+                {
+                    var arr = [];
+                    for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                        arr.push(i);
+                    }
+                    setCodedPageNumbersHindi(arr)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Error loading handover requests page count.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request_hindi', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    pgNo: 0
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                if(resp!=='fail')
+                {
+                    setAdminCodedRequestArray(resp);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error("Error loading handover requests.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request_pgcount_hindi')
+            .then(response => response.json())
+            .then(resp => {
+                if(resp.count)
+                {
+                    var arr = [];
+                    for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                        arr.push(i);
+                    }
+                    setDeletePageNumbersHindi(arr)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Error loading delete requests page count.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request_hindi', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    pgNo: 0
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                if(resp!=='fail')
+                {
+                    setAdminDeleteRequestArray(resp);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error("Error loading delete requests.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+        }
+        else
+        {
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request_pgcount_marathi')
+            .then(response => response.json())
+            .then(resp => {
+                if(resp.count)
+                {
+                    var arr = [];
+                    for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                        arr.push(i);
+                    }
+                    setCodedPageNumbersMarathi(arr)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Error loading handover requests page count.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request_marathi', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    pgNo: 0
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                if(resp!=='fail')
+                {
+                    setAdminCodedRequestArray(resp);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error("Error loading handover requests.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request_pgcount_marathi')
+            .then(response => response.json())
+            .then(resp => {
+                if(resp.count)
+                {
+                    var arr = [];
+                    for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                        arr.push(i);
+                    }
+                    setDeletePageNumbersMarathi(arr)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Error loading delete requests page count.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_delete_request_marathi', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    pgNo: 0
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                if(resp!=='fail')
+                {
+                    setAdminDeleteRequestArray(resp);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error("Error loading delete requests.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+        }
     }
 
     return (
@@ -219,9 +451,17 @@ const AdminRequest = ({setAdminCodedRequestArray, setAdminDeleteRequestArray, se
                 <AdminCodedTable />
                 <div className="senior-request-pagination-container w-100 pb4">
                     <p>. . </p>
-                    {codedPageNumbers.map((number, index) => (
-                        <button key={index} onClick={() => fetchHandoverNewPage(number-1)} className="senior-request-page-btn">{number}</button>
-                    ))}
+                    {
+                        admin_request_language==='hindi'
+                        ?
+                        codedPageNumbersHindi.map((number, index) => (
+                            <button key={index} onClick={() => fetchHandoverNewPage(number-1)} className="senior-request-page-btn">{number}</button>
+                        ))
+                        :
+                        codedPageNumbersMarathi.map((number, index) => (
+                            <button key={index} onClick={() => fetchHandoverNewPage(number-1)} className="senior-request-page-btn">{number}</button>
+                        ))
+                    }
                     <p>. . </p>
                 </div>
             </div>
@@ -232,9 +472,17 @@ const AdminRequest = ({setAdminCodedRequestArray, setAdminDeleteRequestArray, se
             </div>
             <div className="senior-request-pagination-container w-100 pb4">
                 <p>. . </p>
-                {deletePageNumbers.map((number, index) => (
-                    <button key={index} onClick={() => fetchDeleteNewPage(number-1)} className="senior-request-page-btn">{number}</button>
-                ))}
+                {
+                    admin_request_language==='hindi'
+                    ?
+                    deletePageNumbersHindi.map((number, index) => (
+                        <button key={index} onClick={() => fetchDeleteNewPage(number-1)} className="senior-request-page-btn">{number}</button>
+                    ))
+                    :
+                    deletePageNumbersMarathi.map((number, index) => (
+                        <button key={index} onClick={() => fetchDeleteNewPage(number-1)} className="senior-request-page-btn">{number}</button>
+                    ))
+                }
                 <p>. . </p>
             </div>
             <ToastContainer />
@@ -242,6 +490,9 @@ const AdminRequest = ({setAdminCodedRequestArray, setAdminDeleteRequestArray, se
     );
 }
 
+const mapStateToProps =  createStructuredSelector({
+    admin_request_language: selectAdminRequestLanguage
+});
 
 const mapDispatchToProps = dispatch => ({
     setAdminCodedRequestArray: array => dispatch(setAdminCodedRequestArray(array)),
@@ -249,4 +500,4 @@ const mapDispatchToProps = dispatch => ({
     setAdminRequestLanguage: lang => dispatch(setAdminRequestLanguage(lang))
 });
 
-export default connect(null, mapDispatchToProps)(AdminRequest);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminRequest);
