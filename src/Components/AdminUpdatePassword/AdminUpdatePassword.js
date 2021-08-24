@@ -101,12 +101,13 @@ class AdminUpdatePassword extends Component {
         return (
             <div className={'admin-update-container'}>
                 <p className={'f2 flex justify-center b tc'}>Update Password Of Telecaller</p>
-                <form className={'w-50 center'} id={'admin-update-form'} onSubmit={this.handleSubmit}>
-                    <div className={'center flex justify-center items-center pb3'}>
+                <form className={'w-50-l w-50-m w-50-ns w-80 center '} id={'admin-update-form'}
+                      onSubmit={this.handleSubmit}>
+                    <div className={'center flex flex-wrap justify-center items-center pb3'}>
                         <label className={'b f3 mr3'}>Select Designation of Caller: </label>
                         <select
                             name="designation"
-                            className={'f4 ml1'}
+                            className={'f4 ml1 margin-handler-1'}
                             onChange={this.handleChange}
                             required
                         >
@@ -115,10 +116,11 @@ class AdminUpdatePassword extends Component {
                             <option value={"junior"}>Junior Telecaller</option>
                         </select>
                     </div>
-                    <div className={'center flex justify-center items-center'}>
+                    <div className={'center flex flex-wrap justify-center items-center'}>
                         <label className={'b f3 mr3'}>Search for Telecaller: </label>
-                        <input type={"text"} name={"telecaller_id"} onChange={this.handleChange} list={'callers'}
-                               required/>
+                        <input type={"text"} className={'margin-handler-2 f4'} name={"telecaller_id"}
+                               onChange={this.handleChange} list={'callers'}
+                               required placeholder={'Enter Telecaller Id'}/>
                         <datalist id={'callers'}>
                             {
                                 dataCallers.filter(item => item.designation === designation).map((item, index) => {
@@ -129,31 +131,33 @@ class AdminUpdatePassword extends Component {
                             }
                         </datalist>
                     </div>
+                    <div className={'w-50 center form-input-handler'}>
+                        <FormInput
+                            type="new_password"
+                            name="new_password"
+                            value={new_password}
+                            onChange={this.handleChange}
+                            label="New Password"
+                            style={{marginTop: '0px', marginBottom: '0px'}}
+                            required
+                        />
+                        <FormInput
+                            type="confirm_password"
+                            name="confirm_password"
+                            value={confirm_password}
+                            onChange={this.handleChange}
+                            label="Confirm Password"
+                            style={{marginTop: '0px', marginBottom: '0px'}}
+                            required
+                        />
+                    </div>
 
-                    <FormInput
-                        type="new_password"
-                        name="new_password"
-                        value={new_password}
-                        onChange={this.handleChange}
-                        label="New Password"
-                        style={{marginTop: '0px', marginBottom: '0px'}}
-                        required
-                    />
-                    <FormInput
-                        type="confirm_password"
-                        name="confirm_password"
-                        value={confirm_password}
-                        onChange={this.handleChange}
-                        label="Confirm Password"
-                        style={{marginTop: '0px', marginBottom: '0px'}}
-                        required
-                    />
-                    <CustomButton
-                        type='submit'
-                        style={{width: '55%'}}
-                    >
-                        Update Password
-                    </CustomButton>
+                    <div className={'flex justify-center items-center'}>
+                        <button className={'f4 b link dim ph3 pv2 mb2 dib white bg-black button-handler'}
+                                type={'submit'}>
+                            Update Password
+                        </button>
+                    </div>
                 </form>
                 <ToastContainer/>
             </div>
