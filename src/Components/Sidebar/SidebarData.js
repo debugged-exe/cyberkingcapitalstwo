@@ -55,6 +55,11 @@ export const SidebarData = {
             icon: <GrIcons.GrScorecard size={'2rem'}/>
         },
         {
+            path: '/admin/update-password',
+            title: "Update Password",
+            icon: <GrIcons.GrPowerReset size={'2rem'}/>
+        },
+        {
             path: '/',
             title: "Sign Out",
             icon: <FiIcons.FiLogOut size={'2rem'}/>

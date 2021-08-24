@@ -9,6 +9,7 @@ import AdminViewTeam from "../../Components/AdminViewTeam/AdminViewTeam";
 import AdminViewLogs from "../../Components/AdminViewLogs/AdminViewLogs";
 import ProfileSection from "../../Components/ProfileSection/ProfileSection";
 import AdminCounts from "../../Components/AdminCounts/AdminCounts";
+import AdminUpdatePassword from "../../Components/AdminUpdatePassword/AdminUpdatePassword";
 
 const AdminPanel = ({match}) => {
     return (
@@ -21,6 +22,7 @@ const AdminPanel = ({match}) => {
 				<Route path={`${match.path}/overview`}><AdminViewTeam /></Route>
 				<Route path={`${match.path}/counts`}><AdminCounts /></Route>
 				<Route path={`${match.path}/logs`}><AdminViewLogs /></Route>
+				<Route path={`${match.path}/update-password`}><AdminUpdatePassword /></Route>
         	</Switch>
         </div>
     );
