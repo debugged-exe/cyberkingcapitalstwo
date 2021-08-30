@@ -39,6 +39,8 @@ const AdminCounts = () => {
             <PaymentCard Heading={'Pending Marathi'} icon={<FaIcons.FaLanguage size={'5rem'} color={'green'}/>} numeric={counts.marathi_pending}/>
             <PaymentCard Heading={'Processed Hindi'} icon={<FaIcons.FaLanguage size={'5rem'} color={'red'}/>} numeric={counts.hindi_processed}/>
             <PaymentCard Heading={'Processed Marathi'} icon={<FaIcons.FaLanguage size={'5rem'} color={'green'}/>} numeric={counts.marathi_processed}/>
+            <PaymentCard Heading={'Delete Requests Hindi'} icon={<FaIcons.FaLanguage size={'5rem'} color={'red'}/>} numeric={counts.hindi_delete}/>
+            <PaymentCard Heading={'Delete Requests Marathi'} icon={<FaIcons.FaLanguage size={'5rem'} color={'green'}/>} numeric={counts.marathi_delete}/>
             <ToastContainer/>
         </div>
     );
