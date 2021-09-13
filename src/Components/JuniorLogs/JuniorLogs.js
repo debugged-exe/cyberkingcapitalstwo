@@ -245,7 +245,11 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
 			<div className="stats">
            		{
            			log_stat_array.map((item,index) => {
-           				return(<LogCard key={index} Heading={item.title} numeric={item.numeric} />);
+           				return(
+                        <div key={index}>
+                            <LogCard Heading={item.title} numeric={item.numeric} />
+                        </div>
+                        );
            			})
            		}
             </div>
