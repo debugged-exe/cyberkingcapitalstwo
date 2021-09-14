@@ -101,6 +101,8 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
                     return item
                 if(filter === 'lead_id')
                     filterValue = parseInt(filterValue);
+                if(filter === 'custom')
+                    return item
                 return item.[filter] === filterValue
             }).map((item, index) => {
                 var flag=null;

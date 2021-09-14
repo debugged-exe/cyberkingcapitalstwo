@@ -1,4 +1,5 @@
 import React,{useState, useEffect} from 'react';
+import PuffLoader from "react-spinners/PuffLoader";
 import {ToastContainer,toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -56,6 +57,8 @@ const LogStatArray = [
 ]
 
 const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTableLogArray, setModalVisibility}) => {
+
+    const [loader, setLoader] = useState(true)
 
     const [pages, setPages] = useState(0);
     const [pageNumbers, setPageNumbers] = useState([]);
@@ -131,10 +134,12 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
         })
         .then(response => response.json())
         .then(resp => {
+            setLoader(false);
             setJuniorTableLogArray(resp);
         })
         .catch(err => {
             console.log(err);
+            setLoader(false)
             toast.error("Error Loading Table", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
@@ -144,6 +149,55 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
 
     const [filter, setFilter] = useState('*');
     const handleChange = (event) => {
+        const {telecaller_id} = currentUser;
+        if(filter!=='custom'){
+            setLoader(true);
+            fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_pgcount',{
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                    telecaller_id: telecaller_id
+                })
+            })
+            .then(resp => resp.json())
+            .then( response => {
+                setPages(response.count);
+                var arr = [];
+                for (let i = 1; i <= Math.ceil(response.count / perPage); i++) {
+                    arr.push(i);
+                }
+                setPageNumbers(arr);
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Error pg count", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
+            })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                    telecaller_id: telecaller_id,
+                    pgNo: 0
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                setLoader(false)
+                setJuniorTableLogArray(resp);
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.error("Error Loading Table", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
+            })  
+        }
         setFilter(event.target.value);
     }
 
@@ -153,6 +207,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
     }
 
     const fetchNewLeads = () => {
+        setLoader(true)
         const {telecaller_id, username, preferred_language} = currentUser;
         fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_new', {
             method: 'post',
@@ -181,6 +236,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
             }
             else if(resp!=='Unable to assign you leads' || resp!=='Unable to fetch')
             {
+                setLoader(false)
                 setJuniorTableLogArray(resp);
                 toast.success("New Leads assigned successfully", {
                     position: toast.POSITION.TOP_CENTER,
@@ -190,6 +246,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
         })
         .catch(err => {
             console.log(err);
+            setLoader(false)
             toast.error("Unable to fetch new leads", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
@@ -218,25 +275,156 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
 
     const fetchNewPage = (pgNo) => {
         const {telecaller_id} = currentUser;
-        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                telecaller_id: telecaller_id,
-                pgNo: pgNo
+        if(filter!=='custom'){
+            setLoader(true)
+            fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    telecaller_id: telecaller_id,
+                    pgNo: pgNo
+                })
             })
-        })
-        .then(response => response.json())
-        .then(resp => {
-            setJuniorTableLogArray(resp)
-        })
-        .catch(err => {
-            console.log(err);
-            toast.error("Error Loading Table", {
-                    position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
-                });
-        })
+            .then(response => response.json())
+            .then(resp => {
+                setLoader(false)
+                setJuniorTableLogArray(resp)
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.error("Error Loading Table", {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 4000,
+                    });
+            })
+        }
+        else
+        {
+            setLoader(true)
+            fetch('https://aqueous-mesa-28052.herokuapp.com/junior/logs_by_count', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    telecaller_id: telecaller_id,
+                    pgNo: pgNo,
+                    count_type: countType
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                setLoader(false)
+                setJuniorTableLogArray(resp)
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.error("Error Loading Table", {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 4000,
+                    });
+            })
+        }
+    }
+
+
+    const [countType, setCountType] = useState('')
+
+    const countWiseLogHandler = (title, numeric) => {
+        const {telecaller_id} = currentUser;
+        var count_type = title.split(' ').reduce((accumulator, item) => {
+            return accumulator = accumulator + item.toLowerCase();
+        }, '')
+
+        var arr = []
+
+        setCountType(count_type)
+        setFilter('custom')
+
+        if(count_type==='status1updated' || count_type==='status2updated')
+        {
+            fetch('https://aqueous-mesa-28052.herokuapp.com/junior/status_null_count', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    telecaller_id: telecaller_id,
+                    count_type: count_type
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                setPages(resp[0].count);
+                var arr = [];
+                for (let i = 1; i <= Math.ceil(resp[0].count / perPage); i++) {
+                    arr.push(i);
+                }
+                setPageNumbers(arr);
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Error Loading Status Count", {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 4000,
+                    });
+            })
+
+            setLoader(true)
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/junior/logs_by_count', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    telecaller_id: telecaller_id,
+                    pgNo: 0,
+                    count_type: count_type
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                setLoader(false)
+                setJuniorTableLogArray(resp)
+                window.scrollBy(0,760);
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.error("Error Loading Table", {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 4000,
+                    });
+            })   
+        }
+        else
+        {
+            setLoader(true)
+            for(let i=1; i<=Math.ceil(numeric/perPage); i++){
+                arr.push(i)
+            }
+            setPageNumbers(arr)
+            fetch('https://aqueous-mesa-28052.herokuapp.com/junior/logs_by_count', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    telecaller_id: telecaller_id,
+                    pgNo: 0,
+                    count_type: count_type
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                setLoader(false)
+                setJuniorTableLogArray(resp)
+                window.scrollBy(0, 760);
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.error("Error Loading Table", {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 4000,
+                    });
+            })
+        }
     }
 
     return (
@@ -246,7 +434,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
            		{
            			log_stat_array.map((item,index) => {
            				return(
-                        <div key={index}>
+                        <div key={index} onClick={() => countWiseLogHandler(item.title, item.numeric)} className="pointer">
                             <LogCard Heading={item.title} numeric={item.numeric} />
                         </div>
                         );
@@ -292,6 +480,9 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                     <button key={index} onClick={() => fetchNewPage(number-1)} className="junior-log-page-btn">{number}</button>
                 ))}
                 <p>. . </p>
+            </div>
+            <div className="junior-log-puff-loader" style={{display: `${loader?'flex': 'none'}`}}>
+                <PuffLoader loading={true} size={200} color={"red"}/>
             </div>
             <ToastContainer />
 		</div>
