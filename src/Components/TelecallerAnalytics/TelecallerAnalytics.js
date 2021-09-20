@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CustomButton from '../CustomButton/CustomButton.js';
 import FormInput from '../FormInput/FormInput.js';
 import PaymentCard from '../PaymentCard/PaymentCard.js';
-import * as FaIcons from 'react-icons/fa';
+import * as GrIcons from 'react-icons/gr';
 import './TelecallerAnalytics.scss';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -163,7 +163,7 @@ class TelecallerAnalytics extends Component {
 							})
 							title = this.capitalizeFirstLetter(title)
 							return(
-								<PaymentCard key={index} Heading={title} numeric={counts[0][item]} icon={<FaIcons.FaLanguage size={'5rem'} color={'black'}/>}/>
+								<PaymentCard key={index} Heading={title} numeric={counts[0][item]} icon={<GrIcons.GrAnalytics size={'4rem'} color={'black'}/>}/>
 							)
 						})
 						: null
