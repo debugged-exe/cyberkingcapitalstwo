@@ -1,0 +1,53 @@
+.telecaller-analytics{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.telecaller-analytics-header{
+	font-size: 3rem;
+	margin-bottom: 0px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.telecaller-analytics-form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.date-container{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.date{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 20px;
+}
+
+.telecaller-analytics-date-label{
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.telecaller-analytics-counts{
+	display: grid;
+	grid-template-columns: 50% 50%;
+	width: 100%;
+}
+
+@media only screen and (max-width: 650px){
+	.telecaller-analytics-counts{
+		grid-template-columns: 100%;
+	}
+}

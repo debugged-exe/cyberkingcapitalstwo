@@ -9,6 +9,7 @@ import * as BiIcons from 'react-icons/bi';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 import * as GrIcons from 'react-icons/gr';
+import * as SiIcons from 'react-icons/si';
 
 export const SidebarData = {
     client: [
@@ -58,6 +59,11 @@ export const SidebarData = {
             path: '/admin/update-password',
             title: "Update Password",
             icon: <GrIcons.GrPowerReset size={'2rem'}/>
+        },
+        {
+            path: '/admin/analytics',
+            title: "Telecaller Analytics",
+            icon: <SiIcons.SiGoogleanalytics size={'2rem'}/>
         },
         {
             path: '/',
