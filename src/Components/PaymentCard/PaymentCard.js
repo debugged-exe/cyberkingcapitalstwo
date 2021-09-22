@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import * as RiIcons from 'react-icons/ri';
 import * as BiIcons from 'react-icons/bi';
 import './PaymentCard.scss';
 
-const PaymentCard = ({Heading, numeric,icon}) => {
+const PaymentCard = ({Heading, numeric,icon,item, handleLogs}) => {
     return(
-        <div className={'payment-card-container shadow-4'}>
+        <div className={'payment-card-container shadow-4'} onClick={item?() => handleLogs(item,numeric):null}>
             <div className={'content-container'}>
                 <p className="card-header b">{Heading}</p>
                 <p className="price flex justify-center">{numeric}</p>

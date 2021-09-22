@@ -11,3 +11,8 @@ export const selectAdminAnalyticsCount = createSelector(
 	[selectAdminAnalytics],
 	(count) => count.admin_analytics_count
 );
+
+export const selectAdminAnalyticsLogs = createSelector(
+	[selectAdminAnalytics],
+	(logs) => logs.admin_analytics_logs
+)

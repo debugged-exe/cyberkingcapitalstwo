@@ -6,7 +6,7 @@ const initialState = {
 }
 
 //destructing the action types
-const {SET_ADMIN_ANALYTICS_COUNT} = AdminAnalyticsActionTypes;
+const {SET_ADMIN_ANALYTICS_COUNT, SET_ADMIN_ANALYTICS_LOGS} = AdminAnalyticsActionTypes;
 
 const adminAnalyticsReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
@@ -15,6 +15,11 @@ const adminAnalyticsReducer = (state = initialState, { type, payload }) => {
 		return {
 			...state,
 			admin_analytics_count: payload
+		}
+	case SET_ADMIN_ANALYTICS_LOGS:
+		return {
+			...state,
+			admin_analytics_logs: payload
 		}
 	default:
 		return state
