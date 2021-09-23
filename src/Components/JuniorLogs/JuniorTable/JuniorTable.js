@@ -106,6 +106,15 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
                 return item.[filter] === filterValue
             }).map((item, index) => {
                 var flag=null;
+                if(item.coded_flag)
+                {
+                    if(item.coded_flag==='yes')
+                        flag=true
+                }
+                if(item.pending_flag){
+                    if(item.pending_flag==='yes')
+                        flag=true
+                }
                 if(item.handover_flag==='yes')
                     flag=true;
                 if(item.delete_flag==='yes')
