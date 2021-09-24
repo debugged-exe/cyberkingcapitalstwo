@@ -57,7 +57,7 @@ const TelecallerAnalyticsTable = ({analytics_logs}) => {
                                 else
                                 {
                                     let time = new Date(item[key])
-                                    let date = time.getDate() + '-' + time.getMonth() + '-' + time.getFullYear()
+                                    let date = time.getDate() + '-' + (time.getMonth()+1) + '-' + time.getFullYear()
                                     return(
                                         <td className={`telecaller-analytics-table-data-container bg-white`} data-label={label}>{date}</td>
                                     );
