@@ -43,6 +43,23 @@ $base-blue: #00449E;
 	align-items: center;
 }
 
+.telecaller-analytics-select-container{
+	margin: 10px;
+	padding: 10px;
+}
+
+.telecaller-analytics-select{
+	margin: 5px;
+	padding: 3px 10px 3px 10px;
+	font-size: 1.3rem
+}
+
+.telecaller-analytics-id-input{
+	margin: 5px;
+	padding: 3px 10px 3px 10px;
+	font-size: 1.3rem
+}
+
 .date-container{
 	display: flex;
 	flex-wrap: wrap;

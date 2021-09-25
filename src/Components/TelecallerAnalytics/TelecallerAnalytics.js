@@ -26,7 +26,9 @@ const initialState = {
 	'pages': [],
 	'perPage': 10,
 	'log_type': '',
-	loader: false
+	loader: false,
+	dataCallers: [],
+	designation: 'senior'
 }
 
 toast.configure();
@@ -37,12 +39,47 @@ class TelecallerAnalytics extends Component {
 		this.state = initialState
 	}
 
+	componentDidMount(){
+		fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_all_telecallers')
+        .then(resp => resp.json())
+        .then(response => {
+            this.setState({
+                dataCallers: response
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error('Callers fetch failed.Please refresh', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 4000
+            });
+        })
+	}
+
 	handleChange(event){
 		const {name, value} = event.target;
 		this.setState({params: {
 				...this.state.params,
 				[name]: value
 			}
+		});
+	}
+
+	handleSelect(event){
+		const {name, value} = event.target;
+		this.setState({
+			designation: value
+		})
+	}
+
+	handleTelecallerId(event){
+		const {value} = event.target
+		this.setState({params: {
+				...this.state.params,
+				telecaller_id: value
+			}
+		}, () => {
+			console.log(this.state.params)
 		});
 	}
 
@@ -176,20 +213,44 @@ class TelecallerAnalytics extends Component {
 
 	render(){
 		const {telecaller_id, start_date, end_date} = this.state.params
-		const {pages, loader} = this.state;
+		const {pages, loader, dataCallers, designation} = this.state;
 		const {counts,logs} = this.props
 		return (
 			<div className="telecaller-analytics">
 				<p className="telecaller-analytics-header">Telecaller Analytics</p>
 				<form className='telecaller-analytics-form' onSubmit={this.handleSubmit.bind(this)}>
-					<FormInput
-		                type="text"
-		                name="telecaller_id"
-		                value={telecaller_id}
-		                onChange={this.handleChange.bind(this)}
-		                label="Enter Telecaller Id"
-		                style={{marginTop: '0px', marginBottom: '0px'}}
-	                />
+					<div className="telecaller-analytics-select-container">
+						<label htmlFor="designation" className="telecaller-analytics-date-label">Select Designation:</label>
+						<select 
+						name="designation" 
+						className="telecaller-analytics-select" 
+						onChange={this.handleSelect.bind(this)}
+						>
+							<option value="senior">Senior</option>
+							<option value="junior">Junior</option>
+						</select>
+					</div>
+					<div className="telecaller-analytics-id-container">
+						<label htmlFor="telecaller_id" className="telecaller-analytics-date-label">Select Telecaller Id:</label>
+						<input 
+						type="text" 
+						className="telecaller-analytics-id-input"
+						onChange={this.handleTelecallerId.bind(this)}
+						placeholder="Select Telecaller Id"
+						list={"callers"}
+						/>
+						<datalist id="callers">
+							{
+								dataCallers
+								.filter(item => item.designation === designation)
+								.map((item,index) => {
+									return(
+										<option key={index} value={item.telecaller_id}>{item.telecaller_id}</option>
+									)
+								})
+							}
+						</datalist>
+					</div>
 	                <div className="date-container">
 	                	<div className="date">
 	                		<label htmlFor="start_date" className="telecaller-analytics-date-label">Start Date</label>
