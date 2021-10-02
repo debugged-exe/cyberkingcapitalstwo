@@ -10,6 +10,7 @@ import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 import * as GrIcons from 'react-icons/gr';
 import * as SiIcons from 'react-icons/si';
+import * as ImIcons from 'react-icons/im';
 
 export const SidebarData = {
     client: [
@@ -64,6 +65,11 @@ export const SidebarData = {
             path: '/admin/analytics',
             title: "Telecaller Analytics",
             icon: <SiIcons.SiGoogleanalytics size={'2rem'}/>
+        },
+        {
+            path: '/admin/block',
+            title: "Block Telecaller",
+            icon: <ImIcons.ImBlocked size={'2rem'}/>
         },
         {
             path: '/',

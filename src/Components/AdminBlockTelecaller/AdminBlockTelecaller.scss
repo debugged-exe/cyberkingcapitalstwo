@@ -1,0 +1,40 @@
+.admin-block-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+.admin-block-form-container{
+  width: 40%;
+}
+.admin-block-submit-button{
+  background-color: black;
+  color: white;
+  margin: 0 auto;
+  display: block;
+  outline: none;
+  font-size: 1.5rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 57%;
+  transition: all 0.4s ease-out;
+  &:hover{
+    transform: scale(1.1);
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .admin-block-submit-button{
+    width: 77%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .admin-block-form-container{
+    width: 80%;
+  }
+  .admin-block-submit-button{
+    width: 91%;
+  }
+}

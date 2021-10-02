@@ -58,6 +58,7 @@ const LogStatArray = [
 
 const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTableLogArray, setModalVisibility}) => {
 
+    const [blockView, setBlockView] = useState(false);
     const [loader, setLoader] = useState(true)
 
     const [pages, setPages] = useState(0);
@@ -66,6 +67,26 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
 
     useEffect(() => {
         const {telecaller_id} = currentUser;
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/is_blocked',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                telecaller_id: telecaller_id
+            })
+        })
+            .then(resp => resp.json())
+            .then( response => {
+                if(response.blocked === true){
+                    setBlockView(true);
+                }
+                else if(response.blocked === false){
+                    setBlockView(false);
+                }
+            })
+            .catch( err => {
+                console.log(err);
+            });
+
         fetch('https://aqueous-mesa-28052.herokuapp.com/junior/counts',{
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -233,6 +254,13 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
+            }
+            else if (resp === "blocked"){
+                toast.error( "You have been blocked by the admin. Please contact admin for more detail",{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose:2500
+                })
+                setLoader(false);
             }
             else if(resp!=='Unable to assign you leads' || resp!=='Unable to fetch')
             {
@@ -442,7 +470,9 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
            		}
             </div>
             <div className="button-container center">
-                <CustomButton style={{marginLeft: '0'}} onClick={() => fetchNewLeads()}>Fetch New Leads</CustomButton>
+                <div className={`${blockView === true?'hidden':'flex'}`}>
+                    <CustomButton  style={{marginLeft: '0'}} onClick={() => fetchNewLeads()}>Fetch New Leads</CustomButton>
+                </div>
                 <div className={"flex justify-center items-center center mt4 mb4 w-100"}>
                     <label className={"b f3 ml1-ns mr3 "}>Search by : </label>
                     <select
