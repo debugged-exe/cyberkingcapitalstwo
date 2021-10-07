@@ -55,7 +55,7 @@ const adminPaymentReducer =  (state = initialState, { type, payload }) => {
 				state.admin_payment_team_array.map(item => {
 					if(item.telecaller_id===payload.telecaller_id)
 					{
-						item.points_earned = item.points_earned-parseInt(payload.amount);
+						// item.points_earned = item.points_earned-parseInt(payload.amount);
 						item.points_paid = item.points_paid+parseInt(payload.amount);
 						updated.push(item);
 					}
