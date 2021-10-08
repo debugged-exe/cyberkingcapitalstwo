@@ -1,31 +1,37 @@
 import React, {Component} from 'react';
 import './AdminBlockTelecaller.scss';
-import FormInput from "../FormInput/FormInput";
-import CustomButton from "../CustomButton/CustomButton"
 import AdminBlockedTelecallerTable from "./AdminBlockedTelecallerTable/AdminBlockedTelecallerTable";
 import {ToastContainer, toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+
+//redux
+import {connect} from "react-redux";
+import {selectAdminBlockTelecallerLanguage, selectAdminBlockTelecallerTable} from '../../redux/admin-panel/admin-block-telecaller/admin.block.telecaller.selectors';
+import {createStructuredSelector} from "reselect";
+import {
+    setAdminBlockTelecallerLanguage,
+    setAdminBlockTelecallerTable
+} from "../../redux/admin-panel/admin-block-telecaller/admin.block.telecaller.actions";
+
 
 toast.configure();
 class AdminBlockTelecaller extends Component {
     constructor(props) {
         super(props);
         this.state ={
-            telecallers: [],
             pages: [],
             perPage: 10,
-            language: 'marathi'
         }
     }
 
     componentDidMount() {
-        const {language} = this.state;
+        const {admin_block_telecaller_language, setAdminBlockTelecallerTable} = this.props;
         fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count", {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 des: 'junior',
-                language: language
+                language: admin_block_telecaller_language
             })
         })
         .then(response => response.json())
@@ -52,14 +58,12 @@ class AdminBlockTelecaller extends Component {
             body: JSON.stringify({
                 pgNo: 0,
                 des: 'junior',
-                language: language
+                language: admin_block_telecaller_language
             })
         })
         .then(response => response.json())
         .then(resp => {
-            this.setState({telecallers: resp}, () => {
-                console.log()
-            })
+            setAdminBlockTelecallerTable(resp);
         })
         .catch(err => {
             console.log(err);
@@ -92,16 +96,6 @@ class AdminBlockTelecaller extends Component {
                         autoClose: 2500
                     })
                 }
-                let telecallers = this.state.telecallers;
-                telecallers[index] = {
-                    ...telecallers[index],
-                    blocked: !telecallers[index].blocked
-                }
-                this.setState({
-                    telecallers: telecallers
-                }, () => {
-                    console.log()
-                })
             })
             .catch( err => {
                 console.log(err);
@@ -110,24 +104,21 @@ class AdminBlockTelecaller extends Component {
                     autoClose: 2500
                 })
             })
-        this.setState({telecaller_id:""});
     }
     fetchNewPage = pgNo => {
-        const {language} = this.state;
+        const {admin_block_telecaller_language,setAdminBlockTelecallerTable} = this.props;
         fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers", {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 pgNo: pgNo,
                 des: 'junior',
-                language: language
+                language: admin_block_telecaller_language
             })
         })
         .then(response => response.json())
         .then(resp => {
-            this.setState({telecallers: resp}, () => {
-                console.log()
-            })
+            setAdminBlockTelecallerTable(resp);
         })
         .catch(err => {
             console.log(err);
@@ -138,18 +129,26 @@ class AdminBlockTelecaller extends Component {
         })   
     }
 
-    handleChange = event => {
+    handleChange = async (event) => {
         const {name, value} = event.target;
-        const {language} = this.state;
-        this.setState({[name]: value}, () => {
-            fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count", {
-                method: 'post',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    des: 'junior',
-                    language: language
-                })
+        const {
+            setAdminBlockTelecallerLanguage,
+        } = this.props;
+        this.resetPage(value);
+        await setAdminBlockTelecallerLanguage(value);
+    }
+
+    resetPage = (language) => {
+        console.log("reset function call");
+        const {setAdminBlockTelecallerTable} = this.props;
+        fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count", {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                des: 'junior',
+                language: language
             })
+        })
             .then(response => response.json())
             .then(resp => {
                 let arr = []
@@ -168,20 +167,18 @@ class AdminBlockTelecaller extends Component {
                 });
             })
 
-            fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers", {
-                method: 'post',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    pgNo: 0,
-                    des: 'junior',
-                    language: language
-                })
+        fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers", {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: 0,
+                des: 'junior',
+                language: language
             })
+        })
             .then(response => response.json())
             .then(resp => {
-                this.setState({telecallers: resp}, () => {
-                    console.log()
-                })
+                setAdminBlockTelecallerTable(resp);
             })
             .catch(err => {
                 console.log(err);
@@ -189,13 +186,11 @@ class AdminBlockTelecaller extends Component {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 });
-            })   
-        })
+            })
     }
 
     render() {
         const {
-            telecaller_id,
             pages
         } = this.state;
         return (
@@ -215,7 +210,7 @@ class AdminBlockTelecaller extends Component {
                             </select>
                         </div>
                     </div>
-                    <AdminBlockedTelecallerTable data={this.state.telecallers} handleSubmit={this.handleSubmit}/>
+                    <AdminBlockedTelecallerTable handleSubmit={this.handleSubmit}/>
                 </div>
                 <div className="admin-block-pagination-container pb4">
                     <p>. . </p>
@@ -231,4 +226,15 @@ class AdminBlockTelecaller extends Component {
     }
 }
 
-export default AdminBlockTelecaller;
+const mapStateToProps = createStructuredSelector({
+   admin_block_telecaller_language: selectAdminBlockTelecallerLanguage,
+    admin_block_telecaller_table: selectAdminBlockTelecallerTable
+})
+
+const mapDispatchToProps = dispatch => ({
+    setAdminBlockTelecallerLanguage: language => dispatch(setAdminBlockTelecallerLanguage(language)),
+   setAdminBlockTelecallerTable: table => dispatch(setAdminBlockTelecallerTable(table))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminBlockTelecaller);

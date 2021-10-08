@@ -2,13 +2,19 @@ import React, {Component, useEffect, useState} from 'react';
 import './AdminBlockedTelecallerTable.scss';
 import {toast, ToastContainer} from "react-toastify";
 import 'tachyons';
+import {connect} from "react-redux";
+import {createStructuredSelector} from "reselect";
+import {
+    selectAdminBlockTelecallerTable
+} from "../../../redux/admin-panel/admin-block-telecaller/admin.block.telecaller.selectors";
+
 const header = [
     "Sr.no",
     "Telecaller ID",
     "Language"
 ]
 
-const AdminBlockedTelecallerTable = ({data, handleSubmit}) => {
+const AdminBlockedTelecallerTable = ({admin_block_telecaller_table,handleSubmit}) => {
         return (
                 <div className={'admin-blocked-table-container'}>
                     <table cellSpacing="1" className={'admin-blocked-table-box'}>
@@ -23,7 +29,7 @@ const AdminBlockedTelecallerTable = ({data, handleSubmit}) => {
                         </thead>
                         <tbody className={'admin-blocked-table-body-container'}>
                         {
-                            data.map((item, index) => {
+                            admin_block_telecaller_table.map((item, index) => {
                             return (
                                 <tr key={index} className="admin-blocked-table-row-container">
                                     <td className={`admin-blocked-table-data-container ${item.blocked?'bg-light-red':'bg-white'}`} data-label={'Sr.No'}>{index+1}</td>
@@ -41,5 +47,7 @@ const AdminBlockedTelecallerTable = ({data, handleSubmit}) => {
                 </div>
         );
 }
-
-export default AdminBlockedTelecallerTable;
+const mapStateToProps = createStructuredSelector({
+    admin_block_telecaller_table: selectAdminBlockTelecallerTable
+})
+export default connect(mapStateToProps, null)(AdminBlockedTelecallerTable);
