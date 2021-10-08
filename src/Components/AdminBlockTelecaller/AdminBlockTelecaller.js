@@ -10,7 +10,8 @@ import {selectAdminBlockTelecallerLanguage, selectAdminBlockTelecallerTable} fro
 import {createStructuredSelector} from "reselect";
 import {
     setAdminBlockTelecallerLanguage,
-    setAdminBlockTelecallerTable
+    setAdminBlockTelecallerTable,
+    toggleBlockField
 } from "../../redux/admin-panel/admin-block-telecaller/admin.block.telecaller.actions";
 
 
@@ -75,6 +76,7 @@ class AdminBlockTelecaller extends Component {
     }
 
     handleSubmit = (telecaller_id, index) => {
+        const {toggleBlockField} = this.props;
         fetch('https://aqueous-mesa-28052.herokuapp.com/admin/block_telecaller',{
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -84,17 +86,18 @@ class AdminBlockTelecaller extends Component {
         })
             .then(response => response.json())
             .then( response => {
-                console.log(response);
                 if(response === "blocked"){
                     toast.success("Successfully blocked",{
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 2500
                     })
+                    toggleBlockField(index);
                 }else if(response === "unblocked"){
                     toast.success("Successfully unblocked",{
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 2500
                     })
+                    toggleBlockField(index);
                 }
             })
             .catch( err => {
@@ -233,7 +236,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
     setAdminBlockTelecallerLanguage: language => dispatch(setAdminBlockTelecallerLanguage(language)),
-   setAdminBlockTelecallerTable: table => dispatch(setAdminBlockTelecallerTable(table))
+    setAdminBlockTelecallerTable: table => dispatch(setAdminBlockTelecallerTable(table)),
+    toggleBlockField: index => dispatch(toggleBlockField(index))
 })
 
 

@@ -8,7 +8,8 @@ const initialState = {
 //destructing the action types
 const {
     SET_ADMIN_BLOCK_TELECALLER_LANGUAGE,
-    SET_ADMIN_BLOCK_TELECALLER_TABLE
+    SET_ADMIN_BLOCK_TELECALLER_TABLE,
+    TOGGLE_BLOCK_FIELD
 } = AdminBlockTelecallerActionTypes;
 
 const adminBlockTelecallerReducer = (state = initialState, { type, payload }) => {
@@ -23,6 +24,16 @@ const adminBlockTelecallerReducer = (state = initialState, { type, payload }) =>
             return {
                 ...state,
                 admin_block_telecaller_table: payload
+            }
+        case TOGGLE_BLOCK_FIELD:
+            let telecallers = state.admin_block_telecaller_table;
+            telecallers[payload].blocked = !telecallers[payload].blocked
+            let newState = [
+                ...telecallers,
+            ]
+            return {
+                ...state,
+                admin_block_telecaller_table: newState
             }
         default:
             return state
