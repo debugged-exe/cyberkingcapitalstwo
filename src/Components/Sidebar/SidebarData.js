@@ -75,6 +75,11 @@ export const SidebarData = {
             path: '/',
             title: "Sign Out",
             icon: <FiIcons.FiLogOut size={'2rem'}/>
+        },
+        {
+            path: '/refer_friend',
+            title: "Refer a Friend",
+            icon: <FaIcons.FaUserFriends size={'2rem'}/>
         }
     ],
     senior: [
