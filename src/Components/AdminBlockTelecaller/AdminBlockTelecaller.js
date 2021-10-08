@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {Component} from 'react';
 import './AdminBlockTelecaller.scss';
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton"
@@ -11,36 +11,66 @@ class AdminBlockTelecaller extends Component {
     constructor(props) {
         super(props);
         this.state ={
-            telecaller_id: '',
-            data: []
+            telecallers: [],
+            pages: [],
+            perPage: 10,
+            language: 'marathi'
         }
     }
-    componentDidMount() {
-            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_blocked',{
-                method: 'post',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
 
-                })
+    componentDidMount() {
+        const {language} = this.state;
+        fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count", {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                des: 'junior',
+                language: language
             })
-                .then( resp => resp.json())
-                .then( resp => {
-                    this.setState({data: resp});
-                })
-                .catch( err => {
-                    toast.error(`${err}`,{
-                        position: toast.POSITION.TOP_CENTER,
-                        autoClose: 2500
-                    });
-                    console.log(err);
-                })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            let arr = []
+            for (let i = 1; i <= Math.ceil(resp.count / this.state.perPage); i++) {
+                arr.push(i);
+            }
+            this.setState({pages: arr}, () => {
+                console.log()
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error(`${err}`,{
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500
+            });
+        })
+
+        fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers", {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: 0,
+                des: 'junior',
+                language: language
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            this.setState({telecallers: resp}, () => {
+                console.log()
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error(`${err}`,{
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500
+            });
+        })
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
-        const {
-            telecaller_id
-        } = this.state;
+    handleSubmit = (telecaller_id, index) => {
         fetch('https://aqueous-mesa-28052.herokuapp.com/admin/block_telecaller',{
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -62,6 +92,16 @@ class AdminBlockTelecaller extends Component {
                         autoClose: 2500
                     })
                 }
+                let telecallers = this.state.telecallers;
+                telecallers[index] = {
+                    ...telecallers[index],
+                    blocked: !telecallers[index].blocked
+                }
+                this.setState({
+                    telecallers: telecallers
+                }, () => {
+                    console.log()
+                })
             })
             .catch( err => {
                 console.log(err);
@@ -72,44 +112,119 @@ class AdminBlockTelecaller extends Component {
             })
         this.setState({telecaller_id:""});
     }
+    fetchNewPage = pgNo => {
+        const {language} = this.state;
+        fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers", {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: pgNo,
+                des: 'junior',
+                language: language
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            this.setState({telecallers: resp}, () => {
+                console.log()
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error(`${err}`,{
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500
+            });
+        })   
+    }
 
     handleChange = event => {
         const {name, value} = event.target;
-        this.setState({[name]: value});
-        console.log(this.state);
+        const {language} = this.state;
+        this.setState({[name]: value}, () => {
+            fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count", {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    des: 'junior',
+                    language: language
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                let arr = []
+                for (let i = 1; i <= Math.ceil(resp.count / this.state.perPage); i++) {
+                    arr.push(i);
+                }
+                this.setState({pages: arr}, () => {
+                    console.log()
+                })
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error(`${err}`,{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                });
+            })
+
+            fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers", {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    pgNo: 0,
+                    des: 'junior',
+                    language: language
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                this.setState({telecallers: resp}, () => {
+                    console.log()
+                })
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error(`${err}`,{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                });
+            })   
+        })
     }
+
     render() {
         const {
-            telecaller_id
+            telecaller_id,
+            pages
         } = this.state;
         return (
             <div className={'admin-block-section '}>
-                <div className={'admin-block-section-heading'}>
-                    <h1 className={'mt3'}>Block Telecallers</h1>
-                </div>
-               <form id={'admin-block-form'} className={'admin-block-form-container'} onSubmit={this.handleSubmit}>
-                   <FormInput
-                       type="text"
-                       name="telecaller_id"
-                       value={telecaller_id}
-                       onChange={this.handleChange}
-                       label="Telecaller ID"
-                       style={{marginTop: '0px', marginBottom: '0px'}}
-                       required
-                   />
-                   <CustomButton
-                       type='submit'
-                       className={'admin-block-submit-button shadow-4'}
-                   >
-                       Request to Block or Unblock
-                   </CustomButton>
-               </form>
-                <hr color={'grey'} className={'mt4 mb4 w-100'}/>
                 <div className={'w-100 mb4'}>
-                    <div className={'flex justify-center items-center'}>
-                        <h1 style={{marginTop: 0,marginBottom: "1.5rem" }}>Blocked Telecaller IDs</h1>
+                    <div className={'flex flex-column justify-center items-center'}>
+                        <h1 style={{marginTop: "1rem",marginBottom: "1.8rem" }}>Block Telecaller</h1>
+                        <div className="telecaller-analytics-select-container">
+                            <label htmlFor="language" className="admin-block-date-label">Select Language:</label>
+                            <select 
+                            name="language" 
+                            className="admin-block-select" 
+                            onChange={this.handleChange}
+                            >
+                                <option value="marathi">Marathi</option>
+                                <option value="hindi">Hindi</option>
+                            </select>
+                        </div>
                     </div>
-                    <AdminBlockedTelecallerTable data={this.state.data} />
+                    <AdminBlockedTelecallerTable data={this.state.telecallers} handleSubmit={this.handleSubmit}/>
+                </div>
+                <div className="admin-block-pagination-container pb4">
+                    <p>. . </p>
+                    {
+                        pages.map((number, index) => (
+                            <button key={index} onClick={() => this.fetchNewPage(number-1)} className="admin-block-page-btn">{number}</button>
+                        ))
+                    }
+                    <p>. . </p>
                 </div>
             </div>
         );

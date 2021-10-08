@@ -1,3 +1,7 @@
+.admin-block-red{
+  background-color: #FF725C;
+}
+
 .admin-blocked-table-container{
   display: flex;
   flex-direction: column;
@@ -28,7 +32,6 @@
 }
 .admin-blocked-table-data-container{
   font-size: 1.5rem;
-  background-color: white;
   padding-top: 1.5%;
   padding-bottom: 1.8%;
   justify-content: center;

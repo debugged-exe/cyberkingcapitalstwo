@@ -1,37 +1,14 @@
 import React, {Component, useEffect, useState} from 'react';
 import './AdminBlockedTelecallerTable.scss';
-import * as AiIcons from "react-icons/ai";
-import * as ImIcons from "react-icons/im";
 import {toast, ToastContainer} from "react-toastify";
-
+import 'tachyons';
 const header = [
     "Sr.no",
     "Telecaller ID",
     "Language"
 ]
 
-const AdminBlockedTelecallerTable = ({data}) => {
-    // const [data, setData] = useState([]);
-    // useEffect(()=>{
-    //     fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_blocked',{
-    //         method: 'post',
-    //         headers: {'Content-Type': 'application/json'},
-    //         body: JSON.stringify({
-    //
-    //         })
-    //     })
-    //         .then( resp => resp.json())
-    //         .then( resp => {
-    //             setData(resp);
-    //         })
-    //         .catch( err => {
-    //             toast.error(`${err}`,{
-    //                 position: toast.POSITION.TOP_CENTER,
-    //                 autoClose: 2500
-    //             });
-    //             console.log(err);
-    //         })
-    // },[]);
+const AdminBlockedTelecallerTable = ({data, handleSubmit}) => {
         return (
                 <div className={'admin-blocked-table-container'}>
                     <table cellSpacing="1" className={'admin-blocked-table-box'}>
@@ -49,12 +26,12 @@ const AdminBlockedTelecallerTable = ({data}) => {
                             data.map((item, index) => {
                             return (
                                 <tr key={index} className="admin-blocked-table-row-container">
-                                    <td className={'admin-blocked-table-data-container'} data-label={'Sr.No'}>{index+1}</td>
-                                    <td className={'admin-blocked-table-data-container'} data-label={'Telecaller Id'}>{item.telecaller_id}</td>
-                                    <td className={'admin-blocked-table-data-container'} data-label={'Language'}>{item.preferred_language}</td>
-                                    {/*<td className={'admin-blocked-table-data-container '}>*/}
-                                    {/*    <button className={'btn-center pointer'} size={'1.5rem'} color={'red'}>Unblock</button>*/}
-                                    {/*</td>*/}
+                                    <td className={`admin-blocked-table-data-container ${item.blocked?'bg-light-red':'bg-white'}`} data-label={'Sr.No'}>{index+1}</td>
+                                    <td className={`admin-blocked-table-data-container ${item.blocked?'bg-light-red':'bg-white'}`} data-label={'Telecaller Id'}>{item.telecaller_id}</td>
+                                    <td className={`admin-blocked-table-data-container ${item.blocked?'bg-light-red':'bg-white'}`} data-label={'Language'}>{item.preferred_language}</td>
+                                    <td className={`admin-blocked-table-data-container ${item.blocked?'bg-light-red':'bg-white'}`}>
+                                        <button className={'btn-center pointer'} onClick={() => handleSubmit(item.telecaller_id,index)} size={'1.5rem'} color={'red'}>{item.blocked?'Unblock':'Block'}</button>
+                                    </td>
                                 </tr>
                             )
                         })}
@@ -64,6 +41,5 @@ const AdminBlockedTelecallerTable = ({data}) => {
                 </div>
         );
 }
-
 
 export default AdminBlockedTelecallerTable;
