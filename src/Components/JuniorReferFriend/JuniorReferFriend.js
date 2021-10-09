@@ -1,15 +1,24 @@
 import React, {Component} from "react";
-import './JuniorReferFriend.scss';
+
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
 import PuffLoader from "react-spinners/PuffLoader";
 import {ToastContainer, toast} from "react-toastify";
+
+// redux
+import {connect} from 'react-redux';
+
+//reselect
+import {createStructuredSelector} from "reselect";
+import {selectCurrentUser} from "../../redux/user/user.selectors";
+
+// css
+import './JuniorReferFriend.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 class JuniorReferFriend extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             lead_name: '',
             lead_contact: '',
@@ -17,7 +26,8 @@ class JuniorReferFriend extends Component{
             course_type: 'basic',
             prior_knowledge: '',
             preferred_language: '',
-            visible: false
+            visible: false,
+            assigned_to: this.props.currentUser.telecaller_id
         }
     }
 
@@ -27,58 +37,68 @@ class JuniorReferFriend extends Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.setVisible(true);
-        const {lead_name, lead_contact, city, prior_knowledge, preferred_language, course_type} = this.state;
-        fetch('https://aqueous-mesa-28052.herokuapp.com/basicform', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                lead_name: lead_name,
-                lead_contact: lead_contact,
-                city: city,
-                preferred_language: preferred_language,
-                prior_knowledge: prior_knowledge,
-                course_type: course_type
-            })
-        })
-            .then(response => response.json())
-            .then(response => {
-                if(response === "Basic Course Form Registered"){
-                    this.setVisible(false);
-                    toast.success('Registered Successfully.',{
-                        position: toast.POSITION.TOP_CENTER,
-                        autoClose: 2500
-                    })
-                    this.setState({
-                        lead_name: '',
-                        lead_contact: '',
-                        city: '',
-                        preferred_language: '',
-                        prior_knowledge: '',
-                        course_type: 'basic'
-                    })
-                }else if(response === "Failed"){
-                    this.setVisible(false);
-                    toast.error("Failed to register for the course. Please try again",{
-                        position: toast.POSITION.TOP_CENTER,
-                        autoClose: 2500
-                    });
-                }else if(response === "Not Unique"){
-                    this.setVisible(false);
-                    toast.error("Contact has been already registered.Please try with new contact",{
-                        position: toast.POSITION.TOP_CENTER,
-                        autoClose: 2500
-                    });
-                }
-            }).catch(err => {
-            console.log(err);
-            this.setVisible(false);
-            toast.error(`${err}`,{
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500
-            });
-        })
-
+        // this.setVisible(true);
+        // const {
+        //     lead_name,
+        //     lead_contact, 
+        //     city, 
+        //     prior_knowledge, 
+        //     preferred_language, 
+        //     course_type, 
+        //     assigned_to
+        // } = this.state;
+        // fetch('https://aqueous-mesa-28052.herokuapp.com/basicform', {
+        //     method: 'post',
+        //     headers: {'Content-Type': 'application/json'},
+        //     body: JSON.stringify({
+        //         lead_name: lead_name,
+        //         lead_contact: lead_contact,
+        //         city: city,
+        //         preferred_language: preferred_language,
+        //         prior_knowledge: prior_knowledge,
+        //         course_type: course_type,
+        //         assigned_to: assigned_to
+        //     })
+        // })
+        // .then(response => response.json())
+        // .then(response => {
+        //     if(response === "Basic Course Form Registered"){
+        //         this.setVisible(false);
+        //         toast.success('Registered Successfully.',{
+        //             position: toast.POSITION.TOP_CENTER,
+        //             autoClose: 2500
+        //         })
+        //         this.setState({
+        //             lead_name: '',
+        //             lead_contact: '',
+        //             city: '',
+        //             preferred_language: '',
+        //             prior_knowledge: '',
+        //             course_type: 'basic'
+        //         })
+        //     }else if(response === "Failed"){
+        //         this.setVisible(false);
+        //         toast.error("Failed to register for the course. Please try again",{
+        //             position: toast.POSITION.TOP_CENTER,
+        //             autoClose: 2500
+        //         });
+        //     }else if(response === "Not Unique"){
+        //         this.setVisible(false);
+        //         toast.error("Contact has been already registered.Please try with new contact",{
+        //             position: toast.POSITION.TOP_CENTER,
+        //             autoClose: 2500
+        //         });
+        //     }
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        //     this.setVisible(false);
+        //     toast.error(`${err}`,{
+        //         position: toast.POSITION.TOP_CENTER,
+        //         autoClose: 2500
+        //     });
+        // })
+        console.log(this.state)
     }
 
     handleChange = event => {
@@ -152,4 +172,8 @@ class JuniorReferFriend extends Component{
     }
 }
 
-export default JuniorReferFriend;
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+})
+
+export default connect(mapStateToProps)(JuniorReferFriend);

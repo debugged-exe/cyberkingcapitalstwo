@@ -99,7 +99,7 @@ export const SidebarData = {
             icon: <FiIcons.FiLogOut size={'2rem'}/>
         },
         {
-            path: '/refer_friend',
+            path: '/junior/refer_friend',
             title: "Refer a Friend",
             icon: <FaIcons.FaUserFriends size={'2rem'}/>
         }
