@@ -1,0 +1,62 @@
+.basic-course-form-container{
+  background: rgba(0, 0, 0, 0.6) url('FormBg.jpg') no-repeat center;
+  background-size: cover;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Open Sans Condensed', sans-serif;
+  background-blend-mode: darken;
+}
+.basic-course-form-header{
+  font-size: 3rem;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+.basic-course-form-box{
+  width: 40%;
+}
+.basic-course-select-input{
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
+.puff-loader
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  z-index: 4;
+  opacity: 0.6;
+}
+
+@media only screen and (min-width: 1024px) {
+  .basic-course-form-container{
+    height: 100vh;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .basic-course-form-box{
+    width: 70%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .basic-course-form-box{
+    width: 70%;
+  }
+  .basic-course-select-input{
+    grid-template-columns: 100%;
+  }
+  .basic-course-form-container{
+    background-size: 100% 100%;
+  }
+}
