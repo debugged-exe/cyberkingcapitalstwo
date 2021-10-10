@@ -116,7 +116,7 @@ class JuniorReferFriend extends Component{
                         name="lead_name"
                         value={lead_name}
                         onChange={this.handleChange}
-                        label="Enter your Name"
+                        label="Account Opening Name"
                         style={{marginTop: '0px', marginBottom: '0px'}}
                         required
                     />
@@ -125,7 +125,7 @@ class JuniorReferFriend extends Component{
                         name="lead_contact"
                         value={lead_contact}
                         onChange={this.handleChange}
-                        label="Phone Number(eg: 9998879999)"
+                        label="Account Opening Phone Number(eg: 9998879999)"
                         style={{marginTop: '0px', marginBottom: '0px'}}
                         pattern="[0-9]{10}"
                         required
