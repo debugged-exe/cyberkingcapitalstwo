@@ -72,6 +72,11 @@ export const SidebarData = {
             icon: <ImIcons.ImBlocked size={'2rem'}/>
         },
         {
+            path: '/admin/sendid',
+            title: "Send ID Password",
+            icon: <FaIcons.FaWhatsapp size={'2rem'}/>
+        },
+        {
             path: '/',
             title: "Sign Out",
             icon: <FiIcons.FiLogOut size={'2rem'}/>
