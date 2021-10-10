@@ -12,6 +12,7 @@ import AdminCounts from "../../Components/AdminCounts/AdminCounts";
 import AdminUpdatePassword from "../../Components/AdminUpdatePassword/AdminUpdatePassword";
 import TelecallerAnalytics from "../../Components/TelecallerAnalytics/TelecallerAnalytics";
 import AdminBlockTelecaller from "../../Components/AdminBlockTelecaller/AdminBlockTelecaller";
+import AdminSendId from '../../Components/AdminSendId/AdminSendId.js';
 
 const AdminPanel = ({match}) => {
     return (
@@ -27,6 +28,7 @@ const AdminPanel = ({match}) => {
 				<Route path={`${match.path}/update-password`}><AdminUpdatePassword /></Route>
 				<Route path={`${match.path}/analytics`}><TelecallerAnalytics /></Route>
 				<Route path={`${match.path}/block`}><AdminBlockTelecaller/></Route>
+				<Route path={`${match.path}/sendid`}><AdminSendId/></Route>
         	</Switch>
         </div>
     );

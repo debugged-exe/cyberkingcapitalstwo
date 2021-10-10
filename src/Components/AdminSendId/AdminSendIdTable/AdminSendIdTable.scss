@@ -1,0 +1,112 @@
+.admin-sendid-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .admin-sendid-box{
+    width: 90%;
+    text-align: center;
+    font-family: 'Open Sans Condensed', sans-serif;
+    border: 1px solid black;
+    background-color: #bbbbbb;
+  }
+  .admin-sendid-head-container{
+    font-size: 2rem;
+    background-color: white;
+  }
+  .admin-sendid-header-container{
+    padding-top: 1.5%;
+    padding-bottom: 1.8%;
+  }
+  .admin-sendid-body-container{
+  
+  }
+  .admin-sendid-row-container{
+  
+  }
+  .admin-sendid-data-container{
+    font-size: 1.5rem;
+    background-color: white;
+    padding-top: 1.5%;
+    padding-bottom: 1.8%;
+  
+    &:hover{
+      .btn-center{
+        transform: scale(1.5);
+      }
+    }
+  }
+  
+  .btn-center{
+    transition: all 0.4s ease-out;
+  }
+  
+  .accept-all{
+    border: 1px solid gray;
+    font-size: 1.5rem;
+    margin: 2%;
+    padding: 1%;
+    background: white;
+    transition: all 0.4s ease-out;
+  
+    &:hover{
+      background: green;
+      font-weight: bold;
+      color: white;
+    }
+  }
+  @media only screen and (max-width: 500px)
+  {
+    .admin-sendid-box
+    {
+      width: 100%;
+    }
+    .admin-sendid-data-container{
+      font-size: 1.5rem;
+      background-color: white;
+      padding-top: 1.5%;
+      padding-bottom: 1.8%;
+      padding-right: 2%;
+      padding-left: 2%;
+    }
+  }
+  
+  @media only screen and (max-width: 500px){
+    .admin-sendid-head-container{
+      display: none;
+    }
+    .admin-sendid-box{
+      width: 90%;
+    }
+    .admin-sendid-body-container, .admin-sendid-row-container, .admin-sendid-data-container{
+      display: block;
+      width: 100%;
+    }
+    .btn-center{
+        padding-left: 0;
+        text-align: center;
+        margin-right: 100%;
+    }
+    .admin-sendid-row-container{
+      margin-bottom: 10px;
+    }
+  
+    .admin-sendid-data-container{
+      text-align: right;
+      padding-left: 50%;
+      margin-bottom: 1px;
+      position: relative;
+    }
+  
+    .admin-sendid-data-container::before{
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 15px;
+      font-size: 1.6rem;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
