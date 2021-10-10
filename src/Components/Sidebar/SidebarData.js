@@ -94,14 +94,14 @@ export const SidebarData = {
             icon: <BiIcons.BiSpreadsheet size={'2rem'}/>
         },
         {
-            path: '/',
-            title: "Sign Out",
-            icon: <FiIcons.FiLogOut size={'2rem'}/>
-        },
-        {
             path: '/junior/refer_friend',
             title: "Refer a Friend",
             icon: <FaIcons.FaUserFriends size={'2rem'}/>
+        },
+        {
+            path: '/',
+            title: "Sign Out",
+            icon: <FiIcons.FiLogOut size={'2rem'}/>
         }
     ],
     senior: [
