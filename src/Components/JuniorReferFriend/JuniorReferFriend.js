@@ -21,7 +21,10 @@ class JuniorReferFriend extends Component{
         super(props);
         this.state = {
             lead_name: '',
+            account_opening_name: '',
             lead_contact: '',
+            lead_whatsapp_no: '',
+            account_opening_no: '',
             city: '',
             course_type: 'basic',
             prior_knowledge: '',
@@ -37,75 +40,108 @@ class JuniorReferFriend extends Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // this.setVisible(true);
-        // const {
-        //     lead_name,
-        //     lead_contact, 
-        //     city, 
-        //     prior_knowledge, 
-        //     preferred_language, 
-        //     course_type, 
-        //     assigned_to
-        // } = this.state;
-        // fetch('https://aqueous-mesa-28052.herokuapp.com/basicform', {
-        //     method: 'post',
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: JSON.stringify({
-        //         lead_name: lead_name,
-        //         lead_contact: lead_contact,
-        //         city: city,
-        //         preferred_language: preferred_language,
-        //         prior_knowledge: prior_knowledge,
-        //         course_type: course_type,
-        //         assigned_to: assigned_to
-        //     })
-        // })
-        // .then(response => response.json())
-        // .then(response => {
-        //     if(response === "Basic Course Form Registered"){
-        //         this.setVisible(false);
-        //         toast.success('Registered Successfully.',{
-        //             position: toast.POSITION.TOP_CENTER,
-        //             autoClose: 2500
-        //         })
-        //         this.setState({
-        //             lead_name: '',
-        //             lead_contact: '',
-        //             city: '',
-        //             preferred_language: '',
-        //             prior_knowledge: '',
-        //             course_type: 'basic'
-        //         })
-        //     }else if(response === "Failed"){
-        //         this.setVisible(false);
-        //         toast.error("Failed to register for the course. Please try again",{
-        //             position: toast.POSITION.TOP_CENTER,
-        //             autoClose: 2500
-        //         });
-        //     }else if(response === "Not Unique"){
-        //         this.setVisible(false);
-        //         toast.error("Contact has been already registered.Please try with new contact",{
-        //             position: toast.POSITION.TOP_CENTER,
-        //             autoClose: 2500
-        //         });
-        //     }
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        //     this.setVisible(false);
-        //     toast.error(`${err}`,{
-        //         position: toast.POSITION.TOP_CENTER,
-        //         autoClose: 2500
-        //     });
-        // })
+        this.setVisible(true);
+        const {
+            lead_name,
+            lead_contact, 
+            city, 
+            prior_knowledge, 
+            preferred_language, 
+            course_type, 
+            assigned_to,
+            account_opening_no,
+            lead_whatsapp_no,
+            account_opening_name
+        } = this.state;
+        fetch('https://aqueous-mesa-28052.herokuapp.com/basicform', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                lead_name: lead_name,
+                lead_contact: lead_contact,
+                city: city,
+                preferred_language: preferred_language,
+                prior_knowledge: prior_knowledge,
+                course_type: course_type,
+                assigned_to: assigned_to,
+                account_opening_no: account_opening_no,
+                account_opening_name: account_opening_name,
+                lead_whatsapp_no: lead_whatsapp_no
+            })
+        })
+        .then(response => response.json())
+        .then(response => {
+            if(response === "Basic Course Form Registered"){
+                this.setVisible(false);
+                toast.success('Registered Successfully.',{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                })
+                this.setState({
+                    lead_name: '',
+                    lead_contact: '',
+                    city: '',
+                    preferred_language: '',
+                    prior_knowledge: '',
+                    course_type: 'basic'
+                })
+            }else if(response === "Failed"){
+                this.setVisible(false);
+                toast.error("Failed to register for the course. Please try again",{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                });
+            }else if(response === "Not Unique"){
+                this.setVisible(false);
+                toast.error("Contact has been already registered.Please try with new contact",{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500
+                });
+            }
+            else if(response === 'duplicate account_opening_no in coded')
+            {
+                this.setVisible(false);
+                toast.error("Account opening number is already registered us.Please try with new contact",{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000
+                }); 
+            }
+            else if(response === 'duplicate account_opening_no in request'){
+                this.setVisible(false);
+                toast.error("Account opening number exists in the system to be coded.Please try with new contact",{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            this.setVisible(false);
+            toast.error(`${err}`,{
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500
+            });
+        })
     }
 
     handleChange = event => {
         const {name, value} = event.target;
-        this.setState({[name]: value});
+        this.setState({[name]: value}, () => {
+            console.log(this.state[name])
+        });
     }
     render(){
-        const {lead_name, lead_contact, city, course_type, prior_knowledge, preferred_language} = this.state;
+        const {
+            lead_name,
+            lead_contact,
+            city,
+            course_type,
+            prior_knowledge,
+            preferred_language,
+            account_opening_name,
+            lead_whatsapp_no,
+            account_opening_no
+        } = this.state;
         return(
             <div className={'basic-course-form-container white'}>
                 <p className={'basic-course-form-header b'}>Basic Course Application Form</p>
@@ -116,7 +152,7 @@ class JuniorReferFriend extends Component{
                         name="lead_name"
                         value={lead_name}
                         onChange={this.handleChange}
-                        label="Account Opening Name"
+                        label="Enter Friend's Name"
                         style={{marginTop: '0px', marginBottom: '0px'}}
                         required
                     />
@@ -125,9 +161,39 @@ class JuniorReferFriend extends Component{
                         name="lead_contact"
                         value={lead_contact}
                         onChange={this.handleChange}
-                        label="Account Opening Phone Number(eg: 9998879999)"
+                        label="Phone Number(eg: 9998879999)"
                         style={{marginTop: '0px', marginBottom: '0px'}}
                         pattern="[0-9]{10}"
+                        required
+                    />
+                    <FormInput
+                        type="tel"
+                        name="lead_whatsapp_no"
+                        value={lead_whatsapp_no}
+                        onChange={this.handleChange}
+                        label="Enter Whatsapp Number(eg: 9998879999)"
+                        style={{marginTop: '0px', marginBottom: '0px'}}
+                        pattern="[0-9]{10}"
+                        required
+                    />
+                    <FormInput
+                        type="tel"
+                        name="account_opening_no"
+                        value={account_opening_no}
+                        onChange={this.handleChange}
+                        label="Account Opening Number(eg: 9998879999)"
+                        style={{marginTop: '0px', marginBottom: '0px'}}
+                        pattern="[0-9]{10}"
+                        required
+                    />
+                    <FormInput
+                        autofocus='autofocus'
+                        type="text"
+                        name="account_opening_name"
+                        value={account_opening_name}
+                        onChange={this.handleChange}
+                        label="Enter Account Opening Name"
+                        style={{marginTop: '0px', marginBottom: '0px'}}
                         required
                     />
                     <FormInput
