@@ -1,11 +1,14 @@
 import React,{useEffect,useState} from 'react';
 import AdminSendIdTable from './AdminSendIdTable/AdminSendIdTable';
+import {ToastContainer, toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 const AdminSendId = () => {
     const [language, setLanguage] = useState('');
     const[data,setData] = useState([]);
     const [pages, setPages] = useState(0);
     const [pageNumbers, setPageNumbers] = useState([]);
-    const perPage = 10;
     useEffect(() => {
         setData([]);
     }, [])
@@ -22,7 +25,6 @@ const AdminSendId = () => {
             .then( resp => resp.json())
             .then(
                 resp=>{
-                    console.log(resp)
                     setData(resp)
                 }
             )
@@ -31,7 +33,6 @@ const AdminSendId = () => {
     let handleChange;
     handleChange = (event) => {
         const {name, value} = event.target;
-        console.log(value);
         if(value === 'hindi'){
             setLanguage('hindi');
             fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_processed_removed_page_count',{
@@ -44,7 +45,6 @@ const AdminSendId = () => {
                 .then( resp => resp.json())
                 .then(
                     resp=>{
-                        console.log(resp);
                         setPages(resp.count);
                         var arr = [];
                         for (let i = 1; i <= resp.count; i++) {
@@ -65,7 +65,6 @@ const AdminSendId = () => {
             .then( resp => resp.json())
             .then(
                 resp=>{
-                    console.log(resp)
                     setData(resp)
                 }
             )
@@ -83,7 +82,6 @@ const AdminSendId = () => {
                 .then( resp => resp.json())
                 .then(
                     resp=>{
-                        console.log(resp);
                         setPages(resp.count);
                         var arr = [];
                         for (let i = 1; i <= resp.count; i++) {
@@ -104,7 +102,6 @@ const AdminSendId = () => {
                 .then( resp => resp.json())
                 .then(
                     resp=>{
-                        console.log(resp)
                         setData(resp)
                     }
                 )
@@ -129,6 +126,7 @@ const AdminSendId = () => {
                 ))}
                 <p>. . </p>
             </div>
+            <ToastContainer/>
         </div>
     )
 }

@@ -1,9 +1,11 @@
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {ToastContainer, toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 // components
 // css
 import './AdminSendIdTable.scss';
+toast.configure();
 
 const header = [
     "Sr.No",
@@ -29,7 +31,10 @@ const AdminSendIdTable = ({data, setData,language}) => {
             .then( resp => resp.json())
             .then(
                 resp=>{
-                    console.log(resp);
+                   toast.success("Remove Successful", {
+                       position: toast.POSITION.TOP_CENTER,
+                       autoClose: 2500
+                   });
                 }
             )
             .catch(err=>console.log(err));
@@ -80,8 +85,8 @@ const AdminSendIdTable = ({data, setData,language}) => {
                     )
                 })}
                 </tbody>
-                
             </table>
+            <ToastContainer/>
         </div>
     );
 }
