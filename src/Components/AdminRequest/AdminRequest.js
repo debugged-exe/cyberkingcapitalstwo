@@ -4,7 +4,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // redux
 import { connect } from 'react-redux';
-import {setAdminCodedRequestArray, setAdminDeleteRequestArray, setAdminRequestLanguage} from '../../redux/admin-panel/admin-request/admin.request.actions.js'
+import {
+    setAdminCodedRequestArray,
+    setAdminDeleteRequestArray,
+    setAdminRequestLanguage,
+    setAdminReferralRequestArray
+} from '../../redux/admin-panel/admin-request/admin.request.actions.js'
 
 // reselect
 import {createStructuredSelector} from 'reselect';
@@ -13,6 +18,7 @@ import {selectAdminRequestLanguage} from '../../redux/admin-panel/admin-request/
 // component
 import AdminCodedTable from "./AdminCodedTable/AdminCodedTable";
 import AdminDeleteTable from "./AdminDeleteTable/AdminDeleteTable";
+import AdminReferralTable from "./AdminReferralTable/AdminReferralTable";
 
 // css
 import './AdminRequest.scss';
@@ -53,7 +59,7 @@ const deletetableLogs = [
 
 toast.configure();
 
-const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdminDeleteRequestArray, setAdminRequestLanguage}) => {
+const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdminDeleteRequestArray, setAdminRequestLanguage, setAdminReferralRequestArray}) => {
 
     const [codedPageNumbersMarathi, setCodedPageNumbersMarathi] = useState([]);
     const [codedPageNumbersHindi, setCodedPageNumbersHindi] = useState([]);
@@ -65,6 +71,59 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
     const [deletePageNumbersMarathi, setDeletePageNumbersMarathi] = useState([]);
 
     const [deletePages, setDeletePages] = useState(0);
+
+    const [referralPages, setReferralPages] = useState([])
+
+    const fetchReferral = () => {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_referral_lead_pg_count', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: 0,
+                preferred_language: 'hindi'
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            console.log(resp);
+            if(resp.count)
+            {
+                var arr = [];
+                for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                    arr.push(i);
+                }
+                setReferralPages(arr)
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Error loading handover requests page count.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
+
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_referral_lead', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: 0,
+                preferred_language: 'hindi'
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            console.log(resp)
+           setAdminReferralRequestArray(resp);
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Error loading handover requests page count.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
+    }
 
     const fetchHandover = () => {
         fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_coded_request_pgcount_hindi')
@@ -256,9 +315,33 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         }
     }
 
+    const fetchReferralNewPage = (pgNo) => {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_referral_lead', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: pgNo,
+                preferred_language: admin_request_language
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            console.log(resp)
+           setAdminReferralRequestArray(resp);
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Error loading handover requests page count.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
+    }
+
     useEffect(() => {
         fetchHandover();
         fetchDelete();
+        fetchReferral();    
     }, [])
 
     const langHandler = (event) => {
@@ -344,6 +427,55 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             .catch(err => {
                 console.log(err)
                 toast.error("Error loading delete requests.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_referral_lead_pg_count', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: 0,
+                preferred_language: 'hindi'
+            })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                console.log(resp);
+                if(resp.count)
+                {
+                    var arr = [];
+                    for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                        arr.push(i);
+                    }
+                    setReferralPages(arr)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Error loading handover requests page count.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_referral_lead', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    pgNo: 0,
+                    preferred_language: 'hindi'
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                console.log(resp)
+               setAdminReferralRequestArray(resp);
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Error loading handover requests page count.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -434,6 +566,55 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
                     autoClose: 2500,
                 });
             })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_referral_lead_pg_count', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                pgNo: 0,
+                preferred_language: 'marathi'
+            })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                console.log(resp);
+                if(resp.count)
+                {
+                    var arr = [];
+                    for (let i = 1; i <= Math.ceil(resp.count / perPage); i++) {
+                        arr.push(i);
+                    }
+                    setReferralPages(arr)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Error loading handover requests page count.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
+
+            fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_referral_lead', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    pgNo: 0,
+                    preferred_language: 'marathi'
+                })
+            })
+            .then(response => response.json())
+            .then(resp => {
+                console.log(resp)
+               setAdminReferralRequestArray(resp);
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Error loading handover requests page count.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            })
         }
     }
 
@@ -485,8 +666,20 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
                 }
                 <p>. . </p>
             </div>
-            {/*{<hr color={'gray'} className={'mt5 w-100'}/>}
-            <h1 className="f1 b">Referral Requests</h1>*/}
+            {<hr color={'gray'} className={'mt5 w-100'}/>}
+            <h1 className="f1 b">Referral Requests</h1>
+            <div className={'w-100'}>
+                <AdminReferralTable />
+            </div>
+            <div className="senior-request-pagination-container w-100 pb4">
+                <p>. . </p>
+                {
+                    referralPages.map((number, index) => (
+                        <button key={index} onClick = {() => fetchReferralNewPage(number-1)} className="senior-request-page-btn">{number}</button>
+                    ))
+                }
+                <p>. . </p>
+            </div>
             <ToastContainer />
         </div>
     );
@@ -499,6 +692,7 @@ const mapStateToProps =  createStructuredSelector({
 const mapDispatchToProps = dispatch => ({
     setAdminCodedRequestArray: array => dispatch(setAdminCodedRequestArray(array)),
     setAdminDeleteRequestArray: array => dispatch(setAdminDeleteRequestArray(array)),
+    setAdminReferralRequestArray: array => dispatch(setAdminReferralRequestArray(array)),
     setAdminRequestLanguage: lang => dispatch(setAdminRequestLanguage(lang))
 });
 
