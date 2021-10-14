@@ -69,7 +69,7 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
         .then(response => response.json())
         .then(resp => {
             reassignCodedFlag({lead_id: lead_id})
-            toast.success(" Coded Request Successful", {
+            toast.success(resp, {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 4000,
             });
