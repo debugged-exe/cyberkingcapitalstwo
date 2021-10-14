@@ -111,7 +111,6 @@ const AdminReferralTable = ({admin_referral_request_array, admin_request_languag
                             <td className={'admin-referral-table-data-container'} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:'NULL'}`}</td>
                             <td className={'admin-referral-table-data-container'} data-label={'Account Opening Name'}>{`${item.account_opening_name?item.account_opening_name:'NULL'}`}</td>
                             <td className={'admin-referral-table-data-container pointer'}><AiIcons.AiFillCheckCircle className={'btn-center'} onClick={() => codedReferralLead(item.lead_id, item.lead_phone_no, item.telecaller_id)} size={'2rem'} color={'green'} /></td>
-                            <td className={'admin-referral-table-data-container pointer'}><ImIcons.ImCross className={'btn-center'} size={'1.5rem'} color={'red'} /></td>
                         </tr>
                     )
                 })}
@@ -128,5 +127,9 @@ const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser
 })
 
+const mapDispatchToProps = dispatch => ({
+    reassignReferralRequestArray: lead_id => dispatch(reassignReferralRequestArray(lead_id))
+})
 
-export default connect(mapStateToProps)(AdminReferralTable);
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminReferralTable);
