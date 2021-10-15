@@ -23,7 +23,8 @@ import './AdminPaymentModal.scss';
 
 const initialState = {
 	paying: '10',
-	bonus_paying: '10'
+	bonus_paying: '10',
+	referral_paying: '10'
 }
 
 toast.configure();
@@ -114,6 +115,38 @@ class AdminPaymentModal extends Component{
                 });
         	})
 		}
+		else if(name==='referral')
+		{
+			const paying = this.state.referral_paying;
+			const {points_earned, telecaller_id} = this.props.admin_modal_lead;
+			fetch('https://aqueous-mesa-28052.herokuapp.com/admin/pay',{
+	            method: 'post',
+	            headers: {'Content-Type': 'application/json'},
+	            body: JSON.stringify({
+	                amount: paying,
+	                telecaller_id: telecaller_id,
+	                field: 'referral'
+	            })
+        	})
+        	.then(response => response.json())
+        	.then(resp => {
+        		if(resp==='Success')
+        		{
+        			toast.success("Referral points paid Successfully", {
+	                    position: toast.POSITION.TOP_CENTER,
+	                    autoClose: 2500,
+                	});
+                	updatePoints({telecaller_id: telecaller_id, amount: paying, name: 'bonus'});
+        		}
+        	})
+        	.catch(err => {
+        		console.log(err);
+        		toast.error("Referral points payment failed.Please try again.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
+        	})
+		}
 	}
 
 	handleChange = event => {
@@ -123,7 +156,7 @@ class AdminPaymentModal extends Component{
 
 	render(){
 		const {admin_modal_lead, setAdminModalVisibility, admin_modal_visibility} = this.props;
-		const {paying, bonus_paying} = this.state;
+		const {paying, bonus_paying, referral_paying} = this.state;
 		return (
 			<div className={`${admin_modal_visibility?'visible admin-payment-modal-container':'hidden'}`}>
 				<div className="admin-payment-tint"></div>
@@ -140,6 +173,8 @@ class AdminPaymentModal extends Component{
 								<div className="ma2"><label className="f3 b">Designation:</label><span className="ma1 f4">{admin_modal_lead.designation}</span></div>
 								<div className="ma2"><label className="f3 b">Points Earned:</label><span className="ma1 f4">{admin_modal_lead.points_earned}</span></div>
 								<div className="ma2"><label className="f3 b">Points Paid:</label><span className="ma1 f4">{admin_modal_lead.points_paid}</span></div>
+								<div className="ma2"><label className="f3 b">Referral Points Earned:</label><span className="ma1 f4">{admin_modal_lead.referral_points_earned}</span></div>
+								<div className="ma2"><label className="f3 b">Referral Points Paid:</label><span className="ma1 f4">{admin_modal_lead.referral_points_paid}</span></div>
 							</div>
 						</div>
 					</div>
@@ -177,6 +212,25 @@ class AdminPaymentModal extends Component{
 								/>
 								<div className={'mt4'}>
 									<CustomButton type="submit" id={'admin-payment-button-margin-2'}>Pay Bonus</CustomButton>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div className="w-60 admin-payment-modal-form ">
+						<div className={'mt2 f3'} style={{marginBottom: "-3%"}}>
+							<form name="referral" id="referral" className={'admin-payment-modal-form-component'} onSubmit={this.handleSubmit}>
+								<FormInput
+								type="number"
+								name="referral_paying"
+								value={referral_paying}
+								onChange={this.handleChange}
+								label="Amount to be Paid"
+								step="1"
+								min="0"
+								required
+								/>
+								<div className={'mt4'}>
+									<CustomButton type="submit" id={'admin-payment-button-margin-2'}>Pay Referral Points</CustomButton>
 								</div>
 							</form>
 						</div>
