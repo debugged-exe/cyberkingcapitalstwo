@@ -10,10 +10,9 @@ toast.configure();
 const header = [
     "Sr.No",
     "Lead Id",
-    "Lead Name",
-    "Lead Phone No.",
-    "Lead Whatsapp No.",
+    "Account Opening Name",
     "Account Opening Number",
+    "Lead Whatsapp No.",
     "Remove",
     "Send"
 ]
@@ -75,12 +74,11 @@ const AdminSendIdTable = ({data, setData,language}) => {
                         <tr key={index} className="admin-sendid-row-container">
                             <td className={'admin-sendid-data-container'} data-label={'Sr.No'}>{index+1}</td>
                             <td className={'admin-sendid-data-container'} data-label={'Lead Id'}>{item.lead_id}</td>
-                            <td className={'admin-sendid-data-container'} data-label={'Lead Name'}>{item.lead_name}</td>
-                            <td className={'admin-sendid-data-container'} data-label={'Lead Phone No.'}>{`${item.lead_phone_no?item.lead_phone_no:'NULL'}`}</td>
-                            <td className={'admin-sendid-data-container'} data-label={'Lead Whatsapp No.'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:'NULL'}`}</td>
+                            <td className={'admin-sendid-data-container'} data-label={'Account Opening Name'}>{item.account_opening_name}</td>
                             <td className={'admin-sendid-data-container'} data-label={'Account Opening No.'}>{`${item.account_opening_no?item.account_opening_no:'NULL'}`}</td>
-                            <td className={'admin-sendid-data-container'} data-label={'Account Opening No.'}><button style={{outLine: "none", border:'none'}} class="f6 link dim ph3 pv2 mb2 dib white bg-red" onClick={() => removeFunction(item.lead_id)}>Remove</button></td>
-                            <td className={'admin-sendid-data-container'} data-label={'Account Opening No.'}><a class="f6 link dim ph3 pv2 mb2 dib white bg-dark-green" href={`https://wa.me/91${item.lead_whatsapp_no}`} target={'_blank'}>Send</a></td>
+                            <td className={'admin-sendid-data-container'} data-label={'Lead Whatsapp No.'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:'NULL'}`}</td>
+                            <td className={'admin-sendid-data-container'} data-label={'Remove'}><button style={{outLine: "none", border:'none'}} class="f6 link dim ph3 pv2 mb2 dib white bg-red" onClick={() => removeFunction(item.lead_id)}>Remove</button></td>
+                            <td className={'admin-sendid-data-container'} data-label={'Send'}><a class="f6 link dim ph3 pv2 mb2 dib white bg-dark-green" href={`https://wa.me/91${item.lead_whatsapp_no}`} target={'_blank'}>Send</a></td>
                         </tr>
                     )
                 })}
