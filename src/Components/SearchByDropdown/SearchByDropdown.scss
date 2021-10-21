@@ -42,6 +42,9 @@ $base-blue: #00449E;
     color: white;
     transform: scale(1.5);
   }
+  &:focus{
+    background: $base-blue;
+  }
 }
 
 @media only screen and (max-width: 500px){
