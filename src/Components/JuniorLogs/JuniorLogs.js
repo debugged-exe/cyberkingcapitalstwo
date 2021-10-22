@@ -53,6 +53,14 @@ const LogStatArray = [
     {
         title: 'Pending Requests',
         numeric: 0,
+    },
+    {
+        title: 'Referral Pending Requests',
+        numeric: 0
+    },   
+    {
+        title: 'Referral Coded',
+        numeric: 0
     }
 ]
 
@@ -94,8 +102,9 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                 telecaller_id: telecaller_id
             })
         })
-            .then(resp => resp.json())
-            .then(resp => {
+        .then(resp => resp.json())
+        .then(resp => {
+            console.log(resp)
             LogStatArray.map(item => {
                 switch(item.title){
                     case 'Status 1 Updated':
@@ -115,6 +124,12 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                         break;
                     case 'Handed Over Leads':
                         item.numeric = resp[0].handover;
+                        break;
+                    case 'Referral Pending Requests':
+                        item.numeric = resp[0].referral_pending
+                        break;
+                    case 'Referral Coded':
+                        item.numeric = resp[0].referral_coded
                         break;
                     default:
                         break;
