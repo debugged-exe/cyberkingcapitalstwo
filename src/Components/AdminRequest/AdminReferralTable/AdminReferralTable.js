@@ -58,6 +58,35 @@ const AdminReferralTable = ({admin_referral_request_array, admin_request_languag
     //     })
     // }
 
+    const deleteReferral = (lead_id, lead_phone_no) => {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/delete_referral_lead', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                lead_id: lead_id,
+                lead_phone_no: lead_phone_no
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            if(resp==='Success')
+            {
+                reassignReferralRequestArray(lead_id)
+                toast.success('Referral request cancelled successfully.', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error('Failed.Please try again.', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2500,
+            });
+        })
+    }
+
     const codedReferralLead = (lead_id,lead_phone_no,telecaller_id) => {
         fetch('https://aqueous-mesa-28052.herokuapp.com/admin/code', {
             method: 'post',
@@ -111,6 +140,7 @@ const AdminReferralTable = ({admin_referral_request_array, admin_request_languag
                             <td className={'admin-referral-table-data-container'} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:'NULL'}`}</td>
                             <td className={'admin-referral-table-data-container'} data-label={'Account Opening Name'}>{`${item.account_opening_name?item.account_opening_name:'NULL'}`}</td>
                             <td className={'admin-referral-table-data-container pointer'}><AiIcons.AiFillCheckCircle className={'btn-center'} onClick={() => codedReferralLead(item.lead_id, item.lead_phone_no, item.telecaller_id)} size={'2rem'} color={'green'} /></td>
+                            <td className={'admin-referral-table-data-container pointer'}><ImIcons.ImCross className={'btn-center'} size={'1.5rem'} color={'red'} onClick={() => deleteReferral(item.lead_id, item.lead_phone_no)}/></td>                            
                         </tr>
                     )
                 })}
