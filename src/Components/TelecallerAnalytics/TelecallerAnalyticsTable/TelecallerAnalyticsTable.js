@@ -12,7 +12,21 @@ import {connect} from "react-redux";
 import {createStructuredSelector} from "reselect";
 import {selectAdminAnalyticsLogs} from '../../../redux/admin-panel/admin-analytics/admin.analytics.selectors.js';
 
-const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Form Filled At", "Fetched At", "Handedover At", "Handover Retrieved", "Coded At"];
+const header = [
+    "Lead Id",
+    "Assigned to",
+    "Lead Name",
+    "Lead contact",
+    "Form Filled At",
+    "Fetched At",
+    "Handedover At",
+    "Handover Retrieved",
+    "Coded At",
+    "Status 1",
+    "Status 2",
+    "Referral Request",
+    "Referral Accepted"
+];
 
 toast.configure();
 

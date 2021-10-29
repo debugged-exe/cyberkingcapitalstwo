@@ -25,6 +25,12 @@ $base-blue: #00449E;
 	}
 }
 
+.page-btn-focus{
+	border: none;
+	background: $base-blue;
+	color: white;
+}
+
 .stats{
 	display: grid;
 	grid-template-columns: 33% 34% 33%;

@@ -8,7 +8,8 @@ const {
 	SET_MODAL_VISIBILITY,
 	REASSIGN_LEAD,
 	REASSIGN_HANDOVER_FLAG,
-	REASSIGN_CODED_FLAG
+	REASSIGN_CODED_FLAG,
+	REASSIGN_REFERRED
 	} = JuniorLogsAcitonTypes;
 
 export const setLogStatArray = array => ({
@@ -44,4 +45,9 @@ export const reassignHandoverFlag = flag => ({
 export const reassignCodedFlag = flag => ({
 	type: REASSIGN_CODED_FLAG,
 	payload: flag
+})
+
+export const reassignReferred = lead_id => ({
+	type: REASSIGN_REFERRED,
+	payload: lead_id
 })

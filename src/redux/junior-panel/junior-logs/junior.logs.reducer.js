@@ -7,7 +7,8 @@ const {
 	SET_MODAL_LEAD,SET_MODAL_VISIBILITY, 
 	REASSIGN_LEAD,
 	REASSIGN_HANDOVER_FLAG,
-	REASSIGN_CODED_FLAG
+	REASSIGN_CODED_FLAG,
+	REASSIGN_REFERRED
 	} = JuniorLogsAcitonTypes;
 
 const INITIAL_STATE = {
@@ -97,6 +98,16 @@ const juniorLogsReducer = (state = INITIAL_STATE, action) => {
 				return {
 					...state,
 					junior_table_logs: codedRequest
+				}
+			case REASSIGN_REFERRED:
+				const tempArr = [];
+				state.junior_table_logs.filter(item => item.lead_id!== action.payload)
+				.map(item => {
+					tempArr.push(item);
+				})
+				return {
+					...state,
+					junior_table_logs: tempArr
 				}
 		default:
 		return state;

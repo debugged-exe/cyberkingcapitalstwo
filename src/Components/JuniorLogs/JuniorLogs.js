@@ -61,6 +61,10 @@ const LogStatArray = [
     {
         title: 'Referral Coded',
         numeric: 0
+    },
+    {
+        title: 'Referral Rejected',
+        numeric: 0
     }
 ]
 
@@ -72,6 +76,8 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
     const [pages, setPages] = useState(0);
     const [pageNumbers, setPageNumbers] = useState([]);
     const perPage = 10;
+
+    const [currentPage, setCurrentPage] = useState(1)
 
     useEffect(() => {
         const {telecaller_id} = currentUser;
@@ -130,6 +136,9 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
                         break;
                     case 'Referral Coded':
                         item.numeric = resp[0].referral_coded
+                        break;
+                    case 'Referral Rejected':
+                        item.numeric = resp[0].referral_rejected
                         break;
                     default:
                         break;
@@ -280,6 +289,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
             else if(resp!=='Unable to assign you leads' || resp!=='Unable to fetch')
             {
                 setLoader(false)
+                setCurrentPage(1)
                 setJuniorTableLogArray(resp);
                 toast.success("New Leads assigned successfully", {
                     position: toast.POSITION.TOP_CENTER,
@@ -331,6 +341,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
             .then(response => response.json())
             .then(resp => {
                 setLoader(false)
+                setCurrentPage(pgNo+1)
                 setJuniorTableLogArray(resp)
             })
             .catch(err => {
@@ -425,6 +436,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
             .then(response => response.json())
             .then(resp => {
                 setLoader(false)
+                setCurrentPage(1);
                 setJuniorTableLogArray(resp)
                 window.scrollBy(0,760);
             })
@@ -456,6 +468,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
             .then(response => response.json())
             .then(resp => {
                 setLoader(false)
+                setCurrentPage(1)
                 setJuniorTableLogArray(resp)
                 window.scrollBy(0, 760);
             })
@@ -522,7 +535,7 @@ const JuniorLogs = ({currentUser, setLogStatArray, log_stat_array,setJuniorTable
             <div className="junior-log-pagination-container pb4">
                 <p>. . </p>
                 {pageNumbers.map((number, index) => (
-                    <button key={index} onClick={() => fetchNewPage(number-1)} className="junior-log-page-btn">{number}</button>
+                    <button key={index} onClick={() => fetchNewPage(number-1)} className={`${number===currentPage?"page-btn-focus":"junior-log-page-btn"}`}>{number}</button>
                 ))}
                 <p>. . </p>
             </div>
