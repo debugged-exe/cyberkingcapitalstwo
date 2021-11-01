@@ -22,106 +22,6 @@ import {setAdminCountArray} from "../../redux/admin-panel/admin-count/admin.coun
 
 toast.configure();
 
-const tableLogs = [
-    {
-        lead_id: 1,
-        assigned_to: "xyz",
-        lead_name: "abcde",
-        lead_contact: 9087389032,
-        whatsapp_no: 8903221111,
-        account_opening_no: 123,
-        city: "pune",
-        trading_knowledge: "no",
-        preferred_language: "hindi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete",
-        coded: "---",
-        payment: "done"
-    },
-    {
-        lead_id: 2,
-        assigned_to: "mmmmm",
-        lead_name: "oooooo",
-        lead_contact: 9000001222,
-        whatsapp_no: 9090912121,
-        account_opening_no: 8011,
-        city: "pune",
-        trading_knowledge: "no",
-        preferred_language: "marathi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete",
-        coded: "---",
-        payment: "no"
-    },
-    {
-        lead_id: 1,
-        assigned_to: "xyz",
-        lead_name: "abcde",
-        lead_contact: 9087389032,
-        whatsapp_no: 8903221111,
-        account_opening_no: 123,
-        city: "pune",
-        trading_knowledge: "no",
-        preferred_language: "hindi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete",
-        coded: "---",
-        payment: "done"
-    },
-    {
-        lead_id: 2,
-        assigned_to: "mmmmm",
-        lead_name: "oooooo",
-        lead_contact: 9000001222,
-        whatsapp_no: 9090912121,
-        account_opening_no: 8011,
-        city: "pune",
-        trading_knowledge: "no",
-        preferred_language: "marathi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete",
-        coded: "---",
-        payment: "no"
-    },
-    {
-        lead_id: 1,
-        assigned_to: "xyz",
-        lead_name: "abcde",
-        lead_contact: 9087389032,
-        whatsapp_no: 8903221111,
-        account_opening_no: 123,
-        city: "pune",
-        trading_knowledge: "no",
-        preferred_language: "hindi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete",
-        coded: "---",
-        payment: "done"
-    },
-    {
-        lead_id: 2,
-        assigned_to: "mmmmm",
-        lead_name: "oooooo",
-        lead_contact: 9000001222,
-        whatsapp_no: 9090912121,
-        account_opening_no: 8011,
-        city: "pune",
-        trading_knowledge: "no",
-        preferred_language: "marathi",
-        status_1: "complete",
-        status_2: "uncomplete",
-        handover_status: "complete",
-        coded: "---",
-        payment: "no"
-    }
-]
-
-
 const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
 
     useEffect(() => {
@@ -277,6 +177,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
                 <option value="lead_phone_no">Lead Contact</option>
                 <option value="status_1">Status 1</option>
                 <option value="status_2">Status 2</option>
+                <option value='account_opening_no'>Account Opening No</option>
             </select>
         </div>
         <div className="flex flex-column justify-center items-center mb4">
