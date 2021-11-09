@@ -77,6 +77,36 @@ class JuniorModal extends React.Component {
         })
     }
 
+    handleCheck = (event) => {
+    	const {name, checked} = event.target
+    	const {lead_phone_no} = this.props.modal_lead
+    	switch(name){
+    		case 'lead_whatsapp_no_check':
+    			if(checked){
+    				this.setState({lead_whatsapp_no: lead_phone_no})
+    				return;
+    			}
+    			else
+    			{
+    				this.setState({lead_whatsapp_no: ''})
+    				return;
+    			}
+			break;
+			case 'account_opening_no_check':
+    			if(checked){
+    				this.setState({account_opening_no: lead_phone_no})
+    				return;
+    			}
+    			else
+    			{
+    				this.setState({account_opening_no: ''})
+    				return;
+    			}
+			break;
+			default: return;
+    	}
+    }
+
     handleChange = event => {
         const {name, value} = event.target;
         this.setState({[name]: value});
@@ -111,15 +141,26 @@ class JuniorModal extends React.Component {
 								Current Value: {modal_lead.lead_whatsapp_no}
 							</label>
 							<form name="lead_whatsapp_no" className={'junior-modal-form-component'} onSubmit={this.handleSubmit}>
-								<FormInput
-									type="text"
-									name="lead_whatsapp_no"
-									value={lead_whatsapp_no}
-									onChange={this.handleChange}
-									label="Whatsapp Number"
-									style = {{marginTop: '0px', marginBottom: '0px'}}
-									required
-								/>
+								<span className="flex flex-column justify-center items-center">
+									<FormInput
+										type="text"
+										name="lead_whatsapp_no"
+										value={lead_whatsapp_no}
+										onChange={this.handleChange}
+										label="Whatsapp Number"
+										style = {{marginTop: '0px', marginBottom: '-50px'}}
+										required
+									/>
+									<span className="flex justify-center items-center pa0 ma0">
+										<input
+											type="checkbox"
+											name="lead_whatsapp_no_check"
+											value=""
+											onClick = {this.handleCheck}
+										/>
+										<p className="f4 ph2">Same as Lead Contact No</p>
+									</span>
+								</span>
 								<div className={'mt4'}>
 									<CustomButton type="submit" id={'button-margin-1'}>Update</CustomButton>
 								</div>
@@ -128,15 +169,27 @@ class JuniorModal extends React.Component {
 						<div className={'mt2 f3'}>
 							<label>Current Value: {modal_lead.account_opening_no}</label>
 							<form name="account_opening_no" className={'junior-modal-form-component'} onSubmit={this.handleSubmit}>
-								<FormInput
-									type="text"
-									name="account_opening_no"
-									value={account_opening_no}
-									onChange={this.handleChange}
-									label="Account Opening No"
-									style={{marginTop: '0px', marginBottom: '0px'}}
-									required
-								/>
+								<span className="flex flex-column justify-center items-center">
+									<FormInput
+										type="text"
+										name="account_opening_no"
+										value={account_opening_no}
+										onChange={this.handleChange}
+										label="Account Opening No"
+										style={{marginTop: '0px', marginBottom: '-50px'}}
+										required
+									/>
+									<span className="flex justify-center items-center pa0 ma0">
+										<input
+											type="checkbox"
+											name="account_opening_no_check"
+											value=""
+											onClick = {this.handleCheck}
+										/>
+										<p className="f4 ph2">Same as Lead Contact No</p>
+									</span>
+								</span>
+								
 								<div className={'mt4'}>
 									<CustomButton type="submit" id={'button-margin-2'}>Update</CustomButton>
 								</div>
