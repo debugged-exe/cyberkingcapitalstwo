@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PuffLoader from "react-spinners/PuffLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {AiOutlineContacts, AiOutlineSearch} from 'react-icons/ai';
+
 
 // redux
 import { connect } from 'react-redux';
@@ -252,19 +254,76 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
     }
 
     const handleUniversalFilterValue= (event) =>{
-        setUniversalFilter(event.target.value);
+        
+        setUniversalFilter(document.getElementById('dataItem').innerHTML);
+        setFilteredData([]);
     }
 
     const [universalFilter, setUniversalFilter] = useState('');
 
     const handleUniversalChange = (event) => {
-
-        setuFilter(event.target.value);
+        const { telecaller_id } = currentUser;
+        if(event.target.value === 'full_table'){
+            
+                setLoader(true);
+                fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_pgcount', {
+                    method: 'post',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        telecaller_id: telecaller_id
+                    })
+                })
+                    .then(resp => resp.json())
+                    .then(response => {
+                        setPages(response.count);
+                        var arr = [];
+                        for (let i = 1; i <= Math.ceil(response.count / perPage); i++) {
+                            arr.push(i);
+                        }
+                        setPageNumbers(arr);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        toast.error("Error pg count", {
+                            position: toast.POSITION.TOP_CENTER,
+                            autoClose: 4000,
+                        });
+                    })
+    
+                fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
+                    method: 'post',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        telecaller_id: telecaller_id,
+                        pgNo: 0
+                    })
+                })
+                    .then(response => response.json())
+                    .then(resp => {
+                        setLoader(false)
+                        setJuniorTableLogArray(resp);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        setLoader(false)
+                        toast.error("Error Loading Table", {
+                            position: toast.POSITION.TOP_CENTER,
+                            autoClose: 4000,
+                        });
+                    })
+            
+            setuFilter('*');
+        }
+        else
+        {setuFilter(event.target.value);}
     }
 
     const [uFilter, setuFilter] = useState('*');
 
     const handleUniversalFilter = (event) => {
+         
+        
+       
         const {telecaller_id}=currentUser;
         setPageNumbers(['1']);
         if(uFilter=='lead_name')
@@ -277,12 +336,13 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .then(response => response.json())
             .then(resp => {
                 setLoader(false)
+                
                 setJuniorTableLogArray(resp);
             })
             .catch(err => {
                 console.log(err);
                 setLoader(false)
-                toast.error("Error Loading Table apne idhar", {
+                toast.error("Error Loading Table", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -302,7 +362,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .catch(err => {
                 console.log(err);
                 setLoader(false)
-                toast.error("Error Loading Table apne idhar", {
+                toast.error("Error Loading Table ", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -322,12 +382,16 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .catch(err => {
                 console.log(err);
                 setLoader(false)
-                toast.error("Error Loading Table apne idhar", {
+                toast.error("Error Loading Table ", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
             })
             }
+            setUniversalFilter('');
+            setuFilter('*');
+            setFilterValue('');
+           
     }
 
     const fetchNewLeads = () => {
@@ -556,6 +620,61 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
         }
     }
 
+    const [filteredData, setFilteredData] = useState([]);
+   
+
+    const handleUniSearch=(event)=>{
+        setUniversalFilter(event.target.value);
+        const {telecaller_id}=currentUser;
+        
+       
+        if(uFilter=='lead_name')
+        {
+            fetch(`https://aqueous-mesa-28052.herokuapp.com/junior/substring/name/leads?lead_name=${event.target.value}&telecaller_id=${telecaller_id}`, {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json' },
+            
+        })
+            .then(response => response.json())
+            .then(resp => {
+                setLoader(false)
+                setFilteredData(resp);
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.error("Error Loading Dropdown", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
+            })
+        }
+            else if(uFilter == 'lead_phone_no'){
+                fetch(`https://aqueous-mesa-28052.herokuapp.com/junior/substring/phNo/leads?ph_no=${event.target.value}&telecaller_id=${telecaller_id}`, {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json' },
+            
+        })
+            .then(response => response.json())
+            .then(resp => {
+                setLoader(false);
+                setFilteredData(resp);
+                
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.error("Error Loading Dropdown ", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 4000,
+                });
+            })
+            }
+
+       
+    }
+ 
+
     return (
         <div className="junior-logs">
             <p style={{ fontFamily: 'Open Sans Condensed', fontSize: '2rem', fontWeight: 'bold', textAlign: 'center' }}>View Logs</p>
@@ -608,6 +727,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     <label className={"b f3 ml1-ns mr3 "}>Universal Search by : </label>
                     <select
                         name="searchFilter"
+                        value={uFilter}
                         className={"f4 ml1 "}
                         onChange={(event) => handleUniversalChange(event)}
                     >
@@ -615,23 +735,45 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                         <option value='lead_id' >Lead ID</option>
                         <option value="lead_name">Lead Name</option>
                         <option value="lead_phone_no">Lead Contact</option>
+                        <option value="full_table">Full Table</option>
                     </select>
                 </div>
-                <div className={"flex justify-center items-center center w-100"}>
-                    <label className={"b f3 ml1-ns mr3 "}>Enter value : </label>
+                <div className={"flex justify-center items-center center w-100 "}>
+                    <label className={"b f3 ml1-ns mr3 mb0 uniSearch pa0"}>Enter value : </label>
                     <FormInput
                         type="text"
                         name="filter_value"
                         value={universalFilter}
-                        onChange={(event)=> handleUniversalFilterValue(event)}
+                        onChange={(event)=> handleUniSearch(event)}
                         label={uFilter !== '*' ? `Enter ${uFilter}` : 'Choose filter'}
                         style={{ marginTop: '0px', marginBottom: '0px' }}
                         disabled={uFilter === '*' ? true : null}
                         required
                     />
-                     
+      
+                <AiOutlineSearch  style={{marginLeft: '0'}} onClick={(event) => handleUniversalFilter(event)}>Filter</AiOutlineSearch>
+                
                 </div>
-                <CustomButton  style={{marginLeft: '0'}} onClick={(event) => handleUniversalFilter(event)}>Filter</CustomButton>
+                <div >
+
+                        {    filteredData.length !=0 &&     
+
+                           ( 
+                               <div className="result ">
+                              { filteredData.map((item,i)=>{
+                                  
+                                return(
+                                    
+                                    <div  onClick={(event) => handleUniversalFilterValue(event)} cursor='pointer' key={i} id="dataItem" >
+                                        {uFilter=='lead_name'?item.lead_name:item.lead_phone_no}
+                                    </div>
+                                );
+                            })}
+                            </div>)
+                        }     
+                    
+                </div>
+                
 
             </div>
             <div className={'mt4 w-100 mb4'}>
