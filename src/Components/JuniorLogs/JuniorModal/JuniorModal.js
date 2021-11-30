@@ -44,6 +44,30 @@ class JuniorModal extends React.Component {
         let payload = this.state.[name];
         const {lead_id} = this.props.modal_lead;
         const {reassignLead} = this.props;
+		console.log('name',name);
+		console.log("payload",payload);
+		if(name==="account_opening_no"){
+			if(payload.length != 10){
+				toast.error("Account Opening Number should be 10 digits", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+				return
+			}
+
+		}
+		if(name==="lead_whatsapp_no"){
+			if(payload.length != 10){
+				toast.error("Whatsapp number should be 10 digits", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2500,
+                });
+				return
+			}
+
+		}
+		
+		
         fetch('https://aqueous-mesa-28052.herokuapp.com/junior/update', {
         	method: 'post',
         	headers: {'Content-Type': 'application/json'},
@@ -108,8 +132,11 @@ class JuniorModal extends React.Component {
     }
 
     handleChange = event => {
+		
         const {name, value} = event.target;
         this.setState({[name]: value});
+	
+	
     }
 
 	render() {
