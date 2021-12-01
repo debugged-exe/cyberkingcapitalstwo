@@ -23,7 +23,8 @@ const header = [
     "Lead Id",
     "Lead Name",
     "Lead Phone No.",
-    'Handover Status'
+    'Handover Status',
+    "Broker Name"
 ]
 
 toast.configure();
@@ -107,6 +108,7 @@ const AdminDeleteTable = ({admin_delete_request_array, admin_request_language,re
                             <td className={'admin-delete-table-data-container'} data-label={'Telecaller Id'}>{item.telecaller_id}</td>
                             <td className={'admin-delete-table-data-container'} data-label={'Lead Id'}>{item.lead_id}</td>
                             <td className={'admin-delete-table-data-container'} data-label={'Lead Name'}>{item.lead_name}</td>
+                            <td className={'admin-delete-table-data-container'} data-label={'Broker Name'}>{item.broker_name}</td>
                             <td className={'admin-delete-table-data-container'} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
                             <td className={'admin-delete-table-data-container'} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:'NULL'}`}</td>
                             <td className={'admin-delete-table-data-container pointer'}><AiIcons.AiFillCheckCircle className={'btn-center'} size={'2rem'} color={'green'} onClick={() => deleteHandler(item.lead_id)}/></td>
