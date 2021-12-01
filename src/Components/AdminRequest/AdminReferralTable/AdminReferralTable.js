@@ -138,9 +138,11 @@ const AdminReferralTable = ({admin_referral_request_array, admin_request_languag
                             <td className={'admin-referral-table-data-container'} data-label={'Sr.No'}>{index+1}</td>
                             <td className={'admin-referral-table-data-container'} data-label={'Telecaller Id'}>{item.telecaller_id}</td>
                             <td className={'admin-referral-table-data-container'} data-label={'Lead Id'}>{item.lead_id}</td>
-                            <td className={'admin-referral-table-data-container'} data-label={'Broker Name'}>{item.broker_name}</td>
+                            
                             <td className={'admin-referral-table-data-container'} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:'NULL'}`}</td>
+                          
                             <td className={'admin-referral-table-data-container'} data-label={'Account Opening Name'}>{`${item.account_opening_name?item.account_opening_name:'NULL'}`}</td>
+                            <td className={'admin-referral-table-data-container'} data-label={'Broker Name'}>{`${item.broker_name?item.broker_name:'NULL'}`}</td>
                             <td className={'admin-referral-table-data-container pointer'}><AiIcons.AiFillCheckCircle className={'btn-center'} onClick={() => codedReferralLead(item.lead_id, item.lead_phone_no, item.telecaller_id)} size={'2rem'} color={'green'} /></td>
                             <td className={'admin-referral-table-data-container pointer'}><ImIcons.ImCross className={'btn-center'} size={'1.5rem'} color={'red'} onClick={() => deleteReferral(item.lead_id, item.lead_phone_no)}/></td>                            
                         </tr>

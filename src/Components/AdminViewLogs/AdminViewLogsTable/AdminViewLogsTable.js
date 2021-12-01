@@ -22,6 +22,7 @@ const header = [
     "Handover status",
     "Preffered Language",
     "Coded",
+    "Broker Name"
 ];
 
 const AdminViewLogsTable = ({lead_table_array, language}) => {
@@ -57,6 +58,7 @@ const AdminViewLogsTable = ({lead_table_array, language}) => {
                             <td className={'admin-view-log-table-data-container'} data-label={'City'}>{item.lead_city}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Status 1'}>{`${item.status_1?item.status_1:"NULL"}`}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Status 2'}>{`${item.status_2?item.status_2:"NULL"}`}</td>
+                            <td className={'admin-view-log-table-data-container'} data-label={'Broker Name'}>{`${item.broker_name?item.broker_name:"NULL"}`}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Preferred Language'}>{item.preferred_language}</td>
                             <td className={'admin-view-log-table-data-container'} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
