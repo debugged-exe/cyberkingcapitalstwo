@@ -27,7 +27,8 @@ const initialState = {
 	account_opening_no: '',
 	status_1: '',
 	status_2: '',
-	account_opening_name: ''
+	account_opening_name: '',
+	broker_name:''
 }
 
 toast.configure();
@@ -36,6 +37,7 @@ class JuniorModal extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = initialState;
+		
 	}
 
 	handleSubmit = (event) => {
@@ -44,8 +46,9 @@ class JuniorModal extends React.Component {
         let payload = this.state.[name];
         const {lead_id} = this.props.modal_lead;
         const {reassignLead} = this.props;
-		console.log('name',name);
-		console.log("payload",payload);
+		
+
+
 		if(name==="account_opening_no"){
 			if(payload.length != 10){
 				toast.error("Account Opening Number should be 10 digits", {
@@ -74,7 +77,8 @@ class JuniorModal extends React.Component {
             body: JSON.stringify({
             	field: name,
             	payload: payload,
-            	lead_id: lead_id
+            	lead_id: lead_id,
+				
             })
         })
         .then(response => response.json())
@@ -132,16 +136,15 @@ class JuniorModal extends React.Component {
     }
 
     handleChange = event => {
-		
         const {name, value} = event.target;
         this.setState({[name]: value});
 	
-	
     }
+
 
 	render() {
 
-		const {lead_whatsapp_no, account_opening_no, status_1, status_2, account_opening_name} = this.state;
+		const {lead_whatsapp_no, account_opening_no, status_1, status_2, account_opening_name,broker_name} = this.state;
 		const {modal_lead,modal_visibility,setModalVisibility} = this.props;
 		return (
 			<div className={`${modal_visibility?'visible junior-modal-container':'hidden'}`}>
@@ -272,6 +275,20 @@ class JuniorModal extends React.Component {
 								/>
 								<div className={'mt4'}>
 									<CustomButton type="submit" id={'button-margin-4'}>Update</CustomButton>
+								</div>
+							</form>
+						</div>
+						<div className={'mt2 f3 flex justify-center'} >
+							<label>Broker Name: {modal_lead.broker}</label>
+							<form  name="broker_name"  onSubmit={this.handleSubmit}  >
+								<select type="text" name="broker_name"  className={"f4 ml1 "} onChange={this.handleChange}  >
+									<option  value={'not selected'} >--select--</option>
+									<option  value={'Angel Broking'} >Angel Broking</option>
+									<option  value={'Zerodha'}>Zerodha</option>
+									<option  value={'Upstox'}>Upstox</option>
+								</select>
+								<div className={'mt4'}>
+										<CustomButton type="submit" id={'button-margin-3'}>Update </CustomButton>
 								</div>
 							</form>
 						</div>

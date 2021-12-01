@@ -181,6 +181,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
         })
             .then(response => response.json())
             .then(resp => {
+                console.log('fetch old',resp);
                 setLoader(false);
                 setJuniorTableLogArray(resp);
             })
@@ -480,6 +481,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             })
                 .then(response => response.json())
                 .then(resp => {
+                    
                     setLoader(false)
                     setCurrentPage(pgNo + 1)
                     setJuniorTableLogArray(resp)
