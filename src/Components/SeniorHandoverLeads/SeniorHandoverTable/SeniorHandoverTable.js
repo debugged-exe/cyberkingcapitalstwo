@@ -22,7 +22,7 @@ toast.configure();
 const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLead,currentUser}) => {
 	const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
     "Account Opening No.", "Account Opening Name", "City", "Trading knowledge", "Preferred Language",
-    "status 1", "status 2", "Handover status", "Coded"];
+    "status 1", "status 2", "Handover status", "Coded","Broker Name"];
 
     const onDoneHandler = (lead_id) => {
         fetch('https://aqueous-mesa-28052.herokuapp.com/senior/reset_handover',{
@@ -114,6 +114,8 @@ const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLe
                         <td className={'senior-handover-table-data-container'} data-label={'Status 2'}>{`${item.status_2?item.status_2:"NULL"}`}</td>
                         <td className={'senior-handover-table-data-container'} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
                         <td className={'senior-handover-table-data-container'} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
+                        <td className={'senior-handover-table-data-container'} data-label={'Broker Name'}>{`${item.broker_name?item.broker_name:"NULL"}`}</td>
+
                        	<td className={'senior-handover-table-data-container senior-button-center'}>
 							<button className={'ma1'} onClick={() => setSeniorModelLead(item)}>Update</button>
 							<button className={'ma1'} onClick={() => onDoneHandler(item.lead_id)}>Done</button>

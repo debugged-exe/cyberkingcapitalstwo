@@ -20,7 +20,7 @@ import {selectCurrentUser} from "../../../redux/user/user.selectors";
 
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
                 "Account Opening No.", "Account Opening Name", "City", "Trading knowledge", "Preferred Language",
-                "status 1", "status 2", "Handover status", "Coded"];
+                "status 1", "status 2", "Handover status", "Coded","Broker Name"];
 
 toast.configure();
 
@@ -219,6 +219,7 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):(item.referred?'bg-light-blue':'bg-white')}`} data-label={'Status 2'}>{`${item.status_2?item.status_2:"NULL"}`}</td>
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):(item.referred?'bg-light-blue':'bg-white')}`} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
                         <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):(item.referred?'bg-light-blue':'bg-white')}`} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
+                        <td className={`junior-table-data-container ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):(item.referred?'bg-light-blue':'bg-white')}`} data-label={'Broker Name'}>{`${item.broker_name?item.broker_name:"NULL"}`}</td>
                         <td className={`junior-table-data-container request-button-center ${item.handover_flag==='yes'?(item.delete_flag==='yes'?'bg-light-red':'bg-moon-gray fw5'):(item.referred?'bg-light-blue':'bg-white')}`}>
                             <button className="ma1 pointer" disabled={flag} onClick={() => {setModalLead(item)}}>Update</button>
                             <button className="ma1 pointer" disabled={flag} onClick={() => handoverHandler(item.lead_id, item.lead_phone_no)}>{item.referral_flag?"Delete":"Handover"}</button>
