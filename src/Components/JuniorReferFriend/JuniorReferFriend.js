@@ -30,6 +30,7 @@ class JuniorReferFriend extends Component{
             prior_knowledge: '',
             preferred_language: '',
             visible: false,
+            broker_name:'',
             assigned_to: this.props.currentUser.telecaller_id
         }
     }
@@ -51,6 +52,7 @@ class JuniorReferFriend extends Component{
             assigned_to,
             account_opening_no,
             lead_whatsapp_no,
+            broker_name,
             account_opening_name
         } = this.state;
         fetch('https://aqueous-mesa-28052.herokuapp.com/basicform', {
@@ -64,6 +66,7 @@ class JuniorReferFriend extends Component{
                 prior_knowledge: prior_knowledge,
                 course_type: course_type,
                 assigned_to: assigned_to,
+                broker_name: broker_name,
                 account_opening_no: account_opening_no,
                 account_opening_name: account_opening_name,
                 lead_whatsapp_no: lead_whatsapp_no
@@ -83,7 +86,8 @@ class JuniorReferFriend extends Component{
                     city: '',
                     preferred_language: '',
                     prior_knowledge: '',
-                    course_type: 'basic'
+                    course_type: 'basic',
+                    broker_name:'',
                 })
             }else if(response === "Failed"){
                 this.setVisible(false);
@@ -140,12 +144,13 @@ class JuniorReferFriend extends Component{
             preferred_language,
             account_opening_name,
             lead_whatsapp_no,
+            broker_name,
             account_opening_no
         } = this.state;
         return(
-            <div className={'basic-course-form-container white'}>
-                <p className={'basic-course-form-header b'}>Basic Course Application Form</p>
-                <form className={'basic-course-form-box'} onSubmit = {this.handleSubmit}>
+            <div className={'refer-course-form-container white pt2'}>
+                <p className={'basic-course-form-header b '}>Basic Course Application Form</p>
+                <form className={'basic-course-form-box '} onSubmit = {this.handleSubmit}>
                     <FormInput
                         autofocus='autofocus'
                         type="text"
@@ -219,6 +224,15 @@ class JuniorReferFriend extends Component{
                             <option value={''}>--select--</option>
                             <option value="hindi">Hindi</option>
                             <option value="marathi">Marathi</option>
+                        </select>
+                    </div>
+                    <div className={'basic-course-select-input mb4 white '}>
+                        <label className={'b f3 mr3'}>Broker Name </label>
+                        <select name="broker_name" className={'f4 ml1'} value={broker_name} onChange={this.handleChange} required>
+                            <option value={'null'}>--select--</option>
+                            <option value="angel broking">Angel Broking</option>
+                            <option value="zerodha">Zerodha</option>
+                            <option value="upstox">Upstox</option>
                         </select>
                     </div>
                     <CustomButton

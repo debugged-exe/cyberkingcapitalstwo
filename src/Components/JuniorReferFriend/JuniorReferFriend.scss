@@ -1,6 +1,7 @@
-.basic-course-form-container{
-  background: rgba(0, 0, 0, 0.6) url('FormBg.jpg') no-repeat center;
+.refer-course-form-container{
+  background: rgba(0, 0, 0, 0.6) url('FormBg.jpg') no-repeat center center/cover;
   background-size: cover;
+  
   display: flex;
   position: relative;
   flex-direction: column;
@@ -10,6 +11,7 @@
   background-blend-mode: darken;
 }
 .basic-course-form-header{
+
   font-size: 3rem;
   margin-bottom: 0px;
   text-align: center;
@@ -39,7 +41,7 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .basic-course-form-container{
+  .refer-course-form-container{
     height: 100vh;
   }
 }
@@ -56,7 +58,8 @@
   .basic-course-select-input{
     grid-template-columns: 100%;
   }
-  .basic-course-form-container{
+  .refer-course-form-container{
     background-size: 100% 100%;
+    color:white;
   }
 }

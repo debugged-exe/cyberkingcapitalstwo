@@ -696,7 +696,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     <CustomButton  style={{marginLeft: '0'}} onClick={() => fetchNewLeads()}>Fetch New Leads</CustomButton>
                 </div>
 
-                <div className={"flex justify-center items-center center mt4 mb4 w-100"}>
+                {/* <div className={"flex justify-center items-center center mt4 mb4 w-100"}>
                     <label className={"b f3 ml1-ns mr3 "}>Search by : </label>
                     <select
                         name="searchFilter"
@@ -721,7 +721,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                         disabled={filter === '*' ? true : null}
                         required
                     />
-                </div>
+                </div> */}
 
 
                 {/* UNIVERSAL SEARCH BY */}

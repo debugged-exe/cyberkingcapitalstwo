@@ -24,7 +24,7 @@ import {toast, ToastContainer} from "react-toastify";
 //table header data
 const header = ["Lead Id", "Assigned to", "Lead Name", "Lead contact", "Whatsapp No.",
     "Account Opening No.", "Account Opening Name", "City", "Trading knowledge", "Preferred Language",
-    "status 1", "status 2", "Handover status"];
+    "status 1", "status 2", "Handover status","Broker Name"];
 
 const SeniorLogTable = ({current_junior_caller_id, pgCount, setPgCount,junior_lead_array, junior_lead_table_visibility,setJuniorLeadTableVisibility, setJuniorLeadArray}) => {
     const [pages, setPages] = useState(0);
@@ -104,6 +104,7 @@ const SeniorLogTable = ({current_junior_caller_id, pgCount, setPgCount,junior_le
                         <td className={'senior-table-data-container'} data-label={'Status 1'}>{`${item.status_1?item.status_1:"NULL"}`}</td>
                         <td className={'senior-table-data-container'} data-label={'Status 2'}>{`${item.status_2?item.status_2:"NULL"}`}</td>
                         <td className={'senior-table-data-container'} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
+                        <td className={'senior-table-data-container'} data-label={'Broker Name'}>{`${item.broker_name?item.broker_name:"NULL"}`}</td>
                     </tr>
                 )
             })}

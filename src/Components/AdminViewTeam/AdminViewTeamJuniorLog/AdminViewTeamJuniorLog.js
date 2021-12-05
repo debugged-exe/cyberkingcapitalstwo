@@ -30,7 +30,8 @@ const header = [
     'Account Opening Name',
     'Status 1',
     'Status 2',
-    'Handover Update'
+    'Handover Update',
+    'Broker Name'
 ]
 
 const AdminViewTeamJuniorLog = ({setJuniorId,junior_id,pg_count,setJuniorLogArray,setPgCount,juniorLogView, junior_log_array, setJuniorLogView,setUpdateModalLead}) => {
@@ -127,6 +128,9 @@ const AdminViewTeamJuniorLog = ({setJuniorId,junior_id,pg_count,setJuniorLogArra
                                 </td>
                                 <td className={'admin-view-junior-log-data-container'}
                                     data-label={'Handover'}>{`${item.handover_status?item.handover_status:"NULL"}`}
+                                </td>
+                                <td className={'admin-view-junior-log-data-container'}
+                                    data-label={'Broker Name'}>{`${item.broker_name?item.broker_name:"NULL"}`}
                                 </td>
                                 <td className={'admin-view-junior-log-data-container'}>
                                     <button className="ma1" onClick={() => setUpdateModalLead(item)}>Update</button>

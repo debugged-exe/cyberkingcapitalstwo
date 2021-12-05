@@ -191,7 +191,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
                 style={{marginTop: '0px', marginBottom: '0px'}}
                 required
                 />
-                <CustomButton style={{marginLeft: '0px'}}  type='submit' >Fetch</CustomButton>
+                <CustomButton style={{marginLeft: '0px'}}  type='submit' >Filter</CustomButton>
             </form>
         </div>
         <div className={'w-100 mb4'}>
