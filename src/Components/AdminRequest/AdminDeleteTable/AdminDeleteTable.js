@@ -103,7 +103,7 @@ const AdminDeleteTable = ({admin_delete_request_array, admin_request_language,re
                 {admin_delete_request_array.filter(item => item.preferred_language===admin_request_language).map((item, index) => {
                     return (
                         <tr key={index} className="admin-delete-table-row-container">
-                            <td className={'admin-delete-table-data-container'} data-label={'Sr.No'}>{index+1}</td>
+                            <td className={'admin-delete-table-data-container '} data-label={'Sr.No'}>{index+1}</td>
                             <td className={'admin-delete-table-data-container'} data-label={'Telecaller Id'}>{item.telecaller_id}</td>
                             <td className={'admin-delete-table-data-container'} data-label={'Lead Id'}>{item.lead_id}</td>
                             <td className={'admin-delete-table-data-container'} data-label={'Lead Name'}>{item.lead_name}</td>

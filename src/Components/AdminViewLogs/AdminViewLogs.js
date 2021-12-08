@@ -65,7 +65,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
 
     const setFilterHandler = (event) => {
         setFilter(event.target.value);
-        console.log(filter);
+        // console.log(filter);
     }
 
     const [filterValue, setFilterValue] = useState('');
@@ -109,7 +109,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
             })
         }).then( resp => resp.json())
             .then( resp => {
-                console.log(resp);
+                // console.log(resp);
                 if(resp !== "fail" )
                     setAdminLogsArray(resp);
             })

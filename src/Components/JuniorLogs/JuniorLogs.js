@@ -112,7 +112,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
         })
             .then(resp => resp.json())
             .then(resp => {
-                console.log(resp)
+                // console.log(resp)
                 LogStatArray.map(item => {
                     switch (item.title) {
                         case 'Status 1 Updated':
@@ -181,7 +181,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
         })
             .then(response => response.json())
             .then(resp => {
-                console.log('fetch old',resp);
+                // console.log('fetch old',resp);
                 setLoader(false);
                 setJuniorTableLogArray(resp);
             })

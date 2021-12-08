@@ -119,7 +119,7 @@ class AdminBlockTelecaller extends Component {
    }
 
    resetPage = (language) => {
-      console.log("reset function call");
+      // console.log("reset function call");
       const {setAdminBlockTelecallerTable} = this.props;
       fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count", {
          method: 'post',

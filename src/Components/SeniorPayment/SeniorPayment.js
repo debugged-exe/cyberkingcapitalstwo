@@ -70,7 +70,7 @@ const SeniorPayment = ({currentUser,setSeniorPaymentArray, setSeniorPaymentTable
         })
             .then( resp => resp.json())
             .then( resp => {
-                console.log(resp[0]);
+                // console.log(resp[0]);
                 PaymentCardArray.map((item) => {
                     if(item.title === 'Points Earned'){
                         item.numeric = resp[0].points_earned

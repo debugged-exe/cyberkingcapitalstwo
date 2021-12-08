@@ -85,7 +85,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         })
         .then(response => response.json())
         .then(resp => {
-            console.log(resp);
+            // console.log(resp);
             if(resp.count)
             {
                 var arr = [];
@@ -113,7 +113,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         })
         .then(response => response.json())
         .then(resp => {
-            console.log(resp)
+            // console.log(resp)
            setAdminReferralRequestArray(resp);
         })
         .catch(err => {
@@ -326,7 +326,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         })
         .then(response => response.json())
         .then(resp => {
-            console.log(resp)
+            // console.log(resp)
            setAdminReferralRequestArray(resp);
         })
         .catch(err => {
@@ -442,7 +442,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .then(response => response.json())
             .then(resp => {
-                console.log(resp);
+                // console.log(resp);
                 if(resp.count)
                 {
                     var arr = [];
@@ -470,7 +470,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .then(response => response.json())
             .then(resp => {
-                console.log(resp)
+                // console.log(resp)
                setAdminReferralRequestArray(resp);
             })
             .catch(err => {
@@ -577,7 +577,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .then(response => response.json())
             .then(resp => {
-                console.log(resp);
+                // console.log(resp);
                 if(resp.count)
                 {
                     var arr = [];
@@ -605,7 +605,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .then(response => response.json())
             .then(resp => {
-                console.log(resp)
+                // console.log(resp)
                setAdminReferralRequestArray(resp);
             })
             .catch(err => {

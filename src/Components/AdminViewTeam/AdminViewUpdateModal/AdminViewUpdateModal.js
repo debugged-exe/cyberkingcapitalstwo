@@ -63,7 +63,7 @@ class JuniorModal extends React.Component {
                     autoClose: 2500,
                 });
 	        	this.setState(initialState, () => {
-	        		console.log('')
+	        		// console.log('')
 	        	})
         	}
         	

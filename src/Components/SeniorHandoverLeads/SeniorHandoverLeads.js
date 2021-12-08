@@ -135,7 +135,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
             })
             .then(response => response.json())
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 var arr = [];
                 for (let i = 1; i <= Math.ceil(response.count / perPage); i++) {
                     arr.push(i);
