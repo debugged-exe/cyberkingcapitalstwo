@@ -50,7 +50,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
 		.catch(err => {
 			console.log(err);
             setLoader(false);
-			toast.error('Error loading handover requests.Please Refresh', {
+			toast.warn('Error loading handover requests.Please Refresh', {
 				position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
 			});
@@ -73,7 +73,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
         })
         .catch(err => {
         	console.log(err);
-        	toast.error('Failed to fetch page count.Please Refresh', {
+        	toast.warn('Failed to fetch page count.Please Refresh', {
 				position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
 			});
@@ -144,7 +144,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
             })
             .catch(err => {
                 console.log(err);
-                toast.error('Error loading page count.', {
+                toast.warn('Error loading page count.', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });  
@@ -168,7 +168,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
             .catch(err => {
                 console.log(err);
                 setLoader(false);
-                toast.error('Error loading leads.Please try again.', {
+                toast.warn('Error loading leads.Please try again.', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });  
@@ -191,7 +191,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
             .catch(err => {
                 console.log(err);
                 setLoader(false);
-                toast.error('Error loading handover requests.Please Refresh', {
+                toast.warn('Error loading handover requests.Please Refresh', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -214,7 +214,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
             })
             .catch(err => {
                 console.log(err);
-                toast.error('Failed to fetch page count.Please Refresh', {
+                toast.warn('Failed to fetch page count.Please Refresh', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -242,7 +242,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
             .catch(err => {
                 console.log(err);
                 setLoader(false);
-                toast.error('Error loading handover requests.Please Refresh', {
+                toast.warn('Error loading handover requests.Please Refresh', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -268,7 +268,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
             .catch(err => {
                 console.log(err);
                 setLoader(false);
-                toast.error('Error loading handover requests.Please Refresh', {
+                toast.warn('Error loading handover requests.Please Refresh', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });

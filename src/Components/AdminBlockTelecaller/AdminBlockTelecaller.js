@@ -40,7 +40,7 @@ class AdminBlockTelecaller extends Component {
          })
       }).catch(err => {
          console.log(err);
-         toast.error(`${err}`, {
+         toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2500
          });
@@ -55,7 +55,7 @@ class AdminBlockTelecaller extends Component {
          setAdminBlockTelecallerTable(resp);
       }).catch(err => {
          console.log(err);
-         toast.error(`${err}`, {
+         toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2500
          });
@@ -78,7 +78,7 @@ class AdminBlockTelecaller extends Component {
             })
             toggleBlockField(index);
          } else if (response === "unblocked") {
-            toast.success("Successfully unblocked", {
+            toast.error("Successfully unblocked", {
                position: toast.POSITION.TOP_CENTER,
                autoClose: 2500
             })
@@ -86,7 +86,7 @@ class AdminBlockTelecaller extends Component {
          }
       }).catch(err => {
          console.log(err);
-         toast.error(`${err}`, {
+         toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2500
          })
@@ -104,7 +104,7 @@ class AdminBlockTelecaller extends Component {
          setAdminBlockTelecallerTable(resp);
       }).catch(err => {
          console.log(err);
-         toast.error(`${err}`, {
+         toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2500
          });
@@ -139,7 +139,7 @@ class AdminBlockTelecaller extends Component {
          })
       }).catch(err => {
          console.log(err);
-         toast.error(`${err}`, {
+         toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2500
          });
@@ -154,7 +154,7 @@ class AdminBlockTelecaller extends Component {
          setAdminBlockTelecallerTable(resp);
       }).catch(err => {
          console.log(err);
-         toast.error(`${err}`, {
+         toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2500
          });

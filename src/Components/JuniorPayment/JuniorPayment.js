@@ -100,7 +100,7 @@ const JuniorPayment = ({currentUser,setJuniorPaymentArray, junior_payment_array}
             })
             .catch( err => {
                 console.log(err);
-                toast.error( `${err}`, {
+                toast.warn( `${err}`, {
                     position: toast.POSITION.TOP_CENTER,
                     autoclose: 2500
                 })

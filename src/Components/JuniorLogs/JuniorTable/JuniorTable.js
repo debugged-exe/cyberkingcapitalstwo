@@ -58,7 +58,7 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Unable to handover.Please try again.", {
+                toast.warn("Unable to handover.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -80,14 +80,14 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
             .then(response => response.json())
             .then(resp => {
                 reassignReferred(resp.lead_id);
-                toast.success("Lead deleted successfully", {
+                toast.error("Lead deleted successfully", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Unable to delete.Please try again.", {
+                toast.warn("Unable to delete.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -127,7 +127,7 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error during Coded Request.Please try again.", {
+                toast.warn("Error during Coded Request.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -157,12 +157,12 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Unable to send referral request.Please try again.", {
+                toast.warn("Unable to send referral request.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
             })
-        }    
+        }
     }
     return (<div className={'junior-table-container'}>
         <table cellSpacing="1" className={'junior-table-box'}>

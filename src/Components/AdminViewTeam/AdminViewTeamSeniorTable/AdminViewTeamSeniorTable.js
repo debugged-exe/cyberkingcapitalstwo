@@ -43,7 +43,7 @@ const AdminViewTeamSeniorTable = ({setJrView, senior_telecaller_array, setAssign
             })
             .catch( err => {
                 console.log(err);
-                toast.error('Error. Try Again',{
+                toast.warn('Error. Try Again',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 });
@@ -66,7 +66,7 @@ const AdminViewTeamSeniorTable = ({setJrView, senior_telecaller_array, setAssign
                 })
             })
             .catch( err => {
-                toast.error('count not fetched. try again',{
+                toast.warn('count not fetched. try again',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 })

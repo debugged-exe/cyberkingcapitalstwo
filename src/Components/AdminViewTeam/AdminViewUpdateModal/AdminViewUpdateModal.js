@@ -70,7 +70,7 @@ class JuniorModal extends React.Component {
         })
         .catch(err => {
         	console.log(err);
-        	toast.error("Unable to update.Please try again", {
+        	toast.warn("Unable to update.Please try again", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });

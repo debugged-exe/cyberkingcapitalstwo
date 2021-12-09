@@ -1,0 +1,11 @@
+.neumorphism{
+  box-shadow:
+    -8px -8px 12px 0 rgba(0, 0, 0, 0.3),
+    12px 12px 16px rgba(255, 255, 255, 0.25);
+ font-size: 1rem;
+ width:50%;
+ height: 10%;
+ border-radius: 40px;
+ overflow: hidden;
+ text-align: center;
+}

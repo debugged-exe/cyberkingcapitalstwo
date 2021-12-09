@@ -45,7 +45,7 @@ const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLe
         })
         .catch(err => {
             console.log(err);
-            toast.error("Failed to handback.Please try again.", {
+            toast.warn("Failed to handback.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -68,7 +68,7 @@ const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLe
         .then(resp => {
             if(resp==='Success')
             {
-                toast.success("Delete request successfull", {
+                toast.error("Delete request successfull", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -77,7 +77,7 @@ const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLe
         })
         .catch(err => {
             console.log(err);
-            toast.error("Delete request failed.Please try again.", {
+            toast.warn("Delete request failed.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
             });

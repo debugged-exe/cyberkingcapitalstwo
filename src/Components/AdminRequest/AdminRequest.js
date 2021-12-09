@@ -97,7 +97,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         })
         .catch(err => {
             console.log(err);
-            toast.error("Error loading handover requests page count.", {
+            toast.warn("Error loading handover requests page count.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -118,7 +118,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         })
         .catch(err => {
             console.log(err);
-            toast.error("Error loading handover requests page count.", {
+            toast.warn("Error loading handover requests page count.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -140,7 +140,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         })
         .catch(err => {
             console.log(err);
-            toast.error("Error loading handover requests page count.", {
+            toast.warn("Error loading handover requests page count.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -162,7 +162,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         })
         .catch(err => {
             console.log(err)
-            toast.error("Error loading handover requests.", {
+            toast.warn("Error loading handover requests.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -184,7 +184,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         })
         .catch(err => {
             console.log(err);
-            toast.error("Error loading delete requests page count.", {
+            toast.warn("Error loading delete requests page count.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -206,7 +206,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         })
         .catch(err => {
             console.log(err)
-            toast.error("Error loading delete requests.", {
+            toast.warn("Error loading delete requests.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -232,7 +232,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err)
-                toast.error("Error loading handover requests.", {
+                toast.warn("Error loading handover requests.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -256,7 +256,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err)
-                toast.error("Error loading handover requests.", {
+                toast.warn("Error loading handover requests.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -283,7 +283,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err)
-                toast.error("Error loading handover requests.", {
+                toast.warn("Error loading handover requests.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -307,7 +307,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err)
-                toast.error("Error loading handover requests.", {
+                toast.warn("Error loading handover requests.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -331,7 +331,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
         })
         .catch(err => {
             console.log(err);
-            toast.error("Error loading handover requests page count.", {
+            toast.warn("Error loading handover requests page count.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -362,7 +362,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error loading handover requests page count.", {
+                toast.warn("Error loading handover requests page count.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -384,7 +384,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err)
-                toast.error("Error loading handover requests.", {
+                toast.warn("Error loading handover requests.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -404,7 +404,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error loading delete requests page count.", {
+                toast.warn("Error loading delete requests page count.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -426,7 +426,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err)
-                toast.error("Error loading delete requests.", {
+                toast.warn("Error loading delete requests.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -454,7 +454,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error loading handover requests page count.", {
+                toast.warn("Error loading handover requests page count.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -475,7 +475,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error loading handover requests page count.", {
+                toast.warn("Error loading handover requests page count.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -497,7 +497,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error loading handover requests page count.", {
+                toast.warn("Error loading handover requests page count.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -519,7 +519,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err)
-                toast.error("Error loading handover requests.", {
+                toast.warn("Error loading handover requests.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -539,7 +539,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error loading delete requests page count.", {
+                toast.warn("Error loading delete requests page count.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -561,7 +561,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err)
-                toast.error("Error loading delete requests.", {
+                toast.warn("Error loading delete requests.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -589,7 +589,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error loading handover requests page count.", {
+                toast.warn("Error loading handover requests page count.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -610,7 +610,7 @@ const AdminRequest = ({admin_request_language, setAdminCodedRequestArray, setAdm
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error loading handover requests page count.", {
+                toast.warn("Error loading handover requests page count.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });

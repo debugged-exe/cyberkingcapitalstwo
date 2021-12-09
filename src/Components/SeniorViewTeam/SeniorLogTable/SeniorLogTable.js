@@ -54,7 +54,7 @@ const SeniorLogTable = ({current_junior_caller_id, pgCount, setPgCount,junior_le
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error to check junior logs Table", {
+                toast.warn("Error to check junior logs Table", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });

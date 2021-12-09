@@ -23,7 +23,7 @@ const SeniorCounts = () => {
             })
             .catch( err => {
                 console.log( err );
-                toast.error( 'count error. refresh',{
+                toast.warn( 'count error. refresh',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 })

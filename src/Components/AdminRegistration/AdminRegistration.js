@@ -20,7 +20,7 @@ class AdminRegistration extends Component {
             })
             .catch(err => {
                 console.log(err);
-                toast.error('Senior caller fetch failed.Please refresh',{
+                toast.warn('Senior caller fetch failed.Please refresh',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000
                 });
@@ -64,7 +64,7 @@ class AdminRegistration extends Component {
                 password: '',
                 confirm_password: ''
             }, () => {
-                toast.error('The two passwords do not match',{
+                toast.warn('The two passwords do not match',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000
                 });
@@ -73,7 +73,7 @@ class AdminRegistration extends Component {
         }
         if (designation === 'junior' && assigned_to === '') {
             this.setVisible(false);
-            toast.error("Set Senior Caller",{
+            toast.warn("Set Senior Caller",{
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 4000
             });
@@ -119,14 +119,14 @@ class AdminRegistration extends Component {
                     })
                     .catch(err => {
                         console.log(err);
-                        toast.error('Senior caller fetch failed.Please refresh',{
+                        toast.warn('Senior caller fetch failed.Please refresh',{
                             position: toast.POSITION.TOP_CENTER,
                             autoClose: 4000
                         });
                     })
                 } else if (resp === 'not found') {
                     this.setVisible(false);
-                    toast.error('Senior caller to which caller is assigned does not exist',{
+                    toast.warn('Senior caller to which caller is assigned does not exist',{
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000
                     });
@@ -140,14 +140,14 @@ class AdminRegistration extends Component {
                     })
                     .catch(err => {
                         console.log(err);
-                        toast.error('Senior caller fetch failed.Please refresh',{
+                        toast.warn('Senior caller fetch failed.Please refresh',{
                             position: toast.POSITION.TOP_CENTER,
                             autoClose: 4000
                         });
                     })
                 } else if (resp === 'Unable to register') {
                     this.setVisible(false);
-                    toast.error('Unable to register.Please try again',{
+                    toast.warn('Unable to register.Please try again',{
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000
                     });
@@ -161,7 +161,7 @@ class AdminRegistration extends Component {
                     })
                     .catch(err => {
                         console.log(err);
-                        toast.error('Senior caller fetch failed.Please refresh',{
+                        toast.warn('Senior caller fetch failed.Please refresh',{
                             position: toast.POSITION.TOP_CENTER,
                             autoClose: 4000
                         });
@@ -171,7 +171,7 @@ class AdminRegistration extends Component {
             .catch(err => {
                 this.setVisible(false);
                 console.log(err);
-                toast.error('Not able to register',{
+                toast.warn('Not able to register',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000
                 });
@@ -186,7 +186,7 @@ class AdminRegistration extends Component {
                     })
                     .catch(err => {
                         console.log(err);
-                        toast.error('Senior caller fetch failed.Please refresh',{
+                        toast.warn('Senior caller fetch failed.Please refresh',{
                             position: toast.POSITION.TOP_CENTER,
                             autoClose: 4000
                         });

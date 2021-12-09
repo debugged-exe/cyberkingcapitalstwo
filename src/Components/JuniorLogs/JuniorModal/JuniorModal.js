@@ -51,7 +51,7 @@ class JuniorModal extends React.Component {
 
 		if(name==="account_opening_no"){
 			if(payload.length != 10){
-				toast.error("Account Opening Number should be 10 digits", {
+				toast.warn("Account Opening Number should be 10 digits", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -61,7 +61,7 @@ class JuniorModal extends React.Component {
 		}
 		if(name==="lead_whatsapp_no"){
 			if(payload.length != 10){
-				toast.error("Whatsapp number should be 10 digits", {
+				toast.warn("Whatsapp number should be 10 digits", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -98,7 +98,7 @@ class JuniorModal extends React.Component {
         })
         .catch(err => {
         	console.log(err);
-        	toast.error("Unable to update.Please try again", {
+        	toast.warn("Unable to update.Please try again", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });

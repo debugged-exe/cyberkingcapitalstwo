@@ -166,7 +166,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error pg count", {
+                toast.warn("Error pg count", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -188,7 +188,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .catch(err => {
                 console.log(err);
                 setLoader(false)
-                toast.error("Error Loading Table", {
+                toast.warn("Error Loading Table", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -218,7 +218,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 })
                 .catch(err => {
                     console.log(err);
-                    toast.error("Error pg count", {
+                    toast.warn("Error pg count", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000,
                     });
@@ -240,7 +240,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 .catch(err => {
                     console.log(err);
                     setLoader(false)
-                    toast.error("Error Loading Table", {
+                    toast.warn("Error Loading Table", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000,
                     });
@@ -285,7 +285,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     })
                     .catch(err => {
                         console.log(err);
-                        toast.error("Error pg count", {
+                        toast.warn("Error pg count", {
                             position: toast.POSITION.TOP_CENTER,
                             autoClose: 4000,
                         });
@@ -307,7 +307,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     .catch(err => {
                         console.log(err);
                         setLoader(false)
-                        toast.error("Error Loading Table", {
+                        toast.warn("Error Loading Table", {
                             position: toast.POSITION.TOP_CENTER,
                             autoClose: 4000,
                         });
@@ -343,7 +343,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .catch(err => {
                 console.log(err);
                 setLoader(false)
-                toast.error("Error Loading Table", {
+                toast.warn("Error Loading Table", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -363,7 +363,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .catch(err => {
                 console.log(err);
                 setLoader(false)
-                toast.error("Error Loading Table ", {
+                toast.warn("Error Loading Table ", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -383,7 +383,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .catch(err => {
                 console.log(err);
                 setLoader(false)
-                toast.error("Error Loading Table ", {
+                toast.warn("Error Loading Table ", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -410,19 +410,19 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .then(response => response.json())
             .then(resp => {
                 if (resp === 'Less than 1') {
-                    toast.error("15 minutes not yet elapsed from previous fetch", {
+                    toast.warn("15 minutes not yet elapsed from previous fetch", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000,
                     });
                 }
                 else if (resp === 'less than 5') {
-                    toast.error("Not enough leads to assign you.", {
+                    toast.warn("Not enough leads to assign you.", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 2500,
                     });
                 }
                 else if (resp === "blocked") {
-                    toast.error("You have been blocked by the admin. Please contact admin for more detail", {
+                    toast.warn("You have been blocked by the admin. Please contact admin for more detail", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 2500
                     })
@@ -441,7 +441,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .catch(err => {
                 console.log(err);
                 setLoader(false)
-                toast.error("Unable to fetch new leads", {
+                toast.warn("Unable to fetch new leads", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -489,7 +489,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 .catch(err => {
                     console.log(err);
                     setLoader(false)
-                    toast.error("Error Loading Table", {
+                    toast.warn("Error Loading Table", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000,
                     });
@@ -514,7 +514,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 .catch(err => {
                     console.log(err);
                     setLoader(false)
-                    toast.error("Error Loading Table", {
+                    toast.warn("Error Loading Table", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000,
                     });
@@ -556,7 +556,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 })
                 .catch(err => {
                     console.log(err);
-                    toast.error("Error Loading Status Count", {
+                    toast.warn("Error Loading Status Count", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000,
                     });
@@ -583,7 +583,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 .catch(err => {
                     console.log(err);
                     setLoader(false)
-                    toast.error("Error Loading Table", {
+                    toast.warn("Error Loading Table", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000,
                     });
@@ -614,7 +614,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 .catch(err => {
                     console.log(err);
                     setLoader(false)
-                    toast.error("Error Loading Table", {
+                    toast.warn("Error Loading Table", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 4000,
                     });
@@ -645,7 +645,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .catch(err => {
                 console.log(err);
                 setLoader(false)
-                toast.error("Error Loading Dropdown", {
+                toast.warn("Error Loading Dropdown", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -666,7 +666,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             .catch(err => {
                 console.log(err);
                 setLoader(false)
-                toast.error("Error Loading Dropdown ", {
+                toast.warn("Error Loading Dropdown ", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });

@@ -86,7 +86,7 @@ const SeniorPayment = ({currentUser,setSeniorPaymentArray, setSeniorPaymentTable
             })
             .catch( err => {
                 console.log(err);
-                toast.error( 'Error during payment details',{
+                toast.warn( 'Error during payment details',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 })
@@ -104,7 +104,7 @@ const SeniorPayment = ({currentUser,setSeniorPaymentArray, setSeniorPaymentTable
             })
             .catch( err => {
                 console.log( err );
-                toast.error('junior payment table error.Refresh again',{
+                toast.warn('junior payment table error.Refresh again',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 });

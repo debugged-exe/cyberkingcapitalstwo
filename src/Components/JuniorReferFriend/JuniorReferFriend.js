@@ -91,13 +91,13 @@ class JuniorReferFriend extends Component{
                 })
             }else if(response === "Failed"){
                 this.setVisible(false);
-                toast.error("Failed to register for the course. Please try again",{
+                toast.warn("Failed to register for the course. Please try again",{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 });
             }else if(response === "Not Unique"){
                 this.setVisible(false);
-                toast.error("Contact has been already registered.Please try with new contact",{
+                toast.warn("Contact has been already registered.Please try with new contact",{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 });
@@ -105,14 +105,14 @@ class JuniorReferFriend extends Component{
             else if(response === 'duplicate account_opening_no in coded')
             {
                 this.setVisible(false);
-                toast.error("Account opening number is already registered us.Please try with new contact",{
+                toast.warn("Account opening number is already registered us.Please try with new contact",{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 3000
                 }); 
             }
             else if(response === 'duplicate account_opening_no in request'){
                 this.setVisible(false);
-                toast.error("Account opening number exists in the system to be coded.Please try with new contact",{
+                toast.warn("Account opening number exists in the system to be coded.Please try with new contact",{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 3000
                 });
@@ -121,7 +121,7 @@ class JuniorReferFriend extends Component{
         .catch(err => {
             console.log(err);
             this.setVisible(false);
-            toast.error(`${err}`,{
+            toast.warn(`${err}`,{
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500
             });

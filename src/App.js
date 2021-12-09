@@ -95,7 +95,7 @@ class App extends Component {
             else if(resp==='Wrong Credentails')
             {
                 this.setVisible(false);
-                toast.error('Wrong Credentails',{
+                toast.warn('Wrong Credentails',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -104,7 +104,7 @@ class App extends Component {
         .catch(err => {
             console.log(err)
             this.setVisible(false);
-            toast.error('Sign in error.Something went wrong.Please try again.', {
+            toast.warn('Sign in error.Something went wrong.Please try again.', {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });

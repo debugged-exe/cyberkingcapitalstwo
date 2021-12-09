@@ -45,7 +45,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
             })
             .catch( err => {
                 console.log(err);
-                toast.error('counts error',{
+                toast.warn('counts error',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 })
@@ -94,7 +94,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
             })
             .catch( err => {
                 console.log(err);
-                toast.error( 'count error. try again', {
+                toast.warn( 'count error. try again', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 })
@@ -115,7 +115,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
             })
             .catch( err => {
                 console.log(err);
-                toast.error('error table. try again',{
+                toast.warn('error table. try again',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 })
@@ -139,7 +139,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
             })
             .catch( err => {
                 console.log(err);
-                toast.error('error table. try again',{
+                toast.warn('error table. try again',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 })

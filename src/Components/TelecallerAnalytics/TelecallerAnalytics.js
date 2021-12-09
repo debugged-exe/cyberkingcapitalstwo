@@ -49,7 +49,7 @@ class TelecallerAnalytics extends Component {
         })
         .catch(err => {
             console.log(err);
-            toast.error('Callers fetch failed.Please refresh', {
+            toast.warn('Callers fetch failed.Please refresh', {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 4000
             });
@@ -91,7 +91,7 @@ class TelecallerAnalytics extends Component {
 		{
 			if(start_date>end_date)
 			{
-				toast.error('Please enter valid combination of start and end date',{
+				toast.warn('Please enter valid combination of start and end date',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000
                 });
@@ -120,7 +120,7 @@ class TelecallerAnalytics extends Component {
 		.catch(err => {
 			this.setState({loader: false})
 			console.log(err)
-			toast.error('Failed to fetch analysis.Please try again',{
+			toast.warn('Failed to fetch analysis.Please try again',{
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 4000
             });
@@ -171,7 +171,7 @@ class TelecallerAnalytics extends Component {
 		.catch(err => {
 			this.setState({loader: false})
 			console.log(err)
-			toast.error('Failed to fetch analysis.Please try again',{
+			toast.warn('Failed to fetch analysis.Please try again',{
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 4000
             });
@@ -204,7 +204,7 @@ class TelecallerAnalytics extends Component {
 		.catch(err => {
 			this.setState({loader: false})
 			console.log(err)
-			toast.error('Failed to fetch analysis.Please try again',{
+			toast.warn('Failed to fetch analysis.Please try again',{
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 4000
             });

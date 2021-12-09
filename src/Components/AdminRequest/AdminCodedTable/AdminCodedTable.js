@@ -44,7 +44,7 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
             if(resp==='Success')
             {
                 reassignCodedRequestArray(lead_id)
-                toast.success('Coded request cancelled successfully.', {
+                toast.error('Coded request cancelled successfully.', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -52,7 +52,7 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
         })
         .catch(err => {
             console.log(err);
-            toast.error('Failed.Please try again.', {
+            toast.warn('Failed.Please try again.', {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -82,7 +82,7 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
         })
         .catch(err => {
             console.log(err);
-            toast.error('Failed.Please try again.', {
+            toast.warn('Failed.Please try again.', {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });

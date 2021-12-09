@@ -46,7 +46,7 @@ class AdminPaymentModal extends Component{
 			const {currentUser} = this.props;
 			if(paying>points_earned)
 			{
-				toast.error("points being paid greater than points earned.", {
+				toast.warn("points being paid greater than points earned.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -77,7 +77,7 @@ class AdminPaymentModal extends Component{
         	})
         	.catch(err => {
         		console.log(err);
-        		toast.error("Points payment failed.Please try again.", {
+        		toast.warn("Points payment failed.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -109,7 +109,7 @@ class AdminPaymentModal extends Component{
         	})
         	.catch(err => {
         		console.log(err);
-        		toast.error("Bonus points payment failed.Please try again.", {
+        		toast.warn("Bonus points payment failed.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -141,7 +141,7 @@ class AdminPaymentModal extends Component{
         	})
         	.catch(err => {
         		console.log(err);
-        		toast.error("Referral points payment failed.Please try again.", {
+        		toast.warn("Referral points payment failed.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });

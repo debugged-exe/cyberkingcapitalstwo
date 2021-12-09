@@ -56,7 +56,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 			})
 			.catch( err => {
 				console.log(err);
-				toast.error('counts error',{
+				toast.warn('counts error',{
 					position: toast.POSITION.TOP_CENTER,
 					autoClose: 2500
 				})
@@ -72,7 +72,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 		})
 		.catch(err => {
             console.log(err);
-            toast.error("Failed to fetch telecaller count.", {
+            toast.warn("Failed to fetch telecaller count.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -88,7 +88,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 		})
 		.catch(err => {
             console.log(err);
-            toast.error("Failed to fetch telecaller count.", {
+            toast.warn("Failed to fetch telecaller count.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -107,7 +107,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
         })
         .catch(err => {
         	console.log(err);
-            toast.error("Failed to fetch telecallers.", {
+            toast.warn("Failed to fetch telecallers.", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2500,
             });
@@ -134,7 +134,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 	        })
 	        .catch(err => {
 	        	console.log(err);
-	            toast.error("Failed to fetch telecallers.", {
+	            toast.warn("Failed to fetch telecallers.", {
 	                position: toast.POSITION.TOP_CENTER,
 	                autoClose: 2500,
 	            });
@@ -157,7 +157,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 	        })
 	        .catch(err => {
 	        	console.log(err);
-	            toast.error("Failed to fetch telecallers.", {
+	            toast.warn("Failed to fetch telecallers.", {
 	                position: toast.POSITION.TOP_CENTER,
 	                autoClose: 2500,
 	            });
@@ -185,7 +185,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 	        })
 	        .catch(err => {
 	        	console.log(err);
-	            toast.error("Failed to fetch telecallers.", {
+	            toast.warn("Failed to fetch telecallers.", {
 	                position: toast.POSITION.TOP_CENTER,
 	                autoClose: 2500,
 	            });
@@ -208,7 +208,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 	        })
 	        .catch(err => {
 	        	console.log(err);
-	            toast.error("Failed to fetch telecallers.", {
+	            toast.warn("Failed to fetch telecallers.", {
 	                position: toast.POSITION.TOP_CENTER,
 	                autoClose: 2500,
 	            });

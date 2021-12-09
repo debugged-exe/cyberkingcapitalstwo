@@ -53,7 +53,7 @@ const SeniorViewTeam = ({
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error Loading Table", {
+                toast.warn("Error Loading Table", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000,
                 });
@@ -75,7 +75,7 @@ const SeniorViewTeam = ({
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error Loading page count", {
+                toast.warn("Error Loading page count", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -94,7 +94,7 @@ const SeniorViewTeam = ({
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Error to check junior logs Table", {
+                toast.warn("Error to check junior logs Table", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500,
                 });
@@ -114,7 +114,7 @@ const SeniorViewTeam = ({
             })
             .catch(err => {
                 console.log(err);
-                toast.error('Error count. try again', {
+                toast.warn('Error count. try again', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 })

@@ -84,7 +84,7 @@ const AdminViewTeamJuniorTable = ({setJuniorId,setPgCount,jrView, setJrCountArra
             .catch( err => {
                 setJuniorLogArray([]);
                 console.log(err);
-                toast.error('log error. try again',{
+                toast.warn('log error. try again',{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 });
@@ -104,7 +104,7 @@ const AdminViewTeamJuniorTable = ({setJuniorId,setPgCount,jrView, setJrCountArra
             })
             .catch( err => {
                 console.log(err);
-                toast.error('Error count. try again', {
+                toast.warn('Error count. try again', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 2500
                 })

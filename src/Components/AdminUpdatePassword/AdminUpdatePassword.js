@@ -27,7 +27,7 @@ class AdminUpdatePassword extends Component {
             })
             .catch(err => {
                 console.log(err);
-                toast.error('Callers fetch failed.Please refresh', {
+                toast.warn('Callers fetch failed.Please refresh', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000
                 });
@@ -46,7 +46,7 @@ class AdminUpdatePassword extends Component {
                 new_password: '',
                 confirm_password: ''
             }, () => {
-                toast.error('The two passwords do not match', {
+                toast.warn('The two passwords do not match', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 4000
                 });
@@ -76,7 +76,7 @@ class AdminUpdatePassword extends Component {
             })
             .catch(err => {
                 console.log(err);
-                toast.error("Failed. Try Again", {
+                toast.warn("Failed. Try Again", {
                     autoClose: 2500,
                     position: toast.POSITION.TOP_CENTER
                 });

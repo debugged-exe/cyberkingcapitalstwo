@@ -144,7 +144,7 @@ const AdminViewTeam = ({admin_count_array, setAdminSeniorTelecallerArray, setAdm
 			})
 			.catch( err => {
 				console.log(err);
-				toast.error('counts error',{
+				toast.warn('counts error',{
 					position: toast.POSITION.TOP_CENTER,
 					autoClose: 2500
 				})
