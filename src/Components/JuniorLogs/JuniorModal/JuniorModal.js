@@ -1,7 +1,7 @@
 import React from 'react';
 import {ToastContainer,toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { FiPhoneCall } from 'react-icons/fi';
 //components
 import * as AiIcons from 'react-icons/ai';
 import FormInput from '../../FormInput/FormInput.js';
@@ -37,7 +37,7 @@ class JuniorModal extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = initialState;
-		
+
 	}
 
 	handleSubmit = (event) => {
@@ -46,7 +46,7 @@ class JuniorModal extends React.Component {
         let payload = this.state.[name];
         const {lead_id} = this.props.modal_lead;
         const {reassignLead} = this.props;
-		
+
 
 
 		if(name==="account_opening_no"){
@@ -69,8 +69,8 @@ class JuniorModal extends React.Component {
 			}
 
 		}
-		
-		
+
+
         fetch('https://aqueous-mesa-28052.herokuapp.com/junior/update', {
         	method: 'post',
         	headers: {'Content-Type': 'application/json'},
@@ -78,7 +78,7 @@ class JuniorModal extends React.Component {
             	field: name,
             	payload: payload,
             	lead_id: lead_id,
-				
+
             })
         })
         .then(response => response.json())
@@ -94,7 +94,7 @@ class JuniorModal extends React.Component {
 	        		console.log('')
 	        	})
         	}
-        	
+
         })
         .catch(err => {
         	console.log(err);
@@ -138,7 +138,7 @@ class JuniorModal extends React.Component {
     handleChange = event => {
         const {name, value} = event.target;
         this.setState({[name]: value});
-	
+
     }
 
 
@@ -154,7 +154,7 @@ class JuniorModal extends React.Component {
 					<h1 className="ml3 junior-modal-header">Update Details</h1>
 					<AiIcons.AiOutlineClose size={'2rem'} color={'black'} className="mr3" onClick={() => {setModalVisibility(false)}}/>
 				</div>
-				
+
 				<div className="grid-div">
 					<div className="flex flex-column justify-center items-center">
 						<div className="junior-modal-lead-details">
@@ -163,6 +163,7 @@ class JuniorModal extends React.Component {
 							<p className="detail-item shadow-4 ma2 pa2">Lead Contact: {modal_lead.lead_phone_no}</p>
 							<p className="detail-item shadow-4 ma2 pa2">City: {modal_lead.lead_city}</p>
 							<p className="detail-item shadow-4 ma2 pa2">Preferred Language: {modal_lead.preferred_language}</p>
+							<a className="detail-item shadow-4 ma2 pa2 bg-blue white no-underline" href={`tel:+91${modal_lead.lead_phone_no}`}><FiPhoneCall className="mr3"  size="1.6rem"/> Call Now</a>
 						</div>
 					</div>
 					<div className="w-60 junior-modal-form ">
@@ -219,7 +220,7 @@ class JuniorModal extends React.Component {
 										<p className="f4 ph2">Same as Lead Contact No</p>
 									</span>
 								</span>
-								
+
 								<div className={'mt4'}>
 									<CustomButton type="submit" id={'button-margin-2'}>Update</CustomButton>
 								</div>
