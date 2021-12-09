@@ -286,6 +286,7 @@ class JuniorModal extends React.Component {
 									<option  value={'Angel Broking'} >Angel Broking</option>
 									<option  value={'Zerodha'}>Zerodha</option>
 									<option  value={'Upstox'}>Upstox</option>
+									<option  value={'Paid'}>Paid</option>
 								</select>
 								<div className={'mt4'}>
 										<CustomButton type="submit" id={'button-margin-3'}>Update </CustomButton>
