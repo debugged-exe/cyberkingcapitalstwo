@@ -74,7 +74,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
             console.log(err);
             toast.warn("Failed to fetch telecaller count.", {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
         fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_count_hindi')
@@ -90,7 +90,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
             console.log(err);
             toast.warn("Failed to fetch telecaller count.", {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
         fetch('https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers_marathi',{
@@ -109,7 +109,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
         	console.log(err);
             toast.warn("Failed to fetch telecallers.", {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
             setLoader(false);
         })
@@ -136,7 +136,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 	        	console.log(err);
 	            toast.warn("Failed to fetch telecallers.", {
 	                position: toast.POSITION.TOP_CENTER,
-	                autoClose: 2500,
+	                autoClose: 1500,
 	            });
 	            setLoader(false);
 	        })
@@ -159,7 +159,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 	        	console.log(err);
 	            toast.warn("Failed to fetch telecallers.", {
 	                position: toast.POSITION.TOP_CENTER,
-	                autoClose: 2500,
+	                autoClose: 1500,
 	            });
 	            setLoader(false);
 	        })
@@ -187,7 +187,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 	        	console.log(err);
 	            toast.warn("Failed to fetch telecallers.", {
 	                position: toast.POSITION.TOP_CENTER,
-	                autoClose: 2500,
+	                autoClose: 1500,
 	            });
 	            setLoader(false);
 	        })
@@ -210,7 +210,7 @@ const AdminPayment = ({setAdminCountArray, setAdminPaymentTeamArray, setAdminMod
 	        	console.log(err);
 	            toast.warn("Failed to fetch telecallers.", {
 	                position: toast.POSITION.TOP_CENTER,
-	                autoClose: 2500,
+	                autoClose: 1500,
 	            });
 	            setLoader(false);
 	        })

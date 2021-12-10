@@ -48,7 +48,7 @@ class AdminPaymentModal extends Component{
 			{
 				toast.warn("points being paid greater than points earned.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
                 this.setState(initialState, () => {
                 	document.getElementById('points').reset();
@@ -70,7 +70,7 @@ class AdminPaymentModal extends Component{
         		{
         			toast.success("Points paid Successfully", {
 	                    position: toast.POSITION.TOP_CENTER,
-	                    autoClose: 2500,
+	                    autoClose: 1500,
                 	});
                 	updatePoints({telecaller_id: telecaller_id, amount: paying, name: 'points'});
         		}
@@ -79,7 +79,7 @@ class AdminPaymentModal extends Component{
         		console.log(err);
         		toast.warn("Points payment failed.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
         	})
 		}
@@ -102,7 +102,7 @@ class AdminPaymentModal extends Component{
         		{
         			toast.success("Bonus points paid Successfully", {
 	                    position: toast.POSITION.TOP_CENTER,
-	                    autoClose: 2500,
+	                    autoClose: 1500,
                 	});
                 	updatePoints({telecaller_id: telecaller_id, amount: paying, name: 'bonus'});
         		}
@@ -111,7 +111,7 @@ class AdminPaymentModal extends Component{
         		console.log(err);
         		toast.warn("Bonus points payment failed.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
         	})
 		}
@@ -134,7 +134,7 @@ class AdminPaymentModal extends Component{
         		{
         			toast.success("Referral points paid Successfully", {
 	                    position: toast.POSITION.TOP_CENTER,
-	                    autoClose: 2500,
+	                    autoClose: 1500,
                 	});
                 	updatePoints({telecaller_id: telecaller_id, amount: paying, name: 'bonus'});
         		}
@@ -143,7 +143,7 @@ class AdminPaymentModal extends Component{
         		console.log(err);
         		toast.warn("Referral points payment failed.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
         	})
 		}

@@ -102,7 +102,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
             console.log(err);
             toast.warn("Error loading handover requests page count.", {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
 
@@ -123,7 +123,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
             console.log(err);
             toast.warn("Error loading handover requests page count.", {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }
@@ -145,7 +145,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
             console.log(err);
             toast.warn("Error loading handover requests page count.", {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
 
@@ -167,7 +167,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
             console.log(err)
             toast.warn("Error loading handover requests.", {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }
@@ -189,7 +189,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
             console.log(err);
             toast.warn("Error loading delete requests page count.", {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
 
@@ -211,7 +211,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
             console.log(err)
             toast.warn("Error loading delete requests.", {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }
@@ -237,7 +237,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
                 console.log(err)
                 toast.warn("Error loading handover requests.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }
@@ -261,7 +261,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
                 console.log(err)
                 toast.warn("Error loading handover requests.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }
@@ -288,7 +288,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
                 console.log(err)
                 toast.warn("Error loading handover requests.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }
@@ -312,7 +312,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
                 console.log(err)
                 toast.warn("Error loading handover requests.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }
@@ -336,7 +336,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
             console.log(err);
             toast.warn("Error loading handover requests page count.", {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }
@@ -382,7 +382,6 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
 
                 if(resp!=='fail')
                 {
-
                     setAdminCodedRequestArray(resp);
                 }
             })
@@ -390,7 +389,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
                 console.log(err)
                 toast.warn("Error loading coded requests.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }
@@ -416,7 +415,7 @@ const AdminRequest = ({currentUser ,admin_request_language, setAdminCodedRequest
                 console.log(err)
                 toast.warn("Error loading coded requests.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
             }

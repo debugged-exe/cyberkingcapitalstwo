@@ -46,7 +46,7 @@ const AdminReferralTable = ({admin_referral_request_array, admin_request_languag
     //             reassignCodedRequestArray(lead_id)
     //             toast.success('Coded request cancelled successfully.', {
     //                 position: toast.POSITION.TOP_CENTER,
-    //                 autoClose: 2500,
+    //                 autoClose: 1500,
     //             });
     //         }
     //     })
@@ -54,7 +54,7 @@ const AdminReferralTable = ({admin_referral_request_array, admin_request_languag
     //         console.log(err);
     //         toast.warn('Failed.Please try again.', {
     //             position: toast.POSITION.TOP_CENTER,
-    //             autoClose: 2500,
+    //             autoClose: 1500,
     //         });
     //     })
     // }
@@ -75,7 +75,7 @@ const AdminReferralTable = ({admin_referral_request_array, admin_request_languag
                 reassignReferralRequestArray(lead_id)
                 toast.error('Referral request cancelled successfully.', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             }
         })
@@ -83,7 +83,7 @@ const AdminReferralTable = ({admin_referral_request_array, admin_request_languag
             console.log(err);
             toast.warn('Failed.Please try again.', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }
@@ -105,7 +105,7 @@ const AdminReferralTable = ({admin_referral_request_array, admin_request_languag
                 reassignReferralRequestArray(lead_id)
                 toast.success('Referral request accepted successfully.', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             }
         })
@@ -113,7 +113,7 @@ const AdminReferralTable = ({admin_referral_request_array, admin_request_languag
             console.log(err);
             toast.warn('Failed.Please try again.', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }

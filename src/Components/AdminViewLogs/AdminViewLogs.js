@@ -47,7 +47,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
                 console.log(err);
                 toast.warn('counts error',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 })
             })
     }, [])
@@ -96,7 +96,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
                 console.log(err);
                 toast.warn( 'count error. try again', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 })
             })
         fetch('https://aqueous-mesa-28052.herokuapp.com/admin/view_logs', {
@@ -117,7 +117,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
                 console.log(err);
                 toast.warn('error table. try again',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 })
             })
     }
@@ -141,7 +141,7 @@ const AdminViewLogs = ({setAdminLogsArray, admin_count_array}) => {
                 console.log(err);
                 toast.warn('error table. try again',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 })
             })
     }

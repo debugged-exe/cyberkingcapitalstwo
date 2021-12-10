@@ -46,7 +46,7 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
                 reassignCodedRequestArray(lead_id)
                 toast.error('Coded request cancelled successfully.', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             }
         })
@@ -54,7 +54,7 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
             console.log(err);
             toast.warn('Failed.Please try again.', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }
@@ -76,7 +76,7 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
                 reassignCodedRequestArray(lead_id)
                 toast.success('Coded request accepted successfully.', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             }
         })
@@ -84,7 +84,7 @@ const AdminCodedTable = ({admin_coded_request_array, admin_request_language, rea
             console.log(err);
             toast.warn('Failed.Please try again.', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }

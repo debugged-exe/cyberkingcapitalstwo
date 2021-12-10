@@ -32,7 +32,7 @@ const AdminSendIdTable = ({data, setData,language}) => {
                 resp=>{
                    toast.error("Remove Successful", {
                        position: toast.POSITION.TOP_CENTER,
-                       autoClose: 2500
+                       autoClose: 1500
                    });
                 }
             )

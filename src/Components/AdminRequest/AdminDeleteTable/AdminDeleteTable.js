@@ -45,7 +45,7 @@ const AdminDeleteTable = ({admin_delete_request_array, admin_request_language,re
                 reassignDeleteRequestArray(lead_id)
                 toast.error('Delete Successfully.', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             }
         })
@@ -53,7 +53,7 @@ const AdminDeleteTable = ({admin_delete_request_array, admin_request_language,re
             console.log(err);
             toast.warn('Failed.Please try again.', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }
@@ -73,7 +73,7 @@ const AdminDeleteTable = ({admin_delete_request_array, admin_request_language,re
                 reassignDeleteRequestArray(lead_id)
                 toast.error('Canceled delete request successfully.', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             }
         })
@@ -81,7 +81,7 @@ const AdminDeleteTable = ({admin_delete_request_array, admin_request_language,re
             console.log(err)
             toast.warn('Failed.Please try again.', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }

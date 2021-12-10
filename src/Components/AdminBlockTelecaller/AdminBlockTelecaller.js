@@ -42,7 +42,7 @@ class AdminBlockTelecaller extends Component {
          console.log(err);
          toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
-            autoClose: 2500
+            autoClose: 1500
          });
       });
       fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers", {
@@ -57,7 +57,7 @@ class AdminBlockTelecaller extends Component {
          console.log(err);
          toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
-            autoClose: 2500
+            autoClose: 1500
          });
       })
    }
@@ -74,13 +74,13 @@ class AdminBlockTelecaller extends Component {
          if (response === "blocked") {
             toast.success("Successfully blocked", {
                position: toast.POSITION.TOP_CENTER,
-               autoClose: 2500
+               autoClose: 1500
             })
             toggleBlockField(index);
          } else if (response === "unblocked") {
             toast.error("Successfully unblocked", {
                position: toast.POSITION.TOP_CENTER,
-               autoClose: 2500
+               autoClose: 1500
             })
             toggleBlockField(index);
          }
@@ -88,7 +88,7 @@ class AdminBlockTelecaller extends Component {
          console.log(err);
          toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
-            autoClose: 2500
+            autoClose: 1500
          })
       })
    }
@@ -106,7 +106,7 @@ class AdminBlockTelecaller extends Component {
          console.log(err);
          toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
-            autoClose: 2500
+            autoClose: 1500
          });
       })
    }
@@ -141,7 +141,7 @@ class AdminBlockTelecaller extends Component {
          console.log(err);
          toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
-            autoClose: 2500
+            autoClose: 1500
          });
       });
       fetch("https://aqueous-mesa-28052.herokuapp.com/admin/fetch_telecallers", {
@@ -156,7 +156,7 @@ class AdminBlockTelecaller extends Component {
          console.log(err);
          toast.warn(`${err}`, {
             position: toast.POSITION.TOP_CENTER,
-            autoClose: 2500
+            autoClose: 1500
          });
       })
    }

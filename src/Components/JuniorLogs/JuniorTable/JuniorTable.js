@@ -53,14 +53,14 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
                 reassignHandoverFlag({lead_id: resp.lead_id, flag: 'yes'});
                 toast.success("Handed over successfully", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
             .catch(err => {
                 console.log(err);
                 toast.warn("Unable to handover.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }
@@ -82,14 +82,14 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
                 reassignReferred(resp.lead_id);
                 toast.error("Lead deleted successfully", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
             .catch(err => {
                 console.log(err);
                 toast.warn("Unable to delete.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }
@@ -122,14 +122,14 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
                 reassignCodedFlag({lead_id: lead_id})
                 toast.success(resp, {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
             .catch(err => {
                 console.log(err);
                 toast.warn("Error during Coded Request.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
         }
@@ -152,14 +152,14 @@ const JuniorTable = ({ junior_table_logs,setModalLead,currentUser,reassignHandov
                 reassignReferred(resp.lead_id);
                 toast.success("Referral Request sent successfully", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
             .catch(err => {
                 console.log(err);
                 toast.warn("Unable to send referral request.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }

@@ -45,7 +45,7 @@ const AdminViewTeamSeniorTable = ({setJrView, senior_telecaller_array, setAssign
                 console.log(err);
                 toast.warn('Error. Try Again',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 });
             })
     }
@@ -62,13 +62,13 @@ const AdminViewTeamSeniorTable = ({setJrView, senior_telecaller_array, setAssign
             .then( resp => {
                 toast.info(`${telecaller_id} Handover leads: ${resp[0].count} `,{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000
+                    autoClose: 1500
                 })
             })
             .catch( err => {
                 toast.warn('count not fetched. try again',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 })
             })
     }

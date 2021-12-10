@@ -88,7 +88,7 @@ class App extends Component {
                 this.setVisible(false);
                 toast.success('Sign in Successful',{
                     position: toast.POSITION.BOTTOM_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
                 this.props.history.push(`/${resp[0].designation}/profile`);
             }
@@ -97,7 +97,7 @@ class App extends Component {
                 this.setVisible(false);
                 toast.warn('Wrong Credentails',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             }
         })
@@ -106,7 +106,7 @@ class App extends Component {
             this.setVisible(false);
             toast.warn('Sign in error.Something went wrong.Please try again.', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }
@@ -121,7 +121,7 @@ class App extends Component {
         setCurrentUser(user);
         toast.info('Signed out',{
             position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 2500
+            autoClose: 1500
         });
         this.props.history.push('/');
     }

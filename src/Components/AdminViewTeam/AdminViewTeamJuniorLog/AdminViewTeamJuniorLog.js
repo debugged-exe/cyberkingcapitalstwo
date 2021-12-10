@@ -66,7 +66,7 @@ const AdminViewTeamJuniorLog = ({setJuniorId,junior_id,pg_count,setJuniorLogArra
                 console.log(err);
                 toast.warn('log error. try again',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 });
             })
     }

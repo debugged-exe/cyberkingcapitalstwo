@@ -52,7 +52,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
             setLoader(false);
 			toast.warn('Error loading handover requests.Please Refresh', {
 				position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
 			});
 		})
 		fetch('https://aqueous-mesa-28052.herokuapp.com/senior/fetch_handover_pgcount',{
@@ -75,7 +75,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
         	console.log(err);
         	toast.warn('Failed to fetch page count.Please Refresh', {
 				position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
 			});
         })
 	}, [])
@@ -146,7 +146,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
                 console.log(err);
                 toast.warn('Error loading page count.', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });  
             })
 
@@ -170,7 +170,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
                 setLoader(false);
                 toast.warn('Error loading leads.Please try again.', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });  
             }) 
         }
@@ -193,7 +193,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
                 setLoader(false);
                 toast.warn('Error loading handover requests.Please Refresh', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
             fetch('https://aqueous-mesa-28052.herokuapp.com/senior/fetch_handover_pgcount',{
@@ -216,7 +216,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
                 console.log(err);
                 toast.warn('Failed to fetch page count.Please Refresh', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }
@@ -244,7 +244,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
                 setLoader(false);
                 toast.warn('Error loading handover requests.Please Refresh', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }
@@ -270,7 +270,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
                 setLoader(false);
                 toast.warn('Error loading handover requests.Please Refresh', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         }

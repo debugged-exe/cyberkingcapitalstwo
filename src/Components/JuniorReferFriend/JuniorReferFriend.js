@@ -78,7 +78,7 @@ class JuniorReferFriend extends Component{
                 this.setVisible(false);
                 toast.success('Registered Successfully.',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 })
                 this.setState({
                     lead_name: '',
@@ -93,13 +93,13 @@ class JuniorReferFriend extends Component{
                 this.setVisible(false);
                 toast.warn("Failed to register for the course. Please try again",{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 });
             }else if(response === "Not Unique"){
                 this.setVisible(false);
                 toast.warn("Contact has been already registered.Please try with new contact",{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 });
             }
             else if(response === 'duplicate account_opening_no in coded')
@@ -123,7 +123,7 @@ class JuniorReferFriend extends Component{
             this.setVisible(false);
             toast.warn(`${err}`,{
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500
+                autoClose: 1500
             });
         })
     }

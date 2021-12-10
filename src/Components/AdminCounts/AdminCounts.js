@@ -25,7 +25,7 @@ const AdminCounts = () => {
                 console.log( err );
                 toast.warn( 'count error. refresh',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 })
             })
     },[])

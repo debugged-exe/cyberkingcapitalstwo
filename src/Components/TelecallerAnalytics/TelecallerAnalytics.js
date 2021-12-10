@@ -51,7 +51,7 @@ class TelecallerAnalytics extends Component {
             console.log(err);
             toast.warn('Callers fetch failed.Please refresh', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 4000
+                autoClose: 1500
             });
         })
 	}
@@ -93,7 +93,7 @@ class TelecallerAnalytics extends Component {
 			{
 				toast.warn('Please enter valid combination of start and end date',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000
+                    autoClose: 1500
                 });
 			}
 		}
@@ -122,7 +122,7 @@ class TelecallerAnalytics extends Component {
 			console.log(err)
 			toast.warn('Failed to fetch analysis.Please try again',{
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 4000
+                autoClose: 1500
             });
 		})
 	}
@@ -173,7 +173,7 @@ class TelecallerAnalytics extends Component {
 			console.log(err)
 			toast.warn('Failed to fetch analysis.Please try again',{
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 4000
+                autoClose: 1500
             });
 		})
 	}
@@ -206,7 +206,7 @@ class TelecallerAnalytics extends Component {
 			console.log(err)
 			toast.warn('Failed to fetch analysis.Please try again',{
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 4000
+                autoClose: 1500
             });
 		})	
 	}

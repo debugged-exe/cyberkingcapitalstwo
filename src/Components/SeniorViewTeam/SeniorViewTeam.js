@@ -55,7 +55,7 @@ const SeniorViewTeam = ({
                 console.log(err);
                 toast.warn("Error Loading Table", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
     }, [])
@@ -77,7 +77,7 @@ const SeniorViewTeam = ({
                 console.log(err);
                 toast.warn("Error Loading page count", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
         fetch('https://aqueous-mesa-28052.herokuapp.com/senior/fetch_junior_logs', {
@@ -96,7 +96,7 @@ const SeniorViewTeam = ({
                 console.log(err);
                 toast.warn("Error to check junior logs Table", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
     }
@@ -116,7 +116,7 @@ const SeniorViewTeam = ({
                 console.log(err);
                 toast.warn('Error count. try again', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 })
             })
     }

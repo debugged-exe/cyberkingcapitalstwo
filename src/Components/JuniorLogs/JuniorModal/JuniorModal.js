@@ -2,6 +2,8 @@ import React from 'react';
 import {ToastContainer,toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FiPhoneCall } from 'react-icons/fi';
+import { IoLogoWhatsapp } from 'react-icons/io';
+
 //components
 import * as AiIcons from 'react-icons/ai';
 import FormInput from '../../FormInput/FormInput.js';
@@ -53,7 +55,7 @@ class JuniorModal extends React.Component {
 			if(payload.length != 10){
 				toast.warn("Account Opening Number should be 10 digits", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
 				return
 			}
@@ -63,7 +65,7 @@ class JuniorModal extends React.Component {
 			if(payload.length != 10){
 				toast.warn("Whatsapp number should be 10 digits", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
 				return
 			}
@@ -88,7 +90,7 @@ class JuniorModal extends React.Component {
         		reassignLead(resp[0]);
         		toast.success(`${name} updated successfully`, {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
 	        	this.setState(initialState, () => {
 	        		console.log('')
@@ -100,7 +102,7 @@ class JuniorModal extends React.Component {
         	console.log(err);
         	toast.warn("Unable to update.Please try again", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
         })
     }
@@ -163,7 +165,9 @@ class JuniorModal extends React.Component {
 							<p className="detail-item shadow-4 ma2 pa2">Lead Contact: {modal_lead.lead_phone_no}</p>
 							<p className="detail-item shadow-4 ma2 pa2">City: {modal_lead.lead_city}</p>
 							<p className="detail-item shadow-4 ma2 pa2">Preferred Language: {modal_lead.preferred_language}</p>
-							<a className="detail-item shadow-4 ma2 pa2 bg-blue white no-underline" href={`tel:+91${modal_lead.lead_phone_no}`}><FiPhoneCall className="mr3"  size="1.6rem"/> Call Now</a>
+						
+						<a className="detail-item shadow-4 ma2 pa2 bg-blue white no-underline" href={`tel:+91${modal_lead.lead_phone_no}`}> Call Now <FiPhoneCall className="ml3"  size="1.6rem"/></a>
+					<a className="detail-item shadow-4 ma2 pa2 black no-underline" href={`https://wa.me/${modal_lead.lead_whatsapp_no}`}>Chat Now <IoLogoWhatsapp  className="ml3" size="1.8rem" color="green"/></a>
 						</div>
 					</div>
 					<div className="w-60 junior-modal-form ">

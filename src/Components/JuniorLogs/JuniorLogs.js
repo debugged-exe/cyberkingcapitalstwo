@@ -168,7 +168,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 console.log(err);
                 toast.warn("Error pg count", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
         fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
@@ -190,7 +190,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 setLoader(false)
                 toast.warn("Error Loading Table", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
     }, [])
@@ -220,7 +220,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     console.log(err);
                     toast.warn("Error pg count", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000,
+                        autoClose: 1500,
                     });
                 })
 
@@ -242,7 +242,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     setLoader(false)
                     toast.warn("Error Loading Table", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000,
+                        autoClose: 1500,
                     });
                 })
         }
@@ -287,7 +287,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                         console.log(err);
                         toast.warn("Error pg count", {
                             position: toast.POSITION.TOP_CENTER,
-                            autoClose: 4000,
+                            autoClose: 1500,
                         });
                     })
     
@@ -309,7 +309,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                         setLoader(false)
                         toast.warn("Error Loading Table", {
                             position: toast.POSITION.TOP_CENTER,
-                            autoClose: 4000,
+                            autoClose: 1500,
                         });
                     })
             
@@ -345,7 +345,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 setLoader(false)
                 toast.warn("Error Loading Table", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
         }
@@ -365,7 +365,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 setLoader(false)
                 toast.warn("Error Loading Table ", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
             }
@@ -385,7 +385,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 setLoader(false)
                 toast.warn("Error Loading Table ", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
             }
@@ -412,19 +412,19 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 if (resp === 'Less than 1') {
                     toast.warn("15 minutes not yet elapsed from previous fetch", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000,
+                        autoClose: 1500,
                     });
                 }
                 else if (resp === 'less than 5') {
                     toast.warn("Not enough leads to assign you.", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 2500,
+                        autoClose: 1500,
                     });
                 }
                 else if (resp === "blocked") {
                     toast.warn("You have been blocked by the admin. Please contact admin for more detail", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 2500
+                        autoClose: 1500
                     })
                     setLoader(false);
                 }
@@ -434,7 +434,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     setJuniorTableLogArray(resp);
                     toast.success("New Leads assigned successfully", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 2500,
+                        autoClose: 1500,
                     });
                 }
             })
@@ -443,7 +443,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 setLoader(false)
                 toast.warn("Unable to fetch new leads", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
         fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_pgcount', {
@@ -491,7 +491,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     setLoader(false)
                     toast.warn("Error Loading Table", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000,
+                        autoClose: 1500,
                     });
                 })
         }
@@ -516,7 +516,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     setLoader(false)
                     toast.warn("Error Loading Table", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000,
+                        autoClose: 1500,
                     });
                 })
         }
@@ -558,7 +558,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     console.log(err);
                     toast.warn("Error Loading Status Count", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000,
+                        autoClose: 1500,
                     });
                 })
 
@@ -585,7 +585,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     setLoader(false)
                     toast.warn("Error Loading Table", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000,
+                        autoClose: 1500,
                     });
                 })
         }
@@ -616,7 +616,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                     setLoader(false)
                     toast.warn("Error Loading Table", {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000,
+                        autoClose: 1500,
                     });
                 })
         }
@@ -647,7 +647,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 setLoader(false)
                 toast.warn("Error Loading Dropdown", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
         }
@@ -668,7 +668,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 setLoader(false)
                 toast.warn("Error Loading Dropdown ", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
             })
             }

@@ -88,7 +88,7 @@ const SeniorPayment = ({currentUser,setSeniorPaymentArray, setSeniorPaymentTable
                 console.log(err);
                 toast.warn( 'Error during payment details',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 })
             })
             fetch('https://aqueous-mesa-28052.herokuapp.com/senior/junior_payments',{
@@ -106,7 +106,7 @@ const SeniorPayment = ({currentUser,setSeniorPaymentArray, setSeniorPaymentTable
                 console.log( err );
                 toast.warn('junior payment table error.Refresh again',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500
+                    autoClose: 1500
                 });
             })
     }, []);

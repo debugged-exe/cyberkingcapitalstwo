@@ -38,7 +38,7 @@ const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLe
             {
                 toast.success("Lead handed back to junior telecaller successfully", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
                 handbackLead(lead_id);
             }
@@ -47,7 +47,7 @@ const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLe
             console.log(err);
             toast.warn("Failed to handback.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000,
+                    autoClose: 1500,
                 });
         })
     }
@@ -70,7 +70,7 @@ const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLe
             {
                 toast.error("Delete request successfull", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
                 handbackLead(lead_id);
             }
@@ -79,7 +79,7 @@ const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLe
             console.log(err);
             toast.warn("Delete request failed.Please try again.", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
             });
         })
     }

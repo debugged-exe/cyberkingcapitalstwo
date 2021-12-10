@@ -102,7 +102,7 @@ const JuniorPayment = ({currentUser,setJuniorPaymentArray, junior_payment_array}
                 console.log(err);
                 toast.warn( `${err}`, {
                     position: toast.POSITION.TOP_CENTER,
-                    autoclose: 2500
+                    autoClose: 1500
                 })
             })
     },[]);

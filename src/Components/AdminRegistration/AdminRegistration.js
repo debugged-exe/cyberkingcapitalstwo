@@ -22,7 +22,7 @@ class AdminRegistration extends Component {
                 console.log(err);
                 toast.warn('Senior caller fetch failed.Please refresh',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000
+                    autoClose: 1500
                 });
             })
     }
@@ -66,7 +66,7 @@ class AdminRegistration extends Component {
             }, () => {
                 toast.warn('The two passwords do not match',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000
+                    autoClose: 1500
                 });
             });
             return;
@@ -75,7 +75,7 @@ class AdminRegistration extends Component {
             this.setVisible(false);
             toast.warn("Set Senior Caller",{
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 4000
+                autoClose: 1500
             });
             return;
         }
@@ -97,7 +97,7 @@ class AdminRegistration extends Component {
                     this.setVisible(false);
                     toast.success('New Telecaller Added successfully',{
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000
+                        autoClose: 1500
                     });
                     this.setState({
                         telecaller_name: '',
@@ -121,14 +121,14 @@ class AdminRegistration extends Component {
                         console.log(err);
                         toast.warn('Senior caller fetch failed.Please refresh',{
                             position: toast.POSITION.TOP_CENTER,
-                            autoClose: 4000
+                            autoClose: 1500
                         });
                     })
                 } else if (resp === 'not found') {
                     this.setVisible(false);
                     toast.warn('Senior caller to which caller is assigned does not exist',{
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000
+                        autoClose: 1500
                     });
                     document.getElementById('registerForm').reset();
                     fetch('https://aqueous-mesa-28052.herokuapp.com/admin/register/fetch')
@@ -142,14 +142,14 @@ class AdminRegistration extends Component {
                         console.log(err);
                         toast.warn('Senior caller fetch failed.Please refresh',{
                             position: toast.POSITION.TOP_CENTER,
-                            autoClose: 4000
+                            autoClose: 1500
                         });
                     })
                 } else if (resp === 'Unable to register') {
                     this.setVisible(false);
                     toast.warn('Unable to register.Please try again',{
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 4000
+                        autoClose: 1500
                     });
                     document.getElementById('registerForm').reset();
                     fetch('https://aqueous-mesa-28052.herokuapp.com/admin/register/fetch')
@@ -163,7 +163,7 @@ class AdminRegistration extends Component {
                         console.log(err);
                         toast.warn('Senior caller fetch failed.Please refresh',{
                             position: toast.POSITION.TOP_CENTER,
-                            autoClose: 4000
+                            autoClose: 1500
                         });
                     })
                 }
@@ -173,7 +173,7 @@ class AdminRegistration extends Component {
                 console.log(err);
                 toast.warn('Not able to register',{
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000
+                    autoClose: 1500
                 });
                 const form = document.getElementById('registerForm');
                 form.reset();
@@ -188,7 +188,7 @@ class AdminRegistration extends Component {
                         console.log(err);
                         toast.warn('Senior caller fetch failed.Please refresh',{
                             position: toast.POSITION.TOP_CENTER,
-                            autoClose: 4000
+                            autoClose: 1500
                         });
                     })
             })

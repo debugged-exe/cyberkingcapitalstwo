@@ -68,7 +68,7 @@ class SearchByDropdown extends Component {
                     console.log(err)
                     toast.warn('Failed to fetch logs.Please Refresh', {
                         position: toast.POSITION.TOP_CENTER,
-                        autoClose: 2500,
+                        autoClose: 1500,
                     });
                 })
             })
@@ -95,12 +95,12 @@ class SearchByDropdown extends Component {
                 console.log(err)
                 toast.warn('Failed to fetch logs.Please Refresh', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
             })
             toast.warn('Failed to fetch page count.Please Refresh', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     };
@@ -133,7 +133,7 @@ class SearchByDropdown extends Component {
             console.log(err)
             toast.warn('Failed to fetch logs.Please Refresh', {
                 position: toast.POSITION.TOP_CENTER,
-                autoClose: 2500,
+                autoClose: 1500,
             });
         })
     }

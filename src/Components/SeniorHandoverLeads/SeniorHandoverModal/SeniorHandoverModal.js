@@ -3,6 +3,8 @@ import {ToastContainer,toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 //components
+import { FiPhoneCall } from 'react-icons/fi';
+import { IoLogoWhatsapp } from 'react-icons/io';
 import * as AiIcons from 'react-icons/ai';
 import FormInput from '../../FormInput/FormInput.js';
 import CustomButton from '../../CustomButton/CustomButton.js';
@@ -63,7 +65,7 @@ class SeniorHandoverModal extends React.Component {
         		reassignHandoverLead(resp[0]);
         		toast.success(`${name} updated successfully`, {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
 	        	this.setState(initialState, () => {
 	        		console.log('')
@@ -74,7 +76,7 @@ class SeniorHandoverModal extends React.Component {
         	console.log(err);
         	toast.warn("Unable to update.Please try again", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2500,
+                    autoClose: 1500,
                 });
         })
     }
@@ -97,7 +99,7 @@ class SeniorHandoverModal extends React.Component {
 					<h1 className="ml3 senior-handover-modal-header">Update Details</h1>
 					<AiIcons.AiOutlineClose size={'2rem'} color={'black'} className="mr3" onClick={() => {setSeniorModalVisibility(false)}}/>
 				</div>
-				
+
 				<div className="senior-handover-grid-div">
 					<div className="flex flex-column justify-center items-center">
 						<div className="senior-handover-modal-lead-details">
@@ -106,6 +108,9 @@ class SeniorHandoverModal extends React.Component {
 							<p className="senior-handover-detail-item shadow-4 ma2 pa2">Lead Contact: {senior_modal_lead.lead_phone_no}</p>
 							<p className="senior-handover-detail-item shadow-4 ma2 pa2">City: {senior_modal_lead.lead_city}</p>
 							<p className="senior-handover-detail-item shadow-4 ma2 pa2">Preferred Language: {senior_modal_lead.preferred_language}</p>
+
+            <a className="senior-handover-detail-item shadow-4 ma2 pa2 bg-blue white no-underline" href={`tel:+91${senior_modal_lead.lead_phone_no}`}> Call Now <FiPhoneCall className="ml3"  size="1.6rem"/></a>
+            <a className="senior-handover-detail-item shadow-4 ma2 pa2 black no-underline" href={`https://wa.me/${senior_modal_lead.lead_whatsapp_no}`}>Chat Now <IoLogoWhatsapp  className="ml3" size="1.8rem" color="green"/></a>
 						</div>
 					</div>
 					<div className="w-60 senior-handover-modal-form ">

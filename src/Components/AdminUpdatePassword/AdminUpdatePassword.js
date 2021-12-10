@@ -29,7 +29,7 @@ class AdminUpdatePassword extends Component {
                 console.log(err);
                 toast.warn('Callers fetch failed.Please refresh', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000
+                    autoClose: 1500
                 });
             })
     }
@@ -48,7 +48,7 @@ class AdminUpdatePassword extends Component {
             }, () => {
                 toast.warn('The two passwords do not match', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 4000
+                    autoClose: 1500
                 });
             });
             return;
@@ -69,7 +69,7 @@ class AdminUpdatePassword extends Component {
                         confirm_password: ''
                     });
                     toast.success("Password Update Successful", {
-                        autoClose: 2500,
+                        autoClose: 1500,
                         position: toast.POSITION.TOP_CENTER
                     });
                 }
@@ -77,7 +77,7 @@ class AdminUpdatePassword extends Component {
             .catch(err => {
                 console.log(err);
                 toast.warn("Failed. Try Again", {
-                    autoClose: 2500,
+                    autoClose: 1500,
                     position: toast.POSITION.TOP_CENTER
                 });
 
