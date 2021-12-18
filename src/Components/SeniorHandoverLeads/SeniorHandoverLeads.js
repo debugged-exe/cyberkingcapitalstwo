@@ -147,7 +147,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
                 toast.warn('Error loading page count.', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 1500,
-                });  
+                });
             })
 
             fetch('https://aqueous-mesa-28052.herokuapp.com/senior/fetch_handover_leads_by_filter', {
@@ -171,8 +171,8 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
                 toast.warn('Error loading leads.Please try again.', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 1500,
-                });  
-            }) 
+                });
+            })
         }
         else{
             fetch('https://aqueous-mesa-28052.herokuapp.com/senior/fetch_handover_leads',{
@@ -288,7 +288,7 @@ const SeniorHandoverLeads = ({setHandoverLeadArray,currentUser}) => {
                     <option value="lead_phone_no">Lead Phone No</option>
                     <option value="assigned_to">Assigned To</option>
                 </select>
-                <FormInput 
+                <FormInput
                     type="text"
                     name="filter_name"
                     value={filterValue}
