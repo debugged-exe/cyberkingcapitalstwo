@@ -99,21 +99,21 @@ const SeniorHandoverTable = ({handover_leads_array,setSeniorModelLead,handbackLe
             {handover_leads_array.map((item, index) => {
                 return (
                     <tr key={index}  className={`senior-handover-table-row-container`}>
-                        <td className={`senior-handover-table-data-container`} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Lead ID'}>{item.lead_id}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Assigned to'}>{item.assigned_to}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Lead Name'}>{item.lead_name}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Whatsapp Number'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:"NULL"}`}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Account Opening Name'}>{`${item.account_opening_name?item.account_opening_name:"NULL"}`}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'City'}>{item.lead_city}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Trading Knowledge'}>{item.prior_knowledge}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Preferred Language'}>{item.preferred_language}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Status 1'}>{`${item.status_1?item.status_1:"NULL"}`}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Status 2'}>{`${item.status_2?item.status_2:"NULL"}`}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red':null}`}} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
-                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'red': null}`}} data-label={'Broker Name'}>{`${item.broker_name?item.broker_name:"NULL"}`}</td>
+                        <td className={`senior-handover-table-data-container`} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Lead ID'}>{item.lead_id}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Assigned to'}>{item.assigned_to}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Lead Name'}>{item.lead_name}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Lead Contact'}>{item.lead_phone_no}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Whatsapp Number'}>{`${item.lead_whatsapp_no?item.lead_whatsapp_no:"NULL"}`}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Account Opening Number'}>{`${item.account_opening_no?item.account_opening_no:"NULL"}`}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Account Opening Name'}>{`${item.account_opening_name?item.account_opening_name:"NULL"}`}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'City'}>{item.lead_city}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Trading Knowledge'}>{item.prior_knowledge}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Preferred Language'}>{item.preferred_language}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Status 1'}>{`${item.status_1?item.status_1:"NULL"}`}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Status 2'}>{`${item.status_2?item.status_2:"NULL"}`}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Handover Status'}>{`${item.handover_status?item.handover_status:"NULL"}`}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F':'white'}`}} data-label={'Coded'}>{`${item.coded?item.coded:"NULL"}`}</td>
+                        <td className={'senior-handover-table-data-container'} style={{backgroundColor:`${item.delete_flag==='yes'?'#FF7F7F': 'white'}`}} data-label={'Broker Name'}>{`${item.broker_name?item.broker_name:"NULL"}`}</td>
 
                        	<td className={'senior-handover-table-data-container senior-button-center'}>
 							<button className={'ma1'} onClick={() => setSeniorModelLead(item)}>Update</button>

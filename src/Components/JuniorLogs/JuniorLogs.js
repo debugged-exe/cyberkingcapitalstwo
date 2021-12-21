@@ -32,9 +32,9 @@ import './JuniorLogs.scss';
 toast.configure();
 
 const LogStatArray = [
-    {
-        title: 'Handed Over Leads',
-        numeric: 0,
+  {
+      title: 'Unattended',
+      numeric: 0,
     },
     {
         title: 'Status 1 Updated',
@@ -45,11 +45,7 @@ const LogStatArray = [
         numeric: 0,
     },
     {
-        title: 'Unattended',
-        numeric: 0,
-    },
-    {
-        title: 'Coded',
+        title: 'Handed Over Leads',
         numeric: 0,
     },
     {
@@ -57,17 +53,29 @@ const LogStatArray = [
         numeric: 0,
     },
     {
+      title: 'Request Cancelled',
+      numeric: 0,
+    },
+    {
+        title: 'Coded',
+        numeric: 0,
+    },
+
+    {
         title: 'Referral Pending Requests',
+        numeric: 0
+    },
+    {
+        title: 'Referral Rejected',
         numeric: 0
     },
     {
         title: 'Referral Coded',
         numeric: 0
     },
-    {
-        title: 'Referral Rejected',
-        numeric: 0
-    }
+
+
+
 ]
 
 const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTableLogArray, setModalVisibility }) => {
@@ -141,6 +149,9 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                             break;
                         case 'Referral Rejected':
                             item.numeric = resp[0].referral_rejected
+                            break;
+                        case 'Request Cancelled':
+                            item.numeric = resp[0].request_cancelled
                             break;
                         default:
                             break;
@@ -255,7 +266,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
     }
 
     const handleUniversalFilterValue= (event) =>{
-        
+
         setUniversalFilter(document.getElementById('dataItem').innerHTML);
         setFilteredData([]);
     }
@@ -265,7 +276,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
     const handleUniversalChange = (event) => {
         const { telecaller_id } = currentUser;
         if(event.target.value === 'full_table'){
-            
+
                 setLoader(true);
                 fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_pgcount', {
                     method: 'post',
@@ -290,7 +301,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                             autoClose: 1500,
                         });
                     })
-    
+
                 fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
                     method: 'post',
                     headers: { 'Content-Type': 'application/json' },
@@ -312,7 +323,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                             autoClose: 1500,
                         });
                     })
-            
+
             setuFilter('*');
         }
         else
@@ -322,9 +333,9 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
     const [uFilter, setuFilter] = useState('*');
 
     const handleUniversalFilter = (event) => {
-         
-        
-       
+
+
+
         const {telecaller_id}=currentUser;
         setPageNumbers(['1']);
         if(uFilter=='lead_name')
@@ -332,12 +343,12 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             fetch(`https://aqueous-mesa-28052.herokuapp.com/junior/name/leads?lead_name=${universalFilter}&telecaller_id=${telecaller_id}`, {
             method: 'get',
             headers: { 'Content-Type': 'application/json' },
-            
+
         })
             .then(response => response.json())
             .then(resp => {
                 setLoader(false)
-                
+
                 setJuniorTableLogArray(resp);
             })
             .catch(err => {
@@ -353,7 +364,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 fetch(`https://aqueous-mesa-28052.herokuapp.com/junior/leadId/lead?lead_id=${universalFilter}&telecaller_id=${telecaller_id}`, {
             method: 'get',
             headers: { 'Content-Type': 'application/json' },
-            
+
         })
             .then(response => response.json())
             .then(resp => {
@@ -373,7 +384,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 fetch(`https://aqueous-mesa-28052.herokuapp.com/junior/phNo/leads?ph_no=${universalFilter}&telecaller_id=${telecaller_id}`, {
             method: 'get',
             headers: { 'Content-Type': 'application/json' },
-            
+
         })
             .then(response => response.json())
             .then(resp => {
@@ -392,7 +403,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             setUniversalFilter('');
             setuFilter('*');
             setFilterValue('');
-           
+
     }
 
     const fetchNewLeads = () => {
@@ -481,7 +492,7 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             })
                 .then(response => response.json())
                 .then(resp => {
-                    
+
                     setLoader(false)
                     setCurrentPage(pgNo + 1)
                     setJuniorTableLogArray(resp)
@@ -623,19 +634,19 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
     }
 
     const [filteredData, setFilteredData] = useState([]);
-   
+
 
     const handleUniSearch=(event)=>{
         setUniversalFilter(event.target.value);
         const {telecaller_id}=currentUser;
-        
-       
+
+
         if(uFilter=='lead_name')
         {
             fetch(`https://aqueous-mesa-28052.herokuapp.com/junior/substring/name/leads?lead_name=${event.target.value}&telecaller_id=${telecaller_id}`, {
             method: 'get',
             headers: { 'Content-Type': 'application/json' },
-            
+
         })
             .then(response => response.json())
             .then(resp => {
@@ -655,13 +666,13 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                 fetch(`https://aqueous-mesa-28052.herokuapp.com/junior/substring/phNo/leads?ph_no=${event.target.value}&telecaller_id=${telecaller_id}`, {
             method: 'get',
             headers: { 'Content-Type': 'application/json' },
-            
+
         })
             .then(response => response.json())
             .then(resp => {
                 setLoader(false);
                 setFilteredData(resp);
-                
+
             })
             .catch(err => {
                 console.log(err);
@@ -673,9 +684,9 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
             })
             }
 
-       
+
     }
- 
+
 
     return (
         <div className="junior-logs">
@@ -752,30 +763,30 @@ const JuniorLogs = ({ currentUser, setLogStatArray, log_stat_array, setJuniorTab
                         disabled={uFilter === '*' ? true : null}
                         required
                     />
-      
+
                 <AiOutlineSearch  style={{marginLeft: '0'}} onClick={(event) => handleUniversalFilter(event)}>Filter</AiOutlineSearch>
-                
+
                 </div>
                 <div >
 
-                        {    filteredData.length !=0 &&     
+                        {    filteredData.length !=0 &&
 
-                           ( 
+                           (
                                <div className="result ">
                               { filteredData.map((item,i)=>{
-                                  
+
                                 return(
-                                    
+
                                     <div  onClick={(event) => handleUniversalFilterValue(event)} cursor='pointer' key={i} id="dataItem" >
                                         {uFilter=='lead_name'?item.lead_name:item.lead_phone_no}
                                     </div>
                                 );
                             })}
                             </div>)
-                        }     
-                    
+                        }
+
                 </div>
-                
+
 
             </div>
             <div className={'mt4 w-100 mb4'}>

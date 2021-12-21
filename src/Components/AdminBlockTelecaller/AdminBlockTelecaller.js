@@ -40,7 +40,7 @@ class AdminBlockTelecaller extends Component {
          })
       }).catch(err => {
          console.log(err);
-         toast.warn(`${err}`, {
+         toast.warn(`${err} Unable to fetch Count`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1500
          });
@@ -55,7 +55,7 @@ class AdminBlockTelecaller extends Component {
          setAdminBlockTelecallerTable(resp);
       }).catch(err => {
          console.log(err);
-         toast.warn(`${err}`, {
+         toast.warn(`${err} Unable to fetch Telecaller`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1500
          });
@@ -86,7 +86,7 @@ class AdminBlockTelecaller extends Component {
          }
       }).catch(err => {
          console.log(err);
-         toast.warn(`${err}`, {
+         toast.warn(`${err} Unable to Block/Unblock `, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1500
          })
@@ -104,7 +104,7 @@ class AdminBlockTelecaller extends Component {
          setAdminBlockTelecallerTable(resp);
       }).catch(err => {
          console.log(err);
-         toast.warn(`${err}`, {
+         toast.warn(`${err} Unable to Fetch Telecaller`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1500
          });
@@ -139,7 +139,7 @@ class AdminBlockTelecaller extends Component {
          })
       }).catch(err => {
          console.log(err);
-         toast.warn(`${err}`, {
+         toast.warn(`${err} Unable to Fetch Telecaller Counts`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1500
          });
@@ -154,7 +154,7 @@ class AdminBlockTelecaller extends Component {
          setAdminBlockTelecallerTable(resp);
       }).catch(err => {
          console.log(err);
-         toast.warn(`${err}`, {
+         toast.warn(`${err} Unable to Fecth Telecaller`, {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1500
          });

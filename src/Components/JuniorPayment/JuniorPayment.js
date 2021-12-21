@@ -100,7 +100,7 @@ const JuniorPayment = ({currentUser,setJuniorPaymentArray, junior_payment_array}
             })
             .catch( err => {
                 console.log(err);
-                toast.warn( `${err}`, {
+                toast.warn( `${err} Failed to load Payment Details`, {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 1500
                 })
@@ -128,4 +128,3 @@ const mapDispatchToProps = dispatch => ({
     setJuniorPaymentArray: array => dispatch(setJuniorPaymentArray(array))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(JuniorPayment);
-

@@ -2,9 +2,9 @@ import {JuniorLogsAcitonTypes} from "./junior.logs.types";
 
 //destructing the actiontypes
 const {
-	SET_LOG_STAT_ARRAY, 
+	SET_LOG_STAT_ARRAY,
 	SET_JUNIOR_TABLE_LOG_ARRAY,
-	SET_MODAL_LEAD,SET_MODAL_VISIBILITY, 
+	SET_MODAL_LEAD,SET_MODAL_VISIBILITY,
 	REASSIGN_LEAD,
 	REASSIGN_HANDOVER_FLAG,
 	REASSIGN_CODED_FLAG,
@@ -109,6 +109,8 @@ const juniorLogsReducer = (state = INITIAL_STATE, action) => {
 					...state,
 					junior_table_logs: tempArr
 				}
+
+			
 		default:
 		return state;
 	}

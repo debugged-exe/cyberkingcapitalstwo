@@ -44,11 +44,11 @@ class JuniorReferFriend extends Component{
         this.setVisible(true);
         const {
             lead_name,
-            lead_contact, 
-            city, 
-            prior_knowledge, 
-            preferred_language, 
-            course_type, 
+            lead_contact,
+            city,
+            prior_knowledge,
+            preferred_language,
+            course_type,
             assigned_to,
             account_opening_no,
             lead_whatsapp_no,
@@ -108,7 +108,7 @@ class JuniorReferFriend extends Component{
                 toast.warn("Account opening number is already registered us.Please try with new contact",{
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 3000
-                }); 
+                });
             }
             else if(response === 'duplicate account_opening_no in request'){
                 this.setVisible(false);
@@ -121,7 +121,7 @@ class JuniorReferFriend extends Component{
         .catch(err => {
             console.log(err);
             this.setVisible(false);
-            toast.warn(`${err}`,{
+            toast.warn(`${err} Failed to register`,{
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 1500
             });
