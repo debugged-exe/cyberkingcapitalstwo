@@ -208,7 +208,7 @@ class TelecallerAnalytics extends Component {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 1500
             });
-		})	
+		})
 	}
 
 	render(){
@@ -221,9 +221,9 @@ class TelecallerAnalytics extends Component {
 				<form className='telecaller-analytics-form' onSubmit={this.handleSubmit.bind(this)}>
 					<div className="telecaller-analytics-select-container">
 						<label htmlFor="designation" className="telecaller-analytics-date-label">Select Designation:</label>
-						<select 
-						name="designation" 
-						className="telecaller-analytics-select" 
+						<select
+						name="designation"
+						className="telecaller-analytics-select"
 						onChange={this.handleSelect.bind(this)}
 						>
 							<option value="senior">Senior</option>
@@ -232,8 +232,8 @@ class TelecallerAnalytics extends Component {
 					</div>
 					<div className="telecaller-analytics-id-container">
 						<label htmlFor="telecaller_id" className="telecaller-analytics-date-label">Select Telecaller Id:</label>
-						<input 
-						type="text" 
+						<input
+						type="text"
 						className="telecaller-analytics-id-input"
 						onChange={this.handleTelecallerId.bind(this)}
 						placeholder="Select Telecaller Id"
@@ -286,7 +286,7 @@ class TelecallerAnalytics extends Component {
 						counts
 						? Object.keys(counts[0]).map((item,index) => {
 							let titleArr = item.split('_')
-							let title = ""
+							let title = " "
 							titleArr.map(item => {
 								if(item!=="at")
 								{
@@ -331,7 +331,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
 	setAdminAnalyticsCount: array =>  dispatch(setAdminAnalyticsCount(array)),
-	setAdminAnalyticsLogs: array => dispatch(setAdminAnalyticsLogs(array))	
+	setAdminAnalyticsLogs: array => dispatch(setAdminAnalyticsLogs(array))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TelecallerAnalytics);
