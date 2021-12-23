@@ -233,6 +233,9 @@ class JuniorReferFriend extends Component{
                             <option value="angel broking">Angel Broking</option>
                             <option value="zerodha">Zerodha</option>
                             <option value="upstox">Upstox</option>
+                          <option value="paid">Paid</option>
+
+
                         </select>
                     </div>
                     <CustomButton
