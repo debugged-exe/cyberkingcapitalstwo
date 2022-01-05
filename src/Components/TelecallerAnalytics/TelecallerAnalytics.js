@@ -131,7 +131,66 @@ class TelecallerAnalytics extends Component {
   		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
-	handleLogs(name, numeric){
+	handleLogs(name, numeric,heading){
+		
+		var seniorID=document.getElementById('telecaller').value;
+
+		if(seniorID=== ''){
+			var headingArr=heading.split('_');
+
+			let bodyObject = {};
+			for(var key of Object.keys(this.state.params)){
+				if(this.state.params[key])
+				{
+					bodyObject[key] = this.state.params[key]
+
+				}
+			}
+			var logType='';
+			headingArr.map((item,index) =>{
+				if(item!=='hindi'&& item!=='marathi') {
+					if(index===0){
+						logType=logType+item
+					}
+					else{
+							logType=logType+'_'+item
+					}
+				}
+			})
+			logType=logType.split(" ").join("");
+ 			bodyObject['log_type']=logType;
+			bodyObject['preferred_language']=headingArr[headingArr.length-1];
+
+			fetch('https://aqueous-mesa-28052.herokuapp.com/admin/logs', {
+				method: 'post',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify(bodyObject)
+			})
+			.then(response => response.json())
+			.then(resp => {
+				setAdminAnalyticsLogs(resp)
+				window.scrollBy(0,500);
+				let arr = []
+				for (let i = 1; i <= Math.ceil(numeric / perPage); i++) {
+					arr.push(i);
+							}
+							this.setState({pages: arr});
+							this.setState({loader: false})
+
+			})
+			.catch(err => {
+				this.setState({loader: false})
+				console.log(err)
+				toast.warn('Failed to fetch analysis.Please try again',{
+									position: toast.POSITION.TOP_CENTER,
+									autoClose: 1500
+						  	});
+
+				})
+				return;
+		}
+
+
 		let log_type = name;
 		if(log_type==='form_filled')
 		{
@@ -210,6 +269,9 @@ class TelecallerAnalytics extends Component {
             });
 		})
 	}
+handleReset = () =>{
+	this.text.value=('');
+}
 
 	render(){
 		const {telecaller_id, start_date, end_date} = this.state.params
@@ -233,11 +295,13 @@ class TelecallerAnalytics extends Component {
 					<div className="telecaller-analytics-id-container">
 						<label htmlFor="telecaller_id" className="telecaller-analytics-date-label">Select Telecaller Id:</label>
 						<input
+						id="telecaller"
 						type="text"
 						className="telecaller-analytics-id-input"
 						onChange={this.handleTelecallerId.bind(this)}
 						placeholder="Select Telecaller Id"
 						list={"callers"}
+						ref={(el) => (this.text = el)}
 						/>
 						<datalist id="callers">
 							{
@@ -280,22 +344,29 @@ class TelecallerAnalytics extends Component {
                     >
                         Fetch Analysis
                     </CustomButton>
+										<CustomButton
+	                        type='submit'
+	                        style={{width: '55%', marginLeft: '-5px'}}
+													onClick={this.handleReset}
+	                    >
+	                        Reset
+	                    </CustomButton>
 				</form>
 				<div className="telecaller-analytics-counts">
 					{
 						counts
 						? Object.keys(counts[0]).map((item,index) => {
-							let titleArr = item.split('_')
+							let titleArr = item.split(' ')
 							let title = " "
 							titleArr.map(item => {
-								if(item!=="at")
+								if(item!==" at")
 								{
 									title = title+item
 								}
 							})
 							title = this.capitalizeFirstLetter(title)
 							return(
-								<PaymentCard item={item} handleLogs={this.handleLogs.bind(this)} key={index} Heading={title} numeric={counts[0][item]} icon={<GrIcons.GrAnalytics size={'4rem'} color={'black'}/>}/>
+								<PaymentCard item={item}  handleLogs={this.handleLogs.bind(this)} key={index} Heading={title} numeric={counts[0][item]} icon={<GrIcons.GrAnalytics size={'4rem'} color={'black'}/>}/>
 							)
 						})
 						: null
@@ -331,7 +402,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
 	setAdminAnalyticsCount: array =>  dispatch(setAdminAnalyticsCount(array)),
-	setAdminAnalyticsLogs: array => dispatch(setAdminAnalyticsLogs(array))
+	setAdminAnalyticsLogs: array => dispatch(setAdminAnalyticsLogs(array)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TelecallerAnalytics);

@@ -5,9 +5,9 @@ import './PaymentCard.scss';
 
 const PaymentCard = ({Heading, numeric,icon,item, handleLogs}) => {
     return(
-        <div className={'payment-card-container shadow-4'} onClick={item?() => handleLogs(item,numeric):null}>
+        <div className={'payment-card-container shadow-4'} onClick={item?() => handleLogs(item,numeric,Heading):null}>
             <div className={'content-container'}>
-                <p className="card-header b">{Heading}</p>
+                <p id="heading" className="card-header b">{Heading}</p>
                 <p className="price flex justify-center">{numeric}</p>
             </div>
             <div className={'payment-logo'}>

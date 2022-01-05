@@ -26,7 +26,11 @@ const header = [
     'Unattended',
     'Coded',
     'Handed Over leads',
-    'Pending'
+    'Pending',
+    'Request Cancelled',
+    'Referral Pending',
+    'Referral Rejected',
+    'Referral Coded'
 ]
 
 const LogStatArray = [
@@ -36,7 +40,13 @@ const LogStatArray = [
         unattended: 0,
         coded: 0,
         handover: 0,
-        pending: 0
+        pending: 0,
+        request_cancelled:0,
+        referral_pending:0,
+        referral_rejected:0,
+        referral_coded:0
+
+
     }
 ]
 
@@ -90,6 +100,18 @@ const AdminViewTeamJuniorCount = ({jr_count_array,setJrCountArray,jrCount, setJu
                                 </td>
                                 <td className={'admin-view-junior-count-view-data-container'}
                                     data-label={'Pending'}>{item.pending}
+                                </td>
+                                <td className={'admin-view-junior-count-view-data-container'}
+                                    data-label={'Request Cancelled'}>{item.request_cancelled}
+                                </td>
+                                <td className={'admin-view-junior-count-view-data-container'}
+                                    data-label={'Referral Pending'}>{item.referral_pending}
+                                </td>
+                                <td className={'admin-view-junior-count-view-data-container'}
+                                    data-label={'Referral Rejected'}>{item.referral_rejected}
+                                </td>
+                                <td className={'admin-view-junior-count-view-data-container'}
+                                    data-label={'Referral Coded'}>{item.referral_coded}
                                 </td>
                             </tr>
                         )

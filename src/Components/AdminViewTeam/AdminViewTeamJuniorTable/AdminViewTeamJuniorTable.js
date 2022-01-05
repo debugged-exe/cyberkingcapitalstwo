@@ -91,7 +91,7 @@ const AdminViewTeamJuniorTable = ({setJuniorId,setPgCount,jrView, setJrCountArra
             })
     }
     const fetchJrCounts = (telecaller_id) => {
-        fetch('https://aqueous-mesa-28052.herokuapp.com/admin/senior/junior/counts',{
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/counts',{
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

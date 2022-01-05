@@ -47,7 +47,7 @@ const TelecallerAnalyticsTable = ({analytics_logs}) => {
             </tr>
             </thead>
             <tbody className={'telecaller-analytics-table-body-container'}>
-            {analytics_logs.map((item, index) => {
+            { analytics_logs.map((item, index) => {
                 return (
                     <tr className={`telecaller-analytics-table-row-container`}>
                         {
@@ -91,6 +91,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 // const mapDispatchToProps = dispatch => ({
-  
+
 // })
 export default connect(mapStateToProps)(TelecallerAnalyticsTable);
