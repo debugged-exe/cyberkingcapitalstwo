@@ -50,6 +50,8 @@ const LogStatArray = [
     }
 ]
 
+
+
 const AdminViewTeamJuniorCount = ({jr_count_array,setJrCountArray,jrCount, setJuniorCountView}) => {
     return (
         <div className={`${jrCount ? 'admin-view-junior-count-view-container' : 'hidden'} pb4`}>

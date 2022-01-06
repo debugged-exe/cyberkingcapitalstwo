@@ -120,7 +120,7 @@ class TelecallerAnalytics extends Component {
 		.catch(err => {
 			this.setState({loader: false})
 			console.log(err)
-			toast.warn('Failed to fetch analysis.Please try again',{
+			toast.warn('Failed to fetch analysis.Please try again.',{
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 1500
             });
@@ -132,7 +132,10 @@ class TelecallerAnalytics extends Component {
 	}
 
 	handleLogs(name, numeric,heading){
-		
+
+		const {setAdminAnalyticsLogs}=this.props;
+		const {perPage} = this.state
+
 		var seniorID=document.getElementById('telecaller').value;
 
 		if(seniorID=== ''){
@@ -169,6 +172,7 @@ class TelecallerAnalytics extends Component {
 			.then(response => response.json())
 			.then(resp => {
 				setAdminAnalyticsLogs(resp)
+
 				window.scrollBy(0,500);
 				let arr = []
 				for (let i = 1; i <= Math.ceil(numeric / perPage); i++) {
@@ -181,7 +185,7 @@ class TelecallerAnalytics extends Component {
 			.catch(err => {
 				this.setState({loader: false})
 				console.log(err)
-				toast.warn('Failed to fetch analysis.Please try again',{
+				toast.warn('Failed to fetch analysis.Please try again.',{
 									position: toast.POSITION.TOP_CENTER,
 									autoClose: 1500
 						  	});
@@ -200,8 +204,6 @@ class TelecallerAnalytics extends Component {
 			console.log()
 		})
 		this.setState({loader: true})
-		const {setAdminAnalyticsLogs} = this.props
-		const {perPage} = this.state
 		let bodyObject = {};
 		for(var key of Object.keys(this.state.params)){
 			if(this.state.params[key])
@@ -230,7 +232,7 @@ class TelecallerAnalytics extends Component {
 		.catch(err => {
 			this.setState({loader: false})
 			console.log(err)
-			toast.warn('Failed to fetch analysis.Please try again',{
+			toast.warn('Failed to fetch analysis.Please try again.',{
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 1500
             });
@@ -263,7 +265,7 @@ class TelecallerAnalytics extends Component {
 		.catch(err => {
 			this.setState({loader: false})
 			console.log(err)
-			toast.warn('Failed to fetch analysis.Please try again',{
+			toast.warn('Failed to fetch analysis.Please try again.',{
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 1500
             });
