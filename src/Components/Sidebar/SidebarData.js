@@ -6,7 +6,6 @@ import * as FiIcons from 'react-icons/fi';
 import * as CgIcons from 'react-icons/cg';
 import * as MdIcons from 'react-icons/md';
 import * as BiIcons from 'react-icons/bi';
-import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 import * as GrIcons from 'react-icons/gr';
 import * as SiIcons from 'react-icons/si';
@@ -75,6 +74,11 @@ export const SidebarData = {
             path: '/admin/sendid',
             title: "Send ID Password",
             icon: <FaIcons.FaWhatsapp size={'2rem'}/>
+        },
+        {
+            path: '/admin/deletelead',
+            title: "Delete Lead",
+            icon: <RiIcons.RiDeleteBin6Fill size={'2rem'}/>
         },
         {
             path: '/',

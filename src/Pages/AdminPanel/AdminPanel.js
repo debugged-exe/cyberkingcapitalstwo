@@ -13,6 +13,7 @@ import AdminUpdatePassword from "../../Components/AdminUpdatePassword/AdminUpdat
 import TelecallerAnalytics from "../../Components/TelecallerAnalytics/TelecallerAnalytics";
 import AdminBlockTelecaller from "../../Components/AdminBlockTelecaller/AdminBlockTelecaller";
 import AdminSendId from '../../Components/AdminSendId/AdminSendId.js';
+import { AdminDeleteLead } from '../../Components/AdminDeleteLead/AdminDeleteLead.js';
 
 const AdminPanel = ({match}) => {
     return (
@@ -29,6 +30,7 @@ const AdminPanel = ({match}) => {
 				<Route path={`${match.path}/analytics`}><TelecallerAnalytics /></Route>
 				<Route path={`${match.path}/block`}><AdminBlockTelecaller/></Route>
 				<Route path={`${match.path}/sendid`}><AdminSendId/></Route>
+				<Route path={`${match.path}/deletelead`}><AdminDeleteLead/></Route>
         	</Switch>
         </div>
     );
