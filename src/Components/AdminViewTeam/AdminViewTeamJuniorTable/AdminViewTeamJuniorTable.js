@@ -101,6 +101,7 @@ const AdminViewTeamJuniorTable = ({setJuniorId,setPgCount,jrView, setJrCountArra
             .then(resp => resp.json())
             .then( resp => {
                 setJrCountArray(resp);
+                setJuniorId(telecaller_id);
             })
             .catch( err => {
                 console.log(err);
