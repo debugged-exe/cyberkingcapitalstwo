@@ -45,7 +45,7 @@ class JuniorModal extends React.Component {
 	handleSubmit = (event) => {
         event.preventDefault();
         const {name} = event.target;
-        let payload = this.state.[name];
+        let payload = this.state[name];
         const {lead_id} = this.props.modal_lead;
         const {reassignLead} = this.props;
 

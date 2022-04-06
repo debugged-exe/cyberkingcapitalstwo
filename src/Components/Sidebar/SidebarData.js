@@ -98,6 +98,11 @@ export const SidebarData = {
             icon: <MdIcons.MdPayment size={'2rem'} />
         },
         {
+            path: '/junior/fetch',
+            title: "New Fetch",
+            icon: <BiIcons.BiSpreadsheet size={'2rem'}/>
+        },
+        {
             path: '/junior/logs',
             title: "View Logs",
             icon: <BiIcons.BiSpreadsheet size={'2rem'}/>
