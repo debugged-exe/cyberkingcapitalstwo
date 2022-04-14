@@ -1,229 +1,301 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./JuniorBox.css";
 import { AiOutlineSearch } from "react-icons/ai";
+import PuffLoader from "react-spinners/PuffLoader";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import { usePagination } from "@mui/material/Pagination";
+import {selectJuniorTableLogs} from "../../redux/junior-panel/junior-logs/junior.logs.selectors";
 
+import {
+  setModalLead,
+  reassignHandoverFlag,
+  reassignCodedFlag,
+  reassignReferred
+} from "../../redux/junior-panel/junior-logs/junior.logs.actions";
+import {
+  setJuniorTableLogArray,
+  setLogStatArray,
+  setModalVisibility,
+  appendNewLeads
+} from '../../redux/junior-panel/junior-logs/junior.logs.actions.js';
+import JuniorModal from "../JuniorLogs/JuniorModal/JuniorModal";
+
+import { createStructuredSelector } from "reselect";
+import { selectJuniorLogStatArray } from "../../redux/junior-panel/junior-logs/junior.logs.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { store } from "../../redux/store";
+
+// components
+import CustomButton from '../CustomButton/CustomButton.js';
 import FormInput from "../FormInput/FormInput";
+import {useDispatch, useSelector} from 'react-redux';
+import {connect} from "react-redux";
+toast.configure();
 
-const JuniorBox = () => {
+
+const LogStatArray = [
+  {
+      title: 'Unattended',
+      numeric: 0,
+    },
+    {
+        title: 'Status 1 Updated',
+        numeric: 0,
+    },
+    {
+        title: 'Status 2 Updated',
+        numeric: 0,
+    },
+    {
+        title: 'Handed Over Leads',
+        numeric: 0,
+    },
+    {
+        title: 'Pending Requests',
+        numeric: 0,
+    },
+    {
+      title: 'Request Cancelled',
+      numeric: 0,
+    },
+    {
+        title: 'Coded',
+        numeric: 0,
+    },
+
+    {
+        title: 'Referral Pending Requests',
+        numeric: 0
+    },
+    {
+        title: 'Referral Rejected',
+        numeric: 0
+    },
+    {
+        title: 'Referral Coded',
+        numeric: 0
+    },
+]
+
+const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_array, setJuniorTableLogArray, setModalVisibility }) => {
   const [newFetchVisibility, setNewFetchVisibility] = useState(true);
-
+  const [loader, setLoader] = useState(true)
   const [table, setTable] = useState("0");
-
   const onClick = (event) => {
     setTable(event.target.id);
     console.log(event.target.id);
   };
+  
+  const [Data,setData] =useState([]);
+  const [tempData,setTempData]=useState(Data);
+  const handoverHandler = (lead_id, lead_phone_no) => {
+    const {telecaller_id, assigned_to, username} = currentUser;
+    var referred = false;
+    junior_table_logs.map(item => {
+        if(item.lead_id === lead_id && item.referral_flag)
+        {
+            referred = true;
+        }
+    })
+    if(!referred)
+    {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                lead_id: lead_id,
+                lead_phone_no: lead_phone_no,
+                telecaller_id: telecaller_id,
+                senior_id: assigned_to,
+                referred: false
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            reassignHandoverFlag({lead_id: resp.lead_id, flag: 'yes'});
+            toast.success("Handed over successfully", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1500,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            toast.warn("Unable to handover.Please try again.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1500,
+            });
+        })
+    }
+    else
+    {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                lead_id: lead_id,
+                lead_phone_no: lead_phone_no,
+                telecaller_id: telecaller_id,
+                senior_id: assigned_to,
+                referred: true
+            })
+        })
+        .then(response => response.json())
+        .then(resp => {
+            reassignReferred(resp.lead_id);
+            toast.error("Lead deleted successfully", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1500,
+            });
+        })
+        .catch(err => {
+            toast.warn("Unable to delete.Please try again.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1500,
+            });
+        })
+    }
+}
 
-  const Data = [
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Kundan Surve",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Angel broking",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-    {
-      leadId: 597,
-      assigned: "JR01",
-      leadName: "Dipam Patle",
-      leadCont: 1122334455,
-      whNumber: 1122334455,
-      openNum: "inwna314",
-      openName: "Nova",
-      city: "Jaipur",
-      tradingKnow: "yes",
-      preLang: "English",
-      sta1: null,
-      sta2: null,
-      handStat: null,
-      coded: null,
-      brokerName: "Zerodha",
-    },
-  ];
+const requestHandler = (lead_id, lead_phone_no, lead_name) => {
+  const {telecaller_id, username} = currentUser;
+  var referred = false;
+  junior_table_logs.map(item => {
+      if(item.lead_id === lead_id && item.referral_flag)
+      {
+          referred = true;
+      }
+  })
+  if(!referred)
+  {
+      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+              lead_id: lead_id,
+              lead_phone_no: lead_phone_no,
+              telecaller_id: telecaller_id,
+              telecaller_name: username,
+              referred: false
+          })
+      })
+      .then(response => response.json())
+      .then(resp => {
+          reassignCodedFlag({lead_id: lead_id})
+          toast.success(resp, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1500,
+          });
+      })
+      .catch(err => {
+          toast.warn("Error during Coded Request.Please try again.", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1500,
+          });
+      })
+  }
+  else
+  {
+      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+              lead_id: lead_id,
+              lead_phone_no: lead_phone_no,
+              lead_name: lead_name,
+              telecaller_id: telecaller_id,
+              telecaller_name: username,
+              referred: true
+          })
+      })
+      .then(response => response.json())
+      .then(resp => {
+          reassignReferred(resp.lead_id);
+          toast.success("Referral Request sent successfully", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1500,
+          });
+      })
+      .catch(err => {
+          console.log(err);
+          toast.warn("Unable to send referral request.Please try again.", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1500,
+          });
+      })
+  }
+}
+const [handleChange,setHandleChange]=useState();
+const textChange=(e)=>{
+  if(handleChange==='full_table'){
+    setTempData(Data);
+  }else{
+    const newData=Data.filter((d)=>d[handleChange].toString().toLowerCase().startsWith(e.target.value.toString().toLowerCase()));
+    //console.log(JSON.stringify(newData)+" "+e.target.value+" "+Data[0][handleChange]);
+      setTempData(newData);
+  }
+}
 
+const dispatch=useDispatch();
+  useEffect(()=>{
+    setLoader();
+    const { telecaller_id } = currentUser;
+    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                telecaller_id: telecaller_id,
+                leadGroup:null
+            })
+        })
+            .then(response => response.json())
+            .then(resp => {
+                // console.log('fetch old',resp);
+                setLoader(false);
+                setData(resp);
+                
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.warn("Error Loading Table", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 1500,
+                });
+            })
+            if(handleChange==="*"||handleChange==="full_table"){
+              textChange();
+            }
+  })
+  useEffect(()=>{
+    setLoader();
+    const { telecaller_id } = currentUser;
+    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                telecaller_id: telecaller_id,
+                leadGroup:null
+            })
+        })
+            .then(response => response.json())
+            .then(resp => {
+                // console.log('fetch old',resp);
+                setLoader(false);
+                setData(resp);
+                setTempData(resp);
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.warn("Error Loading Table", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 1500,
+                });
+            })
+  })
   return (
-    <>
+    <><JuniorModal/>
       <div className="JuniorBox">
         <div
           style={{
@@ -245,17 +317,8 @@ const JuniorBox = () => {
             justifyContent: "space-around",
           }}
         >
-          <button className="btn" onClick={onClick} id="0">
-            A
-          </button>
-          <button className="btn" onClick={onClick} id="1">
-            B
-          </button>
-          <button className="btn" onClick={onClick} id="2">
-            C
-          </button>
         </div>
-
+        
         <div className="junior-tables">
           <div className="table-1 table-box">
             <div className="search_section">
@@ -270,7 +333,7 @@ const JuniorBox = () => {
                   name="searchFilter"
                   // value={uFilter}
                   className={"f4 ml1 search_select "}
-                  // onChange={(event) => handleUniversalChange(event)}
+                  onChange={event=>setHandleChange(event.target.value)}
                 >
                   <option value="*">--select--</option>
                   <option value="lead_id">Lead ID</option>
@@ -293,8 +356,10 @@ const JuniorBox = () => {
                   // value={universalFilter}
                   // onChange={(event) => handleUniSearch(event)}
                   // label={uFilter !== "*" ? `Enter ${uFilter}` : "Choose filter"}
-                  style={{ marginTop: "0px", marginBottom: "0px" }}
+                  onChange={(event)=>textChange(event)}
+                  style={{ marginTop: "0px", marginBottom: "0px", zIndex:"0" }}
                   // disabled={uFilter === "*" ? true : null}
+                 
                   required
                 />
 
@@ -357,7 +422,7 @@ const JuniorBox = () => {
                 </td>
               </tr>
 
-              {Data.map((item, index) => {
+              {tempData.map((item, index) => {
                 return (
                   <tr
                     className="table-value"
@@ -366,43 +431,28 @@ const JuniorBox = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <td>{Data[index].leadId}</td>
-                    <td>{Data[index].assigned}</td>
-                    <td>{Data[index].leadName}</td>
-                    <td>{Data[index].leadCont}</td>
-                    <td>{Data[index].whNumber}</td>
-                    <td>{Data[index].openNum}</td>
-                    <td>{Data[index].openName}</td>
-                    <td>{Data[index].city}</td>
-                    <td>{Data[index].tradingKnow}</td>
-                    <td>{Data[index].preLang}</td>
-                    <td>{Data[index].sta1}</td>
-                    <td>{Data[index].sta2}</td>
-                    <td>{Data[index].handStat}</td>
+                    <td>{item.lead_id}</td>
+                    <td>{item.assigned_to}</td>
+                    <td>{item.lead_name}</td>
+                    <td>{item.lead_phone_no}</td>
+                    <td>{Data[index].lead_whatsapp_no}</td>
+                    <td>{Data[index].account_opening_no}</td>
+                    <td>{Data[index].account_opening_name}</td>
+                    <td>{Data[index].lead_city}</td>
+                    <td>{Data[index].prior_knowledge}</td>
+                    <td>{Data[index].preferred_language}</td>
+                    <td>{Data[index].status_1}</td>
+                    <td>{Data[index].status_2}</td>
+                    <td>{Data[index].handover_status}</td>
                     <td>{Data[index].coded}</td>
-                    <td>{Data[index].brokerName}</td>
+                    <td>{Data[index].broker_name}</td>
                     <td
                       style={{ borderRight: "none" }}
                       className="table_buttons"
                     >
-                      <button
-                        style={{ backgroundColor: "#36A8AD" }}
-                        className="selector"
-                      >
-                        Update
-                      </button>
-                      <button
-                        style={{ backgroundColor: "#FF4742" }}
-                        className="selector"
-                      >
-                        Delete
-                      </button>
-                      <button
-                        style={{ backgroundColor: "#2C974B" }}
-                        className="selector"
-                      >
-                        Request
-                      </button>
+                      <button className="selector" style={{ backgroundColor: "#36A8AD", zIndex:"5" }}  onClick={() => {dispatch(setModalLead(item))}}>Update</button>
+                      <button className="selector" style={{ backgroundColor: "#FF4742" ,zIndex:"5"}} onClick={() => handoverHandler(item.lead_id, item.lead_phone_no)}>{item.referral_flag?"Delete":"Handover"}</button>
+                      <button className="selector"  style={{ backgroundColor: "#2C974B", zIndex:"5"}} onClick={() => requestHandler(item.lead_id, item.lead_phone_no, item.lead_name)}>Request</button>
                     </td>
                   </tr>
                 );
@@ -416,4 +466,17 @@ const JuniorBox = () => {
   );
 };
 
-export default JuniorBox;
+
+const mapStateToProps = createStructuredSelector({
+  junior_table_logs: selectJuniorTableLogs,
+  currentUser: selectCurrentUser,
+  log_stat_array: selectJuniorLogStatArray
+});
+
+
+const mapDispatchToProps = dispatch => ({
+  setLogStatArray: array => dispatch(setLogStatArray(array)),
+  setJuniorTableLogArray: array => dispatch(setJuniorTableLogArray(array)),
+  setModalVisibility: visible => dispatch(setModalVisibility(visible))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(JuniorBox);

@@ -39,7 +39,7 @@ class JuniorModal extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = initialState;
-
+		
 	}
 
 	handleSubmit = (event) => {
@@ -149,7 +149,7 @@ class JuniorModal extends React.Component {
 		const {lead_whatsapp_no, account_opening_no, status_1, status_2, account_opening_name,broker_name} = this.state;
 		const {modal_lead,modal_visibility,setModalVisibility} = this.props;
 		return (
-			<div className={`${modal_visibility?'visible junior-modal-container':'hidden'}`}>
+			<div style={{zIndex:"100"}} className={`${modal_visibility?'visible junior-modal-container':'hidden'}`}>
 				<div className="junior-tint"></div>
 				<div className='junior-modal'>
 				<div className="flex justify-between items-center">

@@ -7,11 +7,10 @@ import JuniorReferFriend from "../../Components/JuniorReferFriend/JuniorReferFri
 import JuniorBox from '../../Components/JuniorBox/JuniorBox';
 
 const JuniorPanel = ({match,user}) => {
-    alert(JSON.stringify(match))
     return (
         <div>
         	<Switch>
-            <Route path={`${match.path}/fetch`} exact ><JuniorBox/></Route>
+            <Route path={`${match.path}/fetch`} ><JuniorBox/></Route>
 				<Route path={`${match.path}/profile`}><ProfileSection /></Route>
         		<Route path={`${match.path}/logs`}><JuniorLogs /></Route>
         		<Route path={`${match.path}/payment`}><JuniorPayment/></Route>
