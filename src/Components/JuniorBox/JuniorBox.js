@@ -81,12 +81,8 @@ const LogStatArray = [
 const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_array, setJuniorTableLogArray, setModalVisibility }) => {
   const [newFetchVisibility, setNewFetchVisibility] = useState(true);
   const [loader, setLoader] = useState(true)
-  const [table, setTable] = useState("0");
-  const onClick = (event) => {
-    setTable(event.target.id);
-    console.log(event.target.id);
-  };
-  
+  const [leadGroup,setLeadGroup]=useState('A');
+  const [searchBar,setSearchBar]=useState("");
   const [Data,setData] =useState([]);
   const [tempData,setTempData]=useState(Data);
   const handoverHandler = (lead_id, lead_phone_no) => {
@@ -100,7 +96,7 @@ const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_ar
     })
     if(!referred)
     {
-        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
+        fetch('http://localhost:3001/junior/handover', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -129,7 +125,7 @@ const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_ar
     }
     else
     {
-        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
+        fetch('http://localhost:3001/junior/handover', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -168,7 +164,7 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
   })
   if(!referred)
   {
-      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
+      fetch('http://localhost:3001/junior/request_coded', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -196,7 +192,7 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
   }
   else
   {
-      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
+      fetch('http://localhost:3001/junior/request_coded', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -226,34 +222,34 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
   }
 }
 const [handleChange,setHandleChange]=useState();
-const textChange=(e)=>{
-  if(handleChange==='full_table'){
+const textChange=()=>{
+  if(handleChange==='full_table' || handleChange==="*" ){
     setTempData(Data);
   }else{
-    const newData=Data.filter((d)=>d[handleChange].toString().toLowerCase().startsWith(e.target.value.toString().toLowerCase()));
+    const newData=Data.filter((d)=>d[handleChange].toString().toLowerCase().startsWith(searchBar.toString().toLowerCase()));
     //console.log(JSON.stringify(newData)+" "+e.target.value+" "+Data[0][handleChange]);
-      setTempData(newData);
+    console.log(newData);  
+    setTempData(newData);
   }
 }
 
 const dispatch=useDispatch();
-  useEffect(()=>{
-    setLoader();
-    const { telecaller_id } = currentUser;
-    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
+
+const fetchData=(group)=>{
+  const { telecaller_id } = currentUser;
+    fetch('http://localhost:3001/junior/fetch_old_by_group', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 telecaller_id: telecaller_id,
-                leadGroup:null
+                leadGroup:group
             })
         })
             .then(response => response.json())
             .then(resp => {
-                // console.log('fetch old',resp);
                 setLoader(false);
                 setData(resp);
-                
+                setTempData(resp);
             })
             .catch(err => {
                 console.log(err);
@@ -266,16 +262,17 @@ const dispatch=useDispatch();
             if(handleChange==="*"||handleChange==="full_table"){
               textChange();
             }
-  })
+        setLoader();
+}
+
   useEffect(()=>{
-    setLoader();
     const { telecaller_id } = currentUser;
-    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old', {
+    fetch('http://localhost:3001/junior/fetch_old_by_group', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 telecaller_id: telecaller_id,
-                leadGroup:null
+                leadGroup:leadGroup
             })
         })
             .then(response => response.json())
@@ -293,9 +290,20 @@ const dispatch=useDispatch();
                     autoClose: 1500,
                 });
             })
-  })
+            if(handleChange==="*"||handleChange==="full_table"){
+              textChange();
+            }
+  },[])
+
+  
+  const onGroupChange=(event)=>{
+    setLeadGroup(event.target.value);
+    console.log();
+    fetchData(event.target.value);
+  }
+
   return (
-    <><JuniorModal/>
+    <><JuniorModal changeTable={fetchData}/>
       <div className="JuniorBox">
         <div
           style={{
@@ -308,6 +316,11 @@ const dispatch=useDispatch();
         >
           <button className="btn">New Fetch</button>
         </div>
+        <div className="buttons" style={{display: "flex", width:"100%",padding:'1em', justifyContent: "space-around"}}>
+                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="A")?"black":"white",color:(leadGroup!="A")?"black":"white"}} value="A" id='0'>A</button>
+                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="B")?"black":"white",color:(leadGroup!="B")?"black":"white"}} value="B" id='1'>B</button>
+                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="C")?"black":"white",color:(leadGroup!="C")?"black":"white"}} value="C" id='2'>C</button>
+            </div>
         <div
           className="buttons"
           style={{
@@ -321,7 +334,7 @@ const dispatch=useDispatch();
         
         <div className="junior-tables">
           <div className="table-1 table-box">
-            <div className="search_section">
+            <div className="search_section" style={{xOverflow:"scroll"}}>
               <div
                 style={{ paddingRight: "1em" }}
                 className={"flex justify-end items-center center mt4 mb4"}
@@ -333,13 +346,13 @@ const dispatch=useDispatch();
                   name="searchFilter"
                   // value={uFilter}
                   className={"f4 ml1 search_select "}
-                  onChange={event=>setHandleChange(event.target.value)}
+                  onChange={event=>{if(event.target.value==="full_table" || event.target.value==="*"){setTempData(Data);setHandleChange("");setSearchBar("");}else setHandleChange(event.target.value)}}
                 >
-                  <option value="*">--select--</option>
+                  <option value="*" onClick={()=>{setTempData(Data)}}>--select--</option>
                   <option value="lead_id">Lead ID</option>
                   <option value="lead_name">Lead Name</option>
                   <option value="lead_phone_no">Lead Contact</option>
-                  <option value="full_table">Full Table</option>
+                  <option value="full_table" onClick={()=>{setTempData(Data)}}>Full Table</option>
                 </select>
               </div>
               <div
@@ -353,10 +366,11 @@ const dispatch=useDispatch();
                   type="text"
                   name="filter_value"
                   placeholder={"Enter Text"}
+                  value={searchBar}
                   // value={universalFilter}
                   // onChange={(event) => handleUniSearch(event)}
                   // label={uFilter !== "*" ? `Enter ${uFilter}` : "Choose filter"}
-                  onChange={(event)=>textChange(event)}
+                  onChange={(event)=>setSearchBar(event.target.value)}
                   style={{ marginTop: "0px", marginBottom: "0px", zIndex:"0" }}
                   // disabled={uFilter === "*" ? true : null}
                  
@@ -365,14 +379,14 @@ const dispatch=useDispatch();
 
                 <AiOutlineSearch
                   style={{ marginLeft: "0" }}
-                  // onClick={(event) => handleUniversalFilter(event)}
+                  onClick={(event) => textChange()}
                 >
                   Filter
                 </AiOutlineSearch>
               </div>
             </div>
 
-            <table>
+            <table style={{width:"fit-content"}}>
               <tr
                 className="table-header"
                 style={{
@@ -421,7 +435,7 @@ const dispatch=useDispatch();
                   </button> */}
                 </td>
               </tr>
-
+              {!tempData[0]?<div style={{width:"100%",height:"100%",display:"flex",justifyContent:"center",alignItems:"center",padding:"2em",margin:"2em"}}><h2>Empty</h2></div>:null}
               {tempData.map((item, index) => {
                 return (
                   <tr
@@ -435,17 +449,17 @@ const dispatch=useDispatch();
                     <td>{item.assigned_to}</td>
                     <td>{item.lead_name}</td>
                     <td>{item.lead_phone_no}</td>
-                    <td>{Data[index].lead_whatsapp_no}</td>
-                    <td>{Data[index].account_opening_no}</td>
-                    <td>{Data[index].account_opening_name}</td>
-                    <td>{Data[index].lead_city}</td>
-                    <td>{Data[index].prior_knowledge}</td>
-                    <td>{Data[index].preferred_language}</td>
-                    <td>{Data[index].status_1}</td>
-                    <td>{Data[index].status_2}</td>
-                    <td>{Data[index].handover_status}</td>
-                    <td>{Data[index].coded}</td>
-                    <td>{Data[index].broker_name}</td>
+                    <td>{item.lead_whatsapp_no}</td>
+                    <td>{item.account_opening_no}</td>
+                    <td>{item.account_opening_name}</td>
+                    <td>{item.lead_city}</td>
+                    <td>{item.prior_knowledge}</td>
+                    <td>{item.preferred_language}</td>
+                    <td>{item.status_1}</td>
+                    <td>{item.status_2}</td>
+                    <td>{item.handover_status}</td>
+                    <td>{item.coded}</td>
+                    <td>{item.broker_name}</td>
                     <td
                       style={{ borderRight: "none" }}
                       className="table_buttons"

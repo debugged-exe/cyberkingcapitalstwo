@@ -39,7 +39,7 @@ class JuniorModal extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = initialState;
-		
+		this.changeTable=props.changeTable
 	}
 
 	handleSubmit = (event) => {
@@ -154,7 +154,7 @@ class JuniorModal extends React.Component {
 				<div className='junior-modal'>
 				<div className="flex justify-between items-center">
 					<h1 className="ml3 junior-modal-header">Update Details</h1>
-					<AiIcons.AiOutlineClose size={'2rem'} color={'black'} className="mr3" onClick={() => {setModalVisibility(false)}}/>
+					<AiIcons.AiOutlineClose size={'2rem'} color={'black'} className="mr3" onClick={() => {setModalVisibility(false);this.changeTable(modal_lead.leadgroup);}}/>
 				</div>
 
 				<div className="grid-div">
