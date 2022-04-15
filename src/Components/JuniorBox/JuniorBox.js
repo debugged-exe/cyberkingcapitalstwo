@@ -96,7 +96,7 @@ const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_ar
     })
     if(!referred)
     {
-        fetch('http://localhost:3001/junior/handover', {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -125,7 +125,7 @@ const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_ar
     }
     else
     {
-        fetch('http://localhost:3001/junior/handover', {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -164,7 +164,7 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
   })
   if(!referred)
   {
-      fetch('http://localhost:3001/junior/request_coded', {
+      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -192,7 +192,7 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
   }
   else
   {
-      fetch('http://localhost:3001/junior/request_coded', {
+      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -237,7 +237,7 @@ const dispatch=useDispatch();
 
 const fetchData=(group)=>{
   const { telecaller_id } = currentUser;
-    fetch('http://localhost:3001/junior/fetch_old_by_group', {
+    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old_by_group', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -267,7 +267,7 @@ const fetchData=(group)=>{
 
   useEffect(()=>{
     const { telecaller_id } = currentUser;
-    fetch('http://localhost:3001/junior/fetch_old_by_group', {
+    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old_by_group', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
