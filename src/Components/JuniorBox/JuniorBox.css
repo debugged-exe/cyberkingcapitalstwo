@@ -146,3 +146,9 @@ label.boxName {
   align-items: center;
   justify-content: flex-end;
 }
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #999999;
+}

@@ -96,7 +96,7 @@ const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_ar
     })
     if(!referred)
     {
-        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
+        fetch('http://localhost:3001/junior/handover', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -125,7 +125,7 @@ const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_ar
     }
     else
     {
-        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
+        fetch('http://localhost:3001/junior/handover', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -164,7 +164,7 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
   })
   if(!referred)
   {
-      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
+      fetch('http://localhost:3001/junior/request_coded', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -192,7 +192,7 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
   }
   else
   {
-      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
+      fetch('http://localhost:3001/junior/request_coded', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -221,7 +221,7 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
       })
   }
 }
-const [handleChange,setHandleChange]=useState();
+const [handleChange,setHandleChange]=useState('full_table');
 const textChange=()=>{
   if(handleChange==='full_table' || handleChange==="*" ){
     setTempData(Data);
@@ -237,7 +237,7 @@ const dispatch=useDispatch();
 
 const fetchData=(group)=>{
   const { telecaller_id } = currentUser;
-    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old_by_group', {
+    fetch('http://localhost:3001/junior/fetch_old_by_group', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -267,7 +267,7 @@ const fetchData=(group)=>{
 
   useEffect(()=>{
     const { telecaller_id } = currentUser;
-    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old_by_group', {
+    fetch('http://localhost:3001/junior/fetch_old_by_group', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -295,6 +295,67 @@ const fetchData=(group)=>{
             }
   },[])
 
+  const fetchNewLeads = () => {
+    setLoader(true)
+    const { telecaller_id, username, preferred_language } = currentUser;
+    fetch('http://localhost:3001/junior/fetch_new', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            telecaller_id: telecaller_id,
+            telecaller_name: username,
+            preferred_language: preferred_language
+        })
+    })
+        .then(response => response.json())
+        .then(resp => {
+            if (resp === 'Less than 1') {
+                toast.warn("15 minutes not yet elapsed from previous fetch", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 1500,
+                });
+            }else if(resp==='Please Complete the Backlog first, before new fetch'){
+              toast.warn("Please Complete the Backlog first, before new fetch.", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 3000,
+            });
+            }else if(resp==='Maximum new fetch limit exceeded'){
+              toast.warn("Maximum new fetch limit exceeded", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+            }
+            else if (resp === 'less than 1') {
+                toast.warn("Not enough leads to assign you.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 1500,
+                });
+            }
+            else if (resp === "blocked") {
+                toast.warn("You have been blocked by the admin. Please contact admin for more detail", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 1500
+                })
+                setLoader(false);
+            }
+            else if (resp !== 'Unable to assign you leads' || resp !== 'Unable to fetch') {
+                setLoader(false)
+                setJuniorTableLogArray(resp);
+                toast.success("New Leads assigned successfully", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 1500,
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            setLoader(false)
+            toast.warn("Unable to fetch new leads", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1500,
+            });
+        })
+}
   
   const onGroupChange=(event)=>{
     setLeadGroup(event.target.value);
@@ -314,7 +375,7 @@ const fetchData=(group)=>{
             alignItems: "center",
           }}
         >
-          <button className="btn">New Fetch</button>
+          <button className="btn" onClick={fetchNewLeads}>New Fetch</button>
         </div>
         <div className="buttons" style={{display: "flex", width:"100%",padding:'1em', justifyContent: "space-around"}}>
                 <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="A")?"black":"white",color:(leadGroup!="A")?"black":"white"}} value="A" id='0'>A</button>
@@ -348,11 +409,10 @@ const fetchData=(group)=>{
                   className={"f4 ml1 search_select "}
                   onChange={event=>{if(event.target.value==="full_table" || event.target.value==="*"){setTempData(Data);setHandleChange("");setSearchBar("");}else setHandleChange(event.target.value)}}
                 >
-                  <option value="*" onClick={()=>{setTempData(Data)}}>--select--</option>
+                  <option value="full_table" onClick={()=>{setTempData(Data)}}>Full Table</option>
                   <option value="lead_id">Lead ID</option>
                   <option value="lead_name">Lead Name</option>
                   <option value="lead_phone_no">Lead Contact</option>
-                  <option value="full_table" onClick={()=>{setTempData(Data)}}>Full Table</option>
                 </select>
               </div>
               <div
@@ -437,12 +497,30 @@ const fetchData=(group)=>{
               </tr>
               {!tempData[0]?<div style={{width:"100%",height:"100%",display:"flex",justifyContent:"center",alignItems:"center",padding:"2em",margin:"2em"}}><h2>Empty</h2></div>:null}
               {tempData.map((item, index) => {
+                var flag=null;
+                if(item.coded_flag)
+                {
+                    if(item.coded_flag==='yes')
+                        flag=true
+                }
+                if(item.pending_flag){
+                    if(item.pending_flag==='yes')
+                        flag=true
+                }
+                if(item.handover_flag==='yes')
+                    flag=true;
+                if(item.delete_flag==='yes')
+                    flag=true;
+                if(item.referred)
+                    flag=true
                 return (
                   <tr
                     className="table-value"
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
+                      backgroundColor:(!item.color || item.color==="")?"#ffffff":item.color,
+                      color:(!item.color || item.color==="#ffffff" || item.color==="")?"#000000":"#ffffff"
                     }}
                   >
                     <td>{item.lead_id}</td>
@@ -464,9 +542,9 @@ const fetchData=(group)=>{
                       style={{ borderRight: "none" }}
                       className="table_buttons"
                     >
-                      <button className="selector" style={{ backgroundColor: "#36A8AD", zIndex:"5" }}  onClick={() => {dispatch(setModalLead(item))}}>Update</button>
-                      <button className="selector" style={{ backgroundColor: "#FF4742" ,zIndex:"5"}} onClick={() => handoverHandler(item.lead_id, item.lead_phone_no)}>{item.referral_flag?"Delete":"Handover"}</button>
-                      <button className="selector"  style={{ backgroundColor: "#2C974B", zIndex:"5"}} onClick={() => requestHandler(item.lead_id, item.lead_phone_no, item.lead_name)}>Request</button>
+                      <button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#36A8AD",color:"white", zIndex:"5" }}  onClick={() => {dispatch(setModalLead(item))}}>Update</button>
+                      <button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#FF4742" ,color:"white",zIndex:"5"}} onClick={() => {handoverHandler(item.lead_id, item.lead_phone_no);fetchData(leadGroup)}}>{item.referral_flag?"Delete":"Handover"}</button>
+                      <button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#2C974B",color:"white", zIndex:"5"}} onClick={() => {requestHandler(item.lead_id, item.lead_phone_no, item.lead_name);fetchData(leadGroup)}}>Request</button>
                     </td>
                   </tr>
                 );
