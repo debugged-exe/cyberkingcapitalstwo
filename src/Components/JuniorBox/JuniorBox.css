@@ -13,11 +13,12 @@
 .btn {
   background-color: transparent;
   border: none;
-  padding: 0.6em 1em;
+  padding: 0.4em 0.5em;
   font-size: 1.3em;
   text-align: center;
   box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
   min-width: 100px;
+  height:"100px";
 }
 
 .table-box table {
@@ -49,8 +50,8 @@
   padding: 0.3em;
   font-size: 1.2em;
   font-weight: 600;
-  min-width: 89px;
-  max-width: 89px;
+  min-width: 120px;
+  max-width: 120px;
   letter-spacing: 1;
 }
 
@@ -63,8 +64,8 @@
   padding: 0 0.3em;
   font-size: 1.2em;
   font-weight: 600;
-  min-width: 89px;
-  max-width: 89px;
+  min-width: 120px;
+  max-width: 120px;
   letter-spacing: 1;
 }
 
@@ -81,7 +82,7 @@
 
 .table-box {
   margin: 1em;
-  height: 60vh;
+  height: 80vh;
   width: 95%;
   box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 40%);
   border-radius: 8px;

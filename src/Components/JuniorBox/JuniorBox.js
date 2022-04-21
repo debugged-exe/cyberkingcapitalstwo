@@ -3,6 +3,7 @@ import "./JuniorBox.css";
 import { AiOutlineSearch } from "react-icons/ai";
 import PuffLoader from "react-spinners/PuffLoader";
 import { ToastContainer, toast } from 'react-toastify';
+import * as AiIcons from 'react-icons/ai';
 import 'react-toastify/dist/ReactToastify.css';
 // import { usePagination } from "@mui/material/Pagination";
 import {selectJuniorTableLogs} from "../../redux/junior-panel/junior-logs/junior.logs.selectors";
@@ -33,6 +34,54 @@ import {useDispatch, useSelector} from 'react-redux';
 import {connect} from "react-redux";
 toast.configure();
 
+const FlagPopup=(props)=>{
+  const { telecaller_id, username, preferred_language } = props.currentUser;
+  const setFlagModal=props.setFlagModal;
+  const flagLeadId=props.flagLeadId;
+  const fetchData=props.fetchData;
+  const leadGroup=props.leadGroup;
+  const [flagDate,setFlagDate]=useState( new Date().toISOString().split("T")[0]);
+  const flagLead=()=>{
+      fetch('http://localhost:3001/junior/leads/lead/flag', {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              telecaller_id: telecaller_id,
+              lead_id:flagLeadId,
+              flag_date:flagDate
+          })
+      }).then(response => response.json())
+          .then(resp => {setFlagModal(false)})
+          .catch((error)=>{
+            fetchData(leadGroup);
+            console.log(error);
+            setFlagModal(false)
+          })
+  }
+  return (<div style={{display:'flex',top:"0px",zIndex:"999",justifyContent:"center",alignItems:"center",backgroundColor:"rgba(0,0,0,0.7)",position:"fixed",width:"100%",height:"100%"}}>
+    <div style={{backgroundColor:"rgb(250,250,250)",borderRadius:"5px",width:"300px",height:"300px"}}>
+      <div style={{float:"right",width:'2rem',height:'2rem'}}>
+    <AiIcons.AiOutlineClose size={'2rem'} color={'black'} type="button" className="mr3" onClick={() => {setFlagModal(false);}}/>
+    </div>
+    
+  <div style={{width:"100%",margin:"1em",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+  <h3 style={{margin:"0.5em"}}>Lead id: {flagLeadId}</h3>
+    <div style={{width:"100%",height:"50%",margin:"2em",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+      
+    <label for="start">Flag date:</label>
+    <br/>
+    <input type="date" id="start" name="trip-start"
+       value={flagDate}
+       style={{padding:"0.5em",}}
+       onChange={(e)=>{setFlagDate(e.target.value);}}
+       min={new Date().toISOString().split("T")[0]}/>
+    </div>
+
+  <button className="selector" type="button" style={{ border:"none",padding:"1em",borderRadius:"5px",backgroundColor:"#efd202",color:"white", zIndex:"5",width:"95px"}} onClick={() => {flagLead()}}>Flag</button>
+  </div>
+    </div>
+  </div>);
+}
 
 const LogStatArray = [
   {
@@ -85,6 +134,8 @@ const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_ar
   const [searchBar,setSearchBar]=useState("");
   const [Data,setData] =useState([]);
   const [tempData,setTempData]=useState(Data);
+  const [FlagModal,setFlagModal]=useState(false);
+  const [flagLeadId,setFlagLeadId]=useState(null);
   const handoverHandler = (lead_id, lead_phone_no) => {
     const {telecaller_id, assigned_to, username} = currentUser;
     var referred = false;
@@ -237,6 +288,30 @@ const dispatch=useDispatch();
 
 const fetchData=(group)=>{
   const { telecaller_id } = currentUser;
+  if(group==="Flagged"){
+    fetch('http://localhost:3001/junior/leads/flagged', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                telecaller_id: telecaller_id,
+            })
+        }).then(response => response.json())
+            .then(resp => {
+                // console.log('fetch old',resp);
+                setLoader(false);
+                setData(resp);
+                setTempData(resp);
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.warn("Error Loading Table", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 1500,
+                });
+            })
+    return;
+  }
     fetch('http://localhost:3001/junior/fetch_old_by_group', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
@@ -267,6 +342,29 @@ const fetchData=(group)=>{
 
   useEffect(()=>{
     const { telecaller_id } = currentUser;
+    if(leadGroup==="Flagged"){
+      fetch('http://localhost:3001/junior/leads/flagged', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                telecaller_id: telecaller_id,
+            })
+        }).then(response => response.json())
+            .then(resp => {
+                // console.log('fetch old',resp);
+                setLoader(false);
+                setData(resp);
+                setTempData(resp);
+            })
+            .catch(err => {
+                console.log(err);
+                setLoader(false)
+                toast.warn("Error Loading Table", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 1500,
+                });
+            })
+    }else{
     fetch('http://localhost:3001/junior/fetch_old_by_group', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
@@ -290,6 +388,7 @@ const fetchData=(group)=>{
                     autoClose: 1500,
                 });
             })
+          }
             if(handleChange==="*"||handleChange==="full_table"){
               textChange();
             }
@@ -356,15 +455,62 @@ const fetchData=(group)=>{
             });
         })
 }
-  
+
+  const onSubmit=()=>{
+    const { telecaller_id, username, preferred_language } = currentUser;
+    fetch('http://localhost:3001/junior/submit/group', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            telecaller_id: telecaller_id,
+            leadGroup:leadGroup
+        })
+    })
+        .then(response => response.json())
+        .then(resp => {
+          if(resp.error){
+          toast.warn(resp.error, {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1500,
+        });}else{
+          toast.success(resp.error, {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1500,
+        });
+        }
+        })
+        .catch((error)=>{
+          toast.warn(error.error, {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1500,
+        });
+        })
+  }
   const onGroupChange=(event)=>{
     setLeadGroup(event.target.value);
     console.log();
     fetchData(event.target.value);
   }
 
+  const unFlag=(leadid)=>{
+    const { telecaller_id, username, preferred_language } = currentUser;
+    fetch('http://localhost:3001/junior/leads/lead/unflag', {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              telecaller_id: telecaller_id,
+              lead_id:leadid,
+          })
+      }).then(response => response.json())
+          .then(resp => {})
+          .catch((error)=>{
+            fetchData(leadGroup);
+            console.log(error);
+          })
+  }
   return (
     <><JuniorModal changeTable={fetchData}/>
+    {(FlagModal && flagLeadId)?<FlagPopup currentUser={currentUser} flagLeadId={flagLeadId} setFlagModal={setFlagModal} fetchData={fetchData} leadGroup={leadGroup}/>:null}
       <div className="JuniorBox">
         <div
           style={{
@@ -377,29 +523,26 @@ const fetchData=(group)=>{
         >
           <button className="btn" onClick={fetchNewLeads}>New Fetch</button>
         </div>
-        <div className="buttons" style={{display: "flex", width:"100%",padding:'1em', justifyContent: "space-around"}}>
-                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="A")?"black":"white",color:(leadGroup!="A")?"black":"white"}} value="A" id='0'>A</button>
-                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="B")?"black":"white",color:(leadGroup!="B")?"black":"white"}} value="B" id='1'>B</button>
-                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="C")?"black":"white",color:(leadGroup!="C")?"black":"white"}} value="C" id='2'>C</button>
+        <div className="buttons" style={{display: "flex",height:"150px",flexWrap:"wrap", width:"100%",padding:'1em', justifyContent: "space-around"}}>
+                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="A")?"black":"white",color:(leadGroup!="A")?"black":"white",height:"60px"}} value="A" id='0'>A</button>
+                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="B")?"black":"white",color:(leadGroup!="B")?"black":"white",height:"60px"}} value="B" id='1'>B</button>
+                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="C")?"black":"white",color:(leadGroup!="C")?"black":"white",height:"60px"}} value="C" id='2'>C</button>
+                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="D")?"black":"white",color:(leadGroup!="D")?"black":"white",height:"60px"}} value="D" id='3'>D</button>
+                <button className="btn" onClick={onGroupChange} style={{backgroundColor:(leadGroup==="Flagged")?"black":"white",color:(leadGroup!="Flagged")?"black":"white",height:"60px"}} value="Flagged" id='3'>Flag leads</button>
             </div>
-        <div
-          className="buttons"
-          style={{
-            display: "flex",
-            width: "100%",
-            padding: "1em",
-            justifyContent: "space-around",
-          }}
-        >
-        </div>
+            <div className="buttons" style={{display: "flex", width:"100%",padding:'1em', justifyContent: "flex-end"}}>
+                <button className="btn" onClick={()=>{onSubmit()}} style={{marginRight:"1em",backgroundColor:"#4CAF50",color:"#ffffff",borderRadius:'5px'}} value="A" id='0'>Submit</button>
+            </div>
         
         <div className="junior-tables">
           <div className="table-1 table-box">
+            
             <div className="search_section" style={{xOverflow:"scroll"}}>
               <div
                 style={{ paddingRight: "1em" }}
                 className={"flex justify-end items-center center mt4 mb4"}
               >
+                
                 <label className={"b f3 ml1-ns mr3 "}>
                   Universal Search by :{" "}
                 </label>
@@ -422,7 +565,7 @@ const fetchData=(group)=>{
                 {/* <label className={"b f3 ml1-ns mr3 mb0 uniSearch pa0"}>
                   Enter value :{" "}
                 </label> */}
-                <FormInput
+                {(handleChange!='full_table')?<><FormInput
                   type="text"
                   name="filter_value"
                   placeholder={"Enter Text"}
@@ -435,14 +578,14 @@ const fetchData=(group)=>{
                   // disabled={uFilter === "*" ? true : null}
                  
                   required
-                />
+                /><AiOutlineSearch
+                style={{ marginLeft: "0" }}
+                onClick={(event) => textChange()}
+              >
+                Filter
+              </AiOutlineSearch></>:null}
 
-                <AiOutlineSearch
-                  style={{ marginLeft: "0" }}
-                  onClick={(event) => textChange()}
-                >
-                  Filter
-                </AiOutlineSearch>
+                
               </div>
             </div>
 
@@ -470,6 +613,7 @@ const fetchData=(group)=>{
                 <td>Handover Status</td>
                 <td>Coded </td>
                 <td>Broker Name</td>
+                {(leadGroup==="Flagged")?<td>Flagged For (Date)</td>:null}
                 <td
                   style={{ border: "none", boxShadow: "none" }}
                   className="table_buttons"
@@ -513,6 +657,8 @@ const fetchData=(group)=>{
                     flag=true;
                 if(item.referred)
                     flag=true
+                let flagDate=''
+                if(item.flagdate)flagDate=item.flagdate.split('T')[0];
                 return (
                   <tr
                     className="table-value"
@@ -538,13 +684,16 @@ const fetchData=(group)=>{
                     <td>{item.handover_status}</td>
                     <td>{item.coded}</td>
                     <td>{item.broker_name}</td>
+                    {(leadGroup==="Flagged")?<td>{flagDate}</td>:null}
                     <td
                       style={{ borderRight: "none" }}
                       className="table_buttons"
                     >
-                      <button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#36A8AD",color:"white", zIndex:"5" }}  onClick={() => {dispatch(setModalLead(item))}}>Update</button>
-                      <button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#FF4742" ,color:"white",zIndex:"5"}} onClick={() => {handoverHandler(item.lead_id, item.lead_phone_no);fetchData(leadGroup)}}>{item.referral_flag?"Delete":"Handover"}</button>
-                      <button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#2C974B",color:"white", zIndex:"5"}} onClick={() => {requestHandler(item.lead_id, item.lead_phone_no, item.lead_name);fetchData(leadGroup)}}>Request</button>
+                      <button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#36A8AD",color:"white", zIndex:"5" ,width:"95px"}}  onClick={() => {dispatch(setModalLead(item))}}>Update</button>
+                      <button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#FF4742" ,color:"white",zIndex:"5",width:"95px"}} onClick={() => {handoverHandler(item.lead_id, item.lead_phone_no);fetchData(leadGroup)}}>{item.referral_flag?"Delete":"Handover"}</button>
+                      <button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#2C974B",color:"white", zIndex:"5",width:"95px"}} onClick={() => {requestHandler(item.lead_id, item.lead_phone_no, item.lead_name);fetchData(leadGroup)}}>Request</button>
+                      {(leadGroup!=="Flagged")?<button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#eed202",color:"white", zIndex:"5",width:"95px"}} onClick={() => {setFlagLeadId(item.lead_id);setFlagModal(true)}}>Flag</button>
+                      :<button className="selector" disabled={flag} style={{ backgroundColor: (flag)?"#999999":"#eed202",color:"white", zIndex:"5",width:"95px"}} onClick={() => {setFlagLeadId(item.lead_id);unFlag(item.lead_id)}}>Unflag</button>}
                     </td>
                   </tr>
                 );
@@ -553,6 +702,9 @@ const fetchData=(group)=>{
             {/* <label className="boxName">{table}</label> */}
           </div>
         </div>
+        <div className="buttons" style={{display: "flex", width:"100%",padding:'1em', justifyContent: "flex-start"}}>
+                <button className="btn" onClick={()=>{onSubmit()}} style={{marginLeft:"1em",backgroundColor:"#4CAF50",color:"#ffffff",borderRadius:'5px'}} value="A" id='0'>Submit</button>
+            </div>
       </div>
     </>
   );
