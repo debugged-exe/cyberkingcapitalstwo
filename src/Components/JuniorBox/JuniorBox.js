@@ -274,10 +274,11 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
 }
 const [handleChange,setHandleChange]=useState('full_table');
 const textChange=()=>{
-  if(handleChange==='full_table' || handleChange==="*" ){
+  if(handleChange==='full_table' ){
     setTempData(Data);
+    return;
   }else{
-    const newData=Data.filter((d)=>d[handleChange].toString().toLowerCase().startsWith(searchBar.toString().toLowerCase()));
+    const newData=(handleChange!=='full_table')?Data.filter((d)=>d[handleChange].toString().toLowerCase().startsWith(searchBar.toString().toLowerCase())):Data;
     //console.log(JSON.stringify(newData)+" "+e.target.value+" "+Data[0][handleChange]);
     console.log(newData);  
     setTempData(newData);
@@ -334,7 +335,7 @@ const fetchData=(group)=>{
                     autoClose: 1500,
                 });
             })
-            if(handleChange==="*"||handleChange==="full_table"){
+            if(handleChange!=="*" || handleChange!=='full_table'){
               textChange();
             }
         setLoader();
@@ -389,11 +390,18 @@ const fetchData=(group)=>{
                 });
             })
           }
-            if(handleChange==="*"||handleChange==="full_table"){
+            if(handleChange==="*"||handleChange==='full_table'){
               textChange();
             }
   },[])
 
+  useEffect(()=>{
+    if(handleChange==='full_table'){
+
+    }else{
+
+    }
+  })
   const fetchNewLeads = () => {
     setLoader(true)
     const { telecaller_id, username, preferred_language } = currentUser;
@@ -550,9 +558,9 @@ const fetchData=(group)=>{
                   name="searchFilter"
                   // value={uFilter}
                   className={"f4 ml1 search_select "}
-                  onChange={event=>{if(event.target.value==="full_table" || event.target.value==="*"){setTempData(Data);setHandleChange("");setSearchBar("");}else setHandleChange(event.target.value)}}
+                  onChange={event=>{if(event.target.value==='full_table' || event.target.value==="*"){setTempData(Data);setHandleChange("full_table");setSearchBar("");}else setHandleChange(event.target.value)}}
                 >
-                  <option value="full_table" onClick={()=>{setTempData(Data)}}>Full Table</option>
+                  <option value='full_table'>Full Table</option>
                   <option value="lead_id">Lead ID</option>
                   <option value="lead_name">Lead Name</option>
                   <option value="lead_phone_no">Lead Contact</option>
@@ -567,6 +575,7 @@ const fetchData=(group)=>{
                 </label> */}
                 {(handleChange!='full_table')?<><FormInput
                   type="text"
+                  display={(handleChange=='full_table')?"none":""}
                   name="filter_value"
                   placeholder={"Enter Text"}
                   value={searchBar}
@@ -580,7 +589,7 @@ const fetchData=(group)=>{
                   required
                 /><AiOutlineSearch
                 style={{ marginLeft: "0" }}
-                onClick={(event) => textChange()}
+                onClick={(event) => {textChange()}}
               >
                 Filter
               </AiOutlineSearch></>:null}
