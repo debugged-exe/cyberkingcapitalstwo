@@ -42,7 +42,7 @@ const FlagPopup=(props)=>{
   const leadGroup=props.leadGroup;
   const [flagDate,setFlagDate]=useState( new Date().toISOString().split("T")[0]);
   const flagLead=()=>{
-      fetch('http://localhost:3001/junior/leads/lead/flag', {
+      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/leads/lead/flag', {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -147,7 +147,7 @@ const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_ar
     })
     if(!referred)
     {
-        fetch('http://localhost:3001/junior/handover', {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -176,7 +176,7 @@ const JuniorBox = ({ junior_table_logs,currentUser, setLogStatArray, log_stat_ar
     }
     else
     {
-        fetch('http://localhost:3001/junior/handover', {
+        fetch('https://aqueous-mesa-28052.herokuapp.com/junior/handover', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -215,7 +215,7 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
   })
   if(!referred)
   {
-      fetch('http://localhost:3001/junior/request_coded', {
+      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -243,7 +243,7 @@ const requestHandler = (lead_id, lead_phone_no, lead_name) => {
   }
   else
   {
-      fetch('http://localhost:3001/junior/request_coded', {
+      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/request_coded', {
           method: 'post',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -290,7 +290,7 @@ const dispatch=useDispatch();
 const fetchData=(group)=>{
   const { telecaller_id } = currentUser;
   if(group==="Flagged"){
-    fetch('http://localhost:3001/junior/leads/flagged', {
+    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/leads/flagged', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -313,7 +313,7 @@ const fetchData=(group)=>{
             })
     return;
   }
-    fetch('http://localhost:3001/junior/fetch_old_by_group', {
+    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old_by_group', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -344,7 +344,7 @@ const fetchData=(group)=>{
   useEffect(()=>{
     const { telecaller_id } = currentUser;
     if(leadGroup==="Flagged"){
-      fetch('http://localhost:3001/junior/leads/flagged', {
+      fetch('https://aqueous-mesa-28052.herokuapp.com/junior/leads/flagged', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -366,7 +366,7 @@ const fetchData=(group)=>{
                 });
             })
     }else{
-    fetch('http://localhost:3001/junior/fetch_old_by_group', {
+    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_old_by_group', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -405,7 +405,7 @@ const fetchData=(group)=>{
   const fetchNewLeads = () => {
     setLoader(true)
     const { telecaller_id, username, preferred_language } = currentUser;
-    fetch('http://localhost:3001/junior/fetch_new', {
+    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/fetch_new', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -466,7 +466,7 @@ const fetchData=(group)=>{
 
   const onSubmit=()=>{
     const { telecaller_id, username, preferred_language } = currentUser;
-    fetch('http://localhost:3001/junior/submit/group', {
+    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/submit/group', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -502,7 +502,7 @@ const fetchData=(group)=>{
 
   const unFlag=(leadid)=>{
     const { telecaller_id, username, preferred_language } = currentUser;
-    fetch('http://localhost:3001/junior/leads/lead/unflag', {
+    fetch('https://aqueous-mesa-28052.herokuapp.com/junior/leads/lead/unflag', {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
