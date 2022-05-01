@@ -46,7 +46,7 @@ class SeniorHandoverModal extends React.Component {
 	handleSubmit = (event) => {
         event.preventDefault();
         const {name} = event.target;
-        let payload = this.state.[name];
+        let payload = this.state[name];
         const {lead_id} = this.props.senior_modal_lead;
         const {reassignHandoverLead} = this.props;
         fetch('https://aqueous-mesa-28052.herokuapp.com/senior/update', {
