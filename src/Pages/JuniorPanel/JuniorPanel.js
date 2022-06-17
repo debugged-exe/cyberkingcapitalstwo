@@ -12,7 +12,7 @@ const JuniorPanel = ({match,user}) => {
 				<Route path={`${match.path}/profile`}><ProfileSection /></Route>
         		<Route path={`${match.path}/logs`}><JuniorLogs /></Route>
         		<Route path={`${match.path}/payment`}><JuniorPayment/></Route>
-{/*<Route path={`${match.path}/refer_friend`}><JuniorReferFriend/></Route>*/}
+<Route path={`${match.path}/refer_friend`}><JuniorReferFriend/></Route>
         	</Switch>
         </div>
     );
